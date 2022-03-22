@@ -21,7 +21,7 @@ public class Eatery extends Facility{
      * @param openingHour
      * @param contactNumber
      * @param priceRange
-     * @param emailAddres
+     * @param emailAddress
      * @param password
      * @param eateryAddress
      * @param numberOfClicks
@@ -34,7 +34,7 @@ public class Eatery extends Facility{
      */
     public Eatery(int facilityID, String name,String description, int postalCode,
                   LocalDateTime openingHour, String contactNumber, String priceRange,
-                  String emailAddres,String password, String eateryAddress,  int numberOfClicks,
+                  String emailAddress,String password, String eateryAddress,  int numberOfClicks,
                   ArrayList<Integer> ratingScoreList, int numTotalRating,
                   ArrayList<Review> reviewList,
                   String typeOfFood, int foodID, ArrayList<Food> listOfFood){
@@ -63,10 +63,6 @@ public class Eatery extends Facility{
      * @param typeOfFood
      * @param foodID
      * @param listOfFood
-     */
-    /**
-     *
-     * @param typeOfFood
      */
 
     public void setTypeOfFood(String typeOfFood){

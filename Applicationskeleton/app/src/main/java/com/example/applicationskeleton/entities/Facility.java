@@ -12,7 +12,7 @@ public class Facility {
     private LocalDateTime openingHour;
     private String contactNumber;
     private String priceRange;
-    private String emailAddres;
+    private String emailAddress;
     private String password;
     private String eateryAddress;
     private int numberOfClicks;
