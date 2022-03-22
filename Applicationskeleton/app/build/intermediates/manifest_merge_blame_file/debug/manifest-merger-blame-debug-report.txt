@@ -1,0 +1,119 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.applicationskeleton"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+8-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="32" />
+9-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+11-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:4:5-95
+11-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:4:22-76
+12    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+12-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:4:5-95
+12-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:4:22-76
+13    <uses-permission android:name="android.permission.INTERNET" />
+13-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:6:5-83
+13-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:6:22-64
+14
+15    <!-- Include required permissions for Google Maps API to run. -->
+16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+16-->[com.google.android.gms:play-services-maps:16.0.0] /Users/solivagant_ss/.gradle/caches/transforms-3/87ea4e7f3d5599ef4ed572c72d496ea3/transformed/jetified-play-services-maps-16.0.0/AndroidManifest.xml:23:5-79
+16-->[com.google.android.gms:play-services-maps:16.0.0] /Users/solivagant_ss/.gradle/caches/transforms-3/87ea4e7f3d5599ef4ed572c72d496ea3/transformed/jetified-play-services-maps-16.0.0/AndroidManifest.xml:23:22-76
+17
+18    <uses-feature
+18-->[com.google.android.gms:play-services-maps:16.0.0] /Users/solivagant_ss/.gradle/caches/transforms-3/87ea4e7f3d5599ef4ed572c72d496ea3/transformed/jetified-play-services-maps-16.0.0/AndroidManifest.xml:26:5-28:35
+19        android:glEsVersion="0x00020000"
+19-->[com.google.android.gms:play-services-maps:16.0.0] /Users/solivagant_ss/.gradle/caches/transforms-3/87ea4e7f3d5599ef4ed572c72d496ea3/transformed/jetified-play-services-maps-16.0.0/AndroidManifest.xml:27:9-41
+20        android:required="true" />
+20-->[com.google.android.gms:play-services-maps:16.0.0] /Users/solivagant_ss/.gradle/caches/transforms-3/87ea4e7f3d5599ef4ed572c72d496ea3/transformed/jetified-play-services-maps-16.0.0/AndroidManifest.xml:28:9-32
+21
+22    <application
+22-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:8:5-28:19
+23        android:allowBackup="true"
+23-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:9:9-35
+24        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+24-->[androidx.core:core:1.7.0] /Users/solivagant_ss/.gradle/caches/transforms-3/9339927e08badd09bc5459e4ba900d5f/transformed/core-1.7.0/AndroidManifest.xml:24:18-86
+25        android:debuggable="true"
+26        android:extractNativeLibs="false"
+27        android:icon="@mipmap/ic_launcher"
+27-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:10:9-43
+28        android:label="@string/app_name"
+28-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:11:9-41
+29        android:roundIcon="@mipmap/ic_launcher_round"
+29-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:12:9-54
+30        android:supportsRtl="true"
+30-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:13:9-35
+31        android:testOnly="true"
+32        android:theme="@style/Theme.ApplicationSkeleton" >
+32-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:14:9-57
+33        <meta-data
+33-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:16:9-17:57
+34            android:name="com.google.android.geo.API_KEY"
+34-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:16:20-65
+35            android:value="@string/map_key" />
+35-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:17:13-44
+36
+37        <activity
+37-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:18:9-27:20
+38            android:name="com.example.applicationskeleton.MainActivity"
+38-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:19:13-41
+39            android:exported="true"
+39-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:20:13-36
+40            android:label="@string/app_name" >
+40-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:21:13-45
+41            <intent-filter>
+41-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:22:13-26:29
+42                <action android:name="android.intent.action.MAIN" />
+42-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:23:17-69
+42-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:23:25-66
+43
+44                <category android:name="android.intent.category.LAUNCHER" />
+44-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:25:17-77
+44-->/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/AndroidManifest.xml:25:27-74
+45            </intent-filter>
+46        </activity>
+47        <activity
+47-->[com.google.android.gms:play-services-base:16.0.1] /Users/solivagant_ss/.gradle/caches/transforms-3/347cf46dc969edc1c2a0a1307a0127b4/transformed/jetified-play-services-base-16.0.1/AndroidManifest.xml:23:9-26:75
+48            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+48-->[com.google.android.gms:play-services-base:16.0.1] /Users/solivagant_ss/.gradle/caches/transforms-3/347cf46dc969edc1c2a0a1307a0127b4/transformed/jetified-play-services-base-16.0.1/AndroidManifest.xml:24:13-79
+49            android:exported="false"
+49-->[com.google.android.gms:play-services-base:16.0.1] /Users/solivagant_ss/.gradle/caches/transforms-3/347cf46dc969edc1c2a0a1307a0127b4/transformed/jetified-play-services-base-16.0.1/AndroidManifest.xml:25:13-37
+50            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+50-->[com.google.android.gms:play-services-base:16.0.1] /Users/solivagant_ss/.gradle/caches/transforms-3/347cf46dc969edc1c2a0a1307a0127b4/transformed/jetified-play-services-base-16.0.1/AndroidManifest.xml:26:13-72
+51
+52        <meta-data
+52-->[com.google.android.gms:play-services-basement:16.0.1] /Users/solivagant_ss/.gradle/caches/transforms-3/699b7bb98d39d28509cb62fbc9a46ef7/transformed/jetified-play-services-basement-16.0.1/AndroidManifest.xml:23:9-25:69
+53            android:name="com.google.android.gms.version"
+53-->[com.google.android.gms:play-services-basement:16.0.1] /Users/solivagant_ss/.gradle/caches/transforms-3/699b7bb98d39d28509cb62fbc9a46ef7/transformed/jetified-play-services-basement-16.0.1/AndroidManifest.xml:24:13-58
+54            android:value="@integer/google_play_services_version" />
+54-->[com.google.android.gms:play-services-basement:16.0.1] /Users/solivagant_ss/.gradle/caches/transforms-3/699b7bb98d39d28509cb62fbc9a46ef7/transformed/jetified-play-services-basement-16.0.1/AndroidManifest.xml:25:13-66
+55
+56        <provider
+56-->[androidx.emoji2:emoji2:1.0.0] /Users/solivagant_ss/.gradle/caches/transforms-3/09b79be83fba3907471fe1de63f439d3/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:26:9-34:20
+57            android:name="androidx.startup.InitializationProvider"
+57-->[androidx.emoji2:emoji2:1.0.0] /Users/solivagant_ss/.gradle/caches/transforms-3/09b79be83fba3907471fe1de63f439d3/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:27:13-67
+58            android:authorities="com.example.applicationskeleton.androidx-startup"
+58-->[androidx.emoji2:emoji2:1.0.0] /Users/solivagant_ss/.gradle/caches/transforms-3/09b79be83fba3907471fe1de63f439d3/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:28:13-68
+59            android:exported="false" >
+59-->[androidx.emoji2:emoji2:1.0.0] /Users/solivagant_ss/.gradle/caches/transforms-3/09b79be83fba3907471fe1de63f439d3/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:29:13-37
+60            <meta-data
+60-->[androidx.emoji2:emoji2:1.0.0] /Users/solivagant_ss/.gradle/caches/transforms-3/09b79be83fba3907471fe1de63f439d3/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:31:13-33:52
+61                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+61-->[androidx.emoji2:emoji2:1.0.0] /Users/solivagant_ss/.gradle/caches/transforms-3/09b79be83fba3907471fe1de63f439d3/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:32:17-75
+62                android:value="androidx.startup" />
+62-->[androidx.emoji2:emoji2:1.0.0] /Users/solivagant_ss/.gradle/caches/transforms-3/09b79be83fba3907471fe1de63f439d3/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:33:17-49
+63            <meta-data
+63-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/solivagant_ss/.gradle/caches/transforms-3/0e4a425e61d135d109d64d5f17d999df/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:31:13-33:52
+64                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+64-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/solivagant_ss/.gradle/caches/transforms-3/0e4a425e61d135d109d64d5f17d999df/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:32:17-78
+65                android:value="androidx.startup" />
+65-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/solivagant_ss/.gradle/caches/transforms-3/0e4a425e61d135d109d64d5f17d999df/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:33:17-49
+66        </provider>
+67    </application>
+68
+69</manifest>

@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_notifications.xml",
+        "source": "/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/res/layout/fragment_notifications.xml"
+    },
+    {
+        "merged": "/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_dashboard.xml",
+        "source": "/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/res/layout/fragment_dashboard.xml"
+    },
+    {
+        "merged": "/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_main.xml",
+        "source": "/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_home.xml",
+        "source": "/Users/solivagant_ss/Documents/GitHub/CZ2006/Applicationskeleton/app/src/main/res/layout/fragment_home.xml"
+    }
+]

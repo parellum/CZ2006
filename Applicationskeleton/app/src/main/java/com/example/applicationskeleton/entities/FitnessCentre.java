@@ -2,7 +2,7 @@ package com.example.applicationskeleton.entities;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class fitnessCentre extends Facility{
+public class FitnessCentre extends Facility{
     private String facility_name;
     private int postalCode;
     private LocalDateTime openingHour;
@@ -11,7 +11,7 @@ public class fitnessCentre extends Facility{
     private ArrayList<Integer> ratingArrayList;
     private ArrayList<Review> reviewArrayList;
 
-    public fitnessCentre(String facility_name, int postalCode, LocalDateTime openingHour, String contactNumber, int numTotalRating) {
+    public FitnessCentre(String facility_name, int postalCode, LocalDateTime openingHour, String contactNumber, int numTotalRating) {
         this.facility_name = facility_name;
         this.postalCode = postalCode;
         this.openingHour = openingHour;

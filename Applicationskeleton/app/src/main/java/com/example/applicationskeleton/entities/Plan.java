@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
  */
 public class Plan{
     private String name;
+<<<<<<< Updated upstream
     private ActivityType type;
     private LocalDateTime date;
     private String location;
@@ -82,4 +83,7 @@ public class Plan{
         this.status = status;
     }
 
+=======
+    private AcitivityType type;
+>>>>>>> Stashed changes
 }
