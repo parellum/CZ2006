@@ -17,6 +17,6 @@ public class Facility {
     private String eateryAddress;
     private int numberOfClicks;
     private ArrayList<Integer> ratingScoreList;
-    private int numTotalRating int;
+    private int numTotalRating;
     private ArrayList<Review> reviewList;
 }
