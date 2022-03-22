@@ -5,9 +5,8 @@ import java.time.LocalDateTime;
 public class LoginStreak extends Achievement {
     private int loginStreak;
     private LocalDateTime lastLogin;
-    public void getLoginStreak() {
-        // TODO - implement achivement.getLoginStreak
-        throw new UnsupportedOperationException();
+    public int getLoginStreak() {
+        return this.loginStreak;
     }
 
     /**
@@ -18,18 +17,16 @@ public class LoginStreak extends Achievement {
         this.loginStreak = LoginStreak;
     }
 
-    public void getLastLogin() {
-        // TODO - implement achivement.getLastLogin
-        throw new UnsupportedOperationException();
+    public LocalDateTime getLastLogin() {
+        return this.lastLogin;
     }
 
     /**
      *
      * @param LastLogin
      */
-    public void setLastLogin(int LastLogin) {
-        // TODO - implement achivement.setLastLogin
-        throw new UnsupportedOperationException();
+    public void setLastLogin(LocalDateTime LastLogin) {
+        this.lastLogin = LastLogin;
     }
 
 }
