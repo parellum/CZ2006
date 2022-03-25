@@ -7,6 +7,13 @@ package com.example.applicationskeleton.entities;
  */
 public class ShareAmountMilestone extends Achievement {
     private int shareCount;
+    /**
+     * Constructor for ShareAmountMilestone
+     * @param
+     */
+    public ShareAmountMilestone() {
+    }
+
     public int getShareCount() {
         return this.shareCount;
     }

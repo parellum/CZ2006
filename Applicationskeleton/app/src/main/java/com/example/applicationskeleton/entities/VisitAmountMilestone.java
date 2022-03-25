@@ -8,6 +8,12 @@ package com.example.applicationskeleton.entities;
 public class VisitAmountMilestone extends Achievement {
     private int placesVisitCount;
 
+    /**
+     * Constructor for VisitAmountMilestone
+     * @param
+     */
+    public VisitAmountMilestone() {
+    }
     public int getPlacesVisitCount() {
         return this.placesVisitCount;
     }
@@ -16,6 +22,7 @@ public class VisitAmountMilestone extends Achievement {
      *
      * @param placesVisitCount
      */
+
     public void setPlacesVisitCount(int placesVisitCount) {
         this.placesVisitCount = placesVisitCount;
     }

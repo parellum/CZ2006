@@ -1,5 +1,7 @@
 package com.example.applicationskeleton.entities;
 
+import java.util.ArrayList;
+
 /**
  * Achievement holds certain attributes of user which are open for public consumption
  * @author Jeremy
@@ -12,6 +14,12 @@ public class Achievement {
     private int rank;
     private int toRankUp;
 
+    /**
+     * Constructor for Achievement
+     * @param
+     */
+    public Achievement() {
+    }
 
     public String getName() {
         return this.name;

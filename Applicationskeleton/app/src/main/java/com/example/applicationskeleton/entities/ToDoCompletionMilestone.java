@@ -9,6 +9,12 @@ public class ToDoCompletionMilestone extends Achievement {
 
     private int toDoCompletionCount;
 
+    /**
+     * Constructor for ToDoCompletionMilestone
+     * @param
+     */
+    public ToDoCompletionMilestone() {
+    }
     public int getToDoCompletionCount() {
         return this.toDoCompletionCount;
     }
@@ -17,6 +23,7 @@ public class ToDoCompletionMilestone extends Achievement {
      *
      * @param toDoCompletionCount
      */
+
     public void setToDoCompletionCount(int toDoCompletionCount) {
         this.toDoCompletionCount = toDoCompletionCount;
     }

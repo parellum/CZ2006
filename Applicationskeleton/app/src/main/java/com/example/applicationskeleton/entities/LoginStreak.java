@@ -10,6 +10,12 @@ import java.time.LocalDateTime;
 public class LoginStreak extends Achievement {
     private int loginStreak;
     private LocalDateTime lastLogin;
+    /**
+     * Constructor for Achievement
+     * @param
+     */
+    public LoginStreak() {
+    }
     public int getLoginStreak() {
         return this.loginStreak;
     }
@@ -18,6 +24,10 @@ public class LoginStreak extends Achievement {
      *
      * @param LoginStreak
      */
+
+
+
+
     public void setLoginStreak(int LoginStreak) {
         this.loginStreak = LoginStreak;
     }
