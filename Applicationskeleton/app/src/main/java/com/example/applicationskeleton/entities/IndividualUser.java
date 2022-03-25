@@ -2,59 +2,62 @@ package com.example.applicationskeleton.entities;
 
 import java.util.ArrayList;
 
-/**
- * User specific for common users
- * @author Jacques
- * @version 1.0
- * @since 20-03-2022
- */
-public class IndividualUser extends User{
-    private Status[] socialStatusList=new Status[20];
+public class IndividualUser {
+    private int userID;
+    private String userName;
+    private String description;
     private ArrayList<Achievement> acheivementList;
     private ArrayList<Integer> friendList;
+    private Status[] socialStatus=new Status[20];
+    private String firstName;
+    private String lastName;
+    private String password;
+    private boolean isVerfied;
+    private String email;
+    private String address;
+    private String confirmPassword;
 
-    /**
-     * Constructor for IndividualUser
-     * @param userID
-     * @param description
-     * @param firstName
-     * @param lastName
-     * @param password
-     * @param isVerified
-     * @param email
-     * @param address
-     * @param socialStatusList List of Activities in ascending time order
-     * @param acheivementList ArrayList of achievements specific to user
-     * @param friendList ArrayList of friends
-     */
-    public IndividualUser(int userID, String description, String firstName, String lastName, String password, boolean isVerified, String email, String address, Status[] socialStatusList, ArrayList<Achievement> acheivementList, ArrayList<Integer> friendList) {
-        super(userID, description, firstName, lastName, password, isVerified, email, address);
-        this.socialStatusList = socialStatusList;
-        this.acheivementList = acheivementList;
-        this.friendList = friendList;
+    public void IndividualUser(int userID, String userName, String password, String confirmPassword, String email, String description, ArrayList<Achievement> acheivementList, ArrayList<Integer> friendList, Status[] socialStatus){
+        this.userID = userID;
+        this.userName = userName;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.email = email;
+        this.description = description;
     }
 
-    public Status[] getSocialStatusList() {
-        return socialStatusList;
-    }
+    public String userID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
 
-    public void setSocialStatusList(Status[] socialStatusList) {
-        this.socialStatusList = socialStatusList;
-    }
+    public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    public ArrayList<Achievement> getAcheivementList() {
-        return acheivementList;
-    }
+    public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setAcheivementList(ArrayList<Achievement> acheivementList) {
-        this.acheivementList = acheivementList;
-    }
-
-    public ArrayList<Integer> getFriendList() {
-        return friendList;
-    }
-
-    public void setFriendList(ArrayList<Integer> friendList) {
-        this.friendList = friendList;
-    }
+    public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 }
