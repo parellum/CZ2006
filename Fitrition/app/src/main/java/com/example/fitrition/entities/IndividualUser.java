@@ -2,20 +2,62 @@ package com.example.fitrition.entities;
 
 import java.util.ArrayList;
 
-public class IndividualUser extends User{
+public class IndividualUser{
     private String userName;
     private ArrayList<Achievement> acheivementList;
-    private ArrayList<Integer> friendList;
-    private Status[] socialStatus=new Status[20];
-    private String confirmPassword;
+    private ArrayList<String> friendList;
+    private ArrayList<Status> socialStatus;
+	private String userID;
+	private String description;
+	private String firstName;
+	private String lastName;
+	private String password;
+	private String DOB;
+	private boolean isVerified;
+	private String email;
+	private String address;
+	private String height;
+	private String weight;
+	private String gender;
+	private String diet; //change to ennumeration
 
-	public IndividualUser(String userID, String description, String firstName, String lastName, String password, boolean isVerified, String email, String address, String userName, ArrayList<Achievement> acheivementList, ArrayList<Integer> friendList, Status[] socialStatus, String confirmPassword) {
-		super(userID, description, firstName, lastName, password, isVerified, email, address);
+	public IndividualUser(String userName, ArrayList<Achievement> acheivementList, ArrayList<String> friendList, ArrayList<Status> socialStatus, String userID, String description, String firstName, String lastName, String password, String DOB, boolean isVerified, String email, String address, String height, String weight, String gender, String diet) {
 		this.userName = userName;
 		this.acheivementList = acheivementList;
 		this.friendList = friendList;
 		this.socialStatus = socialStatus;
-		this.confirmPassword = confirmPassword;
+		this.userID = userID;
+		this.description = description;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.DOB = DOB;
+		this.isVerified = isVerified;
+		this.email = email;
+		this.address = address;
+		this.height = height;
+		this.weight = weight;
+		this.gender = gender;
+		this.diet = diet;
+	}
+
+	public IndividualUser(String userName, String firstName, String lastName, String eMail, String password, String DOB, String height, String weight, String description,String gender,String diet){
+		this.userName=userName;
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.email=eMail;
+		this.password=password;
+		this.DOB=DOB;
+		this.height=height;
+		this.weight=weight;
+		this.description=description;
+		this.userName = userName;
+		this.acheivementList = new ArrayList<Achievement>();
+		this.friendList = new ArrayList<String>();
+		this.socialStatus = new ArrayList<Status>();
+		this.isVerified = false;
+		this.gender=gender;
+		this.diet=diet;
 	}
 
 	public String getUserName() {
@@ -34,27 +76,123 @@ public class IndividualUser extends User{
 		this.acheivementList = acheivementList;
 	}
 
-	public ArrayList<Integer> getFriendList() {
+	public ArrayList<String> getFriendList() {
 		return friendList;
 	}
 
-	public void setFriendList(ArrayList<Integer> friendList) {
+	public void setFriendList(ArrayList<String> friendList) {
 		this.friendList = friendList;
 	}
 
-	public Status[] getSocialStatus() {
+	public ArrayList<Status> getSocialStatus() {
 		return socialStatus;
 	}
 
-	public void setSocialStatus(Status[] socialStatus) {
+	public void setSocialStatus(ArrayList<Status> socialStatus) {
 		this.socialStatus = socialStatus;
 	}
 
-	public String getConfirmPassword() {
-		return confirmPassword;
+	public String getUserID() {
+		return userID;
 	}
 
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getDOB() {
+		return DOB;
+	}
+
+	public void setDOB(String DOB) {
+		this.DOB = DOB;
+	}
+
+	public boolean isVerified() {
+		return isVerified;
+	}
+
+	public void setVerified(boolean verified) {
+		isVerified = verified;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getHeight() {
+		return height;
+	}
+
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	public String getWeight() {
+		return weight;
+	}
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getDiet() {
+		return diet;
+	}
+
+	public void setDiet(String diet) {
+		this.diet = diet;
 	}
 }

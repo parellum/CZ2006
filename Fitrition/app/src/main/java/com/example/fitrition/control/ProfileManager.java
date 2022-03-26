@@ -12,7 +12,37 @@ import java.util.ArrayList;
  */
 
 public class ProfileManager {
-    
+
+    private static ProfileManager instance=null;
+    ArrayList<IndividualUser> individualUserList=new ArrayList<IndividualUser>();
+
+    public ProfileManager() {
+        individualUserList=new ArrayList<IndividualUser>();
+    }
+
+    public static ProfileManager getInstance() {
+        if (instance == null) {
+            instance = new ProfileManager();
+        }
+        return instance;
+    }
+
+    public ArrayList<IndividualUser> getIndividualUserList() {
+        return individualUserList;
+    }
+
+    public void setIndividualUserList(ArrayList<IndividualUser> individualUserList) {
+        this.individualUserList = individualUserList;
+    }
+
+    public void addNewUser(String userName, String firstName, String lastName, String eMail, String password, String DOB, String height, String weight, String description,String gender,String diet){
+        individualUserList.add(new IndividualUser(userName,firstName,lastName,eMail,password,DOB,height,weight,description,gender,diet));
+    }
+
+    public IndividualUser getUser(){
+        return individualUserList.get(0);
+    }
+
     public boolean validatePassword(String str){
         return str.matches("\\S");
     }

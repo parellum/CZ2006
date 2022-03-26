@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/RegisterTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Registration"
+            android:textAlignment="center"
+            android:textSize="50dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="500dp"
+                android:layout_centerInParent="true">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/RegisterUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:ems="15"
+                        android:hint="Username"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/RegisterFirstName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:ems="15"
+                        android:hint="First Name"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/RegisterLastName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:ems="15"
+                        android:hint="Last Name"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/RegisterEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:ems="15"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress" />
+
+                    <EditText
+                        android:id="@+id/RegisterPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:ems="15"
+                        android:hint="Password"
+                        android:inputType="textPassword" />
+
+
+
+                    <EditText
+                        android:id="@+id/RegisterConfirmPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:ems="15"
+                        android:hint="Confirm Password"
+                        android:inputType="textPassword" />
+
+
+                    <EditText
+                        android:id="@+id/RegisterDOB"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:ems="10"
+                        android:hint="D.O.B"
+                        android:inputType="date" />
+
+                    <Spinner
+                        android:id="@+id/RegisterGender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:spinnerMode="dropdown"/>
+
+                    <EditText
+                        android:id="@+id/RegisterHeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:layout_marginTop="20dp"
+                        android:hint="Height (cm)"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:id="@+id/RegisterWeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:layout_marginTop="20dp"
+                        android:hint="Weight (kg)"
+                        android:inputType="numberDecimal" />
+
+                    <Spinner
+                        android:id="@+id/RegisterDiet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:spinnerMode="dropdown"/>
+
+                    <EditText
+                        android:id="@+id/RegisterDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:ems="15"
+                        android:hint="Describe Yourself"
+                        android:inputType="text" />
+
+                </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
+        <Button
+            android:id="@+id/RegisterFinish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/RegisterPB"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+</RelativeLayout>
