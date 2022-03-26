@@ -1,4 +1,4 @@
-package com.example.fitrition.ui.dashboard;
+package com.example.fitrition.uiReference.dashboard;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -1,7 +1,7 @@
-package com.example.applicationskeleton.control;
+package com.example.fitrition.control;
 
-import com.example.applicationskeleton.entities.Friend;
-import com.example.applicationskeleton.entities.Status;
+import com.example.fitrition.entities.Friend;
+import com.example.fitrition.entities.Status;
 
 import java.util.ArrayList;
 

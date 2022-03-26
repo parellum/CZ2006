@@ -1,6 +1,6 @@
-package com.example.applicationskeleton.control;
+package com.example.fitrition.control;
 
-import com.example.applicationskeleton.entities.Achievement;
+import com.example.fitrition.entities.Achievement;
 
 import java.util.ArrayList;
 

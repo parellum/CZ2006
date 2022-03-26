@@ -23,7 +23,7 @@ public class BusinessUser extends User{
      * @param address
      * @param facilityList The list of facilities owned by BusinessUser
      */
-    public BusinessUser(int userID, String description, String firstName, String lastName, String password, boolean isVerified, String email, String address, ArrayList<Facility> facilityList) {
+    public BusinessUser(String userID, String description, String firstName, String lastName, String password, boolean isVerified, String email, String address, ArrayList<Facility> facilityList) {
         super(userID, description, firstName, lastName, password, isVerified, email, address);
         this.facilityList = facilityList;
     }

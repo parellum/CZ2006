@@ -53,11 +53,13 @@ public class Eatery extends Facility{
     /**
      * Display all information related to the eatery
      */
+    /*
     public void display() { //refer to facility display()
         super.display();
         System.out.println(String.format("%-30s%-75s%-10s", typeOfFood,foodID,listOfFood));
     }
 
+     */
     public void setTypeOfFood(String typeOfFood){
         this.typeOfFood = typeOfFood;
     }

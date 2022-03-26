@@ -11,14 +11,15 @@ public class FitnessCentre extends Facility{
     private ArrayList<Integer> ratingArrayList;
     private ArrayList<Review> reviewArrayList;
 
-    public FitnessCentre(String facility_name, int postalCode, LocalDateTime openingHour, String contactNumber, int numTotalRating) {
+    public FitnessCentre(String facilityID, String name, String description, int postalCode, LocalDateTime openingHour, String contactNumber, String priceRange, String emailAddress, String password, String eateryAddress, int numberOfClicks, ArrayList<Integer> ratingScoreList, int numTotalRating, ArrayList<Review> reviewList, String facility_name, int postalCode1, LocalDateTime openingHour1, String contactNumber1, int numTotalRating1, ArrayList<Integer> ratingArrayList, ArrayList<Review> reviewArrayList) {
+        super(facilityID, name, description, postalCode, openingHour, contactNumber, priceRange, emailAddress, password, eateryAddress, numberOfClicks, ratingScoreList, numTotalRating, reviewList);
         this.facility_name = facility_name;
-        this.postalCode = postalCode;
-        this.openingHour = openingHour;
-        this.contactNumber = contactNumber;
-        this.numTotalRating = numTotalRating;
-        this.ratingArrayList = new ArrayList<Integer>();
-        this.reviewArrayList = new ArrayList<Review>();
+        this.postalCode = postalCode1;
+        this.openingHour = openingHour1;
+        this.contactNumber = contactNumber1;
+        this.numTotalRating = numTotalRating1;
+        this.ratingArrayList = ratingArrayList;
+        this.reviewArrayList = reviewArrayList;
     }
 
     public String getName() {

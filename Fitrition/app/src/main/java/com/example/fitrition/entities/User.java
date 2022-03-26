@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * Generalization of Individual and Business Users
  */
 public abstract class User {
-    private int userID;
+    private String userID;
     private String description;
     private String firstName;
     private String lastName;
@@ -25,7 +25,7 @@ public abstract class User {
      * @param email the e-mail to be registered. Cannot be defaulted to empty
      * @param address the address of user that can be used to optimize suggestion. Can default to None
      */
-    public User(int userID, String description, String firstName, String lastName, String password, boolean isVerified, String email, String address) {
+    public User(String userID, String description, String firstName, String lastName, String password, boolean isVerified, String email, String address) {
         this.userID = userID;
         this.description = description;
         this.firstName = firstName;
@@ -36,11 +36,11 @@ public abstract class User {
         this.address = address;
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 

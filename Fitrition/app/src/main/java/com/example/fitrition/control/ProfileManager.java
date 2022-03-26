@@ -25,6 +25,7 @@ public class ProfileManager {
         return str.matches("\"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$\"");
     }
 
+    /*
     public boolean validateAccount(String email, String password){
 
     }
@@ -45,10 +46,11 @@ public class ProfileManager {
 
     }
 
+     */
     public void updatePassword(String email, String password){
 
     }
-
+    /*
     public void createUserAccount(String email, String userName, String name, String address, String password, boolean isVerified, String verificationCode){
         String username = newUserNameEditText.getText().toString();
         String displayedName = firstNameEditText.getText().toString() + " " + lastNameEditText.getText().toString();
@@ -65,6 +67,7 @@ public class ProfileManager {
             displayToast("Password does not match with the confirmed password.");
     }
 
+     */
     public void updateIsVerified(String email, boolean isVerified){
 
     }
