@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "26404218901",
+    "project_id": "fitrition-3a967",
+    "storage_bucket": "fitrition-3a967.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26404218901:android:f985d92228e7524490061c",
+        "android_client_info": {
+          "package_name": "com.example.fitrition"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "26404218901-idf81s59ufns5o781jpn1jc5lfu7qgig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCufVTz03fe1QIHi3jrJ-Y4wvayYDMur4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "26404218901-idf81s59ufns5o781jpn1jc5lfu7qgig.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
