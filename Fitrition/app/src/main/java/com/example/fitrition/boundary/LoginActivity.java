@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.example.fitrition.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
-
+//
     private TextView register;
 
     @Override
