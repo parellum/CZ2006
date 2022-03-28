@@ -1,4 +1,4 @@
-package com.example.fitrition;
+package com.example.fitrition.boundary;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.fitrition.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -24,7 +26,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.LoginRegister:
-                startActivity(new Intent(this,RegisterActivity.class));
+                startActivity(new Intent(this, RegisterActivity.class));
                 break;
 
         }
