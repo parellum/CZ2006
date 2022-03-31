@@ -5,9 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".boundary.ExploreFragment"
     android:background="@color/red_700">
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Explore" />
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout">
 
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
 </FrameLayout>
