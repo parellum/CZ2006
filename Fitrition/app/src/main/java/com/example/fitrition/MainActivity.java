@@ -3,22 +3,16 @@ package com.example.fitrition;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.fitrition.boundary.CalendarFragment;
+import com.example.fitrition.boundary.TrackerFragment;
 import com.example.fitrition.boundary.ExploreFragment;
 import com.example.fitrition.boundary.ProfileFragment;
 import com.example.fitrition.boundary.SocialFragment;
+import com.example.fitrition.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.fitrition.databinding.ActivityMainBinding;
 
 public class MainActivity extends FragmentActivity {
 
@@ -43,7 +37,7 @@ public class MainActivity extends FragmentActivity {
                     selectedFragment=new ExploreFragment();
                     break;
                 case R.id.nav_calendar:
-                    selectedFragment=new CalendarFragment();
+                    selectedFragment=new TrackerFragment();
                     break;
                 case R.id.nav_social:
                     selectedFragment=new SocialFragment();
