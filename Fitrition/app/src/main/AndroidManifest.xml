@@ -14,11 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fitrition">
         <activity
-            android:name=".ToolbarActivity"
-            android:exported="false"
-            android:label="@string/title_activity_toolbar"
-            android:theme="@style/Theme.Fitrition.NoActionBar" />
-        <activity
             android:name=".boundary.RegisterActivity"
             android:exported="false" />
         <activity
