@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="dark_grey">#777777</color>
+    <color name="colorPrimary">#dddddd</color>
+    <color name="red_700">#e30413</color>
+    <color name="transparent_grey">#99CCCCCC</color>
+    <color name="transparent_twitter_dark">#16202BCC</color>
+    <color name="secondary_text">#757575</color>
+    <color name="twitter_dark">#16202b</color>
+    <color name="material_dark">#131312</color>
+
 </resources>
