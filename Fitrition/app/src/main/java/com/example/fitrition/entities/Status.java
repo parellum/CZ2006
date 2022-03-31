@@ -12,6 +12,11 @@ public class Status {
     private String description;
     private LocalDateTime time;
 
+    public Status(){
+        this.description=null;
+        this.time=LocalDateTime.now();
+    }
+
     /**
      * Constructor for Status
      * @param description Description of activity/achievement worth noting

@@ -28,7 +28,7 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container,new ExploreFragment()).commit();
         BottomNavigationView bottomNav = findViewById(R.id.main_bot_nav);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
     }
