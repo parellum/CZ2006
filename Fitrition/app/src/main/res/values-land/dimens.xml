@@ -1,3 +1,21 @@
 <resources>
+<<<<<<< HEAD
  <dimen name="activity_horizontal_margin">48dp</dimen>
+
+ <resources>
+
+  <dimen name="grid_1x">4dp</dimen>
+  <dimen name="grid_2x">8dp</dimen>
+  <dimen name="grid_3x">16dp</dimen>
+
+  <dimen name="standard_corner_radius">40dp</dimen>
+  <dimen name="standard_height">50dp</dimen>
+  <dimen name="standard_image">30dp</dimen>
+  <dimen name="standard_width">300dp</dimen>
+ </resources>
+
+=======
+    <dimen name="activity_horizontal_margin">48dp</dimen>
+    <dimen name="fab_margin">48dp</dimen>
+>>>>>>> c1f16bc5a91234829a8bae7f3f8f7a0080b11f85
 </resources>
