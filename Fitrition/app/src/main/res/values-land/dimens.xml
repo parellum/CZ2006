@@ -1,4 +1,5 @@
 <resources>
+<<<<<<< HEAD
  <dimen name="activity_horizontal_margin">48dp</dimen>
 
  <resources>
@@ -13,4 +14,8 @@
   <dimen name="standard_width">300dp</dimen>
  </resources>
 
+=======
+    <dimen name="activity_horizontal_margin">48dp</dimen>
+    <dimen name="fab_margin">48dp</dimen>
+>>>>>>> c1f16bc5a91234829a8bae7f3f8f7a0080b11f85
 </resources>

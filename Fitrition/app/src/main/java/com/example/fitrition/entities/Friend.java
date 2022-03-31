@@ -63,7 +63,7 @@ public class Friend{
         this.socialStatusList = socialStatusList;
     }
 
-    public ArrayList<Achievement> getAcheivementList() {
+    public ArrayList<Achievement> getAchievementList() {
         return acheivementList;
     }
 
