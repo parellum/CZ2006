@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,6 +22,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.time.LocalDate;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -103,6 +106,91 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
+        if (userName.length()<6){
+            editUserName.setError("Username needs to be at least 6 characters long!");
+            editUserName.requestFocus();
+            return;
+        }
+
+        if (firstName.isEmpty()){
+            editFirstName.setError("First Name is required!");
+            editFirstName.requestFocus();
+            return;
+        }
+
+        if (eMail.isEmpty()){
+            editEMail.setError("Email is required!");
+            editEMail.requestFocus();
+            return;
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(eMail).matches()){
+            editEMail.setError("Please enter a valid email!");
+            editEMail.requestFocus();
+            return;
+        }
+
+        if (password.isEmpty()){
+            editPassword.setError("Password is required!");
+            editPassword.requestFocus();
+            return;
+        }
+
+        if (password.length()<6){
+            editPassword.setError("Password needs to be at least 6 characters long!");
+            editPassword.requestFocus();
+            return;
+        }
+
+        if (confirmPassword.compareTo(password)!=0){
+            editConfirmpassword.setError("Password and confirmation do not match!");
+            editConfirmpassword.requestFocus();
+            return;
+        }
+
+        if (DOB.isEmpty()){
+            editDOB.setError("Date of Birth is required!");
+            editDOB.requestFocus();
+            return;
+        }
+
+        try{
+            if (!LocalDate.of(Integer.parseInt(DOB.substring(4,8)),Integer.parseInt(DOB.substring(2,4)),Integer.parseInt(DOB.substring(0,2))).isBefore(LocalDate.now())){
+                editDOB.setError("Please Enter Valid Date in DDMMYYYY format");
+                editDOB.requestFocus();
+                return;
+            }
+        }catch (Exception e){
+            editDOB.setError("Please Enter Valid Date in DDMMYYYY format");
+            editDOB.requestFocus();
+            return;
+        }
+
+        if (height.isEmpty()){
+            editHeight.setError("Height is required!");
+            editHeight.requestFocus();
+            return;
+        }
+
+        if (!isNumeric(height)){
+            editHeight.setError("Digits only!");
+            editHeight.requestFocus();
+            return;
+        }
+
+        if (weight.isEmpty()){
+            editWeight.setError("Weight is required!");
+            editWeight.requestFocus();
+            return;
+        }
+        if (!isNumeric(weight)){
+            editWeight.setError("Digits only!");
+            editWeight.requestFocus();
+            return;
+        }
+
+
+
         progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(eMail,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -125,11 +213,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     }
                                 }
                             });
+                            startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
                         } else {
                             Toast.makeText(RegisterActivity.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
         });
+    }
+
+    private boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
     }
 }
