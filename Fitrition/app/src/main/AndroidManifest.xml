@@ -22,7 +22,7 @@
             android:name=".boundary.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".boundary.LoginActivity"
+            android:name=".boundary.TrackerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
