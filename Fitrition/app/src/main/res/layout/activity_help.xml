@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".utils.HelpActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title= " ">
+<!--            app:logo="@mipmap/fitrition_logo"-->
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/back_icon"
+                android:src="@drawable/ic_back_arrow"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/appName"
+                android:text="  Help Page"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:layout_marginLeft="@dimen/browser_actions_context_menu_min_padding"
+                />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="600dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/FAQTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="FAQ"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+// Question 1
+            <MultiAutoCompleteTextView
+                android:id="@+id/Q1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. Is it normal to feel so sore after
+                                exercising?"
+                android:textStyle="bold" />
+
+            <MultiAutoCompleteTextView
+                android:id="@+id/Q1Ans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Muscles feel tender and sore as a result of
+                               microscopic damage to the muscle fibres.
+                                Soreness is normal when working out new
+                                muscle groups. It should go away with rest
+                                and hydration"
+                android:textColor="@color/dark_grey" />
+
+
+            // Question 2
+            <MultiAutoCompleteTextView
+                android:id="@+id/Q2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2. What should I eat to curb hunger pangs? "
+                android:textStyle="bold" />
+
+            <MultiAutoCompleteTextView
+                android:id="@+id/Q2Ans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Try to eat meals loaded with protein as the
+                            macronutrient is known to sate hunger better
+                            than carbs and fats."
+                android:textColor="@color/dark_grey" />
+
+
+            // Question 3
+            <MultiAutoCompleteTextView
+                android:id="@+id/Q3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3. How do I calculate my BMI?"
+                android:textStyle="bold" />
+
+            <MultiAutoCompleteTextView
+                android:id="@+id/Q3Ans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Muscles feel tender and sore as a result of
+                               microscopic damage to the muscle fibres.
+                                Soreness is normal when working out new
+                                muscle groups. It should go away with rest
+                                and hydration"
+                android:textColor="@color/dark_grey" />
+
+            <TextView
+                android:id="@+id/MoreInfoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="More Information"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+</RelativeLayout>
