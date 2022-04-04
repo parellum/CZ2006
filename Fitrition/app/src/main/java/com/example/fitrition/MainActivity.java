@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.fitrition.boundary.LoginActivity;
 import com.example.fitrition.boundary.TrackerFragment;
 import com.example.fitrition.boundary.ExploreFragment;
 import com.example.fitrition.boundary.ProfileFragment;
@@ -27,10 +28,8 @@ import androidx.fragment.app.FragmentActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
     private Toolbar mToolbar;
 
-//    private Button btnActivityMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -73,15 +71,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.help:
-                startActivity(new Intent(MainActivity.this, HelpActivity.class));
+                startActivity(new Intent(this,LoginActivity.class));
 //                Toast.makeText(this, "Help selected", Toast.LENGTH_SHORT).show();
-                break;
-
+                return true;
             case R.id.log_out:
                 Toast.makeText(this, "Log Out selected", Toast.LENGTH_SHORT).show();
-                break;
+                return true;
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener= new BottomNavigationView.OnNavigationItemSelectedListener() {
