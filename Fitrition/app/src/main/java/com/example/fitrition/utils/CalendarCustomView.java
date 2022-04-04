@@ -1,5 +1,6 @@
 package com.example.fitrition.utils;
 
+import android.content.Intent;
 import android.widget.LinearLayout;
         import android.app.DatePickerDialog;
         import android.content.Context;
@@ -12,6 +13,10 @@ import android.widget.LinearLayout;
         import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentTransaction;
+
+
+import com.example.fitrition.MainActivity;
 import com.example.fitrition.uiReference.tracker.ExpandableHeightGridView;
 import com.example.fitrition.R;
 
@@ -46,6 +51,7 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
         setNextButtonClickEvent();
         setGridCellClickEvents();
         setCurrentDateClickEvent();
+        setAddEventButtonClickEvent();
     }
 
     public CalendarCustomView(Context context, AttributeSet attrs) {
@@ -56,6 +62,7 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
         setNextButtonClickEvent();
         setGridCellClickEvents();
         setCurrentDateClickEvent();
+        setAddEventButtonClickEvent();
         Log.d(TAG, "I need to call this method");
     }
 
@@ -69,6 +76,7 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
         previousButton = (ImageView) view.findViewById(R.id.previous_month);
         nextButton = (ImageView) view.findViewById(R.id.next_month);
         currentDate = (TextView) view.findViewById(R.id.display_current_date);
+        addEventButton = (Button) findViewById(R.id.buttonAddEvent);
         calendarGridView = (ExpandableHeightGridView) view.findViewById(R.id.calendar_grid);
         calendarGridView.setExpanded(true);
     }
@@ -111,6 +119,13 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
                     }
                 }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DATE));
                 datePickerDialog.show();
+            }
+        });
+    }
+    private void setAddEventButtonClickEvent() {
+        addEventButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                //startActivity(new Intent(MainActivity.this, HelpActivity.class));
             }
         });
     }
