@@ -8,7 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:26404218901:android:f985d92228e7524490061c",
+        "mobilesdk_app_id": "1:26404218901:android:fc98377f00b9b2e890061c",
         "android_client_info": {
           "package_name": "com.example.fitrition"
         }
@@ -21,7 +21,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCufVTz03fe1QIHi3jrJ-Y4wvayYDMur4E"
+          "current_key": "AIzaSyA-MmG5e4bRf9XcAubV2W4XIE4pPLYhNKY"
         }
       ],
       "services": {
