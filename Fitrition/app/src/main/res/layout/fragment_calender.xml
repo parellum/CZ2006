@@ -144,4 +144,10 @@
         android:horizontalSpacing="4sp"
         android:numColumns="7"
         android:verticalSpacing="4sp" />
+
+    <Button
+        android:id="@+id/buttonAddEvent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Event" />
 </LinearLayout>

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.fitrition.MainActivity;
 import com.example.fitrition.R;
+import com.example.fitrition.utils.HelpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -44,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressBar=(ProgressBar) findViewById(R.id.RegisterPB);
 
         mAuth=FirebaseAuth.getInstance();
+
     }
 
     @Override
@@ -61,6 +63,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void userLogin(){
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+
+        if (!email.isEmpty()){
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            return;
+        }
 
         if (email.isEmpty()){
             editTextEmail.setError("Email is required!");
@@ -86,7 +93,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
