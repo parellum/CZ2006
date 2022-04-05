@@ -17,7 +17,8 @@
     <color name="twitter_dark">#16202b</color>
     <color name="material_dark">#131312</color>
 
-    <color name="app_name">#326e62</color>
+    <color name="green_prime">#326e62</color>
+    <color name="green_alt">#428779</color>
     <color name="icon">#d0daec</color>
     <color name="icon_text">#4c595d</color>
     <color name="choice_1">#c29e94</color>

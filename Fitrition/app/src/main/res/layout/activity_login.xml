@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fitrition"
-            android:textColor="@color/app_name"
+            android:textColor="@color/green_prime"
             android:textSize="100sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
