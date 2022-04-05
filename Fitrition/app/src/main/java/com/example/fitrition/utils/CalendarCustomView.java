@@ -1,6 +1,10 @@
 package com.example.fitrition.utils;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 import android.content.Intent;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.widget.LinearLayout;
         import android.app.DatePickerDialog;
         import android.content.Context;
@@ -12,6 +16,8 @@ import android.widget.LinearLayout;
         import android.widget.DatePicker;
         import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.PopupWindow;
+
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -77,7 +83,7 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
     }
 
     private void initializeUILayout() {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.fragment_calender, this);
         previousButton = (ImageView) view.findViewById(R.id.previous_month);
         nextButton = (ImageView) view.findViewById(R.id.next_month);
@@ -132,16 +138,28 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
     private void setAddEventButtonClickEvent() {
         addEventButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-//                startActivity(new Intent(MainActivity.this, newEventFragment.class));
+                LayoutInflater inflater = (LayoutInflater)
+                        context.getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = inflater.inflate(R.layout.fragment_add_event, null);
 
-//                Intent i = new Intent(getActivity(), NewEventFragment.class);
-//                startActivity(i);
-//                mAdapter = new com.example.fitrition.utils.GridAdapter(context, dayValueInCells, cal, eventObjects);
-//                calendarGridView.setAdapter(mAdapter);
+                // create the popup window
+                int width = LinearLayout.LayoutParams.MATCH_PARENT;
+                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+                final PopupWindow popupWindow = new PopupWindow(popupView, width,  height, focusable);
 
-//                NewEventFragment fragment = new NewEventFragment();
-//                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.fragment_container_view_tag, fragment).commit();
+                // show the popup window
+                // which view you pass in doesn't matter, it is only used for the window tolken
+                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+                // dismiss the popup window when touched
+                popupView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
             }
         });
     }
