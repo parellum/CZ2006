@@ -6,22 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".utils.HelpActivity">
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        >-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:theme="@style/ThemeOverlay.AppCompat.Light"
             >
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/main_toolbar"
+                android:id="@+id/help_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:background="@color/app_name"
                 app:title= " ">
                 <!--            app:logo="@mipmap/fitrition_logo"-->
 
@@ -29,31 +29,184 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/back_icon"
-                    android:src="@drawable/ic_back_arrow"/>
+                    android:src="@drawable/ic_back_arrow"
+                    android:contentDescription="Help image" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/appName"
                     android:text="  Help Page"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:textSize="25dp"
-                    android:layout_marginLeft="@dimen/browser_actions_context_menu_min_padding"
+                    android:textSize="25sp"
+                    android:layout_marginStart="@dimen/browser_actions_context_menu_min_padding"
                     />
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-<!--        <TextView-->
-<!--            android:id="@+id/FAQTitle"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="FAQ"-->
-<!--            android:textSize="30dp"-->
-<!--            android:textStyle="bold"-->
-<!--            android:gravity="center"-->
-<!--            />-->
+        <TextView
+            android:id="@+id/FAQTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FAQ"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:background="@color/app_name"
+            />
+            <ScrollView
+                android:id="@+id/FAQScroll"
+                android:layout_width="wrap_content"
+                android:layout_height="350dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+
+
+<!--                    Question 1-->
+                    <MultiAutoCompleteTextView
+                        android:id="@+id/Q1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1. Is it normal to feel so sore after
+                                        exercising?"
+                        android:textStyle="bold" />
+
+                    <MultiAutoCompleteTextView
+                        android:id="@+id/Q1Ans"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Muscles feel tender and sore as a result of
+                                       microscopic damage to the muscle fibres.
+                                        Soreness is normal when working out new
+                                        muscle groups. It should go away with rest
+                                        and hydration"
+                        android:textColor="@color/dark_grey" />
+
+
+
+<!--                    // Question 2-->
+                    <MultiAutoCompleteTextView
+                        android:id="@+id/Q2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2. What should I eat to curb hunger pangs? "
+                        android:textStyle="bold" />
+
+
+<!--                    // Question 3-->
+                    <MultiAutoCompleteTextView
+                        android:id="@+id/Q2Ans"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Try to eat meals loaded with protein as the
+                                    macronutrient is known to sate hunger better
+                                    than carbs and fats."
+                        android:textColor="@color/dark_grey" />
+
+                    <MultiAutoCompleteTextView
+                        android:id="@+id/Q3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3. How do I calculate my BMI?"
+                        android:textStyle="bold" />
+
+                    <MultiAutoCompleteTextView
+                        android:id="@+id/Q3Ans"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="The formula for BMI is as follows:"
+                        android:textColor="@color/dark_grey" />
+
+
+                </LinearLayout>
+            </ScrollView>
+
+        <TextView
+            android:id="@+id/MoreInfoTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="More Information"
+            android:background="@color/app_name"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <MultiAutoCompleteTextView
+                        android:id="@+id/contact_num_linda"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ms Linda Magdeline
+                                      Nutritionist, National First Hospital
+                                      Contact: (65) 6772 1234
+                                      Email: lindamag@nfh.sg.com"
+                        android:textStyle="bold" />
+
+                    <MultiAutoCompleteTextView
+                        android:id="@+id/contact_num_grace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ms Grace Ng
+                                    Nutritionist, National Medical Centre
+                                    Contact: (65) 6543 1234
+                                    Email: graceng@nmc.sg.com"
+                        android:textStyle="bold" />
+
+                    <MultiAutoCompleteTextView
+                        android:id="@+id/contact_num_tommy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tommy Tan
+                                    Personal Trainer, True Fitness
+                                    Contact: (65) 6553 1037
+                                    Email: tommytan@truefitness.com"
+                        android:textStyle="bold" />
+
+                    <MultiAutoCompleteTextView
+                        android:id="@+id/contact_num_john"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="John Lim
+                                    Personal Trainer,  OneHabit Studio
+                                    Contact: (65) 6553 7633
+                                    Email: johnlim@onehabit.sg.com"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+            </ScrollView>
+
+
+
+
+
+    </LinearLayout>
 
 
 
@@ -61,182 +214,6 @@
 
 
 
-
-<!--    </LinearLayout>-->
-
-
-
-
-
-
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="vertical">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/FAQTitle"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="FAQ"-->
-<!--            android:textSize="30dp"-->
-<!--            android:textStyle="bold"-->
-<!--            />-->
-
-<!--    </LinearLayout>&ndash;&gt;-->
-
-<!--        android:layout_marginTop="80dp"-->
-<!--        android:textAlignment="center"-->
-
-
-
-<!--    <ScrollView-->
-<!--        android:id="@+id/FAQscroll"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="400dp"-->
-<!--        android:layout_marginTop="60dp"-->
-<!--        android:layout_marginLeft="18dp"-->
-<!--        android:layout_marginRight="18dp">-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:orientation="vertical">-->
-
-
-
-
-<!--            // Question 1-->
-<!--            <MultiAutoCompleteTextView-->
-<!--                android:id="@+id/Q1"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="1. Is it normal to feel so sore after-->
-<!--                                exercising?"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <MultiAutoCompleteTextView-->
-<!--                android:id="@+id/Q1Ans"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/Q1"-->
-<!--                android:text="Muscles feel tender and sore as a result of-->
-<!--                               microscopic damage to the muscle fibres.-->
-<!--                                Soreness is normal when working out new-->
-<!--                                muscle groups. It should go away with rest-->
-<!--                                and hydration"-->
-<!--                android:textColor="@color/dark_grey" />-->
-
-
-
-<!--            // Question 2-->
-<!--            <MultiAutoCompleteTextView-->
-<!--                android:id="@+id/Q2"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="2. What should I eat to curb hunger pangs? "-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <MultiAutoCompleteTextView-->
-<!--                android:id="@+id/Q2Ans"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Try to eat meals loaded with protein as the-->
-<!--                            macronutrient is known to sate hunger better-->
-<!--                            than carbs and fats."-->
-<!--                android:textColor="@color/dark_grey" />-->
-
-
-<!--            // Question 3-->
-
-<!--            <MultiAutoCompleteTextView-->
-<!--                android:id="@+id/Q3"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="3. How do I calculate my BMI?"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <MultiAutoCompleteTextView-->
-<!--                android:id="@+id/Q3Ans"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="The formula for BMI is as follows:"-->
-<!--                android:textColor="@color/dark_grey" />-->
-
-
-<!--        </LinearLayout>-->
-<!--    </ScrollView>-->
-
-
-
-<!--    <ScrollView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="250dp"-->
-<!--        android:layout_marginTop="450dp"-->
-<!--        android:layout_marginLeft="18dp"-->
-<!--        android:layout_marginRight="18dp"-->
-<!--        >-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:orientation="vertical">-->
-<!--            <TextView-->
-<!--                android:id="@+id/MoreInfoTitle"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:text="More Information"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="30dp"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <MultiAutoCompleteTextView-->
-<!--                android:id="@+id/contact_num_linda"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Ms Linda Magdeline-->
-<!--                              Nutritionist, National First Hospital-->
-<!--                              Contact: (65) 6772 1234-->
-<!--                              Email: lindamag@nfh.sg.com"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <MultiAutoCompleteTextView-->
-<!--                android:id="@+id/contact_num_grace"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Ms Grace Ng-->
-<!--                            Nutritionist, National Medical Centre-->
-<!--                            Contact: (65) 6543 1234-->
-<!--                            Email: graceng@nmc.sg.com"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <MultiAutoCompleteTextView-->
-<!--                android:id="@+id/contact_num_tommy"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Tommy Tan-->
-<!--                            Personal Trainer, True Fitness-->
-<!--                            Contact: (65) 6553 1037-->
-<!--                            Email: tommytan@truefitness.com"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <MultiAutoCompleteTextView-->
-<!--                android:id="@+id/contact_num_john"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="John Lim-->
-<!--                            Personal Trainer,  OneHabit Studio-->
-<!--                            Contact: (65) 6553 7633-->
-<!--                            Email: johnlim@onehabit.sg.com"-->
-<!--                android:textStyle="bold" />-->
-
-
-<!--        </LinearLayout>-->
-<!--    </ScrollView>-->
 
 
 

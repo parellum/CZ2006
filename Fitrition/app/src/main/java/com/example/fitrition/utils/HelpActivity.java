@@ -44,6 +44,9 @@ public class HelpActivity extends AppCompatActivity {
             }
         });
 
+        mToolbar = findViewById(R.id.help_toolbar);
+        setSupportActionBar(mToolbar);
+
 
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.setTitle("Help Page");
