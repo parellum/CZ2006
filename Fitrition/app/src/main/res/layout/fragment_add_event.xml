@@ -24,49 +24,27 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/seteventtime"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:contentDescription="TODO"
-            tools:ignore="ContentDescription,HardcodedText"
-            android:layout_weight="1"
-            />
-
-        <TextView
+        <EditText
             android:id="@+id/eventtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:text="00:00 AM"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            tools:ignore="HardcodedText"
             android:layout_weight="2"
-            />
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alarm Me"
-            android:textColor="@android:color/white"
-            android:buttonTint="@android:color/white"
-            android:id="@+id/alarmme"
-            android:layout_weight="1"/>
+            android:ems="10"
+            android:hint="Event Time"
+            android:inputType="time"
+            android:textAlignment="center" />
 
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/addevent"
+        android:id="@+id/buttonSaveEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:background="@android:color/white"
-        android:text="Add Event"
+        android:text="Save Event"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
