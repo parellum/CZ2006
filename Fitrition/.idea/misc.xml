@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="..\:/Users/jacqu/AndroidStudioProjects/Fitrition/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
         <entry key="..\:/Users/jacqu/Desktop/Ghub/CZ2006/Fitrition/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.172265625" />
         <entry key="..\:/Users/jacqu/Desktop/Ghub/CZ2006/Fitrition/app/src/main/res/layout/acticity_friend.xml" value="0.103125" />
@@ -25,6 +26,31 @@
         <entry key="..\:/Users/jacqu/Desktop/Ghub/CZ2006/Fitrition/app/src/main/res/layout/list_item.xml" value="0.176" />
         <entry key="..\:/Users/jacqu/Desktop/Ghub/CZ2006/Fitrition/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3625" />
         <entry key="..\:/Users/jacqu/Desktop/Ghub/CZ2006/Fitrition/app/src/main/res/menu/bottom_navigation.xml" value="0.2" />
+<<<<<<< HEAD
+        <entry key="app/src/main/res/drawable/search_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/font/nunito_bold.xml" value="0.12407407407407407" />
+        <entry key="app/src/main/res/font/nunito_semibold.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/acticity_friend.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/layout/fragment_calender.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/layout/fragment_explore.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/layout/fragment_friend_searchbar.xml" value="0.29755503336588546" />
+        <entry key="app/src/main/res/layout/fragment_list_layout.xml" value="0.44952392578125" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/layout/fragment_single_cell.xml" value="0.17135416666666667" />
+        <entry key="app/src/main/res/layout/fragment_social.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_tracker.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/layout/list_item.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+=======
         <entry key="..\:/Users/jerem/Documents/GitHub/CZ2006/Fitrition/app/src/main/res/layout/activity_login.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/jerem/Documents/GitHub/CZ2006/Fitrition/app/src/main/res/layout/fragment_add_event.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/jerem/Documents/GitHub/CZ2006/Fitrition/app/src/main/res/layout/fragment_calender.xml" value="0.21784420289855072" />
@@ -34,6 +60,7 @@
         <entry key="..\:/Users/jerem/Documents/GitHub/CZ2006/Fitrition/app/src/main/res/layout/fragment_single_cell.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/jerem/Documents/GitHub/CZ2006/Fitrition/app/src/main/res/layout/fragment_tracker.xml" value="0.1" />
         <entry key="..\:/Users/jerem/Documents/GitHub/CZ2006/Fitrition/app/src/main/res/layout/list_item.xml" value="0.10989583333333333" />
+>>>>>>> 763b7e5ccdaeed29b69c221bf6b51ac5d5847587
       </map>
     </option>
   </component>
