@@ -1,6 +1,10 @@
 package com.example.fitrition.utils;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 import android.content.Intent;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.widget.LinearLayout;
         import android.app.DatePickerDialog;
         import android.content.Context;
@@ -11,6 +15,7 @@ import android.widget.LinearLayout;
         import android.widget.Button;
         import android.widget.DatePicker;
         import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
@@ -52,6 +57,7 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
         setCurrentDateClickEvent();
+        setAddEventButtonClickEvent();;
     }
 
 
@@ -100,6 +106,36 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
                     }
                 }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DATE));
                 datePickerDialog.show();
+            }
+        });
+    }
+
+
+    private void setAddEventButtonClickEvent() {
+        addEventButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                LayoutInflater inflater = (LayoutInflater)
+                        context.getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = inflater.inflate(R.layout.fragment_add_event, null);
+
+                // create the popup window
+                int width = LinearLayout.LayoutParams.MATCH_PARENT;
+                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+                final PopupWindow popupWindow = new PopupWindow(popupView, width,  height, focusable);
+
+                // show the popup window
+                // which view you pass in doesn't matter, it is only used for the window tolken
+                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+                // dismiss the popup window when touched
+                popupView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
             }
         });
     }
