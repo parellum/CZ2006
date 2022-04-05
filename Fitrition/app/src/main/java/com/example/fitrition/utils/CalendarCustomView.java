@@ -128,8 +128,8 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
 //                startActivity(new Intent(MainActivity.this, newEventFragment.class));
 //                Intent i = new Intent(getActivity(), newEventFragment.class);
 //                startActivity(i);
-                mAdapter = new com.example.fitrition.utils.GridAdapter(context, dayValueInCells, cal, eventObjects);
-                calendarGridView.setAdapter(mAdapter);
+//                mAdapter = new com.example.fitrition.utils.GridAdapter(context, dayValueInCells, cal, eventObjects);
+//                calendarGridView.setAdapter(mAdapter);
             }
         });
     }
