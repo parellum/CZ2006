@@ -24,15 +24,12 @@ public class GridAdapter extends ArrayAdapter {
     private LayoutInflater mInflater;
     private List<Date> monthlyDates;
     private Calendar currentDate;
-    private List<EventObjects> allEvents;
     CalendarCustomView calendarCustomView;
 
-    public GridAdapter( Context context, List<Date> monthlyDates, Calendar currentDate, List<EventObjects> allEvents) {
+    public GridAdapter( Context context, List<Date> monthlyDates, Calendar currentDate) {
         super(context, R.layout.fragment_single_cell);
         this.monthlyDates = monthlyDates;
         this.currentDate = currentDate;
-        this.allEvents = allEvents;
-        this.calendarCustomView = calendarCustomView;
         mInflater = LayoutInflater.from(context);
     }
 
@@ -59,17 +56,6 @@ public class GridAdapter extends ArrayAdapter {
         //Add day to calendar
         TextView cellNumber = (TextView) view.findViewById(R.id.calendar_date_id);
         cellNumber.setText(String.valueOf(dayValue));
-        //Add events to the calendar
-        TextView eventIndicator = (TextView) view.findViewById(R.id.event_id);
-        Calendar eventCalendar = Calendar.getInstance();
-        for (int i = 0; i < allEvents.size(); i++) {
-            eventCalendar.setTime(allEvents.get(i).getDate());
-            if (dayValue == eventCalendar.get(Calendar.DAY_OF_MONTH) && displayMonth == eventCalendar.get(Calendar.MONTH) + 1) {
-                eventIndicator.setText(allEvents.get(i).getMessage());
-                view.setBackgroundColor((allEvents.get(i).getColor() != 0) ? allEvents.get(i).getColor() : Color.parseColor("#FF0000"));
-            }
-            //&& displayYear == eventCalendar.get(Calendar.YEAR)
-        }
         return view;
     }
 
@@ -83,10 +69,6 @@ public class GridAdapter extends ArrayAdapter {
     @Override
     public Object getItem(int position) {
         return monthlyDates.get(position);
-    }
-
-    public EventObjects getEvent(int position){
-        return allEvents.get(position);
     }
 
     @Override
