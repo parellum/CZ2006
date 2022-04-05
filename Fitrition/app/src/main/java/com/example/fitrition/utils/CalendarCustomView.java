@@ -56,7 +56,6 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
         setUpCalendarAdapter();
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
-        setCurrentDateClickEvent();
         setAddEventButtonClickEvent();;
     }
 
@@ -87,25 +86,6 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
             @Override
             public void onClick(View v) {
                 CalendarCustomView.this.nextMonth();
-            }
-        });
-    }
-
-    private void setCurrentDateClickEvent() {
-        currentDate.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Calendar currentDate = Calendar.getInstance();
-                final Calendar date;
-                date = Calendar.getInstance();
-                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, final int dayOfMonth) {
-                        cal.set(year, monthOfYear, dayOfMonth);
-                        setUpCalendarAdapter();
-                    }
-                }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DATE));
-                datePickerDialog.show();
             }
         });
     }
