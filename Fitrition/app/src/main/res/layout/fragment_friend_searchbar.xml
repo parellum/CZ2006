@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
-<!--    tools:context="in.tvac.akshayejh.firebasesearch.MainActivity">-->
+
+    <!--    tools:context="in.tvac.akshayejh.firebasesearch.MainActivity">-->
 
 
     <TextView
@@ -25,20 +26,20 @@
         android:id="@+id/search_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/heading_label"
         android:layout_below="@+id/heading_label"
-        android:layout_marginRight="20dp"
+        android:layout_alignStart="@+id/heading_label"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
         android:layout_toStartOf="@+id/search_btn"
         android:background="@drawable/search_layout"
         android:ems="10"
         android:fontFamily="@font/nunito_semibold"
         android:hint="Search here"
         android:inputType="textPersonName"
-        android:paddingBottom="10dp"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
         android:textColor="#999999"
         android:textSize="16sp" />
 
@@ -53,12 +54,5 @@
         android:background="@android:color/background_light"
         app:srcCompat="@mipmap/search_button" />
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/result_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/search_field"
-        android:layout_marginTop="50dp"></androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

@@ -53,10 +53,9 @@
                 android:layout_height="50dp"
                 android:id="@+id/alarmmeBtn"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ic_action_notification_off"
-                android:background="@color/colorPrimaryDark"/>
-
+                android:layout_marginTop="10dp"/>
+                //android:src="@drawable/ic_action_notification_off"
+                //android:background="@color/colorPrimaryDark"/>
 
 
             <Button
