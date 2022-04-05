@@ -150,7 +150,7 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
 
         //Test location
-        getDeviceLocation();
+        //getDeviceLocation();
         //END
 
 
