@@ -73,11 +73,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.help:
-                Intent i = new Intent(this,HelpActivity.class);
-                startActivity(i);
+                Intent help = new Intent(this,HelpActivity.class);
+                startActivity(help);
                 return true;
             case R.id.log_out:
-                Toast.makeText(this, "Log Out selected", Toast.LENGTH_SHORT).show();
+                Intent logout = new Intent(this, FriendActivity.class);
+//                Toast.makeText(this, "Log Out selected", Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);

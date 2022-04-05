@@ -28,14 +28,14 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/back_icon"
+                    android:id="@+id/help_back_icon"
                     android:src="@drawable/ic_back_arrow"
                     android:contentDescription="Help image" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/appName"
+                    android:id="@+id/HelpPage"
                     android:text="  Help Page"
                     android:textColor="@color/white"
                     android:textStyle="bold"
