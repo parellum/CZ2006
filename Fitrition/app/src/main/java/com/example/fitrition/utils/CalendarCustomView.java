@@ -1,6 +1,10 @@
 package com.example.fitrition.utils;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 import android.content.Intent;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.widget.LinearLayout;
         import android.app.DatePickerDialog;
         import android.content.Context;
@@ -11,12 +15,16 @@ import android.widget.LinearLayout;
         import android.widget.Button;
         import android.widget.DatePicker;
         import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 
+
 import com.example.fitrition.MainActivity;
+import com.example.fitrition.boundary.NewEventFragment;
 import com.example.fitrition.uiReference.tracker.ExpandableHeightGridView;
 import com.example.fitrition.R;
 
@@ -39,36 +47,19 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
     private com.example.fitrition.utils.GridAdapter mAdapter;
-    List<com.example.fitrition.utils.EventObjects> eventObjects = new ArrayList<>();
 
-    public CalendarCustomView(Context context, List<com.example.fitrition.utils.EventObjects> eventObjectses) {
+
+    public CalendarCustomView(Context context) {
         super(context);
-        this.eventObjects = eventObjectses;
         this.context = context;
         initializeUILayout();
         setUpCalendarAdapter();
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
-        setGridCellClickEvents();
         setCurrentDateClickEvent();
-        setAddEventButtonClickEvent();
+        setAddEventButtonClickEvent();;
     }
 
-    public CalendarCustomView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        this.context = context;
-        initializeUILayout();
-        setPreviousButtonClickEvent();
-        setNextButtonClickEvent();
-        setGridCellClickEvents();
-        setCurrentDateClickEvent();
-        setAddEventButtonClickEvent();
-        Log.d(TAG, "I need to call this method");
-    }
-
-    public CalendarCustomView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
 
     private void initializeUILayout() {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
@@ -86,8 +77,6 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
             @Override
             public void onClick(View v) {
                 CalendarCustomView.this.previousMonths();
-//                cal.add(Calendar.MONTH, -1);
-//                setUpCalendarAdapter();
             }
         });
     }
@@ -98,8 +87,6 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
             @Override
             public void onClick(View v) {
                 CalendarCustomView.this.nextMonth();
-//                cal.add(Calendar.MONTH, 1);
-//                setUpCalendarAdapter();
             }
         });
     }
@@ -122,28 +109,35 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
             }
         });
     }
+
+
     private void setAddEventButtonClickEvent() {
         addEventButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-//                startActivity(new Intent(MainActivity.this, newEventFragment.class));
-//                Intent i = new Intent(getActivity(), newEventFragment.class);
-//                startActivity(i);
-//                mAdapter = new com.example.fitrition.utils.GridAdapter(context, dayValueInCells, cal, eventObjects);
-//                calendarGridView.setAdapter(mAdapter);
+                LayoutInflater inflater = (LayoutInflater)
+                        context.getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = inflater.inflate(R.layout.fragment_add_event, null);
+
+                // create the popup window
+                int width = LinearLayout.LayoutParams.MATCH_PARENT;
+                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+                final PopupWindow popupWindow = new PopupWindow(popupView, width,  height, focusable);
+
+                // show the popup window
+                // which view you pass in doesn't matter, it is only used for the window tolken
+                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+                // dismiss the popup window when touched
+                popupView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
             }
         });
-    }
-
-    public String setGridCellClickEvents() {
-        final String[] text = new String[1];
-//        calendarGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                text[0] = "Clicked " + parent.getAdapter().getItem(position);
-//                    Toast.makeText(context, "Clicked " + parent.getAdapter().getItem(position), Toast.LENGTH_LONG).show();
-//            }
-//        });
-        return text[0];
     }
 
 
@@ -160,7 +154,7 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
         Log.d(TAG, "Number of date " + dayValueInCells.size());
         String sDate = formatter.format(cal.getTime());
         currentDate.setText(sDate);
-        mAdapter = new com.example.fitrition.utils.GridAdapter(context, dayValueInCells, cal, eventObjects);
+        mAdapter = new com.example.fitrition.utils.GridAdapter(context, dayValueInCells, cal);
         calendarGridView.setAdapter(mAdapter);
     }
 
@@ -176,25 +170,4 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
         setUpCalendarAdapter();
     }
 
-    public void setSelectedDates(com.example.fitrition.utils.EventObjects eventObjectses) {
-        this.eventObjects.add(eventObjectses);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    public void setRangesOfDate(List<com.example.fitrition.utils.EventObjects> eventObjectses) {
-        this.eventObjects = eventObjectses;
-        setUpCalendarAdapter();
-        mAdapter.notifyDataSetChanged();
-    }
-
-    public void removeSelectedDate(com.example.fitrition.utils.EventObjects eventObjectses) {
-        for (int i = 0; i < this.eventObjects.size(); i++) {
-            if (this.eventObjects.get(i).getDate().toString().equals(eventObjectses.getDate().toString())) {
-                this.eventObjects.remove(i);
-                // TODO: 10/18/2017 here are some tricks
-//                break;
-            }
-        }
-        mAdapter.notifyDataSetChanged();
-    }
 }
