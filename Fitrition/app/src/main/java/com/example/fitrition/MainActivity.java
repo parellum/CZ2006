@@ -45,11 +45,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
 
+
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.setTitle("  Fitrition");
 //        actionBar.setIcon(R.mipmap.fitrition_logo);
 //        actionBar.setDisplayUseLogoEnabled(true);
 //        actionBar.setDisplayShowHomeEnabled(true);
+//        actionBar.addOnMenuVisibilityListener();
 
 
 
@@ -64,21 +66,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.help:
-                startActivity(new Intent(this,LoginActivity.class));
-//                Toast.makeText(this, "Help selected", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(this,HelpActivity.class);
+                startActivity(i);
                 return true;
             case R.id.log_out:
                 Toast.makeText(this, "Log Out selected", Toast.LENGTH_SHORT).show();
                 return true;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener= new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -101,9 +103,12 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container,selectedFragment).commit();
-
             return true;
         }
     };
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

@@ -25,24 +25,24 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HelpActivity extends AppCompatActivity {
 
-//    private ActivityMainBinding binding;
-//    private Toolbar mToolbar;
-//    private ImageView backIcon;
+    private ActivityMainBinding binding;
+    private Toolbar mToolbar;
+    private ImageView backIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-//
-//        backIcon = findViewById(R.id.back_icon);
-//
-//        backIcon.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(HelpActivity.this, MainActivity.class));
-//            }
-//        });
+
+        backIcon = findViewById(R.id.back_icon);
+
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HelpActivity.this, MainActivity.class));
+            }
+        });
 
 
 //        ActionBar actionBar = getSupportActionBar();
