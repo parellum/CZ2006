@@ -35,7 +35,7 @@ import com.example.fitrition.R;
         import java.util.List;
         import java.util.Locale;
 
-public class CalendarCustomView extends LinearLayout implements com.example.fitrition.utils.CalendarUtils {
+public class CalendarCustomView extends LinearLayout {
     private static final String TAG = CalendarCustomView.class.getSimpleName();
     private ImageView previousButton, nextButton;
     private TextView currentDate;
@@ -138,13 +138,11 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
         calendarGridView.setAdapter(mAdapter);
     }
 
-    @Override
     public void nextMonth() {
         cal.add(Calendar.MONTH, 1);
         setUpCalendarAdapter();
     }
 
-    @Override
     public void previousMonths() {
         cal.add(Calendar.MONTH, -1);
         setUpCalendarAdapter();
