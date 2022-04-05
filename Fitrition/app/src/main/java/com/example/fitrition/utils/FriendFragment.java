@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitrition.MainActivity;
 import com.example.fitrition.R;
-import com.example.fitrition.databinding.ActivityMainBinding;
 
 public class FriendFragment extends AppCompatActivity {
 
@@ -39,7 +38,7 @@ public class FriendFragment extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_list_layout);
+        setContentView(R.layout.activity_friend_status);
 
 
         backIcon = findViewById(R.id.status_back_icon);
