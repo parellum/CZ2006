@@ -34,8 +34,6 @@ public class FriendActivity extends AppCompatActivity {
 //        mResultList = (RecyclerView) findViewById(R.id.result_list);
 //    }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

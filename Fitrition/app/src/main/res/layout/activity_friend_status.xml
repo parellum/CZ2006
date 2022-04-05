@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_back_arrow" />
-<!--gender, age, number of postings, recycleview-->
+        <!--gender, age, number of postings, recycleview-->
         <TextView
             android:id="@+id/back_to_status"
             android:layout_width="wrap_content"

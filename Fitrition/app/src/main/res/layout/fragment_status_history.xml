@@ -3,12 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StatusHistoryFragment">
+    tools:context=".boundary.StatusHistoryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="HELLLOOOOO"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        />
 
+</RelativeLayout>
 </FrameLayout>
