@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.fitrition.FriendListFragment;
 import com.example.fitrition.R;
 
 public class ProfileFragment extends Fragment {
@@ -40,6 +39,7 @@ public class ProfileFragment extends Fragment {
                 Fragment friendList = new FriendListFragment();
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.profile_fragment, friendList).commit();
+
             }
         });
 
