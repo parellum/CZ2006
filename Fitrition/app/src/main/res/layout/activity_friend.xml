@@ -9,39 +9,36 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
-            >
+            android:theme="@style/ThemeOverlay.AppCompat.Light">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/friend_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/green_prime"
-                app:title= " ">
+                app:title=" ">
 
                 <ImageView
+                    android:id="@+id/friend_back_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/friend_back_icon"
-                    android:src="@drawable/ic_baseline_arrow_back_24"
-                    android:contentDescription="Friend image" />
+                    android:contentDescription="Friend image"
+                    android:src="@drawable/ic_back_arrow" />
 
                 <TextView
+                    android:id="@+id/FriendPage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/FriendPage"
+                    android:layout_marginStart="@dimen/browser_actions_context_menu_min_padding"
                     android:text="  Social Page"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
                     android:textSize="25sp"
-                    android:layout_marginStart="@dimen/browser_actions_context_menu_min_padding"
-                    />
+                    android:textStyle="bold" />
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
@@ -51,24 +48,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/green_alt"
-            android:text="XXX's Profile"
+            android:text="FAQ"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold" />
+
         <ScrollView
             android:id="@+id/FAQScroll"
             android:layout_width="wrap_content"
             android:layout_height="350dp"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="18dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="18dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
 
             </LinearLayout>
         </ScrollView>

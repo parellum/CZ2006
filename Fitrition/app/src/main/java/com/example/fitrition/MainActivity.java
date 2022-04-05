@@ -1,13 +1,16 @@
 package com.example.fitrition;
 
 import android.content.Intent;
+import android.location.Address;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.fitrition.boundary.LoginActivity;
@@ -27,9 +30,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
+
+    ListView listView;
+    String[] name ={"Alex", "Daniel", "Yoyo","Exceline","Daniel2","Adam", "Z2", "Z3"};
+    ArrayAdapter<String> arrayAdapter;
 
 
 
@@ -46,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
 
+        listView = findViewById(R.id.listview);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, name);
+        listView.setAdapter(arrayAdapter);
 
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.setTitle("  Fitrition");
@@ -65,26 +77,45 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-//        return true;
 
-        MenuItem.OnActionExpandListener onActionExpandListener =new MenuItem.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                Toast.makeText(MainActivity.this, "Search is Expanded", Toast.LENGTH_SHORT);
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-                Toast.makeText(MainActivity.this, "Search is Collapsed", Toast.LENGTH_SHORT);
-                return true;
-            }
-        };
-        menu.findItem(R.id.search_icon).setOnActionExpandListener(onActionExpandListener);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search_icon).getActionView();
+        MenuItem menuItem = menu.findItem(R.id.search_icon);
+        SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setQueryHint("Search eateries/fitness facilities here...");
 
-        return true;
+//        MenuItem.OnActionExpandListener onActionExpandListener =new MenuItem.OnActionExpandListener() {
+//            @Override
+//            public boolean onMenuItemActionExpand(MenuItem item) {
+//                Toast.makeText(MainActivity.this, "Search is Expanded", Toast.LENGTH_SHORT);
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onMenuItemActionCollapse(MenuItem item) {
+//                Toast.makeText(MainActivity.this, "Search is Colapsed", Toast.LENGTH_SHORT);
+//                return true;
+//            }
+//        };
+        // same thing here except for the first line
+//        menu.findItem(R.id.search_icon).setOnActionExpandListener(onActionExpandListener);
+//        SearchView searchView = (SearchView) menu.findItem(R.id.search_icon).getActionView();
+//        searchView.setQueryHint("Search eateries/fitness facilities here...");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                arrayAdapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+
+
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -95,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(help);
                 return true;
             case R.id.log_out:
+//                Intent logout = new Intent(this, LoginActivity.class);
                 Intent logout = new Intent(this, FriendActivity.class);
                 startActivity(logout);
                 // Change FriendActivity
