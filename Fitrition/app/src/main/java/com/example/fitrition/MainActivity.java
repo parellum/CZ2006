@@ -37,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar mToolbar;
 
     ListView listView;
-    String[] name ={"Alex", "Daniel", "Yoyo","Exceline","Daniel2","Adam",
-            "Z2", "Z3"};
+    String[] name ={"Alex", "Daniel", "Yoyo","Exceline","Daniel2","Adam", "Z2", "Z3"};
     ArrayAdapter<String> arrayAdapter;
 
 
@@ -78,24 +77,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-//        return true;
 
-        MenuItem.OnActionExpandListener onActionExpandListener =new MenuItem.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                Toast.makeText(MainActivity.this, "Search is Expanded", Toast.LENGTH_SHORT);
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-                Toast.makeText(MainActivity.this, "Search is Collapsed", Toast.LENGTH_SHORT);
-                return true;
-            }
-        };
-        menu.findItem(R.id.search_icon).setOnActionExpandListener(onActionExpandListener);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search_icon).getActionView();
+        MenuItem menuItem = menu.findItem(R.id.search_icon);
+        SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setQueryHint("Search eateries/fitness facilities here...");
+
+//        MenuItem.OnActionExpandListener onActionExpandListener =new MenuItem.OnActionExpandListener() {
+//            @Override
+//            public boolean onMenuItemActionExpand(MenuItem item) {
+//                Toast.makeText(MainActivity.this, "Search is Expanded", Toast.LENGTH_SHORT);
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onMenuItemActionCollapse(MenuItem item) {
+//                Toast.makeText(MainActivity.this, "Search is Colapsed", Toast.LENGTH_SHORT);
+//                return true;
+//            }
+//        };
+        // same thing here except for the first line
+//        menu.findItem(R.id.search_icon).setOnActionExpandListener(onActionExpandListener);
+//        SearchView searchView = (SearchView) menu.findItem(R.id.search_icon).getActionView();
+//        searchView.setQueryHint("Search eateries/fitness facilities here...");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -106,12 +109,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 arrayAdapter.getFilter().filter(newText);
-                return false;
+                return true;
             }
         });
+        
 
 
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

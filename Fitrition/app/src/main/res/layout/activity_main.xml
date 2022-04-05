@@ -35,17 +35,12 @@
                 />
 
 
+
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listview"
-        android:visibility="visible"
-        android:layout_below="@id/main_toolbar_parent"
-        android:layout_above="@id/main_bot_nav"
-        />
+
+
 
 
 
@@ -56,6 +51,14 @@
         android:layout_below="@id/main_toolbar_parent"
         android:layout_above="@id/main_bot_nav" />
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listview"
+        android:layout_below="@id/main_toolbar_parent"
+        android:layout_above="@id/main_bot_nav"
+        android:visibility="invisible"
+        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_bot_nav"
