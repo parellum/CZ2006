@@ -35,7 +35,7 @@ public class HelpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_help);
 
 
-        backIcon = findViewById(R.id.back_icon);
+        backIcon = findViewById(R.id.help_back_icon);
 
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
