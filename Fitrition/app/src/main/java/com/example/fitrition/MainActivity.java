@@ -22,6 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -29,6 +30,7 @@ import androidx.fragment.app.FragmentActivity;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
+
 
 
     @Override
@@ -45,15 +47,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
 
-
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.setTitle("  Fitrition");
 //        actionBar.setIcon(R.mipmap.fitrition_logo);
 //        actionBar.setDisplayUseLogoEnabled(true);
 //        actionBar.setDisplayShowHomeEnabled(true);
 //        actionBar.addOnMenuVisibilityListener();
-
-
 
 
 // this is used when we want to click a BUTTON and it goes to the other activity
@@ -66,6 +65,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+//        return true;
+
+        MenuItem.OnActionExpandListener onActionExpandListener =new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                Toast.makeText(MainActivity.this, "Search is Expanded", Toast.LENGTH_SHORT);
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                Toast.makeText(MainActivity.this, "Search is Collapsed", Toast.LENGTH_SHORT);
+                return true;
+            }
+        };
+        menu.findItem(R.id.search_icon).setOnActionExpandListener(onActionExpandListener);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search_icon).getActionView();
+        searchView.setQueryHint("Search eateries/fitness facilities here...");
+
         return true;
     }
 
@@ -78,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.log_out:
                 Intent logout = new Intent(this, FriendActivity.class);
+                startActivity(logout);
+                // Change FriendActivity
 //                Toast.makeText(this, "Log Out selected", Toast.LENGTH_SHORT).show();
                 return true;
         }

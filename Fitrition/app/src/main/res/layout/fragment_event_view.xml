@@ -54,9 +54,9 @@
                 android:id="@+id/alarmmeBtn"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/ic_action_notification_off"
-                android:background="@color/colorPrimaryDark"/>
-
+                android:src="@drawable/ic_notifications_black_24dp"
+                android:background="@color/colorPrimary"/>
+            // src and background to be edited
 
 
             <Button
