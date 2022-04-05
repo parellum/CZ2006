@@ -32,6 +32,11 @@
         <activity
             android:name=".utils.HelpActivity">
         </activity>
+
+        <activity
+            android:name=".utils.HelpActivity">
+        </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
