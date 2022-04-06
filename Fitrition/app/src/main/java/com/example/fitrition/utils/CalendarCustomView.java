@@ -24,7 +24,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 
 import com.example.fitrition.MainActivity;
-import com.example.fitrition.boundary.NewEventFragment;
 import com.example.fitrition.uiReference.tracker.ExpandableHeightGridView;
 import com.example.fitrition.R;
 
