@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 //                Intent logout = new Intent(this, LoginActivity.class);
                 Intent logout = new Intent(this, FriendActivity.class);
                 startActivity(logout);
-                // Change FriendActivity
+                // Change to LoginActivity
 //                Toast.makeText(this, "Log Out selected", Toast.LENGTH_SHORT).show();
                 return true;
         }
