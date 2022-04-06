@@ -2,6 +2,7 @@ package com.example.fitrition.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,10 @@ import android.widget.Toast;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fitrition.FriendActivity;
 import com.example.fitrition.R;
 import com.example.fitrition.entities.Status;
+import com.example.fitrition.utils.HelpActivity;
 
 import java.text.BreakIterator;
 import java.util.List;
@@ -43,10 +46,10 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,"The position is:"+position,Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context,"The position is:"+position,Toast.LENGTH_SHORT).show();
+                view.getContext().startActivity(new Intent(view.getContext(), FriendActivity.class));
             }
         });
-
 
     }
 

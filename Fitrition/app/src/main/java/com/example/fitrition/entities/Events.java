@@ -3,10 +3,12 @@ package com.example.fitrition.entities;
 public class Events {
     String Event, Time,Date,Month,Year;
 
-    public Events(String event, String time, String date, String Month, String Year) {
+    public Events(String event, String time, String date, String month, String year) {
         Event = event;
         Time = time;
         Date = date;
+        Month = month;
+        Year = year;
     }
 
     public String getMonth() {
