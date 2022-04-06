@@ -201,12 +201,6 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
         });
     }
 
-
-
-
-
-
-
     public void setUpCalendarAdapter() {
         List<Date> dayValueInCells = new ArrayList<Date>();
         Calendar mCal = (Calendar) cal.clone();
