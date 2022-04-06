@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/light_green">
 
         <TextView
             android:id="@+id/status_history_title"
@@ -19,7 +19,7 @@
             android:fontFamily="@font/nunito_semibold"
             android:textSize="35dp"
             android:textAlignment="center"
-            android:background="@color/light_green"
+            android:background="@color/dark_green"
             />
 
         <androidx.recyclerview.widget.RecyclerView

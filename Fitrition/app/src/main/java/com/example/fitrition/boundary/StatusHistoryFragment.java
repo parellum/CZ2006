@@ -21,11 +21,11 @@ import com.example.fitrition.utils.SpacingItemDecoration;
 import java.util.ArrayList;
 
 public class StatusHistoryFragment extends Fragment {
-    RecyclerView recyclerView;
-    StatusAdapter statusAdapter;
-    ArrayList<Status> statusList=new ArrayList<Status>();
+    RecyclerView recyclerView1;
+    StatusAdapter statusAdapter1;
+    ArrayList<Status> statusList1=new ArrayList<Status>();
 
-    public static final String[] statusTest= {
+    public static final String[] statusTest1= {
             "Joey Lim ate Chicken Rice at NTU Hall 15",
             "Joey Lim has achieved a hotstreak of 1000 days!",
             "Joey Lim has completed her 9th Swimming session!",
@@ -56,24 +56,24 @@ public class StatusHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_status_history, container, false);
-        for(int i=0;i<statusTest.length;i++)
+        for(int i=0;i<statusTest1.length;i++)
         {
             Status status = new Status();
 
-            status.setDescription(statusTest[i]);
+            status.setDescription(statusTest1[i]);
 
-            statusList.add(status);
+            statusList1.add(status);
         }
 
 
-        statusAdapter = new StatusAdapter(statusList);
+        statusAdapter1 = new StatusAdapter(statusList1);
 
-        recyclerView = (RecyclerView)view.findViewById(R.id.status_history);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView1 = (RecyclerView)view.findViewById(R.id.status_history);
+        recyclerView1.setLayoutManager(new LinearLayoutManager(getActivity()));
         SpacingItemDecoration itemDecoration = new SpacingItemDecoration(10);
-        recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(statusAdapter);
+        recyclerView1.addItemDecoration(itemDecoration);
+        recyclerView1.setItemAnimator(new DefaultItemAnimator());
+        recyclerView1.setAdapter(statusAdapter1);
 
         return view;
     }

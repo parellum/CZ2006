@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import com.example.fitrition.databinding.ActivityMainBinding;
 
 public class FriendActivity extends AppCompatActivity {
-
+// do not need this activity anymore
     private ActivityMainBinding binding;
     private Toolbar fToolbar;
     private ImageView backIcon;
