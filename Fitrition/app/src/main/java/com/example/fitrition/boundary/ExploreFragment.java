@@ -125,6 +125,11 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
         gmap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
+
+                //Handles the case where the user presses on the blue icon by accident
+                if(marker.getTitle().equalsIgnoreCase("You Are Here"))
+                    return false;
+
                 marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
                 //Attempt to launch a new activity cuz this fragment is literally flooded
@@ -305,6 +310,13 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
                     gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                             new LatLng(locationResult.getLatitude(),
                                     locationResult.getLongitude()), 14));
+
+                    //Add a blue marker to indicate user location
+                    MarkerOptions curLocMarker = new MarkerOptions().position(new LatLng(lat.get(), lng.get()))
+                            .title("You Are Here")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
+                    gmap.addMarker(curLocMarker);
                 });
 
             }else{
@@ -339,9 +351,7 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
 //Merzen Used to track changes
 // 6 April 2022
-/* 1. edited the on click map listener
- 2. Created a new activtiy (both the xml and class)
- 3. Use the facility Manager to compute distance within 2 KM
+/*
 
  */
 
