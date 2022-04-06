@@ -53,7 +53,7 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdap
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             Event = itemView.findViewById(R.id.eventname);
-//            Date = itemView.findViewById(R.id.date);
+            Date = itemView.findViewById(R.id.eventdate);
             Time   = itemView.findViewById(R.id.eventtime);
         }
     }
