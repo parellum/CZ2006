@@ -3,13 +3,10 @@ package com.example.fitrition.utils;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitrition.MainActivity;
 import com.example.fitrition.R;
@@ -19,11 +16,10 @@ public class FriendFragment extends AppCompatActivity {
     private Toolbar fToolbar;
     private ImageView backIcon;
 
-    private EditText mSearchField;
-    private ImageButton mSearchBtn;
-
-    private RecyclerView mResultList;
-
+//    private EditText mSearchField;
+//    private ImageButton mSearchBtn;
+//
+//    private RecyclerView mResultList;
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState){
 //        super.onCreate(savedInstanceState);
@@ -52,7 +48,6 @@ public class FriendFragment extends AppCompatActivity {
 
         fToolbar = findViewById(R.id.friend_toolbar);
         setSupportActionBar(fToolbar);
-
 
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.setTitle("Help Page");

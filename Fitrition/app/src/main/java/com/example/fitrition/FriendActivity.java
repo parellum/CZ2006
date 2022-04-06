@@ -19,10 +19,10 @@ public class FriendActivity extends AppCompatActivity {
     private Toolbar fToolbar;
     private ImageView backIcon;
 
-    private EditText mSearchField;
-    private ImageButton mSearchBtn;
-
-    private RecyclerView mResultList;
+//    private EditText mSearchField;
+//    private ImageButton mSearchBtn;
+//
+//    private RecyclerView mResultList;
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState){
@@ -33,8 +33,6 @@ public class FriendActivity extends AppCompatActivity {
 //        mSearchBtn = (ImageButton) findViewById(R.id.search_btn);
 //        mResultList = (RecyclerView) findViewById(R.id.result_list);
 //    }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
