@@ -44,18 +44,14 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
 
-    public void SaveEvent(String event, String time, String date){
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put(DBStructure.EVENT,event);
-//        contentValues.put(DBStructure.TIME,time);
-//        contentValues.put(DBStructure.DATE,date);
-        //contentValues.put(DBStructure.MONTH,month);
-        //contentValues.put(DBStructure.YEAR,year);
-        //contentValues.put(DBStructure.Notify,notify);
-        //database.insert(DBStructure.EVENT_TABLE_NAME,null,contentValues);
-
-
-
+    public void SaveEvent(String event, String time, String date, String month, String year, SQLiteDatabase database){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DBStructure.EVENT,event);
+        contentValues.put(DBStructure.TIME,time);
+        contentValues.put(DBStructure.DATE,date);
+        contentValues.put(DBStructure.MONTH,month);
+        contentValues.put(DBStructure.YEAR,year);
+        database.insert(DBStructure.EVENT_TABLE_NAME,null,contentValues);
     }
 
 //    public Cursor ReadEvents(String date,SQLiteDatabase database){
