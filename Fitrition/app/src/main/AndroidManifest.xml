@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fitrition">
         <activity
+            android:name=".ViewFacilities"
+            android:exported="false" />
+        <activity
             android:name=".boundary.FriendListActivity"
             android:exported="false" />
         <activity
@@ -48,7 +51,7 @@
         </activity>
         <activity
             android:name=".utils.HelpActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

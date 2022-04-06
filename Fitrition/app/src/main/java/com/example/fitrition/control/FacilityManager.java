@@ -1,156 +1,96 @@
 package com.example.fitrition.control;
-import com.example.fitrition.entities.Facility;
-import com.example.fitrition.entities.Review;
+import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.example.fitrition.entities.Facility;
+import com.example.fitrition.entities.FitnessCentreJSON;
+import com.example.fitrition.entities.Review;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class FacilityManager {
-    private static FacilityManager SINGLE_INSTANCE;
-    private ArrayList<Facility> facilityList;
+    private static FacilityManager instance=null;
+    //private ArrayList<Facility> facilityList;
     private ArrayList<Review> reviewList;
+    private final float distanceInKm = 2;
 
-    public void getFacilityList(){
-        if(facilityList==null || facilityList.size()==0) {
-            System.out.println(" There is no facility in the list.");
-        } else {
-            for (Facility facility : facilityList) {
-                System.out.println("Facility Name: " + facility.getName());
-                System.out.println("Facility ID : " + facility.getFacilityID());
-                System.out.println("Postal Code : " + facility.getPostalCode());
+
+
+    public static FacilityManager getInstance() {
+        if (instance == null) {
+            instance = new FacilityManager();
+        }
+        return instance;
+    }
+
+    public void obtainFacilityBasedOnDistance(Vector<MarkerOptions> markerOptions, double latCur, double lngCur) {
+
+        Vector<MarkerOptions> editedMarkerOption = new Vector<>();
+        Log.d("FacilityManager","Start of obtainFacilityBasedOnDistance" + Double.toString(latCur) + " " + Double.toString(lngCur) );
+
+        for (int i = 0; i < markerOptions.size(); i++) {
+            LatLng lat2 = markerOptions.get(i).getPosition();
+            //Log.d("FacilityManager","Lat" + Double.toString(lat2.latitude));
+
+            if(distance(latCur, lat2.latitude, lngCur, lat2.longitude) <= distanceInKm){
+                //editedMarkerOption.add(markerOptions.get(i));
+                MarkerOptions m = new MarkerOptions();
+                m = markerOptions.get(i);
+                editedMarkerOption.add(m);
+
+                //Log.d("FacilityManager","Within 2km" );
             }
         }
-    }
 
-    // is there Foodcentre entity? Eatery
-    public void showFitnessCentreInfo(String facilityID){
-        Facility f = getFacility(facilityID);
-        System.out.println("-------------------------------------------");
-        System.out.println("Facility Name: " + f.getName());
-        System.out.println("Opening Hour : " + f.getOpeningHour());
-        System.out.println("Postal Code : " + f.getPostalCode());
-        System.out.println("Contact Number : " + f.getContactNumber());
-        System.out.println("Number of ratings : " + f.getNumTotalRating());
-        System.out.println("Rating : " + f.getRating());
-    }
-    public void getMap(){
+        markerOptions.clear();
+        Log.d("FacilityManager",Integer.toString(markerOptions.size()));
 
-    }
-
-    public void displayMapView(){}
-    public void displayListView(){}
-
-    //combined review and rating, user can choose to leave both review and rating or just the rating
-    public void addReviewRating(String reviewID, String userID, String facilityID, int rating, String content, LocalDateTime date){
-        Review review = new Review(reviewID, userID, facilityID, rating, content, date);
-        reviewList.add(review);
-    }
-
-    public void deleteReview(String reviewID){
-        Review r = getRevByReviewID(reviewID);
-        reviewList.remove(r);
-    }
-
-    public void displayReviewByFacility(String facilityID){
-        Review r = getRevByFacilityID(facilityID);
-        System.out.println("-------------------------------------------");
-        System.out.println("Date: " + r.getDate());
-        System.out.println("User ID : " + r.getUserID());
-        System.out.println("Review ID: " + r.getReviewID());
-        System.out.println("Content : " + r.getContent());
-        System.out.println("Rating : " + r.getRating());
-    }
-    //display review by userid?
-
-    public void editReview(String reviewID, String newContent){
-        getRevByReviewID(reviewID).setContent(newContent);
-    }
-
-    public void editRating(String reviewID, int newRating){
-        getRevByReviewID(reviewID).setRating(newRating);
-    }
-
-    public Review filter(String keyword){
-        if(reviewList==null || reviewList.size()==0) {
-            System.out.println("There is no review in the list.");
-        } else {
-            for (Review review : reviewList) {
-                if (review.getContent().toLowerCase().contains(keyword.toLowerCase())) {
-                    return review;
-                } else{
-                    continue;
-                }
-            }
+        for (int i = 0; i < editedMarkerOption.size(); i++) {
+            markerOptions.add(editedMarkerOption.get(i));
+            Log.d("FacilityManager Added","");
         }
-        System.out.println("Keyword is not found.");
-        return null;
+
+        Log.d("FacilityManager",Integer.toString(markerOptions.size()));
+        //return markerOptions;
     }
 
-    //
-    public void addToTracker(String postalCode, String name){
+    public double distance(double lat1, double lat2, double lon1, double lon2)
+    {
 
+        // The math module contains a function
+        // named toRadians which converts from
+        // degrees to radians.
+        lon1 = Math.toRadians(lon1);
+        lon2 = Math.toRadians(lon2);
+        lat1 = Math.toRadians(lat1);
+        lat2 = Math.toRadians(lat2);
+
+        // Haversine formula
+        double dlon = lon2 - lon1;
+        double dlat = lat2 - lat1;
+        double a = Math.pow(Math.sin(dlat / 2), 2)
+                + Math.cos(lat1) * Math.cos(lat2)
+                * Math.pow(Math.sin(dlon / 2),2);
+
+        double c = 2 * Math.asin(Math.sqrt(a));
+
+        // Radius of earth in kilometers. Use 3956
+        // for miles
+        double r = 6371;
+
+        // calculate the result
+        //Log.d("FacilityManager","Dist" + Double.toString(c*r));
+        return(c * r);
     }
-
-
-    public Review getRevByReviewID(String reviewID){
-        if(reviewList==null || reviewList.size()==0) {
-            System.out.println("There is no review in the list.");
-        } else {
-            for (Review review : reviewList) {
-                if (review.getReviewID().equals(reviewID)) {
-                    return review;
-                } else{
-                    continue;
-                }
-            }
-        }
-        System.out.println("Review is not found.");
-        return null;
-    }
-
-    public Review getRevByFacilityID(String facilityID){
-        if(reviewList==null || reviewList.size()==0) {
-            System.out.println("There is no review in the list.");
-        } else {
-            for (Review review : reviewList) {
-                if (review.getFacilityID().equals(facilityID)) {
-                    return review;
-                } else{
-                    continue;
-                }
-            }
-        }
-        System.out.println(" Review is not found.");
-        return null;
-    }
-    public Facility getFacility(String facilityID){
-        if(facilityList==null || facilityList.size()==0) {
-            System.out.println("There is no facility in the list.");
-        }
-        else {
-            for (Facility facility : facilityList) {
-                if (facility.getFacilityID().equals(facilityID)){
-                    return facility;
-                }else{
-                    continue;
-                }
-            }
-        }
-        System.out.println(" Facility is not found.");
-        return null;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 
