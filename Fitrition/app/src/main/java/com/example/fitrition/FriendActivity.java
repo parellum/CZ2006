@@ -19,10 +19,10 @@ public class FriendActivity extends AppCompatActivity {
     private Toolbar fToolbar;
     private ImageView backIcon;
 
-    private EditText mSearchField;
-    private ImageButton mSearchBtn;
-
-    private RecyclerView mResultList;
+//    private EditText mSearchField;
+//    private ImageButton mSearchBtn;
+//
+//    private RecyclerView mResultList;
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState){

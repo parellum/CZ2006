@@ -4,7 +4,6 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../../layout/custom_preview.xml" value="0.1" />
-        <entry key="..\:/Users/Admin/Documents/GitHub/CZ2006/Fitrition/app/src/main/res/layout/fragment_explore.xml" value="0.1" />
         <entry key="..\:/Users/jacqu/AndroidStudioProjects/Fitrition/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
         <entry key="..\:/Users/jacqu/Desktop/Ghub/CZ2006/Fitrition/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.172265625" />
         <entry key="..\:/Users/jacqu/Desktop/Ghub/CZ2006/Fitrition/app/src/main/res/layout/acticity_friend.xml" value="0.103125" />
@@ -35,8 +34,9 @@
         <entry key="app/src/main/res/font/nunito_semibold.xml" value="0.1" />
         <entry key="app/src/main/res/layout/acticity_friend.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/layout/activity_friend.xml" value="0.3723608445297505" />
+        <entry key="app/src/main/res/layout/activity_friend_list.xml" value="0.25587927790277515" />
         <entry key="app/src/main/res/layout/activity_friend_status.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/activity_help.xml" value="0.21213836669921876" />
+        <entry key="app/src/main/res/layout/activity_help.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.18541666666666667" />
@@ -46,12 +46,14 @@
         <entry key="app/src/main/res/layout/fragment_event_view.xml" value="0.14628623188405798" />
         <entry key="app/src/main/res/layout/fragment_explore.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/layout/fragment_friend_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_friend_searchbar.xml" value="0.29755503336588546" />
         <entry key="app/src/main/res/layout/fragment_list_layout.xml" value="0.26051177978515627" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.26490936279296873" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/layout/fragment_single_cell.xml" value="0.17135416666666667" />
         <entry key="app/src/main/res/layout/fragment_social.xml" value="0.30448760986328127" />
+        <entry key="app/src/main/res/layout/fragment_status_history.xml" value="0.1644021739130435" />
         <entry key="app/src/main/res/layout/fragment_tracker.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.18541666666666667" />
