@@ -38,11 +38,14 @@ public class CalendarCustomView extends LinearLayout {
     private TextView currentDate;
     public ExpandableHeightGridView calendarGridView;
     private Button addEventButton;
+    private Button allEventButton;
+
     private static final int MAX_CALENDAR_COLUMN = 42;
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM, yyyy", Locale.ENGLISH);
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
     private com.example.fitrition.utils.GridAdapter mAdapter;
+    RecyclerView EventRV;
     EventRecyclerAdapter eventRecyclerAdapter;
     ArrayList<Events> arrayList;
 
@@ -54,7 +57,8 @@ public class CalendarCustomView extends LinearLayout {
         setUpCalendarAdapter();
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
-        setAddEventButtonClickEvent();;
+        setAddEventButtonClickEvent();
+        setAllEventButtonClickEvent();
     }
 
 
@@ -65,19 +69,20 @@ public class CalendarCustomView extends LinearLayout {
         nextButton = (ImageView) view.findViewById(R.id.next_month);
         currentDate = (TextView) view.findViewById(R.id.display_current_date);
         addEventButton = (Button) findViewById(R.id.buttonAddEvent);
+        allEventButton = (Button) findViewById(R.id.buttonAllEvent);
         calendarGridView = (ExpandableHeightGridView) view.findViewById(R.id.calendar_grid);
         calendarGridView.setExpanded(true);
         arrayList = new ArrayList<>();
 
-        RecyclerView EventRV= (RecyclerView) view.findViewById(R.id.my_feed);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
-        EventRV.setLayoutManager(layoutManager);
-        EventRV.setHasFixedSize(true);
-
-        eventRecyclerAdapter = new EventRecyclerAdapter(view.getContext()
-                ,arrayList);
-        EventRV.setAdapter(eventRecyclerAdapter);
-        eventRecyclerAdapter.notifyDataSetChanged();
+//        RecyclerView EventRV= (RecyclerView) view.findViewById(R.id.my_feed);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+//        EventRV.setLayoutManager(layoutManager);
+//        EventRV.setHasFixedSize(true);
+//
+//        eventRecyclerAdapter = new EventRecyclerAdapter(view.getContext()
+//                ,arrayList);
+//        EventRV.setAdapter(eventRecyclerAdapter);
+//        eventRecyclerAdapter.notifyDataSetChanged();
     }
 
     private void setPreviousButtonClickEvent() {
@@ -132,7 +137,7 @@ public class CalendarCustomView extends LinearLayout {
                                 , eventTime.getText().toString()
                                 , eventDate.getText().toString(), eventMonth.getText().toString()
                                 , eventYear.getText().toString());
-                        eventRecyclerAdapter.notifyDataSetChanged();
+                        //eventRecyclerAdapter.notifyDataSetChanged();
                         popupWindow.dismiss();
                     }
                 });
@@ -156,7 +161,63 @@ public class CalendarCustomView extends LinearLayout {
     }
 
 
+    private void setAllEventButtonClickEvent() {
+        allEventButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                LayoutInflater inflater = (LayoutInflater)
+                        context.getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = inflater.inflate(R.layout.fragment_event_list, null);
 
+                // create the popup window
+                int width = LinearLayout.LayoutParams.MATCH_PARENT;
+                int height = LinearLayout.LayoutParams.MATCH_PARENT;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+                final PopupWindow popupWindow = new PopupWindow(popupView, width,  height, focusable);
+
+                // show the popup window
+                // which view you pass in doesn't matter, it is only used for the window tolken
+                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+
+
+                EventRV= (RecyclerView) view.findViewById(R.id.my_feed);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+//                EventRV.setLayoutManager(layoutManager);
+//                EventRV.setHasFixedSize(true);
+
+                eventRecyclerAdapter = new EventRecyclerAdapter(view.getContext(),arrayList);
+//                EventRV.setAdapter(eventRecyclerAdapter);
+//                eventRecyclerAdapter.notifyDataSetChanged();
+
+
+
+
+                //Button closeEventButton = (Button) popupView.findViewById(R.id.buttonCloseEventList);
+//                TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
+//                TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
+//                EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
+//                EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
+//                EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
+//                EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
+//                closeEventButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View popupView) {
+//
+//                        popupWindow.dismiss();
+//                    }
+//                });
+
+                // dismiss the popup window when touched
+                popupView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
+    }
 
     public void setUpCalendarAdapter() {
         List<Date> dayValueInCells = new ArrayList<Date>();

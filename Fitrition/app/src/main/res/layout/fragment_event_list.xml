@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/dark_green">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_feed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+<!--    <Button-->
+<!--        android:id="@+id/buttonCloseEventList"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:background="@android:color/white"-->
+<!--        android:text="Save Event"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/colorPrimary"-->
+<!--        android:textStyle="bold"-->
+<!--        tools:ignore="HardcodedText" />-->
+
+</LinearLayout>
