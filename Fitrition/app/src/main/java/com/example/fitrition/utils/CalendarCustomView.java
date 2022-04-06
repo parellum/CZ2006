@@ -176,11 +176,15 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
                 TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
                 EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
                 EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
+                EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
+                EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
                 saveEventButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View popupView) {
                         //String eventNameStr = eventName.getText().toString();
-                        SaveEvent(eventName.getText().toString(), eventTime.getText().toString(), eventDate.getText().toString());
+                        SaveEvent(eventName.getText().toString(), eventTime.getText().toString()
+                                , eventDate.getText().toString(), eventMonth.getText().toString()
+                                , eventYear.getText().toString());
                         popupWindow.dismiss();
                    }
                 });
@@ -221,10 +225,10 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
 
     }
 
-    private void SaveEvent(String event,String time,String date){
+    private void SaveEvent(String event,String time,String date, String month, String year){
         dbOpenHelper = new DBOpenHelper(context);
         SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
-        dbOpenHelper.SaveEvent(event,time,date);
+        dbOpenHelper.SaveEvent(event,time,date,month,year,database);
         dbOpenHelper.close();
         Toast.makeText(context, "Event Saved", Toast.LENGTH_SHORT).show();
     }
