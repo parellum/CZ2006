@@ -1,10 +1,11 @@
 package com.example.fitrition.entities;
 
 public class Events {
-    String Event, Time,Date,Month,Year;
+    String Event,Location,Time,Date,Month,Year;
 
-    public Events(String event, String time, String date, String month, String year) {
+    public Events(String event, String location, String time, String date, String month, String year) {
         Event = event;
+        Location = location;
         Time = time;
         Date = date;
         Month = month;
@@ -34,6 +35,12 @@ public class Events {
     public void setEvent(String event) {
         Event = event;
     }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String location) { Location = location; }
 
     public String getTime() {
         return Time;

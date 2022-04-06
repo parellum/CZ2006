@@ -17,6 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.fitrition.adapter.EventRecyclerAdapter;
+import com.example.fitrition.entities.Events;
 import com.example.fitrition.uiReference.tracker.ExpandableHeightGridView;
 import com.example.fitrition.R;
 
@@ -38,6 +43,8 @@ public class CalendarCustomView extends LinearLayout {
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
     private com.example.fitrition.utils.GridAdapter mAdapter;
+    EventRecyclerAdapter eventRecyclerAdapter;
+    ArrayList<Events> arrayList;
 
 
     public CalendarCustomView(Context context) {
@@ -60,6 +67,17 @@ public class CalendarCustomView extends LinearLayout {
         addEventButton = (Button) findViewById(R.id.buttonAddEvent);
         calendarGridView = (ExpandableHeightGridView) view.findViewById(R.id.calendar_grid);
         calendarGridView.setExpanded(true);
+        arrayList = new ArrayList<>();
+
+        RecyclerView EventRV= (RecyclerView) view.findViewById(R.id.my_feed);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+        EventRV.setLayoutManager(layoutManager);
+        EventRV.setHasFixedSize(true);
+
+        eventRecyclerAdapter = new EventRecyclerAdapter(view.getContext()
+                ,arrayList);
+        EventRV.setAdapter(eventRecyclerAdapter);
+        eventRecyclerAdapter.notifyDataSetChanged();
     }
 
     private void setPreviousButtonClickEvent() {
@@ -101,6 +119,7 @@ public class CalendarCustomView extends LinearLayout {
 
                 Button saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
                 TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
+                TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
                 EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
                 EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
                 EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
@@ -109,9 +128,11 @@ public class CalendarCustomView extends LinearLayout {
                     @Override
                     public void onClick(View popupView) {
                         //String eventNameStr = eventName.getText().toString();
-                        SaveEvent(eventName.getText().toString(), eventTime.getText().toString()
+                        SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
+                                , eventTime.getText().toString()
                                 , eventDate.getText().toString(), eventMonth.getText().toString()
                                 , eventYear.getText().toString());
+                        eventRecyclerAdapter.notifyDataSetChanged();
                         popupWindow.dismiss();
                     }
                 });
@@ -128,8 +149,9 @@ public class CalendarCustomView extends LinearLayout {
         });
     }
 
-    private void SaveEvent(String event,String time,String date, String month, String year){
-
+    private void SaveEvent(String event, String location,String time,String date, String month, String year){
+        Events events = new Events(event,location,time,date,month,year);
+        arrayList.add(events);
         Toast.makeText(context, "Event Saved", Toast.LENGTH_SHORT).show();
     }
 
