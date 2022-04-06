@@ -14,7 +14,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="130dp"
-        android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/nunito_bold"
         android:text="My Friends"
@@ -37,7 +36,7 @@
         android:id="@+id/profile_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="80dp"
         android:background="#FFFFFF"
         app:srcCompat="@drawable/ic_avocado_profile" />
