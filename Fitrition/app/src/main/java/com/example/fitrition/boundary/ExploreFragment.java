@@ -2,17 +2,15 @@ package com.example.fitrition.boundary;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
-import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +24,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.fitrition.FirstFragment;
-import com.example.fitrition.MainActivity;
 import com.example.fitrition.R;
+import com.example.fitrition.ViewFacilities;
+import com.example.fitrition.control.FacilityManager;
 import com.example.fitrition.databinding.ActivityMainBinding;
-import com.example.fitrition.entities.FitnessCentre;
 import com.example.fitrition.entities.FitnessCentreJSON;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -43,23 +40,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.CancellationToken;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
-import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
-import java.util.concurrent.Executor;
+import java.util.concurrent.atomic.AtomicReference;
 
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -77,6 +66,7 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
 
     //ADD
+    private Marker oldMarker = null;
     private String URL = "https://drive.google.com/file/d/1E1XxrwbInzKtQhXl5OK16uXxeXtOqJTJ/view?usp=sharing";
     RequestQueue requestQueue;
     Gson gson;
@@ -85,8 +75,8 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
     Vector<MarkerOptions> markerOptions;
     FusedLocationProviderClient client;
 
-    private ActivityMainBinding binding;
-    // Construct a PlacesClient
+    final Handler handler = new Handler(Looper.getMainLooper());
+
 
     //END
 
@@ -94,17 +84,17 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
-        //ADD
-        Log.d("test123","Testing123");
-        mapCentreLocationButton = (Button) view.findViewById(R.id.mapCentreLocationButton);
-        Log.d("test","Testing");
 
+        //ADD
+        mapCentreLocationButton = (Button) view.findViewById(R.id.mapCentreLocationButton);
+
+        //Request location access from user
         requestPermission();
 
         //Used for finding location
         client = LocationServices.getFusedLocationProviderClient(getActivity().getApplicationContext());
-
         //END
+
         map=(MapView) view.findViewById(R.id.mapView);
         map.onCreate(savedInstanceState);
         map.getMapAsync(this);
@@ -117,10 +107,11 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
     @Override
     public void onMapReady(GoogleMap googleMap){
         gmap=googleMap;
+
+        //Set default location as Chinese Garden
         LatLng Garden = new LatLng(1.279689, 103.862667);
-        gmap.addMarker(new MarkerOptions().position(Garden).title("Garden").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-        );
-        //gmap.moveCamera(CameraUpdateFactory.newLatLng(Garden));
+        /*gmap.addMarker(new MarkerOptions().position(Garden).title("Garden").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+        );*/
         gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(1.2816946528685949, 103.83923394187357), 13));
 
 
@@ -129,37 +120,36 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
         markerOptions = new Vector<>();
         sendRequest();
 
-        if(markerOptions!=null && gmap!=null){
-            for(int i=0;i<markerOptions.size();i++){
-                gmap.addMarker(markerOptions.get(i));
-            }
-        }
 
+        //Code to handle the popping up of the new fragment when a marker is pressed
         gmap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
                 marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+
+                //Attempt to launch a new activity cuz this fragment is literally flooded
+                Intent intent = new Intent(getContext(), ViewFacilities.class);
+                Bundle b = new Bundle();
+                Log.d("Luckly",Integer.toString(markerOptions.size()));
+
+                b.putString("facilitiesName", marker.getTitle());
+                intent.putExtras(b); //Put your id to your next Intent
+                startActivity(intent);
+
+                if(oldMarker != null){
+                    oldMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                }
+                oldMarker = marker;
+
                 return false;
             }
         });
-
-
-        Log.d("Marker Ran before the rest", Integer.toString(markerOptions.size()));
-
-        //CLear all markers: gmap.clear() works but the order in not linear -> that
-        //is we clear first then the other markers were added
-        //gmap.clear();
-
-
-        //Test location
-        //getDeviceLocation();
-        //END
-
-
-
     }
 
     //ADD
+
+
+    //==============================Used to Data base request======================================
     public void sendRequest(){
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,onSuccess,onError);
@@ -206,6 +196,7 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
 
             }
+            Log.d("Tag Total Length", Integer.toString(markerOptions.size()));
         }
     };
 
@@ -216,24 +207,19 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
         }
     };
 
-    //Location permission
+    //=================Used to handle Location permission ===================================
     public void requestPermission(){
 
         if(hasLocationPermissions(requireContext())){
             return;}
 
-        //Log.d("Permission", Boolean.toString(hasLocationPermissions(requireContext())));
-
         if(flagForInfiniteLoop.booleanValue() == Boolean.TRUE){
-            //Log.d("Permission", "Q" );
-
             EasyPermissions.requestPermissions(this,
                     "You need to accept location Permission to display facilities near by you",
                     REQUEST_CODE_LOCATION_PERMISSION,
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION);
         }else{
-            //Log.d("Permission","WHY DID it not reach");
             new AppSettingsDialog.Builder(this).build().show();
         }
     }
@@ -241,7 +227,7 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
     @Override
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
         //Blank
-        //Log.d("Weird idk", "Don't work" );
+
     }
 
     @Override
@@ -253,7 +239,6 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
                                            @NonNull int[] grantResults){
-        Log.d("Permission", "On Permission Granted" );
         counter += 1;
         if(counter >= 2){
             flagForInfiniteLoop = Boolean.FALSE;
@@ -268,20 +253,22 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
                 Manifest.permission.ACCESS_COARSE_LOCATION
         );
     }
+    //End of location permission handling
 
-
-    //As it is not it will zoom the onto the location
-    private void getDeviceLocation() {
+    //Used to centre camera location and filter those within 2 km
+    //Flow is getCurrent location -> FacilitiesManger (to compute those within 2 km)-> add marker
+    private void getDeviceLocationInLocation() {
 
         /*
          * Get the best and most recent location of the device, which may be null in rare
          * cases when a location is not available.
          */
+        AtomicReference<Double> lat = new AtomicReference<>((double) 0);
+        AtomicReference<Double> lng = new AtomicReference<>((double) 0);
+
         try {
             if (hasLocationPermissions(requireContext())) {
-                //Task<Location> locationResult = client.getLastLocation();
 
-                //Task<Location> locationResult = client.getCurrentLocation(100,)
                 client.getCurrentLocation(100, new CancellationToken() {
                     @NonNull
                     @Override
@@ -299,45 +286,27 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
                             "Successfully centred location",
                             Toast.LENGTH_LONG)
                             .show();
+
                     Location locationResult = location;
-                    Log.d("Lat Obtained", String.valueOf(locationResult.getLatitude()));
-                    Log.d("Lng Obtained", String.valueOf(locationResult.getLongitude()));
+                    lat.set(locationResult.getLatitude());
+                    lng.set(locationResult.getLongitude());
+
+                    FacilityManager.getInstance().obtainFacilityBasedOnDistance(markerOptions,lat.get(), lng.get());
+                    Log.d("Current Location Size",Integer.toString(markerOptions.size()));
+
+                    gmap.clear();
+                    for (int i = 0; i < markerOptions.size(); i++) {
+
+                        gmap.addMarker(markerOptions.get(i));
+                        Log.d("Explorer Frag getDeviceLocation","Ran");
+
+                    }
 
                     gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                             new LatLng(locationResult.getLatitude(),
-                                    locationResult.getLongitude()), 15));
-
-                    // use this current location
+                                    locationResult.getLongitude()), 14));
                 });
 
-
-                /*locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Location> task) {
-                        if (task.isSuccessful()) {
-                            // Set the map's camera position to the current location of the device.
-                            Log.d("getLocation","ReachBelow");
-
-                            Location lastKnownLocation = task.getResult();
-                            Log.d("Lat", String.valueOf(lastKnownLocation.getLatitude()));
-                            Log.d("Lng", String.valueOf(lastKnownLocation.getLongitude()));
-
-                            if (lastKnownLocation != null) {
-                                Log.d("getLocation","ReachBelow");
-                                gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                        new LatLng(lastKnownLocation.getLatitude(),
-                                                lastKnownLocation.getLongitude()), 15));
-                                Log.d("getLocation","Reach2");
-                            }
-                        } else {
-                            Log.d("getLocation","Exception");
-                            Log.d("TAG", "Current location is null. Using defaults.");
-                            Log.e("TAG", "Exception: %s", task.getException());
-                            //gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(,, 0));
-                            //gmap.getUiSettings().setMyLocationButtonEnabled(false);
-                        }
-                    }
-                });*/
             }else{
                 Toast.makeText(getActivity(),
                         "Unsuccessful please enable location and try again",
@@ -347,30 +316,62 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
         } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage(), e);
         }
+
     }
 
     @Override
     public void onClick(View view) {
+        //Warn user of the delay
         Toast.makeText(getActivity(),
                 "Please wait UP TO 7 seconds",
                 Toast.LENGTH_LONG)
                 .show();
 
-        getDeviceLocation();
+
+        //Used to centre camera to current location AND filter markers to show only those
+        //within 2 km
+        getDeviceLocationInLocation();
+
     }
 
     //END
 }
 
 //Merzen Used to track changes
-//Added implementation 'com.google.code.gson:gson:2.9.0' & implementation 'com.android.volley:volley:1.2.1'
-//to the build.gradle (Module : Fitrition)
-//Android manifest <Application>: Android uses clear traffic = true
+// 6 April 2022
+/* 1. edited the on click map listener
+ 2. Created a new activtiy (both the xml and class)
+ 3. Use the facility Manager to compute distance within 2 KM
 
-//Added FitnessCentreJSON entity class
-//Added stuff in explorer frag ADD -> END ADD
+ */
 
 
-//For location tracking
-//Added Manifest background location for android Q
-//easypermissions Added
+//==============================LEFTOVER CODE============================================
+/*
+        //Used to tackle the asynchronous issue -> Not needed now
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms (1s)
+
+            }
+        }, 1000);
+
+
+        //Used to search for marker option by String name
+        public MarkerOptions getMarker(String markerName){
+
+        //Add check option for marker option == 0? prob not since the loop wont run
+        for(int i =0; i<markerOptions.size() ;i++){
+            if(markerOptions.get(i).getTitle().equalsIgnoreCase(markerName)){
+                return markerOptions.get(i);
+            }
+
+        }
+        return null;
+    }
+
+
+
+
+ */
