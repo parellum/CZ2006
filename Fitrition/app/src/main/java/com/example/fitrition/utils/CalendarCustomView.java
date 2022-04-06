@@ -5,6 +5,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import android.content.Intent;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.widget.EditText;
 import android.widget.LinearLayout;
         import android.app.DatePickerDialog;
         import android.content.Context;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
         import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -107,6 +109,23 @@ public class CalendarCustomView extends LinearLayout {
                 // which view you pass in doesn't matter, it is only used for the window tolken
                 popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
+                Button saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
+                TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
+                EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
+                EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
+                EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
+                EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
+                saveEventButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View popupView) {
+                        //String eventNameStr = eventName.getText().toString();
+                        SaveEvent(eventName.getText().toString(), eventTime.getText().toString()
+                                , eventDate.getText().toString(), eventMonth.getText().toString()
+                                , eventYear.getText().toString());
+                        popupWindow.dismiss();
+                    }
+                });
+
                 // dismiss the popup window when touched
                 popupView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -117,6 +136,11 @@ public class CalendarCustomView extends LinearLayout {
                 });
             }
         });
+    }
+
+    private void SaveEvent(String event,String time,String date, String month, String year){
+
+        Toast.makeText(context, "Event Saved", Toast.LENGTH_SHORT).show();
     }
 
 
