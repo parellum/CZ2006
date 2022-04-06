@@ -3,15 +3,14 @@ package com.example.fitrition.utils;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 import android.app.AlertDialog;
-import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.Gravity;
 import android.view.MotionEvent;
-import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
         import android.app.DatePickerDialog;
         import android.content.Context;
-        import android.util.AttributeSet;
-        import android.util.Log;
+import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.widget.Button;
@@ -21,19 +20,17 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.fitrition.MainActivity;
 import com.example.fitrition.adapter.EventRecyclerAdapter;
-import com.example.fitrition.boundary.NewEventFragment;
+import com.example.fitrition.boundary.DBOpenHelper;
+import com.example.fitrition.entities.Events;
 import com.example.fitrition.uiReference.tracker.ExpandableHeightGridView;
 import com.example.fitrition.R;
 
-        import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat;
         import java.util.ArrayList;
         import java.util.Calendar;
         import java.util.Date;
@@ -53,7 +50,12 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
     private com.example.fitrition.utils.GridAdapter mAdapter;
-
+    RecyclerView recyclerView;
+    EventRecyclerAdapter eventRecyclerAdapter;
+    List<Events> eventsList = new ArrayList<>();
+    List<Date> dateList = new ArrayList<>();
+    DBOpenHelper dbOpenHelper;
+    AlertDialog alertDialog;
 
     public CalendarCustomView(Context context) {
         super(context);
@@ -78,7 +80,41 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
 
         calendarGridView = (ExpandableHeightGridView) view.findViewById(R.id.calendar_grid);
         calendarGridView.setExpanded(true);
+
+
+        //EVENTS RECYCLER ADAPTER TO BE DONE BY JEREMY
+        RecyclerView EventRV= (RecyclerView) view.findViewById(R.id.my_feed);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+        EventRV.setLayoutManager(layoutManager);
+        EventRV.setHasFixedSize(true);
+
+//        EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(view.getContext()
+//                ,CollectEvent(date));
+//        EventRV.setAdapter(eventRecyclerAdapter);
+//        eventRecyclerAdapter.notifyDataSetChanged();
+//        builder.setView(showView);
+        AlertDialog.Builder builder =new AlertDialog.Builder(context);
+        builder.setCancelable(true);
+        alertDialog =builder.create();
+        alertDialog.show();
     }
+
+//    private ArrayList<Events> CollectEvent(String date) {
+//        ArrayList<Events> arrayList = new ArrayList<>();
+//        DBOpenHelper dbOpenHelper = new DBOpenHelper(context);
+//        SQLiteDatabase sqLiteDatabase = dbOpenHelper.getReadableDatabase();
+//        Cursor cursor = dbOpenHelper.ReadEvents(date, sqLiteDatabase);
+//        while (cursor.moveToNext()) {
+//            String event = cursor.getString(cursor.getColumnIndex(DBStructure.EVENT));
+//            String Time = cursor.getString(cursor.getColumnIndex(DBStructure.TIME));
+//            String Date = cursor.getString(cursor.getColumnIndex(DBStructure.DATE));
+//            String month = cursor.getString(cursor.getColumnIndex(DBStructure.MONTH));
+//            String year = cursor.getString(cursor.getColumnIndex(DBStructure.YEAR));
+//            Events events = new Events(event, Time, Date, month, year);
+//            arrayList.add(events);
+//        }
+//        cursor.close();
+//    }
 
     private void setPreviousButtonClickEvent() {
         previousButton.setOnClickListener(new OnClickListener() {
@@ -137,9 +173,14 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
                 popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
                 saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
+                TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
+                EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
+                EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
                 saveEventButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View popupView) {
+                        //String eventNameStr = eventName.getText().toString();
+                        SaveEvent(eventName.getText().toString(), eventTime.getText().toString(), eventDate.getText().toString());
                         popupWindow.dismiss();
                    }
                 });
@@ -178,6 +219,14 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
         mAdapter = new com.example.fitrition.utils.GridAdapter(context, dayValueInCells, cal);
         calendarGridView.setAdapter(mAdapter);
 
+    }
+
+    private void SaveEvent(String event,String time,String date){
+        dbOpenHelper = new DBOpenHelper(context);
+        SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
+        dbOpenHelper.SaveEvent(event,time,date);
+        dbOpenHelper.close();
+        Toast.makeText(context, "Event Saved", Toast.LENGTH_SHORT).show();
     }
 
 //    private void dateClickEvent() {
