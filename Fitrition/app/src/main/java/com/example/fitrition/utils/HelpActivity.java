@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
@@ -40,9 +41,13 @@ public class HelpActivity extends AppCompatActivity {
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HelpActivity.this, MainActivity.class));
+                finish();
+//                startActivity(new Intent(HelpActivity.this, MainActivity.class));
+//                NavUtils.navigateUpFromSameTask(HelpActivity.this);
             }
         });
+
+
 
         mToolbar = findViewById(R.id.help_toolbar);
         setSupportActionBar(mToolbar);

@@ -42,7 +42,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -150,7 +152,7 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
 
         //Test location
-        getDeviceLocation();
+        //getDeviceLocation();
         //END
 
 
@@ -267,6 +269,7 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
         );
     }
 
+
     //As it is not it will zoom the onto the location
     private void getDeviceLocation() {
 
@@ -276,8 +279,39 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
          */
         try {
             if (hasLocationPermissions(requireContext())) {
-                Task<Location> locationResult = client.getLastLocation();
-                locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
+                //Task<Location> locationResult = client.getLastLocation();
+
+                //Task<Location> locationResult = client.getCurrentLocation(100,)
+                client.getCurrentLocation(100, new CancellationToken() {
+                    @NonNull
+                    @Override
+                    public CancellationToken onCanceledRequested(@NonNull OnTokenCanceledListener onTokenCanceledListener) {
+                        return null;
+                    }
+
+                    @Override
+                    public boolean isCancellationRequested() {
+                        return false;
+                    }
+
+                }).addOnSuccessListener(location -> {
+                    Toast.makeText(getActivity(),
+                            "Successfully centred location",
+                            Toast.LENGTH_LONG)
+                            .show();
+                    Location locationResult = location;
+                    Log.d("Lat Obtained", String.valueOf(locationResult.getLatitude()));
+                    Log.d("Lng Obtained", String.valueOf(locationResult.getLongitude()));
+
+                    gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                            new LatLng(locationResult.getLatitude(),
+                                    locationResult.getLongitude()), 15));
+
+                    // use this current location
+                });
+
+
+                /*locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful()) {
@@ -303,7 +337,12 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
                             //gmap.getUiSettings().setMyLocationButtonEnabled(false);
                         }
                     }
-                });
+                });*/
+            }else{
+                Toast.makeText(getActivity(),
+                        "Unsuccessful please enable location and try again",
+                        Toast.LENGTH_LONG)
+                        .show();
             }
         } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage(), e);
@@ -312,6 +351,11 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
     @Override
     public void onClick(View view) {
+        Toast.makeText(getActivity(),
+                "Please wait UP TO 7 seconds",
+                Toast.LENGTH_LONG)
+                .show();
+
         getDeviceLocation();
     }
 
