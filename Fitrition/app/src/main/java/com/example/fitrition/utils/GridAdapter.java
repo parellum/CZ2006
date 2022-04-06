@@ -16,15 +16,12 @@ import com.example.fitrition.R;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.EventObject;
 import java.util.List;
 
 public class GridAdapter extends ArrayAdapter {
-    private static final String TAG = GridAdapter.class.getSimpleName();
     private LayoutInflater mInflater;
     private List<Date> monthlyDates;
     private Calendar currentDate;
-    CalendarCustomView calendarCustomView;
 
     public GridAdapter( Context context, List<Date> monthlyDates, Calendar currentDate) {
         super(context, R.layout.fragment_single_cell);
@@ -44,6 +41,7 @@ public class GridAdapter extends ArrayAdapter {
         int displayYear = dateCal.get(Calendar.YEAR);
         int currentMonth = currentDate.get(Calendar.MONTH) + 1;
         int currentYear = currentDate.get(Calendar.YEAR);
+        int currentDay = currentDate.get(Calendar.DAY_OF_MONTH);
         View view = convertView;
         if (view == null) {
             view = mInflater.inflate(R.layout.fragment_single_cell, parent, false);
@@ -52,6 +50,9 @@ public class GridAdapter extends ArrayAdapter {
             view.setBackgroundColor(Color.parseColor("#F5F5F5"));
         } else {
             view.setAlpha(0.4f);
+        }
+        if (dayValue == currentDay && displayYear == 2022 && displayMonth == 4){
+            view.setBackgroundColor(Color.parseColor("#428779"));
         }
         //Add day to calendar
         TextView cellNumber = (TextView) view.findViewById(R.id.calendar_date_id);

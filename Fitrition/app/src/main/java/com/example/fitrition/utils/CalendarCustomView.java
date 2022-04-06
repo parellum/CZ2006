@@ -2,29 +2,19 @@ package com.example.fitrition.utils;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
-import android.content.Intent;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
-        import android.app.DatePickerDialog;
         import android.content.Context;
-        import android.util.AttributeSet;
         import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.widget.Button;
-        import android.widget.DatePicker;
         import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-
-
-import com.example.fitrition.MainActivity;
-import com.example.fitrition.boundary.NewEventFragment;
 import com.example.fitrition.uiReference.tracker.ExpandableHeightGridView;
 import com.example.fitrition.R;
 
@@ -42,7 +32,6 @@ public class CalendarCustomView extends LinearLayout {
     public ExpandableHeightGridView calendarGridView;
     private Button addEventButton;
     private static final int MAX_CALENDAR_COLUMN = 42;
-    private int month, year;
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM, yyyy", Locale.ENGLISH);
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
