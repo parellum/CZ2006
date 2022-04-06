@@ -54,44 +54,43 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         database.insert(DBStructure.EVENT_TABLE_NAME,null,contentValues);
     }
 
-//    public Cursor ReadEvents(String date,SQLiteDatabase database){
-//        String [] Projections = {DBStructure.EVENT,DBStructure.TIME,DBStructure.DATE,DBStructure.MONTH,DBStructure.YEAR};
-//        String Selection = DBStructure.DATE +"=?";
-//        String [] SelectionArgs = {date};
-//
-//        return database.query(DBStructure.EVENT_TABLE_NAME,Projections,Selection,SelectionArgs,null,null,null);
-//    }
+    public Cursor ReadEvents(String date,SQLiteDatabase database){
+        String [] Projections = {DBStructure.EVENT,DBStructure.TIME,DBStructure.DATE,DBStructure.MONTH,DBStructure.YEAR};
+        String Selection = DBStructure.DATE +"=?";
+        String [] SelectionArgs = {date};
 
-//    public Cursor ReadIDEvents(String date,String event, String time,SQLiteDatabase database){
-//        String [] Projections = {DBStructure.ID,DBStructure.Notify,DBStructure.TIME};
-//        String Selection = DBStructure.DATE +"=? and "+DBStructure.EVENT+"=? and "+DBStructure.TIME+"=?";
-//        String [] SelectionArgs = {date,event,time};
-//
-//        return database.query(DBStructure.EVENT_TABLE_NAME,Projections,Selection,SelectionArgs,null,null,null);
-//    }
+        return database.query(DBStructure.EVENT_TABLE_NAME,Projections,Selection,SelectionArgs,null,null,null);
+    }
 
+    public Cursor ReadIDEvents(String date,String event, String time,SQLiteDatabase database){
+        String [] Projections = {DBStructure.ID,DBStructure.Notify,DBStructure.TIME};
+        String Selection = DBStructure.DATE +"=? and "+DBStructure.EVENT+"=? and "+DBStructure.TIME+"=?";
+        String [] SelectionArgs = {date,event,time};
 
-//    public Cursor ReadEventsperMonth(String month, String year, SQLiteDatabase database){
-//        String [] Projections = {DBStructure.EVENT,DBStructure.TIME,DBStructure.DATE,DBStructure.MONTH,DBStructure.YEAR};
-//        String Selection = DBStructure.MONTH +"=? and "+DBStructure.YEAR+"=?";
-//        String [] SelectionArgs = {month,year};
-//        return database.query(DBStructure.EVENT_TABLE_NAME,Projections,Selection,SelectionArgs,null,null,null);
-//    }
+        return database.query(DBStructure.EVENT_TABLE_NAME,Projections,Selection,SelectionArgs,null,null,null);
+    }
 
 
+    public Cursor ReadEventsperMonth(String month, String year, SQLiteDatabase database){
+        String [] Projections = {DBStructure.EVENT,DBStructure.TIME,DBStructure.DATE,DBStructure.MONTH,DBStructure.YEAR};
+        String Selection = DBStructure.MONTH +"=? and "+DBStructure.YEAR+"=?";
+        String [] SelectionArgs = {month,year};
+        return database.query(DBStructure.EVENT_TABLE_NAME,Projections,Selection,SelectionArgs,null,null,null);
+    }
 
-//    public void deleteEvent(String event,String date,String time,SQLiteDatabase database){
-//        String selection = DBStructure.EVENT+"=? and "+DBStructure.DATE+"=? and "+DBStructure.TIME+"=?";
-//        String[] selectionArg = {event,date,time};
-//        database.delete(DBStructure.EVENT_TABLE_NAME,selection,selectionArg);
-//    }
 
 
-//    public void updateEvent(String date, String event, String time, String notify, SQLiteDatabase database){
+    public void deleteEvent(String event,String date,String time,SQLiteDatabase database){
+        String selection = DBStructure.EVENT+"=? and "+DBStructure.DATE+"=? and "+DBStructure.TIME+"=?";
+        String[] selectionArg = {event,date,time};
+        database.delete(DBStructure.EVENT_TABLE_NAME,selection,selectionArg);
+    }
+
+
+//    public void updateEvent(String date, String event, String time, SQLiteDatabase database){
 //        this.date = date;
 //        this.event = event;
 //        this.time = time;
-//        this.notify = notify;
 //        this.database = database;
 //        ContentValues contentValues = new ContentValues();
 //        contentValues.put(DBStructure.Notify,notify);
@@ -99,7 +98,13 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 //        String [] SelectionArgs = {date,event,time};
 //        database.update(DBStructure.EVENT_TABLE_NAME,contentValues,Selection,SelectionArgs);
 //    }
-
+    public void updateEvent(String date,String event, String time,String notify,SQLiteDatabase database){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DBStructure.Notify,notify);
+        String Selection = DBStructure.DATE +"=? and "+DBStructure.EVENT+"=? and "+DBStructure.TIME+"=?";
+        String [] SelectionArgs = {date,event,time};
+        database.update(DBStructure.EVENT_TABLE_NAME,contentValues,Selection,SelectionArgs);
+    }
 
 
 }
