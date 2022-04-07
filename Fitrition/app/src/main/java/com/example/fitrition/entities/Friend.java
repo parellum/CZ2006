@@ -9,42 +9,52 @@ import java.util.ArrayList;
  * @since 20-03-2022
  */
 public class Friend{
-    private String firstName;
-    private String lastName;
+    private int friend_image;
+    private String name;
     private String description;
-    private Status[] socialStatusList=new Status[20];
+    private ArrayList socialStatusList=new ArrayList<Status>();
     private ArrayList<Achievement> acheivementList;
+    private String friendlist_divider;
+
+    public int getFriend_image() {
+        return friend_image;
+    }
+
+    public String getFriendlist_divider() {
+        return friendlist_divider;
+    }
+
+    public void setFriendlist_divider(String friendlist_divider) {
+        this.friendlist_divider = friendlist_divider;
+    }
+
+    public void setFriend_image(int friend_image) {
+        this.friend_image = friend_image;
+    }
 
     /**
      * Constructor for Friend class
-     * @param firstName First Name of Friend
-     * @param lastName Last Name of Friend
+     * @param name Last Name of Friend
      * @param description Description of Friend
      * @param socialStatusList SocialStatusList ascending in order for timeline
      * @param acheivementList List of achievements
      */
-    public Friend(String firstName, String lastName, String description, Status[] socialStatusList, ArrayList<Achievement> acheivementList) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Friend(int friend_image, String name, String description, ArrayList socialStatusList, ArrayList acheivementList, String divider) {
+        this.friend_image = friend_image;
+        this.name = name;
         this.description = description;
         this.socialStatusList = socialStatusList;
         this.acheivementList = acheivementList;
+        this.friendlist_divider = friendlist_divider;
     }
 
-    public String getFirstName() {
-        return firstName;
+
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getName() {
+        return name;
     }
 
     public String getDescription() {
@@ -55,11 +65,11 @@ public class Friend{
         this.description = description;
     }
 
-    public Status[] getSocialStatusList() {
+    public ArrayList<Status> getSocialStatusList() {
         return socialStatusList;
     }
 
-    public void setSocialStatusList(Status[] socialStatusList) {
+    public void setSocialStatusList(ArrayList<Status> socialStatusList) {
         this.socialStatusList = socialStatusList;
     }
 
