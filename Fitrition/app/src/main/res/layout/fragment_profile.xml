@@ -97,22 +97,22 @@ xmlns:tools="http://schemas.android.com/tools"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:text="500"
-                    android:textColor="@color/white"
-                    android:textSize="25sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="500"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:text="Status Count"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    android:textSize="13sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="Status Count"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
 
 
         </LinearLayout>
