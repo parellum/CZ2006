@@ -199,6 +199,9 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
                 gmap.addMarker(marker);
 
+                if(info.Description !=  null){
+                    Log.d("Sucess",  info.Description);
+                }
 
             }
             Log.d("Tag Total Length", Integer.toString(markerOptions.size()));
@@ -350,9 +353,11 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 }
 
 //Merzen Used to track changes
-// 6 April 2022
+// 7 April 2022
 /*
-
+    Modified the xml for view Faciltiy activity
+    Modified the view faciltiy JAVA class
+    Modified fitness JSON class
  */
 
 
