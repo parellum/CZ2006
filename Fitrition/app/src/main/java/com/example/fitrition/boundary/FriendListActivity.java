@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
@@ -27,6 +28,8 @@ public class FriendListActivity extends AppCompatActivity {
     List<Friend> userList;
     FriendListRecyclerAdapter friend_list_adapter;
     ImageView back_button;
+    ImageView searchfriend_button;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +39,22 @@ public class FriendListActivity extends AppCompatActivity {
         initData();
         initRecylerView();
         back_button=findViewById(R.id.friendlist_back_icon);
+        searchfriend_button = findViewById(R.id.search_friend_icon);
+
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+        searchfriend_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FriendListActivity.this, FriendAddNewActivity.class));
+            }
+        });
     }
+
 
 
     private void initData() {

@@ -52,6 +52,8 @@
         <activity
             android:name=".utils.HelpActivity"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".boundary.FriendAddNewActivity"/>
     </application>
 
 </manifest>
