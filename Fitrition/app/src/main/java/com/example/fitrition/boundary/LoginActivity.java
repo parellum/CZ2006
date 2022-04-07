@@ -1,10 +1,13 @@
 package com.example.fitrition.boundary;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.fitrition.MainActivity;
 import com.example.fitrition.R;
+import com.example.fitrition.control.ProfileManager;
 import com.example.fitrition.utils.HelpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,7 +30,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView register;
     private EditText editTextEmail, editTextPassword;
     private Button login;
-
+    private ProfileManager profileManager;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
 
@@ -45,6 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressBar=(ProgressBar) findViewById(R.id.RegisterPB);
 
         mAuth=FirebaseAuth.getInstance();
+        profileManager = ProfileManager.getInstance();
 
     }
 
@@ -64,10 +69,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
-        if (!email.isEmpty()){
-            startActivity(new Intent(LoginActivity.this,MainActivity.class));
-            return;
-        }
+//        if (!email.isEmpty()){
+//            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+//            return;
+//        }
 
         if (email.isEmpty()){
             editTextEmail.setError("Email is required!");
@@ -97,6 +102,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    profileManager.loadUser(mAuth.getCurrentUser().getUid(), LoginActivity.this);
                     startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 }
                 else{

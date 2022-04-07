@@ -45,7 +45,8 @@
                     android:hint="Email"
                     android:inputType="textEmailAddress"
                     tools:layout_editor_absoluteX="87dp"
-                    tools:layout_editor_absoluteY="389dp" />
+                    tools:layout_editor_absoluteY="389dp"
+                    android:text="jacques@gmail.com"/>
 
                 <EditText
                     android:id="@+id/LoginPassword"
@@ -55,7 +56,8 @@
                     android:hint="Password"
                     android:inputType="textPassword"
                     tools:layout_editor_absoluteX="87dp"
-                    tools:layout_editor_absoluteY="481dp" />
+                    tools:layout_editor_absoluteY="481dp"
+                    android:text="persona"/>
             </LinearLayout>
         </RelativeLayout>
 

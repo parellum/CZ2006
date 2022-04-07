@@ -85,19 +85,7 @@ public class FriendManager {
         }
     }
 
-    /**
-     * Saves to firebase database
-     * @return 1 if successful otherwise 0
-     */
-    public int saveToDB(){
-        return 0;
-    }
+    private void loadFriendList(){
 
-    /**
-     * Loads from firebase database
-     * @return 1 if successful otherwise 0
-     */
-    public int loadToDB(){
-        return 0;
     }
 }
