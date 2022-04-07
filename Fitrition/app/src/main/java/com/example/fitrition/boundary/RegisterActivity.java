@@ -1,15 +1,16 @@
 package com.example.fitrition.boundary;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +22,10 @@ import android.widget.Toast;
 
 import com.example.fitrition.R;
 import com.example.fitrition.control.ProfileManager;
+import com.example.fitrition.entities.IndividualUser;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +34,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.time.LocalDate;
@@ -41,13 +49,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private ImageView mImageView;
     private Uri mImageUri;
 
+    private IndividualUser Iuser;
 
     private FirebaseAuth mAuth;
     private DatabaseReference userNameReference;
     private TextView registerTitle,registerFinish;
-    private EditText editUserName,editFirstName, editLastName, editEMail, editPassword, editConfirmpassword, editDOB, editHeight, editWeight, editDescription;
-    private Spinner editGender, editDiet;
+    private EditText editUserName, editName, editEMail, editPassword, editConfirmpassword, editDOB, editDescription;
+    private Spinner editGender;
     private ProgressBar progressBar;
+
+    private StorageReference mStorageRef;
+    private DatabaseReference mDatabaseRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,14 +77,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         registerFinish.setOnClickListener(this);
 
         editUserName = (EditText) findViewById(R.id.RegisterUserName);
-        editFirstName = (EditText) findViewById(R.id.RegisterFirstName);
-        editLastName = (EditText) findViewById(R.id.RegisterLastName);
+        editName = (EditText) findViewById(R.id.RegisterName);
         editEMail = (EditText) findViewById(R.id.RegisterEmail);
         editPassword = (EditText) findViewById(R.id.RegisterPassword);
         editConfirmpassword = (EditText) findViewById(R.id.RegisterConfirmPassword);
         editDOB = (EditText) findViewById(R.id.RegisterDOB);
-        editHeight = (EditText) findViewById(R.id.RegisterHeight);
-        editWeight = (EditText) findViewById(R.id.RegisterWeight);
         editDescription = (EditText) findViewById(R.id.RegisterDescription);
 
         editGender = (Spinner) findViewById(R.id.RegisterGender);
@@ -80,13 +89,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         adapterGender.setDropDownViewResource(android.R.layout.simple_spinner_item);
         editGender.setAdapter(adapterGender);
 
-        editDiet = (Spinner) findViewById(R.id.RegisterDiet);
-        ArrayAdapter<CharSequence> adapterDiet=ArrayAdapter.createFromResource(this,R.array.dietaryPreference,android.R.layout.simple_spinner_item);
-        adapterDiet.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        editDiet.setAdapter(adapterDiet);
-
         progressBar = (ProgressBar) findViewById(R.id.RegisterPB);
 
+        mStorageRef = FirebaseStorage.getInstance("gs://fitrition-3a967.appspot.com/").getReference("imageupload");
+        mDatabaseRef = FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
         mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,21 +133,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void registerUser(){
-        ProfileManager profileManager = ProfileManager.getInstance();
 
         String userName = editUserName.getText().toString().trim().toLowerCase();
-        String firstName = editFirstName.getText().toString().trim();
-        String lastName = editLastName.getText().toString().trim();
+        String name = editName.getText().toString().trim();
         String eMail = editEMail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
         String confirmPassword = editConfirmpassword.getText().toString().trim();
         String DOB = editDOB.getText().toString().trim();
-        String height = editHeight.getText().toString().trim();
-        String weight = editWeight.getText().toString().trim();
         String description = editDescription.getText().toString().trim();
         String gender = editGender.getSelectedItem().toString().trim();
-        String diet = editDiet.getSelectedItem().toString().trim();
-
 
 
         //Do more error checking
@@ -169,9 +169,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     editUserName.requestFocus();
                     return;
                 }else{
-                    if (firstName.isEmpty()){
-                        editFirstName.setError("First Name is required!");
-                        editFirstName.requestFocus();
+                    if (name.isEmpty()){
+                        editName.setError("First Name is required!");
+                        editName.requestFocus();
                         return;
                     }
 
@@ -223,31 +223,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         return;
                     }
 
-                    if (height.isEmpty()){
-                        editHeight.setError("Height is required!");
-                        editHeight.requestFocus();
-                        return;
-                    }
-
-                    if (!isNumeric(height)){
-                        editHeight.setError("Digits only!");
-                        editHeight.requestFocus();
-                        return;
-                    }
-
-                    if (weight.isEmpty()){
-                        editWeight.setError("Weight is required!");
-                        editWeight.requestFocus();
-                        return;
-                    }
-                    if (!isNumeric(weight)){
-                        editWeight.setError("Digits only!");
-                        editWeight.requestFocus();
-                        return;
-                    }
-
-
-
                     progressBar.setVisibility(View.VISIBLE);
                     mAuth.createUserWithEmailAndPassword(eMail,password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -255,10 +230,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     int registerFollow = 0;
                                     if (task.isSuccessful()) {
-                                        profileManager.addNewUser(userName, firstName, lastName, eMail, password, DOB, height, weight, description, gender, diet);
-
+                                        Iuser=new IndividualUser(userName, name, eMail, password, DOB, description, gender);
                                         FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                .setValue(profileManager.getUser()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                .setValue(Iuser).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
@@ -281,6 +255,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                                 }
                                             }
                                         });
+
+                                        uploadFile(FirebaseAuth.getInstance().getCurrentUser().getUid());
                                         startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
                                     } else {
                                         Toast.makeText(RegisterActivity.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
@@ -305,6 +281,42 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return true;
         } catch(NumberFormatException e){
             return false;
+        }
+    }
+
+    private String getFileExtension(Uri uri){
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    private void uploadFile(String uid){
+        if (mImageUri!=null){
+            StorageReference fileReference = mStorageRef.child(uid
+            +"."+getFileExtension(mImageUri));
+
+            fileReference.putFile(mImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            String url = fileReference.getDownloadUrl().toString();
+                            mDatabaseRef.child(uid).child("imageUrl").setValue(url);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                            Toast.makeText(RegisterActivity.this, "Uploading...", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }else{
+            Toast.makeText(this,"No file selected!",Toast.LENGTH_SHORT);
         }
     }
 }

@@ -127,9 +127,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.log_out:
 //                Intent logout = new Intent(this, LoginActivity.class);
-                Intent logout = new Intent(this, FriendActivity.class);
+                Intent logout = new Intent(this, LoginActivity.class);
                 startActivity(logout);
-                // Change FriendActivity
 //                Toast.makeText(this, "Log Out selected", Toast.LENGTH_SHORT).show();
                 return true;
         }

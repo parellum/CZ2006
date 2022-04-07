@@ -2,34 +2,26 @@ package com.example.fitrition.utils;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
-import android.app.AlertDialog;
-import android.content.Intent;
 import android.view.Gravity;
 import android.view.MotionEvent;
-import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
-        import android.app.DatePickerDialog;
         import android.content.Context;
-        import android.util.AttributeSet;
         import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.widget.Button;
-        import android.widget.DatePicker;
         import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import com.example.fitrition.MainActivity;
 import com.example.fitrition.adapter.EventRecyclerAdapter;
-import com.example.fitrition.boundary.NewEventFragment;
+import com.example.fitrition.entities.Events;
 import com.example.fitrition.uiReference.tracker.ExpandableHeightGridView;
 import com.example.fitrition.R;
 
@@ -40,19 +32,22 @@ import com.example.fitrition.R;
         import java.util.List;
         import java.util.Locale;
 
-public class CalendarCustomView extends LinearLayout implements com.example.fitrition.utils.CalendarUtils {
+public class CalendarCustomView extends LinearLayout {
     private static final String TAG = CalendarCustomView.class.getSimpleName();
     private ImageView previousButton, nextButton;
     private TextView currentDate;
     public ExpandableHeightGridView calendarGridView;
     private Button addEventButton;
-    private Button saveEventButton;
+    private Button allEventButton;
+
     private static final int MAX_CALENDAR_COLUMN = 42;
-    private int month, year;
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM, yyyy", Locale.ENGLISH);
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
     private com.example.fitrition.utils.GridAdapter mAdapter;
+    RecyclerView EventRV;
+    EventRecyclerAdapter eventRecyclerAdapter;
+    ArrayList<Events> arrayList;
 
 
     public CalendarCustomView(Context context) {
@@ -62,9 +57,8 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
         setUpCalendarAdapter();
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
-        setCurrentDateClickEvent();
         setAddEventButtonClickEvent();
-//        dateClickEvent();
+        setAllEventButtonClickEvent();
     }
 
 
@@ -75,9 +69,20 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
         nextButton = (ImageView) view.findViewById(R.id.next_month);
         currentDate = (TextView) view.findViewById(R.id.display_current_date);
         addEventButton = (Button) findViewById(R.id.buttonAddEvent);
-
+        allEventButton = (Button) findViewById(R.id.buttonAllEvent);
         calendarGridView = (ExpandableHeightGridView) view.findViewById(R.id.calendar_grid);
         calendarGridView.setExpanded(true);
+        arrayList = new ArrayList<>();
+
+//        RecyclerView EventRV= (RecyclerView) view.findViewById(R.id.my_feed);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+//        EventRV.setLayoutManager(layoutManager);
+//        EventRV.setHasFixedSize(true);
+//
+//        eventRecyclerAdapter = new EventRecyclerAdapter(view.getContext()
+//                ,arrayList);
+//        EventRV.setAdapter(eventRecyclerAdapter);
+//        eventRecyclerAdapter.notifyDataSetChanged();
     }
 
     private void setPreviousButtonClickEvent() {
@@ -95,25 +100,6 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
             @Override
             public void onClick(View v) {
                 CalendarCustomView.this.nextMonth();
-            }
-        });
-    }
-
-    private void setCurrentDateClickEvent() {
-        currentDate.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Calendar currentDate = Calendar.getInstance();
-                final Calendar date;
-                date = Calendar.getInstance();
-                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, final int dayOfMonth) {
-                        cal.set(year, monthOfYear, dayOfMonth);
-                        setUpCalendarAdapter();
-                    }
-                }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DATE));
-                datePickerDialog.show();
             }
         });
     }
@@ -136,12 +122,24 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
                 // which view you pass in doesn't matter, it is only used for the window tolken
                 popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
-                saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
+                Button saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
+                TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
+                TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
+                EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
+                EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
+                EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
+                EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
                 saveEventButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View popupView) {
+                        //String eventNameStr = eventName.getText().toString();
+                        SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
+                                , eventTime.getText().toString()
+                                , eventDate.getText().toString(), eventMonth.getText().toString()
+                                , eventYear.getText().toString());
+                        //eventRecyclerAdapter.notifyDataSetChanged();
                         popupWindow.dismiss();
-                   }
+                    }
                 });
 
                 // dismiss the popup window when touched
@@ -156,11 +154,70 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
         });
     }
 
+    private void SaveEvent(String event, String location,String time,String date, String month, String year){
+        Events events = new Events(event,location,time,date,month,year);
+        arrayList.add(events);
+        Toast.makeText(context, "Event Saved", Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void setAllEventButtonClickEvent() {
+        allEventButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                LayoutInflater inflater = (LayoutInflater)
+                        context.getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = inflater.inflate(R.layout.fragment_event_list, null);
+
+                // create the popup window
+                int width = LinearLayout.LayoutParams.MATCH_PARENT;
+                int height = LinearLayout.LayoutParams.MATCH_PARENT;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+                final PopupWindow popupWindow = new PopupWindow(popupView, width,  height, focusable);
+
+                // show the popup window
+                // which view you pass in doesn't matter, it is only used for the window tolken
+                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+
+
+                EventRV= (RecyclerView) view.findViewById(R.id.my_feed);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+//                EventRV.setLayoutManager(layoutManager);
+//                EventRV.setHasFixedSize(true);
+
+                eventRecyclerAdapter = new EventRecyclerAdapter(view.getContext(),arrayList);
+//                EventRV.setAdapter(eventRecyclerAdapter);
+//                eventRecyclerAdapter.notifyDataSetChanged();
 
 
 
 
+                //Button closeEventButton = (Button) popupView.findViewById(R.id.buttonCloseEventList);
+//                TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
+//                TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
+//                EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
+//                EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
+//                EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
+//                EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
+//                closeEventButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View popupView) {
+//
+//                        popupWindow.dismiss();
+//                    }
+//                });
 
+                // dismiss the popup window when touched
+                popupView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
+    }
 
     public void setUpCalendarAdapter() {
         List<Date> dayValueInCells = new ArrayList<Date>();
@@ -177,75 +234,13 @@ public class CalendarCustomView extends LinearLayout implements com.example.fitr
         currentDate.setText(sDate);
         mAdapter = new com.example.fitrition.utils.GridAdapter(context, dayValueInCells, cal);
         calendarGridView.setAdapter(mAdapter);
-
     }
 
-//    private void dateClickEvent() {
-//
-//        calendarGridView.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                LayoutInflater inflater = (LayoutInflater)
-//                        context.getSystemService(LAYOUT_INFLATER_SERVICE);
-//                View popupView = inflater.inflate(R.layout.fragment_event_view, null);
-//
-//                // create the popup window
-//                int width = LinearLayout.LayoutParams.MATCH_PARENT;
-//                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-//                boolean focusable = true; // lets taps outside the popup also dismiss it
-//                final PopupWindow popupWindow = new PopupWindow(popupView, width,  height, focusable);
-//
-//                // show the popup window
-//                // which view you pass in doesn't matter, it is only used for the window tolken
-//                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-//
-//                // dismiss the popup window when touched
-//                popupView.setOnTouchListener(new View.OnTouchListener() {
-//                    @Override
-//                    public boolean onTouch(View v, MotionEvent event) {
-//                        popupWindow.dismiss();
-//                        return true;
-//                    }
-//                });
-//            }
-//        });
-//
-//        calendarGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//                final String date = dateFormat.format(dateList.get(position));
-//
-//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                builder.setCancelable(true);
-//                View showView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_event_view,null);
-//                RecyclerView EventRV= (RecyclerView) showView.findViewById(R.id.eventsRV);
-//                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(showView.getContext());
-//                EventRV.setLayoutManager(layoutManager);
-//                EventRV.setHasFixedSize(true);
-//
-//                EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(showView.getContext()
-//                        ,CollectEvent(date));
-//                EventRV.setAdapter(eventRecyclerAdapter);
-//                eventRecyclerAdapter.notifyDataSetChanged();
-//                builder.setView(showView);
-//                alertDialog =builder.create();
-//                alertDialog.show();
-//
-//
-//                return true;
-//            }
-//        });
-//
-//    }
-
-
-    @Override
     public void nextMonth() {
         cal.add(Calendar.MONTH, 1);
         setUpCalendarAdapter();
     }
 
-    @Override
     public void previousMonths() {
         cal.add(Calendar.MONTH, -1);
         setUpCalendarAdapter();

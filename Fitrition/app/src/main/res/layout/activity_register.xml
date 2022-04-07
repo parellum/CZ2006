@@ -83,22 +83,22 @@
                         android:inputType="textPersonName" />
 
                     <EditText
-                        android:id="@+id/RegisterFirstName"
+                        android:id="@+id/RegisterName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:ems="15"
-                        android:hint="First Name"
+                        android:hint="Given Name"
                         android:inputType="textPersonName" />
 
-                    <EditText
-                        android:id="@+id/RegisterLastName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:ems="15"
-                        android:hint="Last Name"
-                        android:inputType="textPersonName" />
+<!--                    <EditText-->
+<!--                        android:id="@+id/RegisterLastName"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:ems="15"-->
+<!--                        android:hint="Last Name"-->
+<!--                        android:inputType="textPersonName" />-->
 
                     <EditText
                         android:id="@+id/RegisterEmail"
@@ -147,30 +147,30 @@
                         android:layout_marginTop="20dp"
                         android:spinnerMode="dropdown"/>
 
-                    <EditText
-                        android:id="@+id/RegisterHeight"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:layout_marginTop="20dp"
-                        android:hint="Height (cm)"
-                        android:inputType="number" />
+<!--                    <EditText-->
+<!--                        android:id="@+id/RegisterHeight"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:ems="10"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:hint="Height (cm)"-->
+<!--                        android:inputType="number" />-->
 
-                    <EditText
-                        android:id="@+id/RegisterWeight"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:layout_marginTop="20dp"
-                        android:hint="Weight (kg)"
-                        android:inputType="numberDecimal" />
+<!--                    <EditText-->
+<!--                        android:id="@+id/RegisterWeight"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:ems="10"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:hint="Weight (kg)"-->
+<!--                        android:inputType="numberDecimal" />-->
 
-                    <Spinner
-                        android:id="@+id/RegisterDiet"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:spinnerMode="dropdown"/>
+<!--                    <Spinner-->
+<!--                        android:id="@+id/RegisterDiet"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:spinnerMode="dropdown"/>-->
 
                     <EditText
                         android:id="@+id/RegisterDescription"

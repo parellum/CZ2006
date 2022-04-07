@@ -151,9 +151,15 @@
         android:layout_height="wrap_content"
         android:text="Add Event" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/my_feed"
+    <Button
+        android:id="@+id/buttonAllEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"/>
+        android:text="All Events" />
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/my_feed"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:scrollbars="vertical"/>-->
 </LinearLayout>

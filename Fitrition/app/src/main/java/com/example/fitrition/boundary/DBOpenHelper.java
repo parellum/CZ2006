@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class DBOpenHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_EVENTS_TABLE = "create table "+DBStructure.EVENT_TABLE_NAME+"(ID INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -17,9 +21,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     private String date;
     private String event;
     private String time;
-    private String notify;
-    private SQLiteDatabase database;
-
+//    private String notify;
+    //private SQLiteDatabase database;
+    List<DBStructure> database = new ArrayList<>();
+    private int id = 0;
 
     public DBOpenHelper(@Nullable Context context) {
         super(context, DBStructure.DB_NAME, null, DBStructure.DB_VERSION);
@@ -27,7 +32,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_EVENTS_TABLE);
+//        db.execSQL(CREATE_EVENTS_TABLE);
 
     }
 
@@ -39,16 +44,14 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
 
-    public void SaveEvent(String event,String time,String date,String month,String year,String notify,SQLiteDatabase database){
+    public void SaveEvent(String event, String time, String date, String month, String year, SQLiteDatabase database){
         ContentValues contentValues = new ContentValues();
         contentValues.put(DBStructure.EVENT,event);
         contentValues.put(DBStructure.TIME,time);
         contentValues.put(DBStructure.DATE,date);
         contentValues.put(DBStructure.MONTH,month);
         contentValues.put(DBStructure.YEAR,year);
-        contentValues.put(DBStructure.Notify,notify);
         database.insert(DBStructure.EVENT_TABLE_NAME,null,contentValues);
-
     }
 
     public Cursor ReadEvents(String date,SQLiteDatabase database){
@@ -84,19 +87,24 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
 
-    public void updateEvent(String date, String event, String time, String notify, SQLiteDatabase database){
-        this.date = date;
-        this.event = event;
-        this.time = time;
-        this.notify = notify;
-        this.database = database;
+//    public void updateEvent(String date, String event, String time, SQLiteDatabase database){
+//        this.date = date;
+//        this.event = event;
+//        this.time = time;
+//        this.database = database;
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put(DBStructure.Notify,notify);
+//        String Selection = DBStructure.DATE +"=? and "+DBStructure.EVENT+"=? and "+DBStructure.TIME+"=?";
+//        String [] SelectionArgs = {date,event,time};
+//        database.update(DBStructure.EVENT_TABLE_NAME,contentValues,Selection,SelectionArgs);
+//    }
+    public void updateEvent(String date,String event, String time,String notify,SQLiteDatabase database){
         ContentValues contentValues = new ContentValues();
         contentValues.put(DBStructure.Notify,notify);
         String Selection = DBStructure.DATE +"=? and "+DBStructure.EVENT+"=? and "+DBStructure.TIME+"=?";
         String [] SelectionArgs = {date,event,time};
         database.update(DBStructure.EVENT_TABLE_NAME,contentValues,Selection,SelectionArgs);
     }
-
 
 
 }

@@ -26,7 +26,7 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdap
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_event_view,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_event_list,parent,false);
 
         return new MyViewHolder(view);
     }
@@ -53,7 +53,7 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdap
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             Event = itemView.findViewById(R.id.eventname);
-//            Date = itemView.findViewById(R.id.date);
+            Date = itemView.findViewById(R.id.eventdate);
             Time   = itemView.findViewById(R.id.eventtime);
         }
     }

@@ -1,6 +1,21 @@
 package com.example.fitrition.control;
 
+import static android.content.ContentValues.TAG;
+
+import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
 import com.example.fitrition.entities.IndividualUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -14,10 +29,12 @@ import java.util.ArrayList;
 public class ProfileManager {
 
     private static ProfileManager instance=null;
-    ArrayList<IndividualUser> individualUserList=new ArrayList<IndividualUser>();
+    IndividualUser user;
+    DatabaseReference mDatabaseReference;
+    StorageReference mStorageReference;
 
     public ProfileManager() {
-        individualUserList=new ArrayList<IndividualUser>();
+        user=new IndividualUser();
     }
 
     public static ProfileManager getInstance() {
@@ -27,20 +44,20 @@ public class ProfileManager {
         return instance;
     }
 
-    public ArrayList<IndividualUser> getIndividualUserList() {
-        return individualUserList;
+    public IndividualUser getIndividualUser() {
+        return user;
     }
 
-    public void setIndividualUserList(ArrayList<IndividualUser> individualUserList) {
-        this.individualUserList = individualUserList;
+    public void setIndividualUserList(IndividualUser user) {
+        this.user = user;
     }
 
-    public void addNewUser(String userName, String firstName, String lastName, String eMail, String password, String DOB, String height, String weight, String description,String gender,String diet){
-        individualUserList.add(new IndividualUser(userName,firstName,lastName,eMail,password,DOB,height,weight,description,gender,diet));
+    public void addNewUser(String userName, String name, String eMail, String password, String DOB, String description, String gender){
+        user =new IndividualUser(userName, name, eMail,  password,  DOB,  description,  gender);
     }
 
     public IndividualUser getUser(){
-        return individualUserList.get(0);
+        return user;
     }
 
     public boolean validatePassword(String str){
@@ -51,54 +68,27 @@ public class ProfileManager {
         return str.matches("[a-zA-Z0-9]*");
     }
 
-    public boolean validateEmail(String str){
-        return str.matches("\"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$\"");
-    }
-
-    /*
-    public boolean validateAccount(String email, String password){
-
-    }
-
-    public boolean validateEmailAvailability(String email){
-
-    }
-
-    public void updateVerificationCode(String email, String verificationCode){
-
-    }
-
-    public boolean validateVerificationCode(String email, String verificationCode){
-
-    }
-
-    public boolean validateConfirmPassword(String password, String confirmPassword){
-
-    }
-
-     */
-    public void updatePassword(String email, String password){
-
-    }
-    /*
-    public void createUserAccount(String email, String userName, String name, String address, String password, boolean isVerified, String verificationCode){
-        String username = newUserNameEditText.getText().toString();
-        String displayedName = firstNameEditText.getText().toString() + " " + lastNameEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-        String email = emailEditText.getText().toString();
-        String confirmPW = confirmPwEditText.getText().toString();
-
-        if (firstNameEditText.getText().toString().matches("") || passwordEditText.getText().toString().matches("")) {
-
-            displayToast("A username and password are required.");
-
-        } else if (!password.matches(confirmPW)){
-
-            displayToast("Password does not match with the confirmed password.");
-    }
-
-     */
     public void updateIsVerified(String email, boolean isVerified){
+
+    }
+
+    public void loadUser(String uid, Context context){
+        ArrayList<IndividualUser> lol = new ArrayList<IndividualUser>();
+        mDatabaseReference = FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users").child(uid);
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                user = snapshot.getValue(IndividualUser.class);
+                Log.d(TAG, "onDataChange: "+user.getName());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG, "onCancelled: user not loaded");
+            }
+        });
+        mStorageReference = FirebaseStorage.getInstance("gs://fitrition-3a967.appspot.com/").getReference("imageupload");
+        //Read up fire base storag ui to display straight to image view from firebase storage
 
     }
 
