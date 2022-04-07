@@ -1,7 +1,21 @@
 package com.example.fitrition.control;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.example.fitrition.entities.Friend;
+import com.example.fitrition.entities.IndividualUser;
 import com.example.fitrition.entities.Status;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -16,6 +30,8 @@ public class FriendManager {
      * For singleton pattern adherence. This FriendManager instance persists throughout runtime.
      */
     private static FriendManager instance=null;
+    private DatabaseReference mDatabaseReference;
+    private ProfileManager profileManager;
     /**
      * Holds ArrayList of Friend object that can be referenced throughout runtime.
      */
@@ -85,7 +101,26 @@ public class FriendManager {
         }
     }
 
-    private void loadFriendList(){
+    public void loadFriendList(){
+        profileManager=ProfileManager.getInstance();
+        friendList=new ArrayList<Friend>();
+        mDatabaseReference= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot friendChild:snapshot.getChildren()) {
+                    Friend targetFriend = friendChild.getValue(Friend.class);
+                    if (profileManager.getUser().getFriendList().contains(targetFriend.getUserID())) {
+                        friendList.add(targetFriend);
+                    }
+                }
+                mDatabaseReference.removeEventListener(this);
+            }
 
-    }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        }
 }

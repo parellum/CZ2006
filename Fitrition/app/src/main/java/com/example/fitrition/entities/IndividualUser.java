@@ -6,6 +6,7 @@ public class IndividualUser{
     private String userName;
     private ArrayList<String> friendList;
     private ArrayList<Status> socialStatus;
+    private ArrayList<String> friendRequest;
 	private String userID;
 	private String description;
 	private String name;
@@ -18,6 +19,7 @@ public class IndividualUser{
 
 	public IndividualUser(){
 		//Needed for firebase
+		friendList=new ArrayList<String>();
 	}
 
 	public IndividualUser(String userName, String name, String eMail, String password, String dob, String description, String gender, String imageUrl, ArrayList<String> friendList, ArrayList<Status> socialStatus){
@@ -35,7 +37,8 @@ public class IndividualUser{
 		this.imageUrl=imageUrl;
 	}
 
-	public IndividualUser(String userName, String name, String eMail, String password, String dob, String description, String gender){
+	public IndividualUser(String userID,String userName, String name, String eMail, String password, String dob, String description, String gender){
+		this.userID=userID;
 		this.userName=userName;
 		this.name = name;
 		this.email=eMail;
@@ -145,5 +148,13 @@ public class IndividualUser{
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public ArrayList<String> getFriendRequest() {
+		return friendRequest;
+	}
+
+	public void setFriendRequest(ArrayList<String> friendRequest) {
+		this.friendRequest = friendRequest;
 	}
 }
