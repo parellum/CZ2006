@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.fitrition.MainActivity;
 import com.example.fitrition.R;
 import com.example.fitrition.utils.CalendarCustomView;
 
@@ -81,7 +82,7 @@ public class TrackerFragment extends Fragment {
                 SimpleDateFormat dateFormat= new SimpleDateFormat("dd MMMM yyyy");
                 String dateOnly = dateFormat.format(date);
 
-                //Toast.makeText(TrackerFragment.this, "Date: " + dateOnly, Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(), "Date: " + dateOnly, Toast.LENGTH_LONG).show();
 
 
                 colorId = ((ColorDrawable) view.getBackground()).getColor();
