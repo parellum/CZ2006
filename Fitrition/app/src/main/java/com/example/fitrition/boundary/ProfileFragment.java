@@ -37,9 +37,7 @@ public class ProfileFragment extends Fragment {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment friendList = new FriendListFragment();
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.profile_fragment, friendList).commit();
+                startActivity(new Intent(view.getContext(),FriendListActivity.class));
             }
         });
 
