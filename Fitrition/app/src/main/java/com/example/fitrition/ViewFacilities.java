@@ -6,11 +6,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class ViewFacilities extends AppCompatActivity {
     private TextView viewFacilitiesName;
     private ImageView viewFacilitiesImage;
+    private RatingBar viewFacilitiesRatingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +21,7 @@ public class ViewFacilities extends AppCompatActivity {
 
         viewFacilitiesName = (TextView) findViewById(R.id.viewFacilitiesName);
         viewFacilitiesImage = (ImageView) findViewById(R.id.viewFacilitiesImage);
+        viewFacilitiesRatingBar = (RatingBar) findViewById(R.id.viewFacilitiesRatingBar);
 
         Bundle b = getIntent().getExtras();
         String facilitiesName = null;
@@ -52,6 +55,9 @@ public class ViewFacilities extends AppCompatActivity {
 
         viewFacilitiesImage.setImageDrawable(getDrawable(resId));
         Log.d("ViewFaciltiyImage",Integer.toString(resId));
+
+        viewFacilitiesRatingBar.setRating((float) 2.20);
+
 
 
     }
