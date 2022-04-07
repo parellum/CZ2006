@@ -2,8 +2,6 @@ package com.example.fitrition.utils;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.widget.EditText;
@@ -20,10 +18,7 @@ import android.widget.Toast;
 import android.widget.DatePicker;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import android.app.DatePickerDialog;
-import com.example.fitrition.boundary.DBOpenHelper;
-import com.example.fitrition.boundary.DBStructure;
+
 import com.example.fitrition.control.CalendarManager;
 import com.example.fitrition.entities.Events;
 import com.example.fitrition.uiReference.tracker.ExpandableHeightGridView;
@@ -35,8 +30,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
         import java.util.Calendar;
         import java.util.Date;
@@ -304,26 +297,7 @@ public class CalendarCustomView extends LinearLayout {
         calendarGridView.setAdapter(mAdapter);
     }
 
-//    private ArrayList<Events> CollectEvent(String date){
-//        ArrayList<Events> arrayList = new ArrayList<>();
-//        dbOpenHelper = new DBOpenHelper(context);
-//        SQLiteDatabase sqLiteDatabase = dbOpenHelper.getReadableDatabase();
-//        Cursor cursor = dbOpenHelper.ReadEvents(date,sqLiteDatabase);
-//        while (cursor.moveToNext()){
-//            String event = cursor.getString(cursor.getColumnIndex(DBStructure.EVENT));
-//            String location = cursor.getString(cursor.getColumnIndex(DBStructure.LOCATION));
-//            String Time = cursor.getString(cursor.getColumnIndex(DBStructure.TIME));
-//            String Date = cursor.getString(cursor.getColumnIndex(DBStructure.DATE));
-//            String month = cursor.getString(cursor.getColumnIndex(DBStructure.MONTH));
-//            String year = cursor.getString(cursor.getColumnIndex(DBStructure.YEAR));
-//            Events events = new Events(event,location,Time,Date,month,year);
-//            arrayList.add(events);
-//        }
-//        cursor.close();
-//        dbOpenHelper.close();
-//// Toast.makeText(context, String.valueOf(arrayList.size()), Toast.LENGTH_SHORT).show();
-//        return arrayList;
-//    }
+
 
     public void nextMonth() {
         cal.add(Calendar.MONTH, 1);
