@@ -87,9 +87,6 @@ public class ProfileManager {
                 Log.d(TAG, "onCancelled: user not loaded");
             }
         });
-        mStorageReference = FirebaseStorage.getInstance("gs://fitrition-3a967.appspot.com/").getReference("imageupload");
-        //Read up fire base storag ui to display straight to image view from firebase storage
-
     }
 
 

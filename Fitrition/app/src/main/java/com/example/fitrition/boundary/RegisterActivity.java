@@ -299,8 +299,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            String url = fileReference.getDownloadUrl().toString();
-                            mDatabaseRef.child(uid).child("imageUrl").setValue(url);
+                            fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String url = uri.toString();
+                                    mDatabaseRef.child(uid).child("imageUrl").setValue(url);
+                                }
+                            });
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
