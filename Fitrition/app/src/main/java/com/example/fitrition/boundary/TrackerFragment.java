@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.fitrition.MainActivity;
 import com.example.fitrition.R;
 import com.example.fitrition.utils.CalendarCustomView;
 
@@ -25,12 +24,10 @@ public class TrackerFragment extends Fragment {
 
     LinearLayout layoutCalender;
     View custom_view;
-    View calendar_date_id;
     View viewCopy;
     Date date;
     int n = 0;
     int colorId;
-//    private Button addEventButton;
 
 
     @Override
@@ -39,14 +36,12 @@ public class TrackerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tracker, container, false);
         setInitializations(view);
         setCalenderView(view);
-//        setAddEventButtonClickEvent();
         return view;
     }
 
     private void setInitializations(View view) {
         custom_view = (View) view.findViewById(R.id.custom_view);
         layoutCalender = (LinearLayout) view.findViewById(R.id.layoutCalender);
-//        addEventButton = (Button) view.findViewById(R.id.buttonAddEvent);
 
     }
 
