@@ -20,24 +20,26 @@ xmlns:tools="http://schemas.android.com/tools"
             android:layout_marginTop="30dp">
             <!--        android:background="@drawable/circle_border">-->
 
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="144dp"
-                android:layout_marginStart="9dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="9dp"
-                android:layout_marginBottom="9dp"
-                android:adjustViewBounds="true"
-                android:padding="3dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_avocado_profile" />
-            <!--            android:background="@drawable/circle"-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/friend_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="70dp">
+
+                <ImageView
+                    android:id="@+id/profile_user_image"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_avocado_profile" />
+                <!--            android:background="@drawable/circle"-->
+            </androidx.cardview.widget.CardView>
 
 
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/profile_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imgUser"
@@ -49,10 +51,10 @@ xmlns:tools="http://schemas.android.com/tools"
             android:textSize="32sp" />
 
         <TextView
-            android:id="@+id/profile_age"
+            android:id="@+id/profile_user_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_name"
+            android:layout_below="@+id/profile_user_name"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/nunito_semibold"
             android:text="25"
@@ -167,7 +169,7 @@ xmlns:tools="http://schemas.android.com/tools"
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="300dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="350dp"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp">
 
@@ -198,6 +200,7 @@ xmlns:tools="http://schemas.android.com/tools"
                         android:textSize="13sp" />
 
                     <EditText
+                        android:id="@+id/profile_user_password"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
@@ -231,6 +234,7 @@ xmlns:tools="http://schemas.android.com/tools"
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/profile_user_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_semibold"
@@ -260,6 +264,7 @@ xmlns:tools="http://schemas.android.com/tools"
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/profile_user_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_semibold"
@@ -291,6 +296,7 @@ xmlns:tools="http://schemas.android.com/tools"
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/profile_user_gender"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_semibold"

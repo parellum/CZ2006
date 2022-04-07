@@ -44,10 +44,6 @@ public class ProfileManager {
         return instance;
     }
 
-    public IndividualUser getIndividualUser() {
-        return user;
-    }
-
     public void setIndividualUserList(IndividualUser user) {
         this.user = user;
     }
