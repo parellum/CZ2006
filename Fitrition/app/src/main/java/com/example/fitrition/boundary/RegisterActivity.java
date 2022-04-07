@@ -103,6 +103,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+
     private void openFileChooser(){
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -324,4 +325,5 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Toast.makeText(this,"No file selected!",Toast.LENGTH_SHORT);
         }
     }
+
 }

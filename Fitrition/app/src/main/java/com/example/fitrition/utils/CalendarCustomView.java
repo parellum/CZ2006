@@ -17,10 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fitrition.adapter.EventRecyclerAdapter;
 import com.example.fitrition.entities.Events;
 import com.example.fitrition.uiReference.tracker.ExpandableHeightGridView;
 import com.example.fitrition.R;
@@ -45,8 +43,6 @@ public class CalendarCustomView extends LinearLayout {
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
     private com.example.fitrition.utils.GridAdapter mAdapter;
-    RecyclerView EventRV;
-    EventRecyclerAdapter eventRecyclerAdapter;
     ArrayList<Events> arrayList;
 
 
@@ -73,16 +69,6 @@ public class CalendarCustomView extends LinearLayout {
         calendarGridView = (ExpandableHeightGridView) view.findViewById(R.id.calendar_grid);
         calendarGridView.setExpanded(true);
         arrayList = new ArrayList<>();
-
-//        RecyclerView EventRV= (RecyclerView) view.findViewById(R.id.my_feed);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
-//        EventRV.setLayoutManager(layoutManager);
-//        EventRV.setHasFixedSize(true);
-//
-//        eventRecyclerAdapter = new EventRecyclerAdapter(view.getContext()
-//                ,arrayList);
-//        EventRV.setAdapter(eventRecyclerAdapter);
-//        eventRecyclerAdapter.notifyDataSetChanged();
     }
 
     private void setPreviousButtonClickEvent() {
@@ -160,6 +146,65 @@ public class CalendarCustomView extends LinearLayout {
         Toast.makeText(context, "Event Saved", Toast.LENGTH_SHORT).show();
     }
 
+    public void dateClickEvent(View view, Date date) {
+        LayoutInflater inflater = (LayoutInflater)
+                view.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.fragment_add_event, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width,  height, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
+        EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
+        EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
+        SimpleDateFormat dateFormatDay= new SimpleDateFormat("dd ");
+        String forDay = dateFormatDay.format(date);
+        SimpleDateFormat dateFormatMonth= new SimpleDateFormat("MM");
+        String forMonth = dateFormatMonth.format(date);
+        SimpleDateFormat dateFormatYear= new SimpleDateFormat("yyyy");
+        String forYear = dateFormatYear.format(date);
+        eventDate.setText(forDay);
+        eventMonth.setText(forMonth);
+        eventYear.setText(forYear);
+
+
+        Button saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
+        TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
+        TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
+        EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
+
+        saveEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View popupView) {
+                //String eventNameStr = eventName.getText().toString();
+                SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
+                        , eventTime.getText().toString()
+                        , eventDate.getText().toString(), eventMonth.getText().toString()
+                        , eventYear.getText().toString());
+                //eventRecyclerAdapter.notifyDataSetChanged();
+                popupWindow.dismiss();
+            }
+        });
+
+
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+    }
+
 
     private void setAllEventButtonClickEvent() {
         allEventButton.setOnClickListener(new View.OnClickListener() {
@@ -177,35 +222,21 @@ public class CalendarCustomView extends LinearLayout {
                 // show the popup window
                 // which view you pass in doesn't matter, it is only used for the window tolken
                 popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                Events events;
+                String text = "";
+
+                TextView eventCellTV = popupView.findViewById(R.id.eventListTV);
+                for (int i = 0; i < arrayList.size(); i +=1){
+                    events = arrayList.get(i);
+                    text = text + "\nEvent Name: " + events.getEvent() + "\nEvent Location: " + events.getLocation()
+                            + "\nEvent Time: " + events.getTime() + "\nEvent Date: " + events.getDate() + " " + events.getMonth()
+                            + " " + events.getYear() + "\n\n";
+                }
 
 
 
-                EventRV= (RecyclerView) view.findViewById(R.id.my_feed);
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
-//                EventRV.setLayoutManager(layoutManager);
-//                EventRV.setHasFixedSize(true);
+                eventCellTV.setText(text);
 
-                eventRecyclerAdapter = new EventRecyclerAdapter(view.getContext(),arrayList);
-//                EventRV.setAdapter(eventRecyclerAdapter);
-//                eventRecyclerAdapter.notifyDataSetChanged();
-
-
-
-
-                //Button closeEventButton = (Button) popupView.findViewById(R.id.buttonCloseEventList);
-//                TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
-//                TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
-//                EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
-//                EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
-//                EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
-//                EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
-//                closeEventButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View popupView) {
-//
-//                        popupWindow.dismiss();
-//                    }
-//                });
 
                 // dismiss the popup window when touched
                 popupView.setOnTouchListener(new View.OnTouchListener() {
