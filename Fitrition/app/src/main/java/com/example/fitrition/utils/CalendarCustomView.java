@@ -51,8 +51,6 @@ public class CalendarCustomView extends LinearLayout {
     private com.example.fitrition.utils.GridAdapter mAdapter;
     private DatePicker datePicker;
     private CalendarManager calendarManager;
-
-    DBOpenHelper dbOpenHelper;
     ArrayList<Events> arrayList;
     TextView eventCellTV;
 
@@ -85,6 +83,7 @@ public class CalendarCustomView extends LinearLayout {
         mAuth=FirebaseAuth.getInstance();
         mDatabaseReference= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(mAuth.getCurrentUser().getUid());
         calendarManager=CalendarManager.getInstance();
+        calendarManager.loadEvents();
         arrayList = calendarManager.getEventsList();
     }
 
@@ -135,13 +134,34 @@ public class CalendarCustomView extends LinearLayout {
                 saveEventButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View popupView) {
-                        //String eventNameStr = eventName.getText().toString();
-                        SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
-                                , eventTime.getText().toString()
-                                , eventDate.getText().toString(), eventMonth.getText().toString()
-                                , eventYear.getText().toString());
-                        //eventRecyclerAdapter.notifyDataSetChanged();
-                        popupWindow.dismiss();
+                        String err_msg = "";
+                        int year_int = Integer.parseInt(eventYear.getText().toString());
+                        if (year_int < 1950 || year_int >2100){
+                            err_msg = err_msg + "Year is not valid. Please enter number in range of 1950 to 2100\n";
+                        }
+                        int month_int = Integer.parseInt(eventMonth.getText().toString());
+                        if (month_int < 1 || month_int >12){
+                            err_msg = err_msg + "Month is not valid. Please enter number in range of 1 to 12\n";
+                        }
+                        int date_int = Integer.parseInt(eventDate.getText().toString());
+                        if (date_int < 1 || date_int >31){
+                            err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
+                        }
+                        int time_int = Integer.parseInt(eventTime.getText().toString());
+                        if (time_int < 0 || time_int >2359){
+                            err_msg = err_msg + "Time is not valid. Please enter number in range of 0000 to 2359\n";
+                        }
+
+                        if (err_msg == "") {
+                            SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
+                                    , eventTime.getText().toString()
+                                    , eventDate.getText().toString(), eventMonth.getText().toString()
+                                    , eventYear.getText().toString());
+                            popupWindow.dismiss();
+                        }
+                        else {
+                            Toast.makeText(context, err_msg, Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
 
@@ -186,7 +206,7 @@ public class CalendarCustomView extends LinearLayout {
         EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
         EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
         EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
-        SimpleDateFormat dateFormatDay= new SimpleDateFormat("dd ");
+        SimpleDateFormat dateFormatDay= new SimpleDateFormat("dd");
         String forDay = dateFormatDay.format(date);
         SimpleDateFormat dateFormatMonth= new SimpleDateFormat("MM");
         String forMonth = dateFormatMonth.format(date);
@@ -205,13 +225,34 @@ public class CalendarCustomView extends LinearLayout {
         saveEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View popupView) {
-                //String eventNameStr = eventName.getText().toString();
-                SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
-                        , eventTime.getText().toString()
-                        , eventDate.getText().toString(), eventMonth.getText().toString()
-                        , eventYear.getText().toString());
-                //eventRecyclerAdapter.notifyDataSetChanged();
-                popupWindow.dismiss();
+                String err_msg = "";
+                int year_int = Integer.parseInt(eventYear.getText().toString());
+                if (year_int < 1950 || year_int >2100){
+                    err_msg = err_msg + "Year is not valid. Please enter number in range of 1950 to 2100\n";
+                }
+                int month_int = Integer.parseInt(eventMonth.getText().toString());
+                if (month_int < 1 || month_int >12){
+                    err_msg = err_msg + "Month is not valid. Please enter number in range of 1 to 12\n";
+                }
+                int date_int = Integer.parseInt(eventDate.getText().toString());
+                if (date_int < 1 || date_int >31){
+                    err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
+                }
+                int time_int = Integer.parseInt(eventTime.getText().toString());
+                if (time_int < 0 || time_int >2359){
+                    err_msg = err_msg + "Time is not valid. Please enter number in range of 0000 to 2359\n";
+                }
+
+                if (err_msg == "") {
+                    SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
+                            , eventTime.getText().toString()
+                            , eventDate.getText().toString(), eventMonth.getText().toString()
+                            , eventYear.getText().toString());
+                    popupWindow.dismiss();
+                }
+                else {
+                    Toast.makeText(context, err_msg, Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -242,11 +283,15 @@ public class CalendarCustomView extends LinearLayout {
                 Events events;
                 String text = "";
                 eventCellTV = popupView.findViewById(R.id.eventListTV);
+                //Toast.makeText(context, "Month : " + cal.get(Calendar.MONTH), Toast.LENGTH_SHORT).show();
                 for (int i = 0; i < arrayList.size(); i +=1){
                     events = arrayList.get(i);
-                    text = text + "\nEvent Name: " + events.getEvent() + "\nEvent Location: " + events.getLocation()
-                            + "\nEvent Time: " + events.getTime() + "\nEvent Date: " + events.getDate() + " " + events.getMonth()
-                            + " " + events.getYear() + "\n\n";
+                    //Toast.makeText(context, "Month : " + events.getMonth(), Toast.LENGTH_SHORT).show();
+                    if ((cal.get(Calendar.MONTH) + 1) == Integer.parseInt(events.getMonth())){
+                        text = text + "\nEvent Name: " + events.getEvent() + "\nEvent Location: " + events.getLocation()
+                                + "\nEvent Time: " + events.getTime() + "\nEvent Date: " + events.getDate() + " " + events.getMonth()
+                                + " " + events.getYear() + "\n\n";
+                    }
                 }
                 eventCellTV.setText(text);
                 // dismiss the popup window when touched
