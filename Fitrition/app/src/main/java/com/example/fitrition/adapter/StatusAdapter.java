@@ -46,6 +46,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // use friendmanager conditional
 //                Toast.makeText(context,"The position is:"+position,Toast.LENGTH_SHORT).show();
                 view.getContext().startActivity(new Intent(view.getContext(), FriendActivity.class));
             }
