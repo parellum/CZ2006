@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_custom_calendar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,7 +25,7 @@
             android:padding="3sp"
             android:rotation="180"
             android:src="@drawable/white_next_icon"
-            android:tint="@color/black" />
+            app:tint="@color/black" />
 
         <TextView
             android:id="@+id/display_current_date"
@@ -48,7 +49,7 @@
             android:contentDescription="@string/app_name"
             android:padding="3sp"
             android:src="@drawable/white_next_icon"
-            android:tint="@color/black" />
+            app:tint="@color/black" />
     </LinearLayout>
 
     <View

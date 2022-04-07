@@ -1,30 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/dark_green">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/my_feed"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-
-<!--    <Button-->
-<!--        android:id="@+id/buttonCloseEventList"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:background="@android:color/white"-->
-<!--        android:text="Save Event"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/colorPrimary"-->
-<!--        android:textStyle="bold"-->
-<!--        tools:ignore="HardcodedText" />-->
-
-</LinearLayout>
+        <TextView
+            android:id="@+id/eventListTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
