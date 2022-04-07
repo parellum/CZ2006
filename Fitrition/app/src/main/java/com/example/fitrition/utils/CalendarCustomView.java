@@ -2,6 +2,8 @@ package com.example.fitrition.utils;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.widget.EditText;
@@ -15,16 +17,27 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.DatePicker;
 
-
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.app.DatePickerDialog;
+import com.example.fitrition.boundary.DBOpenHelper;
+import com.example.fitrition.boundary.DBStructure;
+import com.example.fitrition.control.CalendarManager;
 import com.example.fitrition.entities.Events;
 import com.example.fitrition.uiReference.tracker.ExpandableHeightGridView;
 import com.example.fitrition.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-        import java.text.SimpleDateFormat;
-        import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
         import java.util.Calendar;
         import java.util.Date;
         import java.util.List;
@@ -43,7 +56,15 @@ public class CalendarCustomView extends LinearLayout {
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
     private com.example.fitrition.utils.GridAdapter mAdapter;
+    private DatePicker datePicker;
+    private CalendarManager calendarManager;
+
+    DBOpenHelper dbOpenHelper;
     ArrayList<Events> arrayList;
+    TextView eventCellTV;
+
+    DatabaseReference mDatabaseReference;
+    FirebaseAuth mAuth;
 
 
     public CalendarCustomView(Context context) {
@@ -68,7 +89,10 @@ public class CalendarCustomView extends LinearLayout {
         allEventButton = (Button) findViewById(R.id.buttonAllEvent);
         calendarGridView = (ExpandableHeightGridView) view.findViewById(R.id.calendar_grid);
         calendarGridView.setExpanded(true);
-        arrayList = new ArrayList<>();
+        mAuth=FirebaseAuth.getInstance();
+        mDatabaseReference= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(mAuth.getCurrentUser().getUid());
+        calendarManager=CalendarManager.getInstance();
+        arrayList = calendarManager.getEventsList();
     }
 
     private void setPreviousButtonClickEvent() {
@@ -142,8 +166,13 @@ public class CalendarCustomView extends LinearLayout {
 
     private void SaveEvent(String event, String location,String time,String date, String month, String year){
         Events events = new Events(event,location,time,date,month,year);
+        mDatabaseReference.child(Long.toString(Calendar.getInstance().getTimeInMillis())).setValue(events).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(context, events.getDate(), Toast.LENGTH_SHORT).show();
+            }
+        });
         arrayList.add(events);
-        Toast.makeText(context, "Event Saved", Toast.LENGTH_SHORT).show();
     }
 
     public void dateClickEvent(View view, Date date) {
@@ -193,8 +222,6 @@ public class CalendarCustomView extends LinearLayout {
             }
         });
 
-
-
         // dismiss the popup window when touched
         popupView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -205,39 +232,30 @@ public class CalendarCustomView extends LinearLayout {
         });
     }
 
-
     private void setAllEventButtonClickEvent() {
         allEventButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 LayoutInflater inflater = (LayoutInflater)
                         context.getSystemService(LAYOUT_INFLATER_SERVICE);
                 View popupView = inflater.inflate(R.layout.fragment_event_list, null);
-
                 // create the popup window
                 int width = LinearLayout.LayoutParams.MATCH_PARENT;
                 int height = LinearLayout.LayoutParams.MATCH_PARENT;
                 boolean focusable = true; // lets taps outside the popup also dismiss it
                 final PopupWindow popupWindow = new PopupWindow(popupView, width,  height, focusable);
-
                 // show the popup window
                 // which view you pass in doesn't matter, it is only used for the window tolken
                 popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
                 Events events;
                 String text = "";
-
-                TextView eventCellTV = popupView.findViewById(R.id.eventListTV);
+                eventCellTV = popupView.findViewById(R.id.eventListTV);
                 for (int i = 0; i < arrayList.size(); i +=1){
                     events = arrayList.get(i);
                     text = text + "\nEvent Name: " + events.getEvent() + "\nEvent Location: " + events.getLocation()
                             + "\nEvent Time: " + events.getTime() + "\nEvent Date: " + events.getDate() + " " + events.getMonth()
                             + " " + events.getYear() + "\n\n";
                 }
-
-
-
                 eventCellTV.setText(text);
-
-
                 // dismiss the popup window when touched
                 popupView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -249,6 +267,25 @@ public class CalendarCustomView extends LinearLayout {
             }
         });
     }
+
+//    private DatePickerDialog.OnDateSetListener myDateListener = new
+//            DatePickerDialog.OnDateSetListener() {
+//                @Override
+//                public void onDateSet(DatePicker arg0,
+//                                      int arg1, int arg2, int arg3) {
+//                    // TODO Auto-generated method stub
+//                    // arg1 = year
+//                    // arg2 = month
+//                    // arg3 = day
+//                    showDate(arg1, arg2+1, arg3);
+//                }
+//            };
+//
+//    private void showDate(int year, int month, int day) {
+//        eventCellTV.setText(new StringBuilder().append(day).append("/")
+//                .append(month).append("/").append(year));
+//    }
+
 
     public void setUpCalendarAdapter() {
         List<Date> dayValueInCells = new ArrayList<Date>();
@@ -266,6 +303,27 @@ public class CalendarCustomView extends LinearLayout {
         mAdapter = new com.example.fitrition.utils.GridAdapter(context, dayValueInCells, cal);
         calendarGridView.setAdapter(mAdapter);
     }
+
+//    private ArrayList<Events> CollectEvent(String date){
+//        ArrayList<Events> arrayList = new ArrayList<>();
+//        dbOpenHelper = new DBOpenHelper(context);
+//        SQLiteDatabase sqLiteDatabase = dbOpenHelper.getReadableDatabase();
+//        Cursor cursor = dbOpenHelper.ReadEvents(date,sqLiteDatabase);
+//        while (cursor.moveToNext()){
+//            String event = cursor.getString(cursor.getColumnIndex(DBStructure.EVENT));
+//            String location = cursor.getString(cursor.getColumnIndex(DBStructure.LOCATION));
+//            String Time = cursor.getString(cursor.getColumnIndex(DBStructure.TIME));
+//            String Date = cursor.getString(cursor.getColumnIndex(DBStructure.DATE));
+//            String month = cursor.getString(cursor.getColumnIndex(DBStructure.MONTH));
+//            String year = cursor.getString(cursor.getColumnIndex(DBStructure.YEAR));
+//            Events events = new Events(event,location,Time,Date,month,year);
+//            arrayList.add(events);
+//        }
+//        cursor.close();
+//        dbOpenHelper.close();
+//// Toast.makeText(context, String.valueOf(arrayList.size()), Toast.LENGTH_SHORT).show();
+//        return arrayList;
+//    }
 
     public void nextMonth() {
         cal.add(Calendar.MONTH, 1);

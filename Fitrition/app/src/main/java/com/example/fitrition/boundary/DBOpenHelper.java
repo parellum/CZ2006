@@ -16,7 +16,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_EVENTS_TABLE = "create table "+DBStructure.EVENT_TABLE_NAME+"(ID INTEGER PRIMARY KEY AUTOINCREMENT, "
             +DBStructure.EVENT+" TEXT, "+DBStructure.TIME+" TEXT, "+DBStructure.DATE+" TEXT, "+DBStructure.MONTH+" TEXT, "
-            +DBStructure.YEAR+" TEXT, "+DBStructure.Notify+" TEXT)";
+            +DBStructure.YEAR+" TEXT, "+DBStructure.LOCATION+" TEXT)";
     private static final String DROP_EVENTS_TABLE= "DROP TABLE IF EXISTS "+DBStructure.EVENT_TABLE_NAME;
     private String date;
     private String event;
@@ -63,7 +63,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
     public Cursor ReadIDEvents(String date,String event, String time,SQLiteDatabase database){
-        String [] Projections = {DBStructure.ID,DBStructure.Notify,DBStructure.TIME};
+        String [] Projections = {DBStructure.ID,DBStructure.LOCATION,DBStructure.TIME};
         String Selection = DBStructure.DATE +"=? and "+DBStructure.EVENT+"=? and "+DBStructure.TIME+"=?";
         String [] SelectionArgs = {date,event,time};
 
@@ -100,7 +100,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 //    }
     public void updateEvent(String date,String event, String time,String notify,SQLiteDatabase database){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DBStructure.Notify,notify);
+        contentValues.put(DBStructure.LOCATION,notify);
         String Selection = DBStructure.DATE +"=? and "+DBStructure.EVENT+"=? and "+DBStructure.TIME+"=?";
         String [] SelectionArgs = {date,event,time};
         database.update(DBStructure.EVENT_TABLE_NAME,contentValues,Selection,SelectionArgs);
