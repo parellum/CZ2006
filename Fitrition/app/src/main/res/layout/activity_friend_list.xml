@@ -6,6 +6,31 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/friend_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/green_prime"
+        app:title=" ">
+
+        <ImageView
+            android:id="@+id/friendlist_back_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_arrow" />
+        <!--gender, age, number of postings, recycleview-->
+        <TextView
+            android:id="@+id/back_to_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/browser_actions_context_menu_min_padding"
+            android:fontFamily="@font/nunito_bold"
+            android:text=" Back to Status"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
     <TextView
         android:id="@+id/friendlist_heading"
         android:layout_width="wrap_content"
@@ -14,33 +39,24 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="130dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/nunito_bold"
         android:text="My Friends"
         android:textColor="@color/green_prime"
         android:textSize="24sp" />
 
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/friend_social_feed"
+        android:id="@+id/friendlist_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/friendlist_heading"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="405dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
         android:scrollbars="vertical">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-    <ImageView
-        android:id="@+id/profile_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="80dp"
-        android:background="#FFFFFF"
-        app:srcCompat="@drawable/ic_avocado_profile" />
-    />
 
     <View
         android:id="@+id/divider"
