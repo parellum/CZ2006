@@ -93,22 +93,4 @@ public class TrackerFragment extends Fragment {
         });
 
     }
-
-
-//    private void setAddEventButtonClickEvent() {
-//        addEventButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-////                startActivity(new Intent(MainActivity.this, newEventFragment.class));
-//
-//                Intent i = new Intent(getActivity(), NewEventFragment.class);
-//                startActivity(i);
-////                mAdapter = new com.example.fitrition.utils.GridAdapter(context, dayValueInCells, cal, eventObjects);
-////                calendarGridView.setAdapter(mAdapter);
-//
-////                NewEventFragment fragment = new NewEventFragment();
-////                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-////                transaction.replace(R.id.fragment_container_view_tag, fragment).commit();
-//            }
-//        });
-//    }
 }
