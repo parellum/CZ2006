@@ -17,5 +17,33 @@ public class FitnessCentreJSON {
     @Expose
     public String longitude;
 
+
+    //Added
+
+    @SerializedName("Url")
+    @Expose
+    public String url;
+
+    @SerializedName("Address")
+    @Expose
+    public String Address;
+
+    @SerializedName("OpeningTime")
+    @Expose
+    public int OpeningTime;
+
+    @SerializedName("ClosingTime")
+    @Expose
+    public int ClosingTime;
+
+    @SerializedName("Description")
+    @Expose
+    public String Description;
+
+    @SerializedName("Rating")
+    @Expose
+    public double Rating;
+
+    //End
 }
 
