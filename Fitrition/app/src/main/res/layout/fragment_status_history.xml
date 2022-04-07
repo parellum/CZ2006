@@ -16,10 +16,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Status History"
-            android:fontFamily="@font/nunito_semibold"
-            android:textSize="35dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textSize="24sp"
+            android:textColor="@color/green_prime"
             android:textAlignment="center"
-            android:background="@color/dark_green"
+            android:background="@color/white"
             />
 
         <androidx.recyclerview.widget.RecyclerView
