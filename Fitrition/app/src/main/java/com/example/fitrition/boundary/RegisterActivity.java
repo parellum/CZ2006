@@ -231,7 +231,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     int registerFollow = 0;
                                     if (task.isSuccessful()) {
-                                        Iuser=new IndividualUser(userName, name, eMail, password, DOB, description, gender);
+                                        Iuser=new IndividualUser(FirebaseAuth.getInstance().getCurrentUser().getUid(),userName, name, eMail, password, DOB, description, gender);
                                         FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                 .setValue(Iuser).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override

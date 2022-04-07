@@ -31,7 +31,7 @@ public class ProfileManager {
     private static ProfileManager instance=null;
     IndividualUser user;
     DatabaseReference mDatabaseReference;
-    StorageReference mStorageReference;
+    FriendManager friendManager;
 
     public ProfileManager() {
         user=new IndividualUser();
@@ -48,8 +48,8 @@ public class ProfileManager {
         this.user = user;
     }
 
-    public void addNewUser(String userName, String name, String eMail, String password, String DOB, String description, String gender){
-        user =new IndividualUser(userName, name, eMail,  password,  DOB,  description,  gender);
+    public void addNewUser(String userID,String userName, String name, String eMail, String password, String DOB, String description, String gender){
+        user =new IndividualUser(userID,userName, name, eMail,  password,  DOB,  description,  gender);
     }
 
     public IndividualUser getUser(){
@@ -69,13 +69,14 @@ public class ProfileManager {
     }
 
     public void loadUser(String uid, Context context){
-        ArrayList<IndividualUser> lol = new ArrayList<IndividualUser>();
         mDatabaseReference = FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users").child(uid);
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user = snapshot.getValue(IndividualUser.class);
                 Log.d(TAG, "onDataChange: "+user.getName());
+                friendManager = FriendManager.getInstance();
+                friendManager.loadFriendList();
             }
 
             @Override
@@ -83,6 +84,8 @@ public class ProfileManager {
                 Log.d(TAG, "onCancelled: user not loaded");
             }
         });
+        friendManager=FriendManager.getInstance();
+        friendManager.loadFriendList();
     }
 
 

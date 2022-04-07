@@ -31,12 +31,12 @@ public class FriendListRecyclerAdapter extends RecyclerView.Adapter<FriendListRe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        int resource=userList.get(position).getFriend_image();
+//        int resource=userList.get(position).getImageUrl();
         String name=userList.get(position).getName();
         String description=userList.get(position).getDescription();
-        String divider=userList.get(position).getFriendlist_divider();
+//        String divider=userList.get(position).getFriendlist_divider();
 
-        holder.setData(resource,name, description, divider);
+        holder.setData(name, description);
     }
 
     @Override
@@ -53,13 +53,13 @@ public class FriendListRecyclerAdapter extends RecyclerView.Adapter<FriendListRe
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            friendImage=itemView.findViewById(R.id.friend_image);
+//            friendImage=itemView.findViewById(R.id.friend_image);
             friendName=itemView.findViewById(R.id.name_textview);
             friendDescrp=itemView.findViewById(R.id.description_textview);
             friendDiv=itemView.findViewById(R.id.friendlist_divider);
         }
-        public void setData(int resource, String name, String description, String divider){
-            friendImage.setImageResource(resource);
+        public void setData( String name, String description){
+//            friendImage.setImageResource(resource);
             friendName.setText(name);
             friendDescrp.setText(description);
         }

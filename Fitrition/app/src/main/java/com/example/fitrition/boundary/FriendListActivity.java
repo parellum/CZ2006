@@ -47,16 +47,16 @@ public class FriendListActivity extends AppCompatActivity {
 
     private void initData() {
         userList = new ArrayList<>();
-        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jannie", "Hello!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-        userList.add(new Friend(R.drawable.ic_avocado_profile, "Tonny", "What's up!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jaden", "Looking for a run!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jia Xin", "Looking for a gym buddy!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-        userList.add(new Friend(R.drawable.ic_avocado_profile, "Darren", "Follow my instagram: darren_love_food",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jannie", "Hello!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-        userList.add(new Friend(R.drawable.ic_avocado_profile, "Tonny", "What's up!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jaden", "Looking for a run!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jia Xin", "Looking for a gym buddy!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-        userList.add(new Friend(R.drawable.ic_avocado_profile, "Darren", "Follow my instagram: darren_love_food",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
+//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jannie", "Hello!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
+//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Tonny", "What's up!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
+//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jaden", "Looking for a run!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
+//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jia Xin", "Looking for a gym buddy!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
+//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Darren", "Follow my instagram: darren_love_food",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
+//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jannie", "Hello!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
+//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Tonny", "What's up!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
+//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jaden", "Looking for a run!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
+//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jia Xin", "Looking for a gym buddy!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
+//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Darren", "Follow my instagram: darren_love_food",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
     }
 
     private void initRecylerView() {

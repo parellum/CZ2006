@@ -9,52 +9,50 @@ import java.util.ArrayList;
  * @since 20-03-2022
  */
 public class Friend{
-    private int friend_image;
-    private String name;
+    private String userID;
+    private String userName;
+    private ArrayList<Status> socialStatus;
+    private ArrayList<String> friendRequest;
     private String description;
-    private ArrayList socialStatusList=new ArrayList<Status>();
-    private ArrayList<Achievement> acheivementList;
-    private String friendlist_divider;
+    private String name;
+    private String dob;
+    private String gender;
+    private String imageUrl;
 
-    public int getFriend_image() {
-        return friend_image;
+    public Friend(){
+
     }
 
-    public String getFriendlist_divider() {
-        return friendlist_divider;
+    public String getUserID() {
+        return userID;
     }
 
-    public void setFriendlist_divider(String friendlist_divider) {
-        this.friendlist_divider = friendlist_divider;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
-    public void setFriend_image(int friend_image) {
-        this.friend_image = friend_image;
+    public String getUserName() {
+        return userName;
     }
 
-    /**
-     * Constructor for Friend class
-     * @param name Last Name of Friend
-     * @param description Description of Friend
-     * @param socialStatusList SocialStatusList ascending in order for timeline
-     * @param acheivementList List of achievements
-     */
-    public Friend(int friend_image, String name, String description, ArrayList socialStatusList, ArrayList acheivementList, String divider) {
-        this.friend_image = friend_image;
-        this.name = name;
-        this.description = description;
-        this.socialStatusList = socialStatusList;
-        this.acheivementList = acheivementList;
-        this.friendlist_divider = friendlist_divider;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-
-    public void setName(String name) {
-        this.name = name;
+    public ArrayList<Status> getSocialStatus() {
+        return socialStatus;
     }
 
-    public String getName() {
-        return name;
+    public void setSocialStatus(ArrayList<Status> socialStatus) {
+        this.socialStatus = socialStatus;
+    }
+
+    public ArrayList<String> getFriendRequest() {
+        return friendRequest;
+    }
+
+    public void setFriendRequest(ArrayList<String> friendRequest) {
+        this.friendRequest = friendRequest;
     }
 
     public String getDescription() {
@@ -65,19 +63,35 @@ public class Friend{
         this.description = description;
     }
 
-    public ArrayList<Status> getSocialStatusList() {
-        return socialStatusList;
+    public String getName() {
+        return name;
     }
 
-    public void setSocialStatusList(ArrayList<Status> socialStatusList) {
-        this.socialStatusList = socialStatusList;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public ArrayList<Achievement> getAchievementList() {
-        return acheivementList;
+    public String getDob() {
+        return dob;
     }
 
-    public void setAcheivementList(ArrayList<Achievement> acheivementList) {
-        this.acheivementList = acheivementList;
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
