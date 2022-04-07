@@ -5,6 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="729dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/background_tint" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/friend_toolbar"
@@ -47,14 +53,14 @@
 
     <ImageButton
 
-    android:id="@+id/search_friend_icon"
+        android:id="@+id/search_friend_icon"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_marginTop="58dp"
         android:layout_toEndOf="@+id/friendlist_heading"
-        android:src="@drawable/ic_add_new_friend"
+        android:background="@color/background_tint"
         android:paddingLeft="10dp"
-        android:background="@android:color/background_light"/>
+        android:src="@drawable/ic_add_new_friend" />
 
 
 
@@ -70,13 +76,7 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="729dp"
-        android:layout_marginTop="2dp"
-        android:background="?android:attr/listDivider"
-        android:backgroundTint="#C6A951" />
+
 
 
 </RelativeLayout>

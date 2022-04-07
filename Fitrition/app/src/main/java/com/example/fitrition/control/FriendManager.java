@@ -10,6 +10,9 @@ import androidx.annotation.Nullable;
 import com.example.fitrition.entities.Friend;
 import com.example.fitrition.entities.IndividualUser;
 import com.example.fitrition.entities.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -76,13 +80,26 @@ public class FriendManager {
      * @param aFriend
      * @return 1 if successful otherwise 0
      */
-    public int addFriend(Friend aFriend){
+    public void addFriend(Friend aFriend){
         if (!friendList.contains(aFriend)){
             friendList.add(aFriend);
-            return 1;
+            profileManager=ProfileManager.getInstance();
+            mDatabaseReference=FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
+            //replace arraylist in uid
+            profileManager.getUser().getFriendList().add(aFriend.getUserID());
+            mDatabaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("friendList").setValue(profileManager.getUser().getFriendList()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
+            friend.getFriendList().add(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            mDatabaseReference.child(aFriend.getUserID()).child("friendList").setValue(friend.getFriendList());
+
+            return;
         }
         else{
-            return 0;
+            return;
         }
     }
 
@@ -120,7 +137,7 @@ public class FriendManager {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot friendChild:snapshot.getChildren()) {
                     Friend targetFriend = friendChild.getValue(Friend.class);
-                    if (profileManager.getUser().getFriendList().contains(targetFriend.getUserID())) {
+                    if (profileManager.getUser().getFriendList().contains(targetFriend.getUserID()) & !friendList.contains(targetFriend.getUserID())) {
                         friendList.add(targetFriend);
                     }
                 }

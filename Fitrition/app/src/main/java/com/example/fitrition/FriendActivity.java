@@ -12,11 +12,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.fitrition.adapter.StatusAdapter;
 import com.example.fitrition.adapter.StatusFocusAdapter;
 import com.example.fitrition.control.FriendManager;
@@ -30,12 +32,14 @@ import java.time.format.DateTimeFormatter;
 
 public class FriendActivity extends AppCompatActivity {
 // do not need this activity anymore
-    private ActivityMainBinding binding;
+//    private ActivityMainBinding binding;
     private Toolbar fToolbar;
     private ImageView backIcon;
 
     private TextView userName,age,gender,description;
     private ImageView friendImage;
+
+    private Button friendAdd;
 
     private FriendManager friendManager;
 
@@ -75,6 +79,15 @@ public class FriendActivity extends AppCompatActivity {
 
         friendImage = findViewById(R.id.friend_status_image);
 
+        friendAdd = findViewById(R.id.friend_status_add);
+
+        friendAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                friendManager.addFriend(friendManager.getFriend());
+            }
+        });
+
         userName.setText(friendSubject.getUserName());
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
@@ -94,6 +107,10 @@ public class FriendActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(statusFocusAdapter);
+
+        Glide.with(this)
+                .load(friendSubject.getImageUrl())
+                .into(friendImage);
 
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override

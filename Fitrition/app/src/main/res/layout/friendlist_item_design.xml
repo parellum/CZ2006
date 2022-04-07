@@ -7,8 +7,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/friend_list_cv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white">
 
 
     <RelativeLayout
@@ -60,18 +61,18 @@
             android:textColor="@color/black"
             android:textSize="14sp"></TextView>
 
-        <TextView
-            android:id="@+id/friendlist_divider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/friend_image_view"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="-5dp"
-            android:layout_toRightOf="@+id/friend_image_view"
-            android:fontFamily="@font/nunito_semibold"
-            android:text="__________________________________________"
-            android:textColor="@color/dark_green"
-            android:textSize="15sp"></TextView>
+<!--        <TextView-->
+<!--            android:id="@+id/friendlist_divider"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/friend_image_view"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_marginTop="-5dp"-->
+<!--            android:layout_toRightOf="@+id/friend_image_view"-->
+<!--            android:fontFamily="@font/nunito_semibold"-->
+<!--            android:text="__________________________________________"-->
+<!--            android:textColor="@color/dark_green"-->
+<!--            android:textSize="15sp"></TextView>-->
 
     </RelativeLayout>
     </androidx.cardview.widget.CardView>

@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 
 import com.example.fitrition.R;
 import com.example.fitrition.adapter.FriendListRecyclerAdapter;
+import com.example.fitrition.control.FriendManager;
+import com.example.fitrition.control.ProfileManager;
 import com.example.fitrition.entities.Achievement;
 import com.example.fitrition.entities.Friend;
 import com.example.fitrition.entities.Status;
@@ -29,12 +31,15 @@ public class FriendListActivity extends AppCompatActivity {
     FriendListRecyclerAdapter friend_list_adapter;
     ImageView back_button;
     ImageView searchfriend_button;
+    FriendManager friendManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_list);
+
+        friendManager=FriendManager.getInstance();
 
         initData();
         initRecylerView();
@@ -59,16 +64,7 @@ public class FriendListActivity extends AppCompatActivity {
 
     private void initData() {
         userList = new ArrayList<>();
-//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jannie", "Hello!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Tonny", "What's up!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jaden", "Looking for a run!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jia Xin", "Looking for a gym buddy!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Darren", "Follow my instagram: darren_love_food",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jannie", "Hello!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Tonny", "What's up!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jaden", "Looking for a run!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Jia Xin", "Looking for a gym buddy!",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
-//        userList.add(new Friend(R.drawable.ic_avocado_profile, "Darren", "Follow my instagram: darren_love_food",new ArrayList<Status>(), new ArrayList<Achievement>(), "_____________________________________________"));
+        userList = friendManager.getFriendList();
     }
 
     private void initRecylerView() {

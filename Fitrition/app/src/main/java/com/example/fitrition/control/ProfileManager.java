@@ -77,6 +77,7 @@ public class ProfileManager {
                 Log.d(TAG, "onDataChange: "+user.getName());
                 friendManager = FriendManager.getInstance();
                 friendManager.loadFriendList();
+                mDatabaseReference.removeEventListener(this);
             }
 
             @Override
@@ -85,7 +86,6 @@ public class ProfileManager {
             }
         });
         friendManager=FriendManager.getInstance();
-        friendManager.loadFriendList();
     }
 
 

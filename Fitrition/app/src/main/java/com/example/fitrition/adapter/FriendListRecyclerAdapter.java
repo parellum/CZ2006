@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.fitrition.FriendActivity;
 import com.example.fitrition.R;
 import com.example.fitrition.control.FriendManager;
@@ -41,7 +42,9 @@ public class FriendListRecyclerAdapter extends RecyclerView.Adapter<FriendListRe
 //        String divider=userList.get(position).getFriendlist_divider();
 
         Friend targetFriend = userList.get(position);
-
+        Glide.with(holder.friendImage.getContext())
+                .load(userList.get(position).getImageUrl())
+                .into(holder.friendImage);
         holder.setData(name, description);
         holder.friendCv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,14 +71,13 @@ public class FriendListRecyclerAdapter extends RecyclerView.Adapter<FriendListRe
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            friendImage=itemView.findViewById(R.id.friend_image);
+            friendImage=itemView.findViewById(R.id.friend_image);
             friendCv=itemView.findViewById(R.id.friend_list_cv);
             friendName=itemView.findViewById(R.id.name_textview);
             friendDescrp=itemView.findViewById(R.id.description_textview);
-            friendDiv=itemView.findViewById(R.id.friendlist_divider);
+//            friendDiv=itemView.findViewById(R.id.friendlist_divider);
         }
         public void setData( String name, String description){
-//            friendImage.setImageResource(resource);
             friendName.setText(name);
             friendDescrp.setText(description);
         }

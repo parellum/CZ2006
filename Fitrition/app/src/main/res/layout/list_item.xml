@@ -44,13 +44,14 @@
                 android:id="@+id/status_text"
                 android:text="Place_holder"/>
         </LinearLayout>
+
             <TextView
                 android:id="@+id/status_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:text="01-01-2020 16:31"/>
+                android:text="01-01-2020 16:31" />
         </RelativeLayout>
 
 

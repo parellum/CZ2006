@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.fitrition.FriendActivity;
 import com.example.fitrition.R;
 import com.example.fitrition.control.FriendManager;
@@ -40,6 +41,10 @@ public class AllUserRecyclerAdapter extends RecyclerView.Adapter<AllUserRecycler
         String name=allUserList.get(position).getName();
         String description=allUserList.get(position).getDescription();
 //        String divider=allUserList.get(position).getFriendlist_divider();
+
+        Glide.with(holder.friendImage.getContext())
+                .load(allUserList.get(position).getImageUrl())
+                .into(holder.friendImage);
 
         holder.setData(name, description);
 
@@ -76,7 +81,7 @@ public class AllUserRecyclerAdapter extends RecyclerView.Adapter<AllUserRecycler
             friendImage=itemView.findViewById(R.id.friend_image);
             friendName=itemView.findViewById(R.id.name_textview);
             friendDescrp=itemView.findViewById(R.id.description_textview);
-            friendDiv=itemView.findViewById(R.id.friendlist_divider);
+//            friendDiv=itemView.findViewById(R.id.friendlist_divider);
         }
         public void setData( String name, String description){
 //            friendImage.setImageResource(resource);

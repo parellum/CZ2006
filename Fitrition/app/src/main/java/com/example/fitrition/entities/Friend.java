@@ -1,5 +1,6 @@
 package com.example.fitrition.entities;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 /**
@@ -12,6 +13,7 @@ public class Friend{
     private String userID;
     private String userName;
     private ArrayList<Status> socialStatus;
+    private ArrayList<String> friendList;
     private ArrayList<String> friendRequest;
     private String description;
     private String name;
@@ -20,7 +22,9 @@ public class Friend{
     private String imageUrl;
 
     public Friend(){
-
+        socialStatus=new ArrayList<Status>();
+        friendList=new ArrayList<String>();
+        friendRequest=new ArrayList<String>();
     }
 
     public String getUserID() {
@@ -45,6 +49,14 @@ public class Friend{
 
     public void setSocialStatus(ArrayList<Status> socialStatus) {
         this.socialStatus = socialStatus;
+    }
+
+    public ArrayList<String> getFriendList() {
+        return friendList;
+    }
+
+    public void setFriendList(ArrayList<String> friendList) {
+        this.friendList = friendList;
     }
 
     public ArrayList<String> getFriendRequest() {

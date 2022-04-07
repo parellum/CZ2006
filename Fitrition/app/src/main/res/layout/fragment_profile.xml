@@ -98,6 +98,7 @@ xmlns:tools="http://schemas.android.com/tools"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/profile_status_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_semibold"
@@ -144,6 +145,7 @@ xmlns:tools="http://schemas.android.com/tools"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/profile_friend_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_semibold"

@@ -31,7 +31,7 @@ import java.time.format.DateTimeFormatter;
 public class ProfileFragment extends Fragment {
     Button button1;
     Button button2;
-    TextView name,age,email,description,gender;
+    TextView name,age,email,description,gender,statusCount,friendCount;
     EditText password;
     ProfileManager profileManager;
     ImageView profilePic;
@@ -51,6 +51,8 @@ public class ProfileFragment extends Fragment {
         email = (TextView) view.findViewById(R.id.profile_user_email);
         description = (TextView) view.findViewById(R.id.profile_user_description);
         gender = (TextView) view.findViewById(R.id.profile_user_gender);
+        statusCount = (TextView) view.findViewById(R.id.profile_status_count);
+        friendCount = (TextView) view.findViewById(R.id.profile_friend_count);
 
         password = (EditText) view.findViewById(R.id.profile_user_password);
 
@@ -90,6 +92,9 @@ public class ProfileFragment extends Fragment {
         email.setText(profileManager.getUser().getEmail());
         description.setText(profileManager.getUser().getDescription());
         gender.setText(profileManager.getUser().getGender());
+
+        friendCount.setText(Integer.toString(profileManager.getUser().getFriendList().size()));
+        statusCount.setText(Integer.toString(profileManager.getUser().getSocialStatus().size()));
 
         password.setText(profileManager.getUser().getPassword());
         Log.d(TAG, "onViewCreated: "+profileManager.getUser().getImageUrl());

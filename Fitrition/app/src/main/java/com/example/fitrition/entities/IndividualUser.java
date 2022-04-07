@@ -21,6 +21,8 @@ public class IndividualUser{
 	public IndividualUser(){
 		//Needed for firebase
 		friendList=new ArrayList<String>();
+		socialStatus=new ArrayList<Status>();
+		friendRequest = new ArrayList<String>();
 	}
 
 	public IndividualUser(String userID,String userName, String name, String eMail, String password, String dob, String description, String gender){
