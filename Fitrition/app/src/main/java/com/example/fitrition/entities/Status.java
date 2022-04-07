@@ -1,5 +1,9 @@
 package com.example.fitrition.entities;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
+
 import java.time.LocalDateTime;
 
 /**
@@ -10,21 +14,15 @@ import java.time.LocalDateTime;
  */
 public class Status {
     private String description;
-    private LocalDateTime time;
+    private String time;
 
     public Status(){
-        this.description=null;
-        this.time=LocalDateTime.now();
     }
 
-    /**
-     * Constructor for Status
-     * @param description Description of activity/achievement worth noting
-     * @param time Marker for comparison
-     */
-    public Status(String description, LocalDateTime time) {
+    public Status(String description, LocalDateTime localDateTime) {
         this.description = description;
-        this.time = time;
+        this.time=localDateTime.plusHours(8).toString();
+        Log.d(TAG, "Status: "+time);
     }
 
     public String getDescription() {
@@ -35,11 +33,11 @@ public class Status {
         this.description = description;
     }
 
-    public LocalDateTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

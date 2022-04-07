@@ -35,7 +35,8 @@ public class FriendManager {
     /**
      * Holds ArrayList of Friend object that can be referenced throughout runtime.
      */
-    ArrayList<Friend> friendList=new ArrayList<Friend>();
+    private ArrayList<Friend> friendList=new ArrayList<Friend>();
+    private Friend friend;
     /**
      * Default constructor for Friend Manager.
      */
@@ -59,6 +60,15 @@ public class FriendManager {
 
     public void setFriendList(ArrayList<Friend> friendList) {
         this.friendList = friendList;
+    }
+
+
+    public Friend getFriend() {
+        return friend;
+    }
+
+    public void setFriend(Friend friend) {
+        this.friend = friend;
     }
 
     /**

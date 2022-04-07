@@ -30,70 +30,73 @@
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
 
-
-    <ImageView
-        android:id="@+id/profile_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/friend_status_image_cv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="80dp"
+        app:cardCornerRadius="40dp">
+    <ImageView
+        android:id="@+id/friend_status_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:background="#FFFFFF"
         app:srcCompat="@drawable/ic_avocado_profile" />
-<!--        android:layout_alignParentStart="true"-->
-<!--        android:layout_alignParentTop="true"-->
+    </androidx.cardview.widget.CardView>
 
 
     <TextView
-        android:id="@+id/name_text"
+        android:id="@+id/friend_status_userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="80dp"
         android:layout_marginRight="20dp"
-        android:layout_toEndOf="@+id/profile_image"
+        android:layout_toEndOf="@+id/friend_status_image_cv"
         android:fontFamily="@font/nunito_semibold"
         android:text="Username"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/status_text"
+        android:id="@+id/friend_status_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/gender"
+        android:layout_below="@+id/friend_status_gender"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="30dp"
-        android:layout_toEndOf="@+id/profile_image"
+        android:layout_toEndOf="@+id/friend_status_image_cv"
         android:fontFamily="@font/nunito_semibold"
         android:text="Hello there!"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/gender"
+        android:id="@+id/friend_status_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/name_text"
+        android:layout_below="@+id/friend_status_userName"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="30dp"
-        android:layout_toEndOf="@+id/profile_image"
+        android:layout_toEndOf="@+id/friend_status_image_cv"
         android:fontFamily="@font/nunito_semibold"
         android:text="Female"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/age"
+        android:id="@+id/friend_status_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/name_text"
+        android:layout_below="@+id/friend_status_userName"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="30dp"
-        android:layout_toEndOf="@+id/gender"
+        android:layout_toEndOf="@+id/friend_status_gender"
         android:fontFamily="@font/nunito_semibold"
         android:text="32"
         android:textColor="@color/black"
@@ -105,20 +108,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:background="@color/green_prime"
-        android:text="Past Status"
         android:fontFamily="@font/nunito_bold"
+        android:text="Past Status"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/friend_social_feed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/name_text"
-        android:layout_marginTop="200dp"
-        android:scrollbars="vertical" />
 
     <View
         android:id="@+id/divider"
@@ -126,7 +121,15 @@
         android:layout_height="500dp"
         android:layout_below="@+id/past_status_divider"
         android:layout_marginTop="2dp"
-        android:background="?android:attr/listDivider"
-        android:backgroundTint="#C6A951" />
+        android:background="@color/background_tint" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/friend_social_feed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/past_status_divider"
+        android:scrollbars="vertical" />
+
+
 
 </RelativeLayout>

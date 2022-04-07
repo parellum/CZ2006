@@ -1,5 +1,6 @@
 package com.example.fitrition.entities;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class IndividualUser{
@@ -22,21 +23,6 @@ public class IndividualUser{
 		friendList=new ArrayList<String>();
 	}
 
-	public IndividualUser(String userName, String name, String eMail, String password, String dob, String description, String gender, String imageUrl, ArrayList<String> friendList, ArrayList<Status> socialStatus){
-		this.userName=userName;
-		this.name = name;
-		this.email=eMail;
-		this.password=password;
-		this.dob = dob;
-		this.description=description;
-		this.userName = userName;
-		this.friendList = friendList;
-		this.socialStatus = socialStatus;
-		this.verified = false;
-		this.gender=gender;
-		this.imageUrl=imageUrl;
-	}
-
 	public IndividualUser(String userID,String userName, String name, String eMail, String password, String dob, String description, String gender){
 		this.userID=userID;
 		this.userName=userName;
@@ -48,10 +34,10 @@ public class IndividualUser{
 		this.userName = userName;
 		this.friendList = new ArrayList<String>();
 		this.socialStatus = new ArrayList<Status>();
+		socialStatus.add(new Status(userName+" just joined Fitrition!",LocalDateTime.now()));
 		this.verified = false;
 		this.gender=gender;
 	}
-
 
 	public ArrayList<String> getFriendList() {
 		return friendList;
@@ -68,7 +54,6 @@ public class IndividualUser{
 	public void setSocialStatus(ArrayList<Status> socialStatus) {
 		this.socialStatus = socialStatus;
 	}
-
 
 	public String getUserName() {
 		return userName;

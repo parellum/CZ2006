@@ -52,7 +52,6 @@ public class CalendarCustomView extends LinearLayout {
     private DatePicker datePicker;
     private CalendarManager calendarManager;
 
-    DBOpenHelper dbOpenHelper;
     ArrayList<Events> arrayList;
     TextView eventCellTV;
 
