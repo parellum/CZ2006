@@ -24,12 +24,10 @@ public class TrackerFragment extends Fragment {
 
     LinearLayout layoutCalender;
     View custom_view;
-    View calendar_date_id;
     View viewCopy;
     Date date;
     int n = 0;
     int colorId;
-//    private Button addEventButton;
 
 
     @Override
@@ -38,14 +36,12 @@ public class TrackerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tracker, container, false);
         setInitializations(view);
         setCalenderView(view);
-//        setAddEventButtonClickEvent();
         return view;
     }
 
     private void setInitializations(View view) {
         custom_view = (View) view.findViewById(R.id.custom_view);
         layoutCalender = (LinearLayout) view.findViewById(R.id.layoutCalender);
-//        addEventButton = (Button) view.findViewById(R.id.buttonAddEvent);
 
     }
 
@@ -81,7 +77,7 @@ public class TrackerFragment extends Fragment {
                 SimpleDateFormat dateFormat= new SimpleDateFormat("dd MMMM yyyy");
                 String dateOnly = dateFormat.format(date);
 
-                //Toast.makeText(TrackerFragment.this, "Date: " + dateOnly, Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(), "Date: " + dateOnly, Toast.LENGTH_LONG).show();
 
 
                 colorId = ((ColorDrawable) view.getBackground()).getColor();
@@ -92,22 +88,4 @@ public class TrackerFragment extends Fragment {
         });
 
     }
-
-
-//    private void setAddEventButtonClickEvent() {
-//        addEventButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-////                startActivity(new Intent(MainActivity.this, newEventFragment.class));
-//
-//                Intent i = new Intent(getActivity(), NewEventFragment.class);
-//                startActivity(i);
-////                mAdapter = new com.example.fitrition.utils.GridAdapter(context, dayValueInCells, cal, eventObjects);
-////                calendarGridView.setAdapter(mAdapter);
-//
-////                NewEventFragment fragment = new NewEventFragment();
-////                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-////                transaction.replace(R.id.fragment_container_view_tag, fragment).commit();
-//            }
-//        });
-//    }
 }

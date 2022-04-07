@@ -12,10 +12,12 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.fitrition.MainActivity;
 import com.example.fitrition.R;
 import com.example.fitrition.control.ProfileManager;
@@ -24,6 +26,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 //
@@ -103,6 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     profileManager.loadUser(mAuth.getCurrentUser().getUid(), LoginActivity.this);
+                    Log.d(TAG, "onComplete: "+profileManager.getUser().getImageUrl());
                     startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 }
                 else{
