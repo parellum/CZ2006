@@ -1,5 +1,7 @@
 package com.example.fitrition.boundary;
 
+import static android.content.ContentValues.TAG;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +30,7 @@ import com.example.fitrition.R;
 import com.example.fitrition.ViewFacilities;
 import com.example.fitrition.control.FacilityManager;
 import com.example.fitrition.databinding.ActivityMainBinding;
+import com.example.fitrition.entities.Fitness;
 import com.example.fitrition.entities.FitnessCentreJSON;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -46,6 +49,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicReference;
@@ -70,7 +74,8 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
     private String URL = "https://drive.google.com/file/d/1E1XxrwbInzKtQhXl5OK16uXxeXtOqJTJ/view?usp=sharing";
     RequestQueue requestQueue;
     Gson gson;
-    FitnessCentreJSON[] fitnessCentre;
+    ArrayList<FitnessCentreJSON> fitnessCentre;
+    FacilityManager facilityManager;
     MarkerOptions marker;
     Vector<MarkerOptions> markerOptions;
     FusedLocationProviderClient client;
@@ -84,6 +89,9 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
+
+        facilityManager=FacilityManager.getInstance();
+        fitnessCentre = facilityManager.getFacilityList();
 
         //ADD
         mapCentreLocationButton = (Button) view.findViewById(R.id.mapCentreLocationButton);
@@ -172,12 +180,11 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
                 //Log.d("Sucess", "C:\\Users\\Admin\\Desktop\\sampleJsonNPP.json");
 
                 //FileReader fr =  new FileReader("C:\\Users\\Admin\\Desktop\\sampleJson.txt");
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(getActivity().getApplicationContext().getAssets().open("sampleJson.txt")));
-                fitnessCentre = gson.fromJson(reader, FitnessCentreJSON[].class);
+//                BufferedReader reader = new BufferedReader(
+//                        new InputStreamReader(getActivity().getApplicationContext().getAssets().open("sampleJson.txt")));
 
                 //t = gson.fromJson(new FileReader("C:\\Users\\Admin\\Desktop\\sampleJsonNPP.json"), FitnessCentreJSON[].class);
-                Log.d("Sucess", "what Inner" + Integer.toString(fitnessCentre.length));
+//                Log.d("Sucess", "what Inner" + Integer.toString(fitnessCentre.length));
             }
             catch(Exception e) {
                 Log.d("Failure", "Exception"  );
@@ -186,9 +193,9 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
 
             for(FitnessCentreJSON info : fitnessCentre){
-                double lat = Double.parseDouble(info.latitude);
-                double lng = Double.parseDouble(info.longitude);
-                String title = info.name;
+                double lat = Double.parseDouble(info.getLatitude());
+                double lng = Double.parseDouble(info.getLongitude());
+                String title = info.getName();
                 //Log.d("sample", Double.toString(lat));
 
                 MarkerOptions marker = new MarkerOptions().position(new LatLng(lat, lng))
@@ -199,8 +206,8 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
                 gmap.addMarker(marker);
 
-                if(info.Description !=  null){
-                    Log.d("Sucess",  info.Description);
+                if(info.getDescription() !=  null){
+                    Log.d("Sucess",  info.getDescription());
                 }
 
             }

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.fitrition.MainActivity;
 import com.example.fitrition.R;
+import com.example.fitrition.control.FacilityManager;
 import com.example.fitrition.control.ProfileManager;
 import com.example.fitrition.utils.HelpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editTextEmail, editTextPassword;
     private Button login;
     private ProfileManager profileManager;
+    private FacilityManager facilityManager;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
 
@@ -54,6 +56,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mAuth=FirebaseAuth.getInstance();
         profileManager = ProfileManager.getInstance();
+        facilityManager = FacilityManager.getInstance();
+
+        facilityManager.loadFacilities();
+
 
     }
 
