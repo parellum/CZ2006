@@ -103,4 +103,5 @@ public class ProfileFragment extends Fragment {
                 .load(profileManager.getUser().getImageUrl())
                 .into(profilePic);
     }
+
 }

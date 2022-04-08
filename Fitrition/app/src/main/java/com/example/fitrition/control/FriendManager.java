@@ -2,11 +2,14 @@ package com.example.fitrition.control;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.fitrition.FriendActivity;
 import com.example.fitrition.entities.Friend;
 import com.example.fitrition.entities.IndividualUser;
 import com.example.fitrition.entities.Status;
@@ -80,7 +83,7 @@ public class FriendManager {
      * @param aFriend
      * @return 1 if successful otherwise 0
      */
-    public void addFriend(Friend aFriend){
+    public void addFriend(Friend aFriend,FriendActivity friendActivity){
         if (!friendList.contains(aFriend)){
             friendList.add(aFriend);
             profileManager=ProfileManager.getInstance();
@@ -90,7 +93,7 @@ public class FriendManager {
             mDatabaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("friendList").setValue(profileManager.getUser().getFriendList()).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-
+                    friendActivity.friendAddToggle();
                 }
             });
             friend.getFriendList().add(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -101,6 +104,29 @@ public class FriendManager {
         else{
             return;
         }
+    }
+
+    public void removeFriend(Friend aFriend,FriendActivity friendActivity){
+        if (friendList.contains(aFriend)){
+            friendList.remove(aFriend);
+            profileManager=ProfileManager.getInstance();
+            mDatabaseReference=FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
+            //replace arraylist in uid
+            profileManager.getUser().getFriendList().remove(aFriend.getUserID());
+            mDatabaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("friendList").setValue(profileManager.getUser().getFriendList()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    friendActivity.friendAddToggle();
+                }
+            });
+            friend.getFriendList().remove(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            mDatabaseReference.child(aFriend.getUserID()).child("friendList").setValue(friend.getFriendList());
+            return;
+        }
+        else{
+            return;
+        }
+
     }
 
     /**

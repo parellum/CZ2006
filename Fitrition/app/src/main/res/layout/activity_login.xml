@@ -16,10 +16,10 @@
             android:id="@+id/LoginTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
             android:text="Fitrition"
             android:textColor="@color/green_prime"
             android:textSize="100sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
@@ -44,9 +44,10 @@
                     android:ems="10"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="jacques@gmail.com"
                     tools:layout_editor_absoluteX="87dp"
-                    tools:layout_editor_absoluteY="389dp"
-                    android:text="jacques@gmail.com"/>
+                    tools:layout_editor_absoluteY="389dp" />
 
                 <EditText
                     android:id="@+id/LoginPassword"
@@ -55,9 +56,10 @@
                     android:ems="10"
                     android:hint="Password"
                     android:inputType="textPassword"
+                    android:text="persona"
+                    android:fontFamily="@font/nunito_semibold"
                     tools:layout_editor_absoluteX="87dp"
-                    tools:layout_editor_absoluteY="481dp"
-                    android:text="persona"/>
+                    tools:layout_editor_absoluteY="481dp" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -91,6 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Forgot Password"
+                        android:fontFamily="@font/nunito_semibold"
                         tools:layout_editor_absoluteX="295dp"
                         tools:layout_editor_absoluteY="636dp" />
 
@@ -100,6 +103,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:text="Register"
+                        android:fontFamily="@font/nunito_semibold"
                         tools:layout_editor_absoluteX="118dp"
                         tools:layout_editor_absoluteY="636dp" />
                 </LinearLayout>
