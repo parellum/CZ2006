@@ -1,60 +1,64 @@
 package com.example.fitrition.entities;
 
 public class Events {
-    String Event,Location,Time,Date,Month,Year;
+    String event,location,time,date,month,year;
+
+    public Events(){}
 
     public Events(String event, String location, String time, String date, String month, String year) {
-        Event = event;
-        Location = location;
-        Time = time;
-        Date = date;
-        Month = month;
-        Year = year;
-    }
-
-    public String getMonth() {
-        return Month;
-    }
-
-    public void setMonth(String month) {
-        Month = month;
-    }
-
-    public String getYear() {
-        return Year;
-    }
-
-    public void setYear(String year) {
-        Year = year;
+        this.event = event;
+        this.location = location;
+        this.time = time;
+        this.date = date;
+        this.month = month;
+        this.year = year;
     }
 
     public String getEvent() {
-        return Event;
+        return event;
     }
 
     public void setEvent(String event) {
-        Event = event;
+        this.event = event;
     }
 
     public String getLocation() {
-        return Location;
+        return location;
     }
 
-    public void setLocation(String location) { Location = location; }
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public String getTime() {
-        return Time;
+        return time;
     }
 
     public void setTime(String time) {
-        Time = time;
+        this.time = time;
     }
 
     public String getDate() {
-        return Date;
+        return date;
     }
 
     public void setDate(String date) {
-        Date = date;
+        this.date = date;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 }

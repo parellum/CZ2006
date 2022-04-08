@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.fitrition.MainActivity;
 import com.example.fitrition.R;
+import com.example.fitrition.control.CalendarManager;
 import com.example.fitrition.control.FacilityManager;
 import com.example.fitrition.control.ProfileManager;
 import com.example.fitrition.utils.HelpActivity;
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button login;
     private ProfileManager profileManager;
     private FacilityManager facilityManager;
+    private CalendarManager calendarManager;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
 
@@ -57,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth=FirebaseAuth.getInstance();
         profileManager = ProfileManager.getInstance();
         facilityManager = FacilityManager.getInstance();
+        calendarManager = CalendarManager.getInstance();
 
         facilityManager.loadFacilities();
 
@@ -114,6 +117,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     profileManager.loadUser(mAuth.getCurrentUser().getUid(), LoginActivity.this);
+                    calendarManager.loadEvents();
                     Log.d(TAG, "onComplete: "+profileManager.getUser().getImageUrl());
                     startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 }
