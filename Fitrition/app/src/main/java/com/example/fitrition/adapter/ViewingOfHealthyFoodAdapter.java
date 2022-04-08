@@ -24,12 +24,19 @@ import com.example.fitrition.R;
 import com.example.fitrition.entities.Events;
 import com.example.fitrition.entities.Food;
 import com.example.fitrition.entities.Friend;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfHealthyFoodAdapter.ViewHolder>{
 
     private List<Food> foodList;
+    private DatabaseReference mDataRef;
 
     public ViewingOfHealthyFoodAdapter(List<Food> foodList){
         this.foodList = foodList;
@@ -56,6 +63,8 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
         holder.foodAdapterAddEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 LayoutInflater inflater = (LayoutInflater)
                         view.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
                 View popupView = inflater.inflate(R.layout.fragment_add_event, null);
@@ -142,9 +151,17 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
 
     private void SaveEvent(String event, String location,String time,String date, String month, String year){
         Events events = new Events(event,location,time,date,month,year);
-        //arrayList.add(events);
-        //Toast.makeText(context, "Event Saved", Toast.LENGTH_SHORT).show();
-        Log.d("weeeeeeeeeeee","pls workkkkkkkk");
+
+
+        mDataRef= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        mDataRef.child(Long.toString(Calendar.getInstance().getTimeInMillis())).setValue(events).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                //Toast.makeText(context, "Successfully Saved", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 }
