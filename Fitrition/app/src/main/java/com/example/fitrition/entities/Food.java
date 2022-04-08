@@ -2,14 +2,25 @@ package com.example.fitrition.entities;
 
 import android.media.Image;
 
+//Don't know who created this but i'm using it
 public class Food {
     private int foodID;
-    private String name;
+    private String nameOfFood;
+    private String nameOfStall;
     private String description;
-    private int calories;
-    private Image photos;
+    private double calories;
+    private String foodImageUrl;
 
-    public int getFoodID(){
+    public Food(int foodID, String nameOfFood, String nameOfStall, String description, double calories, String foodImageUrl) {
+        this.foodID = foodID;
+        this.nameOfFood = nameOfFood;
+        this.nameOfStall = nameOfStall;
+        this.description = description;
+        this.calories = calories;
+        this.foodImageUrl = foodImageUrl;
+    }
+
+    public int getFoodID() {
         return foodID;
     }
 
@@ -17,15 +28,23 @@ public class Food {
         this.foodID = foodID;
     }
 
-    public String getName(){
-        return name;
+    public String getNameOfFood() {
+        return nameOfFood;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameOfFood(String nameOfFood) {
+        this.nameOfFood = nameOfFood;
     }
 
-    public String getDescription(){
+    public String getNameOfStall() {
+        return nameOfStall;
+    }
+
+    public void setNameOfStall(String nameOfStall) {
+        this.nameOfStall = nameOfStall;
+    }
+
+    public String getDescription() {
         return description;
     }
 
@@ -33,23 +52,20 @@ public class Food {
         this.description = description;
     }
 
-    public int getCalories(){
+    public double getCalories() {
         return calories;
     }
 
-    public void setCalories(int calories) {
+    public void setCalories(double calories) {
         this.calories = calories;
     }
 
-    public Image getPhotos(){
-        return photos;
+    public String getFoodImageUrl() {
+        return foodImageUrl;
     }
 
-    public void setPhotos(Image photos) {
-        this.photos = photos;
+    public void setFoodImageUrl(String foodImageUrl) {
+        this.foodImageUrl = foodImageUrl;
     }
 
-    public void display() {
-        System.out.print(String.format("%-30s%-75s%-10.2f", name, description, calories, photos));
-    }
 }

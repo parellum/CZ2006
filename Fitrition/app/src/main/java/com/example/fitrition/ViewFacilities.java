@@ -1,64 +1,78 @@
 package com.example.fitrition;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
+
+import com.example.fitrition.boundary.SocialFragment;
+import com.example.fitrition.entities.FitnessCentreJSON;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ViewFacilities extends AppCompatActivity {
-    private TextView viewFacilitiesName;
+
     private ImageView viewFacilitiesImage;
-    private RatingBar viewFacilitiesRatingBar;
+    private Button viewFacilitiesButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_facilities);
+        viewFacilitiesButton = (Button) findViewById(R.id.viewFacilitiesButton);
 
-        viewFacilitiesName = (TextView) findViewById(R.id.viewFacilitiesName);
-        viewFacilitiesImage = (ImageView) findViewById(R.id.viewFacilitiesImage);
-        viewFacilitiesRatingBar = (RatingBar) findViewById(R.id.viewFacilitiesRatingBar);
+        //If its a fitness facility, hide the button
+        Bundle bundle = getIntent().getExtras();
+        String nameOfMarkerClicked = bundle.getString("facilitiesName");
 
-        Bundle b = getIntent().getExtras();
-        String facilitiesName = null;
-        if(b != null){
-            facilitiesName = b.getString("facilitiesName");
-            viewFacilitiesName.setText(facilitiesName);
-            //viewFacilitiesImage.setImageDrawable(this.getAssets().open(""));
+        //Remove once JAC IS DONE============================================================
+        ArrayList<FitnessCentreJSON> fitnessCentreArrayList = null;
+        try {
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(this.getAssets().open("fitnessLocations.txt")));
+            Gson gson =  new GsonBuilder().create();
+            fitnessCentreArrayList = gson.fromJson(reader, new TypeToken<List<FitnessCentreJSON>>(){}.getType()
+            );
+
+            Log.d("Sucess123", "what Inner" + Integer.toString(fitnessCentreArrayList.size()));
+        }
+        catch(Exception e) {
+            Log.d("Failure", "Exception"  );
+        }
+        //==============================
+        for(FitnessCentreJSON info : fitnessCentreArrayList){
+            if(nameOfMarkerClicked.equalsIgnoreCase(info.getName())){
+                //MATCH QUICK HIDE THE BUTTON
+                viewFacilitiesButton.setVisibility(View.INVISIBLE);
+                break;
+            }
         }
 
-        /*Field[] drawables = android.R.drawable.class.getFields();
-        for (Field f : drawables) {
-            try {
-                System.out.println("R.drawable." + f.getName());
-            } catch (Exception e) {
-                e.printStackTrace();
+
+
+        viewFacilitiesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.viewFacilitiesFragmentContainer, viewingOfHealthyFood.class, null)
+                        .setReorderingAllowed(true)
+                        .addToBackStack("name") // name can be null
+                        .commit();
             }
-        }*/
-        /*for (int j = 1; j < 10; j++) {
-            getDrawable();
-            Drawable drawable = getResources().getDrawable(getResources().getIdentifier("ic_back_arrow.xml", "drawable", getPackageName()));
-            viewFacilitiesImage.setImageDrawable(drawable);
-
-            }
-         */
-
-        int resId = this.getResources().getIdentifier(
-                "ic_back_arrow",
-                "drawable",
-                this.getPackageName()
-        );
-
-        viewFacilitiesImage.setImageDrawable(getDrawable(resId));
-        Log.d("ViewFaciltiyImage",Integer.toString(resId));
-
-        viewFacilitiesRatingBar.setRating((float) 2.20);
+        });
 
 
-
+        }
     }
-}

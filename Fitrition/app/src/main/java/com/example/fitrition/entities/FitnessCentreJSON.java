@@ -4,28 +4,18 @@ import com.google.gson.annotations.SerializedName;
 
 public class FitnessCentreJSON {
 
-//    @SerializedName("id")
-//    @Expose
-//    public String id;
-//    @SerializedName("Name")
-//    @Expose
-//    public String name;
-//    @SerializedName("latitude")
-//    @Expose
-//    public String latitude;
-//    @SerializedName("longitude")
-//    @Expose
-//    public String longitude;
-
     @SerializedName("id")
     @Expose
     private String id;
+
     @SerializedName("Name")
     @Expose
     private String name;
+
     @SerializedName("latitude")
     @Expose
     private String latitude;
+
     @SerializedName("longitude")
     @Expose
     private String longitude;
@@ -112,16 +102,5 @@ public class FitnessCentreJSON {
         Rating = rating;
     }
 
-    //    @SerializedName("Url")
-//    @Expose
-//    public String url;
-//
-//    @SerializedName("Address")
-//    @Expose
-//    public String Address;
-//
-
-//
-//    //End
 }
 
