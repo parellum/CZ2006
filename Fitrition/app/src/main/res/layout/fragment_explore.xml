@@ -19,6 +19,7 @@
             android:id="@+id/mapCentreLocationButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
             android:text="CentreLocation" />
     </RelativeLayout>
 </FrameLayout>

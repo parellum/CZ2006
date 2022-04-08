@@ -29,7 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.fitrition.R;
 import com.example.fitrition.ViewFacilities;
 import com.example.fitrition.control.FacilityManager;
-import com.example.fitrition.databinding.ActivityMainBinding;
+//import com.example.fitrition.databinding.ActivityMainBinding;
 import com.example.fitrition.entities.Fitness;
 import com.example.fitrition.entities.FitnessCentreJSON;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -46,8 +46,10 @@ import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,20 +72,19 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
 
     //ADD
-    private Marker oldMarker = null;
-    private String URL = "https://drive.google.com/file/d/1E1XxrwbInzKtQhXl5OK16uXxeXtOqJTJ/view?usp=sharing";
-    RequestQueue requestQueue;
+    private Marker oldHawkerMarker = null;
+    private Marker oldFitnessMarker = null;
+
     Gson gson;
-    ArrayList<FitnessCentreJSON> fitnessCentre;
+    ArrayList<FitnessCentreJSON> hawkerCentreArrayList;
+    ArrayList<FitnessCentreJSON> fitnessCentreArrayList;
     FacilityManager facilityManager;
-    MarkerOptions marker;
-    Vector<MarkerOptions> markerOptions;
+
+    Vector<MarkerOptions> markerOptionsVectorForHawkerCentre;
+    Vector<MarkerOptions> markerOptionsVectorForFitnessCentre;
     FusedLocationProviderClient client;
 
-    final Handler handler = new Handler(Looper.getMainLooper());
-
-
-    //END
+    //final Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,7 +92,7 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
 
         facilityManager=FacilityManager.getInstance();
-        fitnessCentre = facilityManager.getFacilityList();
+        hawkerCentreArrayList = facilityManager.getFacilityList();
 
         //ADD
         mapCentreLocationButton = (Button) view.findViewById(R.id.mapCentreLocationButton);
@@ -125,8 +126,13 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
         //ADDED
         gson = new GsonBuilder().create();
-        markerOptions = new Vector<>();
-        sendRequest();
+        markerOptionsVectorForHawkerCentre = new Vector<>();
+        markerOptionsVectorForFitnessCentre = new Vector<>();
+
+        //sendRequest();
+
+        createHawkerMarkers();
+        createFitnessMarkers();
 
 
         //Code to handle the popping up of the new fragment when a marker is pressed
@@ -143,16 +149,39 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
                 //Attempt to launch a new activity cuz this fragment is literally flooded
                 Intent intent = new Intent(getContext(), ViewFacilities.class);
                 Bundle b = new Bundle();
-                Log.d("Luckly",Integer.toString(markerOptions.size()));
+                Log.d("Luckly",Integer.toString(markerOptionsVectorForHawkerCentre.size()));
 
                 b.putString("facilitiesName", marker.getTitle());
                 intent.putExtras(b); //Put your id to your next Intent
                 startActivity(intent);
 
-                if(oldMarker != null){
-                    oldMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                //Change the markers back to the previous colour
+                //The level of brute force is bad
+                int isFitnessCentre = 0;
+                for(FitnessCentreJSON info : fitnessCentreArrayList){
+                    if(marker.getTitle().equalsIgnoreCase(info.getName())){
+                        isFitnessCentre = 1;
+                        break;
+                    }
                 }
-                oldMarker = marker;
+
+                if(isFitnessCentre == 1){
+                    //Is a fitness centre
+                    if(oldFitnessMarker != null && !(oldFitnessMarker.getTitle().equalsIgnoreCase(marker.getTitle()))){//oldFitnessMarker != marker
+                        oldFitnessMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                        if(oldHawkerMarker != null)
+                            oldHawkerMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    }
+                    oldFitnessMarker = marker;
+                }else{
+                    //A hakwer
+                    if(oldHawkerMarker != null && !(oldHawkerMarker.getTitle().equalsIgnoreCase(marker.getTitle()))){//oldHawkerMarker != marker
+                        oldHawkerMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                        if(oldFitnessMarker != null)
+                            oldFitnessMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                    }
+                    oldHawkerMarker = marker;
+                }
 
                 return false;
             }
@@ -163,65 +192,61 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
 
     //==============================Used to Data base request======================================
-    public void sendRequest(){
-        requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,onSuccess,onError);
-        requestQueue.add(stringRequest);
 
+    public void createHawkerMarkers(){
+        for(FitnessCentreJSON info : hawkerCentreArrayList){
+            double lat = Double.parseDouble(info.getLatitude());
+            double lng = Double.parseDouble(info.getLongitude());
+            String title = info.getName();
+            //Log.d("sample", Double.toString(lat));
+
+            MarkerOptions marker = new MarkerOptions().position(new LatLng(lat, lng))
+                    .title(title);
+
+            markerOptionsVectorForHawkerCentre.add(marker);
+            //Log.d("Marker", Integer.toString(markerOptions.size()));
+
+            gmap.addMarker(marker);
+
+            if(info.getDescription() !=  null){
+                Log.d("Sucess",  info.getDescription());
+            }
+    }
     }
 
-    public Response.Listener<String> onSuccess = new Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
-            //Log.d("Sucess", "what");
-            //fitnessCentre = gson.fromJson(response, FitnessCentreJSON[].class);
+    public void createFitnessMarkers(){
+        try {
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(getActivity().getApplicationContext().getAssets().open("fitnessLocations.txt")));
 
-            try {
-                //Log.d("Sucess", "C:\\Users\\Admin\\Desktop\\sampleJsonNPP.json");
+            fitnessCentreArrayList = gson.fromJson(reader, new TypeToken<List<FitnessCentreJSON>>(){}.getType()
+            );
 
-                //FileReader fr =  new FileReader("C:\\Users\\Admin\\Desktop\\sampleJson.txt");
-//                BufferedReader reader = new BufferedReader(
-//                        new InputStreamReader(getActivity().getApplicationContext().getAssets().open("sampleJson.txt")));
-
-                //t = gson.fromJson(new FileReader("C:\\Users\\Admin\\Desktop\\sampleJsonNPP.json"), FitnessCentreJSON[].class);
-//                Log.d("Sucess", "what Inner" + Integer.toString(fitnessCentre.length));
-            }
-            catch(Exception e) {
-                Log.d("Failure", "Exception"  );
-            }
-
-
-
-            for(FitnessCentreJSON info : fitnessCentre){
-                double lat = Double.parseDouble(info.getLatitude());
-                double lng = Double.parseDouble(info.getLongitude());
-                String title = info.getName();
-                //Log.d("sample", Double.toString(lat));
-
-                MarkerOptions marker = new MarkerOptions().position(new LatLng(lat, lng))
-                        .title(title);
-
-                markerOptions.add(marker);
-                //Log.d("Marker", Integer.toString(markerOptions.size()));
-
-                gmap.addMarker(marker);
-
-                if(info.getDescription() !=  null){
-                    Log.d("Sucess",  info.getDescription());
-                }
-
-            }
-            Log.d("Tag Total Length", Integer.toString(markerOptions.size()));
+             Log.d("Sucess123", "what Inner" + Integer.toString(fitnessCentreArrayList.size()));
         }
-    };
-
-    public Response.ErrorListener onError = new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Toast.makeText(getActivity().getApplicationContext(),error.getMessage(), Toast.LENGTH_LONG).show();
+        catch(Exception e) {
+            Log.d("Failure", "Exception"  );
         }
-    };
 
+
+
+        for(FitnessCentreJSON info : fitnessCentreArrayList){
+            double lat = Double.parseDouble(info.getLatitude());
+            double lng = Double.parseDouble(info.getLongitude());
+            String title = info.getName();
+
+            MarkerOptions marker = new MarkerOptions().position(new LatLng(lat, lng))
+                    .title(title).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+
+
+            markerOptionsVectorForFitnessCentre.add(marker);
+
+            gmap.addMarker(marker);
+
+
+
+        }
+    }
     //=================Used to handle Location permission ===================================
     public void requestPermission(){
 
@@ -306,13 +331,24 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
                     lat.set(locationResult.getLatitude());
                     lng.set(locationResult.getLongitude());
 
-                    FacilityManager.getInstance().obtainFacilityBasedOnDistance(markerOptions,lat.get(), lng.get());
-                    Log.d("Current Location Size",Integer.toString(markerOptions.size()));
+                    createFitnessMarkers();
+                    createHawkerMarkers();
+                    FacilityManager.getInstance().obtainFacilityBasedOnDistance(markerOptionsVectorForHawkerCentre,lat.get(), lng.get());
+                    FacilityManager.getInstance().obtainFacilityBasedOnDistance(markerOptionsVectorForFitnessCentre,lat.get(), lng.get());
+
+                    Log.d("Current Location Size",Integer.toString(markerOptionsVectorForHawkerCentre.size()));
 
                     gmap.clear();
-                    for (int i = 0; i < markerOptions.size(); i++) {
+                    for (int i = 0; i < markerOptionsVectorForHawkerCentre.size(); i++) {
 
-                        gmap.addMarker(markerOptions.get(i));
+                        gmap.addMarker(markerOptionsVectorForHawkerCentre.get(i));
+                        Log.d("Explorer Frag getDeviceLocation","Ran");
+
+                    }
+
+                    for (int i = 0; i < markerOptionsVectorForFitnessCentre.size(); i++) {
+
+                        gmap.addMarker(markerOptionsVectorForFitnessCentre.get(i));
                         Log.d("Explorer Frag getDeviceLocation","Ran");
 
                     }
@@ -395,5 +431,64 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
 
 
+//Useless
+ public void sendRequest(){
+        requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,onSuccess,onError);
+        requestQueue.add(stringRequest);
 
- */
+
+    public Response.Listener<String> onSuccess = new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
+            //Log.d("Sucess", "what");
+            //fitnessCentre = gson.fromJson(response, FitnessCentreJSON[].class);
+
+            try {
+                //Log.d("Sucess", "C:\\Users\\Admin\\Desktop\\sampleJsonNPP.json");
+
+                //FileReader fr =  new FileReader("C:\\Users\\Admin\\Desktop\\sampleJson.txt");
+//                BufferedReader reader = new BufferedReader(
+//                        new InputStreamReader(getActivity().getApplicationContext().getAssets().open("sampleJson.txt")));
+
+                //t = gson.fromJson(new FileReader("C:\\Users\\Admin\\Desktop\\sampleJsonNPP.json"), FitnessCentreJSON[].class);
+//                Log.d("Sucess", "what Inner" + Integer.toString(fitnessCentre.length));
+            }
+            catch(Exception e) {
+                Log.d("Failure", "Exception"  );
+            }
+
+
+
+            for(FitnessCentreJSON info : fitnessCentre){
+                double lat = Double.parseDouble(info.getLatitude());
+                double lng = Double.parseDouble(info.getLongitude());
+                String title = info.getName();
+                //Log.d("sample", Double.toString(lat));
+
+                MarkerOptions marker = new MarkerOptions().position(new LatLng(lat, lng))
+                        .title(title);
+
+                markerOptions.add(marker);
+                //Log.d("Marker", Integer.toString(markerOptions.size()));
+
+                gmap.addMarker(marker);
+
+                if(info.getDescription() !=  null){
+                    Log.d("Sucess",  info.getDescription());
+                }
+
+            }
+            Log.d("Tag Total Length", Integer.toString(markerOptions.size()));
+        }
+    };
+
+    public Response.ErrorListener onError = new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            Toast.makeText(getActivity().getApplicationContext(),error.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    };
+*/
+
+
