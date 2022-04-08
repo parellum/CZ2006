@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         calendarManager = CalendarManager.getInstance();
 
         facilityManager.loadFacilities();
+        facilityManager.loadFood();
 
 
 

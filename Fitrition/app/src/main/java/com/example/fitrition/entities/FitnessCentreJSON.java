@@ -49,6 +49,10 @@ public class FitnessCentreJSON {
     @Expose
     private double Rating;
 
+    @SerializedName("imageUrl")
+    @Expose
+    private String imageUrl;
+
     public FitnessCentreJSON(){}
 
     public String getId() {
@@ -126,5 +130,12 @@ public class FitnessCentreJSON {
             this.type = Type.FITNESS;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
 
