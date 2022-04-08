@@ -15,41 +15,44 @@
             android:id="@+id/RegisterTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/nunito_bold"
             android:text="Registration"
             android:textAlignment="center"
-            android:fontFamily="@font/nunito_bold"
+            android:layout_weight="1"
             android:textSize="50dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
             <androidx.cardview.widget.CardView
                 android:layout_width="155dp"
                 android:layout_height="155dp"
-                app:cardCornerRadius="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
                 app:cardBackgroundColor="@color/green_prime"
-                android:layout_centerHorizontal="true">
+                app:cardCornerRadius="80dp">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    app:cardCornerRadius="75dp"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="75dp">
 
                     <ImageView
                         android:id="@+id/RegisterImage"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-                        android:scaleType="centerCrop"
                         android:adjustViewBounds="true"
-                        />
+                        android:scaleType="centerCrop" />
 
                     <Button
                         android:id="@+id/RegisterImageChoose"
                         android:layout_width="155dp"
                         android:layout_height="155dp"
-                        android:alpha="0"/>
+                        android:alpha="0" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -60,7 +63,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
 
             <ScrollView
@@ -80,8 +84,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="50dp"
                         android:ems="15"
-                        android:hint="Username"
                         android:fontFamily="@font/nunito_semibold"
+                        android:hint="Username"
                         android:inputType="textPersonName" />
 
                     <EditText
@@ -90,18 +94,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:ems="15"
-                        android:hint="Given Name"
                         android:fontFamily="@font/nunito_semibold"
+                        android:hint="Given Name"
                         android:inputType="textPersonName" />
 
-<!--                    <EditText-->
-<!--                        android:id="@+id/RegisterLastName"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginTop="20dp"-->
-<!--                        android:ems="15"-->
-<!--                        android:hint="Last Name"-->
-<!--                        android:inputType="textPersonName" />-->
+                    <!--                    <EditText-->
+                    <!--                        android:id="@+id/RegisterLastName"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="20dp"-->
+                    <!--                        android:ems="15"-->
+                    <!--                        android:hint="Last Name"-->
+                    <!--                        android:inputType="textPersonName" />-->
 
                     <EditText
                         android:id="@+id/RegisterEmail"
@@ -109,8 +113,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:ems="15"
-                        android:hint="Email"
                         android:fontFamily="@font/nunito_semibold"
+                        android:hint="Email"
                         android:inputType="textEmailAddress" />
 
                     <EditText
@@ -119,10 +123,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:ems="15"
-                        android:hint="Password"
                         android:fontFamily="@font/nunito_semibold"
+                        android:hint="Password"
                         android:inputType="textPassword" />
-
 
 
                     <EditText
@@ -131,8 +134,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:ems="15"
-                        android:hint="Confirm Password"
                         android:fontFamily="@font/nunito_semibold"
+                        android:hint="Confirm Password"
                         android:inputType="textPassword" />
 
 
@@ -142,42 +145,42 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:ems="10"
-                        android:maxEms="8"
-                        android:hint="D.O.B"
                         android:fontFamily="@font/nunito_semibold"
-                        android:inputType="date" />
+                        android:hint="D.O.B"
+                        android:inputType="date"
+                        android:maxEms="8" />
 
                     <Spinner
                         android:id="@+id/RegisterGender"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:spinnerMode="dropdown"/>
+                        android:spinnerMode="dropdown" />
 
-<!--                    <EditText-->
-<!--                        android:id="@+id/RegisterHeight"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:ems="10"-->
-<!--                        android:layout_marginTop="20dp"-->
-<!--                        android:hint="Height (cm)"-->
-<!--                        android:inputType="number" />-->
+                    <!--                    <EditText-->
+                    <!--                        android:id="@+id/RegisterHeight"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:ems="10"-->
+                    <!--                        android:layout_marginTop="20dp"-->
+                    <!--                        android:hint="Height (cm)"-->
+                    <!--                        android:inputType="number" />-->
 
-<!--                    <EditText-->
-<!--                        android:id="@+id/RegisterWeight"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:ems="10"-->
-<!--                        android:layout_marginTop="20dp"-->
-<!--                        android:hint="Weight (kg)"-->
-<!--                        android:inputType="numberDecimal" />-->
+                    <!--                    <EditText-->
+                    <!--                        android:id="@+id/RegisterWeight"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:ems="10"-->
+                    <!--                        android:layout_marginTop="20dp"-->
+                    <!--                        android:hint="Weight (kg)"-->
+                    <!--                        android:inputType="numberDecimal" />-->
 
-<!--                    <Spinner-->
-<!--                        android:id="@+id/RegisterDiet"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginTop="20dp"-->
-<!--                        android:spinnerMode="dropdown"/>-->
+                    <!--                    <Spinner-->
+                    <!--                        android:id="@+id/RegisterDiet"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="20dp"-->
+                    <!--                        android:spinnerMode="dropdown"/>-->
 
                     <EditText
                         android:id="@+id/RegisterDescription"
@@ -185,17 +188,19 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:ems="15"
-                        android:hint="Describe Yourself"
                         android:fontFamily="@font/nunito_semibold"
+                        android:hint="Describe Yourself"
                         android:inputType="text" />
 
                 </LinearLayout>
             </ScrollView>
         </RelativeLayout>
+
         <Button
             android:id="@+id/RegisterFinish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Register" />
     </LinearLayout>
 
