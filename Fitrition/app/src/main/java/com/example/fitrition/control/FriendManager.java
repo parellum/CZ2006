@@ -118,7 +118,7 @@ public class FriendManager {
                 public void onComplete(@NonNull Task<Void> task) {
                     friendActivity.friendAddToggle();
                 }
-            })
+            });
             friend.getFriendList().remove(FirebaseAuth.getInstance().getCurrentUser().getUid());
             mDatabaseReference.child(aFriend.getUserID()).child("friendList").setValue(friend.getFriendList());
             return;
