@@ -156,7 +156,7 @@
         android:id="@+id/buttonAllEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="All Events" />
+        android:text="All Events this month" />
 
 <!--    <androidx.recyclerview.widget.RecyclerView-->
 <!--        android:id="@+id/my_feed"-->

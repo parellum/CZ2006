@@ -182,7 +182,7 @@ public class CalendarCustomView extends LinearLayout {
         mDatabaseReference.child(Long.toString(Calendar.getInstance().getTimeInMillis())).setValue(events).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(context, events.getDate(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Successfully Saved", Toast.LENGTH_SHORT).show();
             }
         });
         arrayList.add(events);
