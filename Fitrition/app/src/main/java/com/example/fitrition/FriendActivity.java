@@ -25,6 +25,7 @@ import com.example.fitrition.control.FriendManager;
 import com.example.fitrition.databinding.ActivityMainBinding;
 import com.example.fitrition.entities.Friend;
 import com.example.fitrition.utils.SpacingItemDecoration;
+import com.google.firebase.database.DatabaseReference;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -40,8 +41,12 @@ public class FriendActivity extends AppCompatActivity {
     private ImageView friendImage;
 
     private Button friendAdd;
+    private Button friendRemove;
 
     private FriendManager friendManager;
+
+    //check if the database is updated before
+    private DatabaseReference databaseReference;
 
     RecyclerView recyclerView;
     StatusFocusAdapter statusFocusAdapter;
@@ -80,11 +85,24 @@ public class FriendActivity extends AppCompatActivity {
         friendImage = findViewById(R.id.friend_status_image);
 
         friendAdd = findViewById(R.id.friend_status_add);
+        friendRemove=findViewById(R.id.friend_status_remove);
+
+        if (friendManager.getFriendList().contains(friendManager.getFriend())){
+            friendRemove.setVisibility(View.VISIBLE);
+            friendAdd.setVisibility(View.INVISIBLE);
+        }
 
         friendAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                friendManager.addFriend(friendManager.getFriend());
+                friendManager.addFriend(friendManager.getFriend(),FriendActivity.this);
+            }
+        });
+
+        friendRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                friendManager.removeFriend(friendManager.getFriend(),FriendActivity.this);
             }
         });
 
@@ -124,5 +142,14 @@ public class FriendActivity extends AppCompatActivity {
 
     }
 
+    public void friendAddToggle(){
+        if (friendAdd.getVisibility()==View.VISIBLE){
+            friendAdd.setVisibility(View.INVISIBLE);
+            friendRemove.setVisibility(View.VISIBLE);
+        }else{
+            friendAdd.setVisibility(View.VISIBLE);
+            friendRemove.setVisibility(View.INVISIBLE);
+        }
+    }
 
 }

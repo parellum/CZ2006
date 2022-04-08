@@ -72,7 +72,6 @@ public class SocialFragment extends Fragment {
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(statusAdapter);
-        Log.d(TAG, "onCreateView: yo");
 
 ////        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(SocialFragment.this, DividerItemDecoration.VERTICAL);
 ////        recyclerView.addItemDecoration(dividerItemDecoration);
@@ -112,5 +111,17 @@ public class SocialFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getParentFragmentManager().beginTransaction().detach(this).attach(this).commit();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getParentFragmentManager().beginTransaction().detach(this).attach(this).commit();
+    }
 }
+
 

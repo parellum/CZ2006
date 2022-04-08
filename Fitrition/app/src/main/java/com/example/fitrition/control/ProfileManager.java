@@ -3,11 +3,13 @@ package com.example.fitrition.control;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.fitrition.MainActivity;
 import com.example.fitrition.entities.IndividualUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -85,8 +87,6 @@ public class ProfileManager {
                 Log.d(TAG, "onCancelled: user not loaded");
             }
         });
-        friendManager=FriendManager.getInstance();
     }
-
 
 }
