@@ -22,7 +22,12 @@ import com.example.fitrition.entities.Food;
 import com.example.fitrition.entities.Friend;
 import com.example.fitrition.entities.Status;
 import com.example.fitrition.utils.SpacingItemDecoration;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +35,8 @@ public class viewingOfHealthyFood extends Fragment {
 
     RecyclerView recyclerView;
     ViewingOfHealthyFoodAdapter healthyFoodAdapter;
-    List<Food> foodList;
+    List<Food> foodArrayList;
+    List<Food> partialFoodArrayList;
 
 
 
@@ -41,11 +47,21 @@ public class viewingOfHealthyFood extends Fragment {
 
 
     private void initData() {
-        foodList =  new ArrayList<>();
-        foodList.add(new Food(1,"Chicken Rice","Stall 1", "Place Holder Description",12.34,"nill"));
-        foodList.add(new Food(2,"Chicken Noodle","Stall 2", "Place Holder Description",56.78,"nill"));
-        foodList.add(new Food(3,"Chicken Soup","Stall 3", "Place Holder Description",91.23,"nill"));
 
+        try {
+            Gson gson;
+            gson = new GsonBuilder().create();
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(getActivity().getApplicationContext().getAssets().open("food.txt")));
+
+            foodArrayList = gson.fromJson(reader, new TypeToken<List<Food>>(){}.getType());
+//            FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("facilities").setValue(foodList);
+
+             Log.d("SucessFinalVIew", "what Inner" + Integer.toString(foodArrayList.size()));
+        }
+        catch(Exception e) {
+            Log.d("FailureFinalVIew", "Exception"  );
+        }
     }
 
     @Override
@@ -56,7 +72,18 @@ public class viewingOfHealthyFood extends Fragment {
 
         initData();
 
-        healthyFoodAdapter = new ViewingOfHealthyFoodAdapter(foodList);
+        //Here is where the list gets populate
+        Bundle bundle = getActivity().getIntent().getExtras();
+        String nameOfMarkerClicked = bundle.getString("facilitiesName");
+        //Log.d("Ended",nameOfMarkerClicked);
+
+        partialFoodArrayList = new ArrayList<>();
+        for(Food f: foodArrayList ){
+            if(f.getNameOfHawker().equalsIgnoreCase(nameOfMarkerClicked)){
+                partialFoodArrayList.add(f);
+            }
+        }
+        healthyFoodAdapter = new ViewingOfHealthyFoodAdapter(partialFoodArrayList);
 
         recyclerView= view.findViewById(R.id.viewingOfFoodRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

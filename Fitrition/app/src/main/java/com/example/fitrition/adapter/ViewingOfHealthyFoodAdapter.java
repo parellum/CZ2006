@@ -47,8 +47,9 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
         String name = foodList.get(position).getNameOfFood();
         String description=foodList.get(position).getDescription();
         Double calories =foodList.get(position).getCalories();
+        String nameOfStall = foodList.get(position).getNameOfStall();
 
-        String location = foodList.get(position).getNameOfStall();
+        String location = foodList.get(position).getNameOfHawker();
 
         holder.setData(URL, name, description, calories);
 

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.fitrition.boundary.SocialFragment;
+import com.example.fitrition.control.FacilityManager;
 import com.example.fitrition.entities.FitnessCentreJSON;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,6 +25,9 @@ public class ViewFacilities extends AppCompatActivity {
 
     private ImageView viewFacilitiesImage;
     private Button viewFacilitiesButton;
+    private FacilityManager facilityManager;
+    private ArrayList<FitnessCentreJSON> allFacilitiesArrayList;
+
 
 
     @Override
@@ -32,34 +36,23 @@ public class ViewFacilities extends AppCompatActivity {
         setContentView(R.layout.activity_view_facilities);
         viewFacilitiesButton = (Button) findViewById(R.id.viewFacilitiesButton);
 
+        //Default fragment being contained is the facilityDisplay
+
         //If its a fitness facility, hide the button
         Bundle bundle = getIntent().getExtras();
         String nameOfMarkerClicked = bundle.getString("facilitiesName");
 
-        //Remove once JAC IS DONE============================================================
-        ArrayList<FitnessCentreJSON> fitnessCentreArrayList = null;
-        try {
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(this.getAssets().open("fitnessLocations.txt")));
-            Gson gson =  new GsonBuilder().create();
-            fitnessCentreArrayList = gson.fromJson(reader, new TypeToken<List<FitnessCentreJSON>>(){}.getType()
-            );
+        facilityManager = FacilityManager.getInstance();
+        allFacilitiesArrayList = facilityManager.getFacilityList();
 
-            Log.d("Sucess123", "what Inner" + Integer.toString(fitnessCentreArrayList.size()));
-        }
-        catch(Exception e) {
-            Log.d("Failure", "Exception"  );
-        }
-        //==============================
-        for(FitnessCentreJSON info : fitnessCentreArrayList){
-            if(nameOfMarkerClicked.equalsIgnoreCase(info.getName())){
+        for(FitnessCentreJSON info : allFacilitiesArrayList){
+            if(info.getType().equalsIgnoreCase("FITNESS") && nameOfMarkerClicked.equalsIgnoreCase(info.getName())){
                 //MATCH QUICK HIDE THE BUTTON
                 viewFacilitiesButton.setVisibility(View.INVISIBLE);
                 break;
             }
+
         }
-
-
 
         viewFacilitiesButton.setOnClickListener(new View.OnClickListener() {
             @Override
