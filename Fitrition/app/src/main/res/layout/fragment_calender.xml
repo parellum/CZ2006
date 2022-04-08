@@ -36,7 +36,6 @@
             android:layout_weight="3"
             android:gravity="center"
             android:text="current date"
-            android:fontFamily="@font/nunito_bold"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -75,7 +74,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/sun"
-            android:fontFamily="@font/nunito_semibold"
             android:textColor="@color/black" />
 
         <TextView
@@ -86,7 +84,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/mon"
-            android:fontFamily="@font/nunito_semibold"
             android:textColor="@color/black" />
 
         <TextView
@@ -97,7 +94,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/tue"
-            android:fontFamily="@font/nunito_semibold"
             android:textColor="@color/black" />
 
         <TextView
@@ -108,7 +104,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/wed"
-            android:fontFamily="@font/nunito_semibold"
             android:textColor="@color/black" />
 
         <TextView
@@ -119,7 +114,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/thu"
-            android:fontFamily="@font/nunito_semibold"
             android:textColor="@color/black" />
 
         <TextView
@@ -130,7 +124,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/fri"
-            android:fontFamily="@font/nunito_semibold"
             android:textColor="@color/black" />
 
         <TextView
@@ -141,7 +134,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/sat"
-            android:fontFamily="@font/nunito_semibold"
             android:textColor="@color/black" />
     </LinearLayout>
 
@@ -158,15 +150,13 @@
         android:id="@+id/buttonAddEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Event"
-        android:fontFamily="@font/nunito_bold" />
+        android:text="Add Event" />
 
     <Button
         android:id="@+id/buttonAllEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="All Events"
-        android:fontFamily="@font/nunito_bold" />
+        android:text="All Events this month" />
 
 <!--    <androidx.recyclerview.widget.RecyclerView-->
 <!--        android:id="@+id/my_feed"-->
