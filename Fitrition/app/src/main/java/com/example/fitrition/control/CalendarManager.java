@@ -55,7 +55,6 @@ public class CalendarManager {
                     Log.d(TAG, "loadEvents: HELLO");
                     eventsList.add(eventChild);
                 }
-                mDatabaseReference.removeEventListener(this);
             }
 
             @Override

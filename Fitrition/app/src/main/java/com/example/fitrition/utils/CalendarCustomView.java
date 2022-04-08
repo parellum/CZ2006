@@ -294,6 +294,7 @@ public class CalendarCustomView extends LinearLayout {
                 eventCellTV = popupView.findViewById(R.id.eventListTV);
                 for (int i = 0; i < arrayList.size(); i +=1){
                     events = arrayList.get(i);
+                    //Toast.makeText(context, cal.get(Calendar.YEAR), Toast.LENGTH_LONG).show();
                     if ((cal.get(Calendar.MONTH) + 1) == Integer.parseInt(events.getMonth())){
                         text = text + "\nEvent Name: " + events.getEvent() + "\nEvent Location: " + events.getLocation()
                                 + "\nEvent Time: " + events.getTime() + "\nEvent Date: " + events.getDate() + " " + events.getMonth()
