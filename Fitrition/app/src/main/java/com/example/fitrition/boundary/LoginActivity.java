@@ -33,7 +33,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 //
-    private TextView register;
+    private TextView register,resetPassword;
     private EditText editTextEmail, editTextPassword;
     private Button login;
     private ProfileManager profileManager;
@@ -49,6 +49,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         register = (TextView) findViewById(R.id.LoginRegister);
         register.setOnClickListener(this);
+        resetPassword = (TextView) findViewById(R.id.LoginForgot);
+        resetPassword.setOnClickListener(this);
 
         login=(Button) findViewById(R.id.LoginBtn);
         login.setOnClickListener(this);
@@ -74,6 +76,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.LoginBtn:
                 userLogin();
+                break;
+            case R.id.LoginForgot:
+                startActivity(new Intent(this,ResetActivity.class));
                 break;
         }
     }
