@@ -42,6 +42,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_gravity="center"
                 android:id="@+id/status_text"
+                android:fontFamily="@font/nunito_semibold"
                 android:text="Place_holder"/>
         </LinearLayout>
 
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
+                android:fontFamily="@font/nunito_semibold"
                 android:text="01-01-2020 16:31" />
         </RelativeLayout>
 

@@ -22,7 +22,8 @@
             android:id="@+id/viewFacilitiesButton"
             android:layout_width="404dp"
             android:layout_height="56dp"
-            android:text="Click to view Healthy Food" />
+            android:text="Click to view Healthy Food"
+            android:fontFamily="@font/nunito_semibold" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/viewFacilitiesFragmentContainer"
