@@ -230,23 +230,28 @@ public class CalendarCustomView extends LinearLayout {
             @Override
             public void onClick(View popupView) {
                 String err_msg = "";
-                int year_int = Integer.parseInt(eventYear.getText().toString());
-                if (year_int < 1900 || year_int >2100){
-                    err_msg = err_msg + "Year is not valid. Please enter number in range of 1900 to 2100\n";
+                if (eventName.getText().toString() == "") {
+                    err_msg = err_msg + "Name is not valid. Please enter the event name.\n";
                 }
-                int month_int = Integer.parseInt(eventMonth.getText().toString());
-                if (month_int < 1 || month_int >12){
-                    err_msg = err_msg + "Month is not valid. Please enter number in range of 1 to 12\n";
-                }
-                int date_int = Integer.parseInt(eventDate.getText().toString());
-                if (date_int < 1 || date_int >31){
-                    err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
+                if (eventLocation.getText().toString() == "") {
+                    err_msg = err_msg + "Location is not valid. Please enter a valid location.\n";
                 }
                 int time_int = Integer.parseInt(eventTime.getText().toString());
                 if (time_int < 0 || time_int >2359){
                     err_msg = err_msg + "Time is not valid. Please enter number in range of 0000 to 2359\n";
                 }
-
+                int date_int = Integer.parseInt(eventDate.getText().toString());
+                if (date_int < 1 || date_int >31){
+                    err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
+                }
+                int month_int = Integer.parseInt(eventMonth.getText().toString());
+                if (month_int < 1 || month_int >12){
+                    err_msg = err_msg + "Month is not valid. Please enter number in range of 1 to 12\n";
+                }
+                int year_int = Integer.parseInt(eventYear.getText().toString());
+                if (year_int < 1900 || year_int >2100){
+                    err_msg = err_msg + "Year is not valid. Please enter number in range of 1900 to 2100\n";
+                }
                 if (err_msg == "") {
                     SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
                             , eventTime.getText().toString()
