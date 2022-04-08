@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.fitrition.LoadinDialogBar;
 import com.example.fitrition.MainActivity;
 import com.example.fitrition.R;
 import com.example.fitrition.control.CalendarManager;
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CalendarManager calendarManager;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         facilityManager.loadFacilities();
 
 
+
+
+
     }
 
     @Override
@@ -75,9 +80,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(this, RegisterActivity.class));
                 break;
             case R.id.LoginBtn:
+
                 userLogin();
                 break;
             case R.id.LoginForgot:
+
                 startActivity(new Intent(this,ResetActivity.class));
                 break;
         }
