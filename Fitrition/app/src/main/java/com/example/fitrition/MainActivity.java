@@ -21,6 +21,7 @@ import com.example.fitrition.boundary.SocialFragment;
 import com.example.fitrition.databinding.ActivityMainBinding;
 import com.example.fitrition.utils.HelpActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -126,10 +127,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(help);
                 return true;
             case R.id.log_out:
-//                Intent logout = new Intent(this, LoginActivity.class);
-                Intent logout = new Intent(this, LoginActivity.class);
-                startActivity(logout);
-//                Toast.makeText(this, "Log Out selected", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

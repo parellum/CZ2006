@@ -27,6 +27,8 @@ public class FriendListRecyclerAdapter extends RecyclerView.Adapter<FriendListRe
         this.userList=userList;
     }
 
+    public void setData(List<Friend> userList){ this.userList=userList;}
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

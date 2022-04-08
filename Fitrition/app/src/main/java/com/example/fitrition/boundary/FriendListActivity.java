@@ -75,6 +75,13 @@ public class FriendListActivity extends AppCompatActivity {
         friend_list_adapter=new FriendListRecyclerAdapter(userList);
         recyclerView.setAdapter(friend_list_adapter);
         friend_list_adapter.notifyDataSetChanged();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userList = friendManager.getFriendList();
+        friend_list_adapter.setData(userList);
+        friend_list_adapter.notifyDataSetChanged();
     }
 }

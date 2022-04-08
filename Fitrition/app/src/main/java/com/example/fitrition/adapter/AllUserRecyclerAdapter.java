@@ -28,6 +28,10 @@ public class AllUserRecyclerAdapter extends RecyclerView.Adapter<AllUserRecycler
         this.allUserList=userList;
     }
 
+    public void setData(List<Friend>userList){
+        this.allUserList=userList;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

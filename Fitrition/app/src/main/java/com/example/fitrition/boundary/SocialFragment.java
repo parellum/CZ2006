@@ -31,6 +31,8 @@ public class SocialFragment extends Fragment {
     RecyclerView recyclerView;
     StatusAdapter statusAdapter;
 
+    View view;
+
 
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -48,21 +50,17 @@ public class SocialFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view=inflater.inflate(R.layout.fragment_social, container, false);
+        view=inflater.inflate(R.layout.fragment_social, container, false);
 
         friendManager=FriendManager.getInstance();
         friendIDList=new ArrayList<String>();
         statusList=new ArrayList<Status>();
-        Log.d(TAG, "onCreateView: hi");
         for (Friend friendSub:friendManager.getFriendList()){
             friendIDList.add(friendSub.getUserID());
             for (Status statusSub:friendSub.getSocialStatus()){
                 statusList.add(statusSub);
             }
         }
-        Log.d(TAG, "onCreateView: "+statusList.size());
-        Log.d(TAG, "onCreateView: "+friendIDList.size());
-        Log.d(TAG, "onCreateView: "+friendManager.getFriendList().size());
         statusAdapter = new StatusAdapter(statusList,friendIDList, friendManager.getFriendList());
 
 
@@ -78,50 +76,49 @@ public class SocialFragment extends Fragment {
 //
 //
 //
-//        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//
-//
-//                for(int i=0;i<statusTest2.length;i++) //set a limit to the number of status shown
-//                {
-//                    Status status = new Status();
-//
-//                    status.setDescription(statusTest2[i]);
-//
-//                    statusList.add(status);
-//                    statusList.add(0, status);
-//
-//                    if (statusList.size()>20){
-//                        statusList.remove(statusList.size() - 1);
-//                    }
-//
-//                }
-//
-//                statusAdapter.notifyDataSetChanged();
-//                swipeRefreshLayout.bringToFront();
-//                swipeRefreshLayout.setRefreshing(false);
-//
-//
-//
-//            }
-//        });
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                friendIDList=new ArrayList<String>();
+                statusList=new ArrayList<Status>();
+                for (Friend friendSub:friendManager.getFriendList()){
+                    friendIDList.add(friendSub.getUserID());
+                    for (Status statusSub:friendSub.getSocialStatus()){
+                        statusList.add(statusSub);
+                    }
+                }
+                statusAdapter.setData(statusList,friendIDList, friendManager.getFriendList());
+                statusAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.bringToFront();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         return view;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        getParentFragmentManager().beginTransaction().detach(this).attach(this).commit();
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: HI");
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        getParentFragmentManager().beginTransaction().detach(this).attach(this).commit();
+    public void onResume() {
+        super.onResume();
+        friendIDList=new ArrayList<String>();
+        statusList=new ArrayList<Status>();
+        for (Friend friendSub:friendManager.getFriendList()){
+            friendIDList.add(friendSub.getUserID());
+            for (Status statusSub:friendSub.getSocialStatus()){
+                statusList.add(statusSub);
+            }
+        }
+        statusAdapter.setData(statusList,friendIDList, friendManager.getFriendList());
+        statusAdapter.notifyDataSetChanged();
     }
+
 }
 
 
