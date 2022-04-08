@@ -2,23 +2,49 @@ package com.example.fitrition.entities;
 
 import android.media.Image;
 
-//Don't know who created this but i'm using it
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+
 public class Food {
+
+    @SerializedName("foodID")
+    @Expose
     private int foodID;
+
+    @SerializedName("nameOfFood")
+    @Expose
     private String nameOfFood;
+
+    @SerializedName("nameOfStall")
+    @Expose
     private String nameOfStall;
+
+    @SerializedName("description")
+    @Expose
     private String description;
+
+    @SerializedName("calories")
+    @Expose
     private double calories;
+
+    @SerializedName("foodImageUrl")
+    @Expose
     private String foodImageUrl;
 
-    public Food(int foodID, String nameOfFood, String nameOfStall, String description, double calories, String foodImageUrl) {
+    @SerializedName("nameOfHawker")
+    @Expose
+    private String nameOfHawker;
+
+    public Food(int foodID, String nameOfFood, String nameOfHawker, String nameOfStall, String description, double calories, String foodImageUrl) {
         this.foodID = foodID;
         this.nameOfFood = nameOfFood;
-        this.nameOfStall = nameOfStall;
+        this.nameOfHawker = nameOfHawker;
         this.description = description;
         this.calories = calories;
         this.foodImageUrl = foodImageUrl;
     }
+    public Food(){}
 
     public int getFoodID() {
         return foodID;
@@ -67,5 +93,15 @@ public class Food {
     public void setFoodImageUrl(String foodImageUrl) {
         this.foodImageUrl = foodImageUrl;
     }
+
+    public String getNameOfHawker() {
+        return nameOfHawker;
+    }
+
+    public void setNameOfHawker(String nameOfHawker) {
+        this.nameOfHawker = nameOfHawker;
+    }
+
+
 
 }

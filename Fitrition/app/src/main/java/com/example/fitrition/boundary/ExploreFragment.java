@@ -44,6 +44,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -69,32 +71,29 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
     private Button mapCentreLocationButton;
 
-
-
-    //ADD
     private Marker oldHawkerMarker = null;
     private Marker oldFitnessMarker = null;
 
-    Gson gson;
-    ArrayList<FitnessCentreJSON> hawkerCentreArrayList;
-    ArrayList<FitnessCentreJSON> fitnessCentreArrayList;
+    ArrayList<FitnessCentreJSON> allFacilitiesArrayList;
     FacilityManager facilityManager;
 
     Vector<MarkerOptions> markerOptionsVectorForHawkerCentre;
     Vector<MarkerOptions> markerOptionsVectorForFitnessCentre;
     FusedLocationProviderClient client;
 
-    //final Handler handler = new Handler(Looper.getMainLooper());
+    //Adding of database stuff - JAC
+    private DatabaseReference mDataRef;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
 
-        facilityManager=FacilityManager.getInstance();
-        hawkerCentreArrayList = facilityManager.getFacilityList();
 
-        //ADD
+        facilityManager=FacilityManager.getInstance();
+        allFacilitiesArrayList = facilityManager.getFacilityList();
+
         mapCentreLocationButton = (Button) view.findViewById(R.id.mapCentreLocationButton);
 
         //Request location access from user
@@ -102,7 +101,6 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
         //Used for finding location
         client = LocationServices.getFusedLocationProviderClient(getActivity().getApplicationContext());
-        //END
 
         map=(MapView) view.findViewById(R.id.mapView);
         map.onCreate(savedInstanceState);
@@ -119,21 +117,13 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
         //Set default location as Chinese Garden
         LatLng Garden = new LatLng(1.279689, 103.862667);
-        /*gmap.addMarker(new MarkerOptions().position(Garden).title("Garden").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-        );*/
-        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(1.2816946528685949, 103.83923394187357), 13));
+        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(1.279689, 103.862667), 13));
 
-
-        //ADDED
-        gson = new GsonBuilder().create();
         markerOptionsVectorForHawkerCentre = new Vector<>();
         markerOptionsVectorForFitnessCentre = new Vector<>();
 
-        //sendRequest();
-
-        createHawkerMarkers();
-        createFitnessMarkers();
-
+        //Populate the map with all markers whenever it first load
+        createAllMapMarkers();
 
         //Code to handle the popping up of the new fragment when a marker is pressed
         gmap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -149,38 +139,30 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
                 //Attempt to launch a new activity cuz this fragment is literally flooded
                 Intent intent = new Intent(getContext(), ViewFacilities.class);
                 Bundle b = new Bundle();
-                Log.d("Luckly",Integer.toString(markerOptionsVectorForHawkerCentre.size()));
 
                 b.putString("facilitiesName", marker.getTitle());
                 intent.putExtras(b); //Put your id to your next Intent
                 startActivity(intent);
 
-                //Change the markers back to the previous colour
-                //The level of brute force is bad
-                int isFitnessCentre = 0;
-                for(FitnessCentreJSON info : fitnessCentreArrayList){
-                    if(marker.getTitle().equalsIgnoreCase(info.getName())){
-                        isFitnessCentre = 1;
-                        break;
-                    }
-                }
-
-                if(isFitnessCentre == 1){
-                    //Is a fitness centre
-                    if(oldFitnessMarker != null && !(oldFitnessMarker.getTitle().equalsIgnoreCase(marker.getTitle()))){//oldFitnessMarker != marker
-                        oldFitnessMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
-                        if(oldHawkerMarker != null)
-                            oldHawkerMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                    }
-                    oldFitnessMarker = marker;
-                }else{
-                    //A hakwer
-                    if(oldHawkerMarker != null && !(oldHawkerMarker.getTitle().equalsIgnoreCase(marker.getTitle()))){//oldHawkerMarker != marker
-                        oldHawkerMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                        if(oldFitnessMarker != null)
+                for(FitnessCentreJSON info : allFacilitiesArrayList){
+                    if(info.getType().equalsIgnoreCase("FITNESS") && marker.getTitle().equalsIgnoreCase(info.getName())){
+                        //Fitness
+                        if(oldFitnessMarker != null && !(oldFitnessMarker.getTitle().equalsIgnoreCase(marker.getTitle()))){//oldFitnessMarker != marker
                             oldFitnessMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                            if(oldHawkerMarker != null)
+                                oldHawkerMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                        }
+                        oldFitnessMarker = marker;
+                    }else{
+                        //Must BE Hawker
+                        if(oldHawkerMarker != null && !(oldHawkerMarker.getTitle().equalsIgnoreCase(marker.getTitle()))){//oldHawkerMarker != marker
+                            oldHawkerMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                            if(oldFitnessMarker != null)
+                                oldFitnessMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                        }
+                        oldHawkerMarker = marker;
+
                     }
-                    oldHawkerMarker = marker;
                 }
 
                 return false;
@@ -193,58 +175,41 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
 
     //==============================Used to Data base request======================================
 
-    public void createHawkerMarkers(){
-        for(FitnessCentreJSON info : hawkerCentreArrayList){
-            double lat = Double.parseDouble(info.getLatitude());
-            double lng = Double.parseDouble(info.getLongitude());
-            String title = info.getName();
-            //Log.d("sample", Double.toString(lat));
-
-            MarkerOptions marker = new MarkerOptions().position(new LatLng(lat, lng))
-                    .title(title);
-
-            markerOptionsVectorForHawkerCentre.add(marker);
-            //Log.d("Marker", Integer.toString(markerOptions.size()));
-
-            gmap.addMarker(marker);
-
-            if(info.getDescription() !=  null){
-                Log.d("Sucess",  info.getDescription());
-            }
-    }
-    }
-
-    public void createFitnessMarkers(){
-        try {
+    public void createAllMapMarkers(){
+        //Used to write to database - Remove Later
+        /*try {
             BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(getActivity().getApplicationContext().getAssets().open("fitnessLocations.txt")));
+                    new InputStreamReader(getActivity().getApplicationContext().getAssets().open("sampleJson.txt")));
 
-            fitnessCentreArrayList = gson.fromJson(reader, new TypeToken<List<FitnessCentreJSON>>(){}.getType()
-            );
+            allFacilitiesArrayList = gson.fromJson(reader, new TypeToken<List<FitnessCentreJSON>>(){}.getType());
+//            FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("facilities").setValue(allFacilitiesArrayList);
 
              Log.d("Sucess123", "what Inner" + Integer.toString(fitnessCentreArrayList.size()));
         }
         catch(Exception e) {
             Log.d("Failure", "Exception"  );
-        }
+        }*/
 
-
-
-        for(FitnessCentreJSON info : fitnessCentreArrayList){
+        for(FitnessCentreJSON info : allFacilitiesArrayList){
             double lat = Double.parseDouble(info.getLatitude());
             double lng = Double.parseDouble(info.getLongitude());
             String title = info.getName();
+            String type = info.getType();
 
-            MarkerOptions marker = new MarkerOptions().position(new LatLng(lat, lng))
-                    .title(title).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+            if(type.equalsIgnoreCase("HAWKER")){
+                //HAWKER
+                MarkerOptions marker = new MarkerOptions().position(new LatLng(lat, lng))
+                        .title(title);
 
-
-            markerOptionsVectorForFitnessCentre.add(marker);
-
-            gmap.addMarker(marker);
-
-
-
+                markerOptionsVectorForHawkerCentre.add(marker);
+                gmap.addMarker(marker);
+            }else if(type.equalsIgnoreCase("FITNESS")){
+                //FITNESS
+                MarkerOptions marker = new MarkerOptions().position(new LatLng(lat, lng))
+                        .title(title).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                markerOptionsVectorForFitnessCentre.add(marker);
+                gmap.addMarker(marker);
+            }
         }
     }
     //=================Used to handle Location permission ===================================
@@ -331,26 +296,20 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
                     lat.set(locationResult.getLatitude());
                     lng.set(locationResult.getLongitude());
 
-                    createFitnessMarkers();
-                    createHawkerMarkers();
+                    createAllMapMarkers();
                     FacilityManager.getInstance().obtainFacilityBasedOnDistance(markerOptionsVectorForHawkerCentre,lat.get(), lng.get());
                     FacilityManager.getInstance().obtainFacilityBasedOnDistance(markerOptionsVectorForFitnessCentre,lat.get(), lng.get());
-
-                    Log.d("Current Location Size",Integer.toString(markerOptionsVectorForHawkerCentre.size()));
 
                     gmap.clear();
                     for (int i = 0; i < markerOptionsVectorForHawkerCentre.size(); i++) {
 
                         gmap.addMarker(markerOptionsVectorForHawkerCentre.get(i));
-                        Log.d("Explorer Frag getDeviceLocation","Ran");
 
                     }
 
                     for (int i = 0; i < markerOptionsVectorForFitnessCentre.size(); i++) {
 
                         gmap.addMarker(markerOptionsVectorForFitnessCentre.get(i));
-                        Log.d("Explorer Frag getDeviceLocation","Ran");
-
                     }
 
                     gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(
@@ -489,6 +448,57 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
             Toast.makeText(getActivity().getApplicationContext(),error.getMessage(), Toast.LENGTH_LONG).show();
         }
     };
+
+   //Change the markers back to the previous colour
+                //The level of brute force is bad
+                /*int isFitnessCentre = 0;
+                for(FitnessCentreJSON info : fitnessCentreArrayList){
+                    if(marker.getTitle().equalsIgnoreCase(info.getName())){
+                        isFitnessCentre = 1;
+                        break;
+                    }
+                }
+
+
+                if(isFitnessCentre == 1){
+                    //Is a fitness centre
+                    if(oldFitnessMarker != null && !(oldFitnessMarker.getTitle().equalsIgnoreCase(marker.getTitle()))){//oldFitnessMarker != marker
+                        oldFitnessMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                        if(oldHawkerMarker != null)
+                            oldHawkerMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    }
+                    oldFitnessMarker = marker;
+                }else{
+                    //A hakwer
+                    if(oldHawkerMarker != null && !(oldHawkerMarker.getTitle().equalsIgnoreCase(marker.getTitle()))){//oldHawkerMarker != marker
+                        oldHawkerMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                        if(oldFitnessMarker != null)
+                            oldFitnessMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                    }
+                    oldHawkerMarker = marker;
+                }
+
+                    public void createHawkerMarkers(){
+        for(FitnessCentreJSON info : hawkerCentreArrayList){
+            double lat = Double.parseDouble(info.getLatitude());
+            double lng = Double.parseDouble(info.getLongitude());
+            String title = info.getName();
+            //Log.d("sample", Double.toString(lat));
+
+            MarkerOptions marker = new MarkerOptions().position(new LatLng(lat, lng))
+                    .title(title);
+
+            markerOptionsVectorForHawkerCentre.add(marker);
+            //Log.d("Marker", Integer.toString(markerOptions.size()));
+
+            gmap.addMarker(marker);
+
+            if(info.getDescription() !=  null){
+                Log.d("Sucess",  info.getDescription());
+            }
+    }
+    }
+
 */
 
 
