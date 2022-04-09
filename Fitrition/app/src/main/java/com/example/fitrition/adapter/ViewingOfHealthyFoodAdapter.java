@@ -155,7 +155,7 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
     }
 
     private void SaveEvent(String event, String location,String time,String date, String month, String year){
-        Events events = new Events(event,location,time,date,month,year);
+        Events events = new Events(event,location,time,date,month,year,false);
 
 
         mDataRef= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid());

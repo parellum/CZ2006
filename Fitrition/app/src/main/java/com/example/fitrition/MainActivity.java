@@ -18,7 +18,6 @@ import com.example.fitrition.boundary.TrackerFragment;
 import com.example.fitrition.boundary.ExploreFragment;
 import com.example.fitrition.boundary.ProfileFragment;
 import com.example.fitrition.boundary.SocialFragment;
-import com.example.fitrition.databinding.ActivityMainBinding;
 import com.example.fitrition.utils.HelpActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;

@@ -6,26 +6,49 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fitrition.R;
+import com.example.fitrition.adapter.EventRecycleAdapter;
+import com.example.fitrition.adapter.FriendListRecyclerAdapter;
+import com.example.fitrition.control.CalendarManager;
+import com.example.fitrition.control.FriendManager;
 import com.example.fitrition.entities.Events;
+import com.example.fitrition.entities.Friend;
 import com.example.fitrition.utils.CalendarCustomView;
 
+import java.sql.Array;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class TrackerFragment extends Fragment {
 
@@ -35,21 +58,256 @@ public class TrackerFragment extends Fragment {
     Date date;
     int n = 0;
     int colorId;
+    TextView currentDay;
+
+    RecyclerView recyclerView;
+    LinearLayoutManager layoutManager;
+    ArrayList<Events> eventsList;
+    EventRecycleAdapter tracker_day_recycle_manager;
+    CalendarManager calendarManager;
+
+    Calendar cal;
+
+    Button addEventButton;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_tracker, container, false);
+
         setInitializations(view);
         setCalenderView(view);
+
+        addEventButton=view.findViewById(R.id.buttonAddEvent);
+        currentDay = view.findViewById(R.id.display_current_day);
+        recyclerView = view.findViewById(R.id.tracker_day_recycle);
+        eventsList=new ArrayList<Events>();
+        calendarManager= CalendarManager.getInstance();
+
+
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Singapore"));
+        cal=Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore"));
+
+        SimpleDateFormat dateFormat= new SimpleDateFormat("dd MMMM yyyy");
+        String dateOnly = dateFormat.format(cal.getTime());
+        currentDay.setText(dateOnly);
+
+        initRecylerView(view,dateOnly);
+
+        Button allEvent = view.findViewById(R.id.buttonAllEvent);
+        allEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container,new EventsHistoryFragment()).commit();
+            }
+        });
+
         return view;
+    }
+
+    private void initRecylerView(View view,String dateStr) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH);
+
+        LocalDate date = LocalDate.parse(dateStr, formatter);
+
+        Toast.makeText(view.getContext(), dateStr.toString(), Toast.LENGTH_SHORT).show();
+
+        ArrayList<Events> eventsList = new ArrayList<Events>();
+        ArrayList<Integer> intList=new ArrayList<Integer>();
+
+        for (Events subject:calendarManager.getEventsList()){
+            if(date.getMonthValue()==Integer.parseInt(subject.getMonth()) & date.getDayOfMonth()==Integer.parseInt(subject.getDate()) & date.getYear()==Integer.parseInt(subject.getYear())){
+                eventsList.add(subject);
+                intList.add(Integer.parseInt(subject.getTime()));
+            }
+        }
+        Collections.sort(intList);
+        ArrayList<Events> sortedArray = new ArrayList<Events>();
+
+        for (Integer subject:intList){
+            for (Events sub:eventsList){
+                if(subject==Integer.parseInt(sub.getTime())){
+                    sortedArray.add(sub);
+                    eventsList.remove(sub);
+                    break;
+                }
+            }
+        }
+
+        recyclerView=view.findViewById(R.id.tracker_day_recycle);
+        layoutManager=new LinearLayoutManager(view.getContext());
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        tracker_day_recycle_manager=new EventRecycleAdapter(sortedArray);
+        recyclerView.setAdapter(tracker_day_recycle_manager);
+    }
+
+    private void updateRecycler(View view,String dateStr){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH);
+
+        LocalDate date = LocalDate.parse(dateStr, formatter);
+
+        Toast.makeText(view.getContext(), dateStr.toString(), Toast.LENGTH_SHORT).show();
+
+        ArrayList<Events> eventsList = new ArrayList<Events>();
+        ArrayList<Integer> intList=new ArrayList<Integer>();
+
+        for (Events subject:calendarManager.getEventsList()){
+            if(date.getMonthValue()==Integer.parseInt(subject.getMonth()) & date.getDayOfMonth()==Integer.parseInt(subject.getDate()) & date.getYear()==Integer.parseInt(subject.getYear())){
+                eventsList.add(subject);
+                intList.add(Integer.parseInt(subject.getTime()));
+            }
+        }
+        Collections.sort(intList);
+        ArrayList<Events> sortedArray = new ArrayList<Events>();
+
+        for (Integer subject:intList){
+            for (Events sub:eventsList){
+                if(subject==Integer.parseInt(sub.getTime())){
+                    sortedArray.add(sub);
+                    eventsList.remove(sub);
+                    break;
+                }
+            }
+        }
+
+        tracker_day_recycle_manager.setData(sortedArray);
+        tracker_day_recycle_manager.notifyDataSetChanged();
     }
 
     private void setInitializations(View view) {
         custom_view = (View) view.findViewById(R.id.custom_view);
         layoutCalender = (LinearLayout) view.findViewById(R.id.layoutCalender);
 
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        addEventButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                LayoutInflater inflater = (LayoutInflater)
+                        view.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = inflater.inflate(R.layout.fragment_add_event, null);
+
+                // create the popup window
+                int width = LinearLayout.LayoutParams.MATCH_PARENT;
+                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+                final PopupWindow popupWindow = new PopupWindow(popupView, width,  height, focusable);
+
+                // show the popup window
+                // which view you pass in doesn't matter, it is only used for the window tolken
+                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+
+                TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
+                TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
+                EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
+                EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
+                EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
+                EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
+                Button saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
+
+                RadioButton eventDine = popupView.findViewById(R.id.add_event_radio_dine);
+
+                TimeZone.setDefault(TimeZone.getTimeZone("Asia/Singapore"));
+                cal=Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore"));
+
+                SimpleDateFormat dateFormat= new SimpleDateFormat("dd MMMM yyyy");
+                String dateOnly = dateFormat.format(cal.getTime());
+
+                String calDay=Integer.toString(cal.get(Calendar.DATE));
+                String calMonth=Integer.toString(cal.get(Calendar.MONTH)+1);
+
+                if (calDay.length()==1){
+                    calDay="0"+calDay;
+                }
+                if (calMonth.length()==1){
+                    calMonth="0"+calMonth;
+                }
+
+                eventDate.setText(calDay);
+                eventMonth.setText(calMonth);
+                eventYear.setText(Integer.toString(cal.get(Calendar.YEAR)));
+
+
+                saveEventButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View popupView) {
+                        String err_msg = "";
+
+                        String newName = eventName.getText().toString().trim();
+                        String newLocation = eventLocation.getText().toString().trim();
+                        String newTime = eventTime.getText().toString().trim();
+                        String newDay=eventDate.getText().toString().trim();
+                        String newMonth = eventMonth.getText().toString().trim();
+                        String newYear = eventYear.getText().toString().trim();
+                        Boolean isExercise;
+
+                        if (eventDine.isChecked()){
+                            isExercise=false;
+                        }else{
+                            isExercise=true;
+                        }
+
+
+                        if (eventName.getText().toString().trim().isEmpty()) {
+                            err_msg = err_msg + "Name is not valid. Please enter the event name.\n";
+                            eventName.setError(err_msg);
+                            eventName.requestFocus();
+                            return;
+                        }
+                        if (eventLocation.getText().toString().trim().isEmpty()) {
+                            err_msg = err_msg + "Location is not valid. Please enter a valid location.\n";
+                            eventLocation.setError(err_msg);
+                            eventLocation.requestFocus();
+                            return;
+                        }
+                        if (eventTime.getText().toString().trim().isEmpty()) {
+                            err_msg = err_msg + "Time is not valid. Please enter a valid time.\n";
+                            eventTime.setError(err_msg);
+                            eventTime.requestFocus();
+                            return;
+                        }
+
+                        if (eventTime.getText().toString().trim().length()!=4) {
+                            err_msg = err_msg + "Time is not valid. Please enter a valid time.\n";
+                            eventTime.setError(err_msg);
+                            eventTime.requestFocus();
+                            return;
+                        }
+
+                        int time_int = Integer.parseInt(eventTime.getText().toString());
+                        if (time_int < 0 || time_int >2359){
+                            err_msg = err_msg + "Time is not valid. Please enter number in range of 0000 to 2359\n";
+                        }
+                        int date_int = Integer.parseInt(eventDate.getText().toString());
+                        if (date_int < 1 || date_int >31){
+                            err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
+                        }
+                        int month_int = Integer.parseInt(eventMonth.getText().toString());
+                        if (month_int < 1 || month_int >12){
+                            err_msg = err_msg + "Month is not valid. Please enter number in range of 1 to 12\n";
+                        }
+                        int year_int = Integer.parseInt(eventYear.getText().toString());
+                        if (year_int < 1900 || year_int >2100){
+                            err_msg = err_msg + "Year is not valid. Please enter number in range of 1900 to 2100\n";
+                        }
+                        if (err_msg == "") {
+                            calendarManager.saveAnEvent(new Events(newName,newLocation,newTime,newDay,newMonth,newYear,isExercise));
+                            updateRecycler(view,dateOnly);
+                            popupWindow.dismiss();
+                        }
+                        else {
+                            Toast.makeText(view.getContext(), err_msg, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+            }
+        });
     }
 
     public void setCalenderView(View view) {
@@ -67,7 +325,6 @@ public class TrackerFragment extends Fragment {
         calendarCustomView.calendarGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 if(n == 1) {
                     if (colorId == -657931)
                         viewCopy.setBackgroundColor(Color.parseColor("#F5F5F5"));
@@ -84,9 +341,124 @@ public class TrackerFragment extends Fragment {
                 SimpleDateFormat dateFormat= new SimpleDateFormat("dd MMMM yyyy");
                 String dateOnly = dateFormat.format(date);
 
+                addEventButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View view) {
+                        LayoutInflater inflater = (LayoutInflater)
+                                view.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                        View popupView = inflater.inflate(R.layout.fragment_add_event, null);
+
+                        // create the popup window
+                        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+                        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        boolean focusable = true; // lets taps outside the popup also dismiss it
+                        final PopupWindow popupWindow = new PopupWindow(popupView, width,  height, focusable);
+
+                        // show the popup window
+                        // which view you pass in doesn't matter, it is only used for the window tolken
+                        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+                        EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
+                        EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
+                        EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
+                        SimpleDateFormat dateFormatDay= new SimpleDateFormat("dd");
+                        String forDay = dateFormatDay.format(date);
+                        SimpleDateFormat dateFormatMonth= new SimpleDateFormat("MM");
+                        String forMonth = dateFormatMonth.format(date);
+                        SimpleDateFormat dateFormatYear= new SimpleDateFormat("yyyy");
+                        String forYear = dateFormatYear.format(date);
+                        eventDate.setText(forDay);
+                        eventMonth.setText(forMonth);
+                        eventYear.setText(forYear);
+
+
+                        Button saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
+                        TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
+                        TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
+                        EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
+
+                        RadioButton eventDine = popupView.findViewById(R.id.add_event_radio_dine);
+
+                        saveEventButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View popupView) {
+                                String newName = eventName.getText().toString().trim();
+                                String newLocation = eventLocation.getText().toString().trim();
+                                String newTime = eventTime.getText().toString().trim();
+                                String newDay=eventDate.getText().toString().trim();
+                                String newMonth = eventMonth.getText().toString().trim();
+                                String newYear = eventYear.getText().toString().trim();
+                                Boolean isExercise;
+
+                                if (eventDine.isChecked()){
+                                    isExercise=false;
+                                }else{
+                                    isExercise=true;
+                                }
+
+                                String err_msg = "";
+                                if (eventName.getText().toString().trim().isEmpty()) {
+                                    err_msg = err_msg + "Name is not valid. Please enter the event name.\n";
+                                    eventName.setError(err_msg);
+                                    eventName.requestFocus();
+                                    return;
+                                }
+                                if (eventLocation.getText().toString().trim().isEmpty()) {
+                                    err_msg = err_msg + "Location is not valid. Please enter a valid location.\n";
+                                    eventLocation.setError(err_msg);
+                                    eventLocation.requestFocus();
+                                    return;
+                                }
+                                if (eventTime.getText().toString().trim().isEmpty()) {
+                                    err_msg = err_msg + "Time is not valid. Please enter a valid time.\n";
+                                    eventTime.setError(err_msg);
+                                    eventTime.requestFocus();
+                                    return;
+                                }
+
+                                if (eventTime.getText().toString().trim().length()!=4) {
+                                    err_msg = err_msg + "Time is not valid. Please enter a valid time.\n";
+                                    eventTime.setError(err_msg);
+                                    eventTime.requestFocus();
+                                    return;
+                                }
+
+
+                                int time_int = Integer.parseInt(eventTime.getText().toString());
+                                if (time_int < 0 || time_int >2359){
+                                    err_msg = err_msg + "Time is not valid. Please enter number in range of 0000 to 2359\n";
+                                }
+                                int date_int = Integer.parseInt(eventDate.getText().toString());
+                                if (date_int < 1 || date_int >31){
+                                    err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
+                                }
+                                int month_int = Integer.parseInt(eventMonth.getText().toString());
+                                if (month_int < 1 || month_int >12){
+                                    err_msg = err_msg + "Month is not valid. Please enter number in range of 1 to 12\n";
+                                }
+                                int year_int = Integer.parseInt(eventYear.getText().toString());
+                                if (year_int < 1900 || year_int >2100){
+                                    err_msg = err_msg + "Year is not valid. Please enter number in range of 1900 to 2100\n";
+                                }
+                                if (err_msg == "") {
+                                    calendarManager.saveAnEvent(new Events(newName,newLocation,newTime,newDay,newMonth,newYear,isExercise));
+                                    updateRecycler(view,dateOnly);
+                                    popupWindow.dismiss();
+                                }
+                                else {
+                                    Toast.makeText(view.getContext(), err_msg, Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    }
+                });
+
+
+
                 Toast.makeText(view.getContext(), "Date: " + dateOnly, Toast.LENGTH_LONG).show();
 
-                calendarCustomView.dateClickEvent(view, date);
+                currentDay.setText(dateOnly);
+
+                updateRecycler(view,dateOnly);
 
                 colorId = ((ColorDrawable) view.getBackground()).getColor();
                 view.setBackgroundColor(Color.parseColor("#326e62"));
@@ -96,4 +468,6 @@ public class TrackerFragment extends Fragment {
         });
 
     }
+
+
 }
