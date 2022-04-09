@@ -1,15 +1,8 @@
 package com.example.fitrition.boundary;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,11 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,72 +36,21 @@ public class FriendAddNewActivity extends AppCompatActivity {
     DatabaseReference mDatabaseReference;
     int allowUpdate=0;
 
-    private EditText mSearchField;
-    private ImageButton mSearchBtn;
-    private RecyclerView mResultList;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_addnew);
         profileManager = ProfileManager.getInstance();
 
-        //added for search bar
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("users");
-        mSearchField = (EditText) findViewById(R.id.search_field);
-        mSearchBtn = (ImageButton) findViewById(R.id.search_btn);
-        mResultList = (RecyclerView) findViewById(R.id.searchfriend_recyclerview);
-        mResultList.setHasFixedSize(true);
-        mResultList.setLayoutManager(new LinearLayoutManager(this));
-
         initData();
         back_button=findViewById(R.id.all_user_back_icon);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String searchText = mSearchField.getText().toString();
-                firebaseUserSearch(searchText);
+                finish();
             }
         });
     }
-
-    // added
-    private void firebaseUserSearch(String searchText) {
-
-        FirebaseRecyclerAdapter<Friend,FriendViewHolder> firebaseRecyclerAdapter= new FirebaseRecyclerAdapter<Friend, FriendViewHolder>() {
-            @Override
-            protected void onBindViewHolder(@NonNull FriendViewHolder holder, int position, @NonNull Friend model) {
-
-            }
-
-            @NonNull
-            @Override
-            public FriendViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
-            }
-        };
-
-    }
-
-    // View Holder Class
-    public static class FriendViewHolder extends RecyclerView.ViewHolder {
-        View mView;
-        public FriendViewHolder(View itemView) {
-            super(itemView);
-            mView = itemView;
-        }
-        public void setDetails(Context ctx, String userName, String userStatus, String userImage){
-            TextView user_name = (TextView) mView.findViewById(R.id.name_textview);
-            TextView user_status = (TextView) mView.findViewById(R.id.description_textview);
-            ImageView user_image = (ImageView) mView.findViewById(R.id.friend_image);
-
-            user_name.setText(userName);
-            user_status.setText(userStatus);
-
-        }
-    }
-
 
 
     private void initData() {
