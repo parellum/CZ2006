@@ -62,6 +62,11 @@ public class CalendarCustomView extends LinearLayout {
     int previous_page_array_point = 0;
     int next_page_array_point;
 
+    int array_point1 = 0;
+    int array_point2 = 0;
+    int array_point3 = 0;
+    int array_point4 = 0;
+
 
     public CalendarCustomView(Context context) {
         super(context);
@@ -313,15 +318,20 @@ public class CalendarCustomView extends LinearLayout {
         buttonDeleteTV1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View popupView) {
-
+                arrayList.remove(array_point1);
+                String text = "Event removed successfully";
+                eventCellTV1.setText(text);
             }
         });
 
         Button buttonDeleteTV2 = (Button) popupView.findViewById(R.id.buttonDeleteTV2);
+
         buttonDeleteTV2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View popupView) {
-
+                arrayList.remove(array_point2);
+                String text = "Event removed successfully";
+                eventCellTV2.setText(text);
             }
         });
 
@@ -329,7 +339,9 @@ public class CalendarCustomView extends LinearLayout {
         buttonDeleteTV3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View popupView) {
-
+                arrayList.remove(array_point3);
+                String text = "Event removed successfully";
+                eventCellTV3.setText(text);
             }
         });
 
@@ -337,7 +349,9 @@ public class CalendarCustomView extends LinearLayout {
         buttonDeleteTV4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View popupView) {
-
+                arrayList.remove(array_point4);
+                String text = "Event removed successfully";
+                eventCellTV4.setText(text);
             }
         });
 
@@ -345,7 +359,8 @@ public class CalendarCustomView extends LinearLayout {
         buttonPreviousPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View popupView) {
-
+                next_page_array_point = eventListViewer(popupView, previous_page_array_point);
+                previous_page_array_point = 0;
             }
         });
 
@@ -353,9 +368,10 @@ public class CalendarCustomView extends LinearLayout {
         buttonNextPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View popupView) {
-                //array_point = next_page_array_point;
-                //previous_page_array_point = array_point;
+                previous_page_array_point = array_point;
+                array_point = next_page_array_point;
                 next_page_array_point = eventListViewer(popupView, next_page_array_point);
+
             }
         });
 
@@ -375,9 +391,15 @@ public class CalendarCustomView extends LinearLayout {
         String text;
 
         for (int i = array_point; i < arrayList.size(); i +=1){
+            if(i == arrayList.size() - 1) {
+                eventCellTV2.setText("No more events this month");
+                eventCellTV3.setText("No more events this month");
+                eventCellTV4.setText("No more events this month");
+            }
             events = arrayList.get(i);
-            //Toast.makeText(context, cal.get(Calendar.YEAR), Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "Total Number of Events this month:" + String.format("%d", arrayList.size()), Toast.LENGTH_LONG).show();
             if ((cal.get(Calendar.MONTH) + 1) == Integer.parseInt(events.getMonth())){
+                array_point1 = i;
                 text = "";
                 text = text + "\nEvent Name: " + events.getEvent() + "\nEvent Location: " + events.getLocation()
                         + "\nEvent Time: " + events.getTime() + "\nEvent Date: " + events.getDate() + " " + events.getMonth()
@@ -389,10 +411,15 @@ public class CalendarCustomView extends LinearLayout {
             array_point +=1;
         }
 
-        for (int i = array_point; i < arrayList.size(); i +=1){
+        for (int i = array_point; i < arrayList.size(); i +=1){if(i == arrayList.size() - 1) {
+            eventCellTV3.setText("No more events this month");
+            eventCellTV4.setText("No more events this month");
+        }
+
             events = arrayList.get(i);
             //Toast.makeText(context, cal.get(Calendar.YEAR), Toast.LENGTH_LONG).show();
             if ((cal.get(Calendar.MONTH) + 1) == Integer.parseInt(events.getMonth())){
+                array_point2 = i;
                 text = "";
                 text = text + "\nEvent Name: " + events.getEvent() + "\nEvent Location: " + events.getLocation()
                         + "\nEvent Time: " + events.getTime() + "\nEvent Date: " + events.getDate() + " " + events.getMonth()
@@ -405,6 +432,10 @@ public class CalendarCustomView extends LinearLayout {
         }
 
         for (int i = array_point; i < arrayList.size(); i +=1){
+            if(i == arrayList.size() - 1) {
+                eventCellTV4.setText("No more events this month");
+            }
+            array_point3 = i;
             events = arrayList.get(i);
             //Toast.makeText(context, cal.get(Calendar.YEAR), Toast.LENGTH_LONG).show();
             if ((cal.get(Calendar.MONTH) + 1) == Integer.parseInt(events.getMonth())){
@@ -420,6 +451,7 @@ public class CalendarCustomView extends LinearLayout {
         }
 
         for (int i = array_point; i < arrayList.size(); i +=1){
+            array_point4 = i;
             events = arrayList.get(i);
             //Toast.makeText(context, cal.get(Calendar.YEAR), Toast.LENGTH_LONG).show();
             if ((cal.get(Calendar.MONTH) + 1) == Integer.parseInt(events.getMonth())){
