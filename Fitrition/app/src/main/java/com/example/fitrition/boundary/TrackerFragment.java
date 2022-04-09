@@ -112,7 +112,6 @@ public class TrackerFragment extends Fragment {
 
         LocalDate date = LocalDate.parse(dateStr, formatter);
 
-        Toast.makeText(view.getContext(), dateStr.toString(), Toast.LENGTH_SHORT).show();
 
         ArrayList<Events> eventsList = new ArrayList<Events>();
         ArrayList<Integer> intList=new ArrayList<Integer>();
@@ -148,8 +147,6 @@ public class TrackerFragment extends Fragment {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH);
 
         LocalDate date = LocalDate.parse(dateStr, formatter);
-
-        Toast.makeText(view.getContext(), dateStr.toString(), Toast.LENGTH_SHORT).show();
 
         ArrayList<Events> eventsList = new ArrayList<Events>();
         ArrayList<Integer> intList=new ArrayList<Integer>();
@@ -453,8 +450,6 @@ public class TrackerFragment extends Fragment {
                 });
 
 
-
-                Toast.makeText(view.getContext(), "Date: " + dateOnly, Toast.LENGTH_LONG).show();
 
                 currentDay.setText(dateOnly);
 

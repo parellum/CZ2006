@@ -73,12 +73,14 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
         holder.eventCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                event.setDone(b);
-                FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(event.getId()).setValue(event);
-                if (b==true){
+                if (b==true & event.getPosted()==false){
                     socialManager=SocialManager.getInstance();
                     socialManager.createStatusFromEvent(event);
                 }
+                event.setDone(b);
+                event.setPosted(true);
+                FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(event.getId()).setValue(event);
+
             }
         });
     }

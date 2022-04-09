@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Events {
     String id,event,location,time,date,month,year;
-    Boolean done,isExercise;
+    Boolean done,isExercise,isPosted;
 
     public Events(){}
 
@@ -19,6 +19,7 @@ public class Events {
         this.month = month;
         this.year = year;
         this.done = false;
+        this.isPosted=false;
         this.isExercise=isExercise;
     }
 
@@ -92,5 +93,13 @@ public class Events {
 
     public void setExercise(Boolean exercise) {
         isExercise = exercise;
+    }
+
+    public Boolean getPosted() {
+        return isPosted;
+    }
+
+    public void setPosted(Boolean posted) {
+        isPosted = posted;
     }
 }
