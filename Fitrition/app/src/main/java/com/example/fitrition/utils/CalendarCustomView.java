@@ -275,6 +275,7 @@ public class CalendarCustomView extends LinearLayout {
             }
         });
 
+
         // dismiss the popup window when touched
         popupView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -308,6 +309,16 @@ public class CalendarCustomView extends LinearLayout {
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // Add event popup
+                TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
+        TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
+        EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
+        EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
+        EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
+        EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
+        Button saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
+
         eventCellTV1 = popupView.findViewById(R.id.eventListTV1);
         eventCellTV2 = popupView.findViewById(R.id.eventListTV2);
         eventCellTV3 = popupView.findViewById(R.id.eventListTV3);
@@ -321,6 +332,13 @@ public class CalendarCustomView extends LinearLayout {
                 arrayList.remove(array_point1);
                 String text = "Event removed successfully";
                 eventCellTV1.setText(text);
+            }
+        });
+
+        Button buttonEditTV1 = (Button) popupView.findViewById(R.id.buttonEditTV1);
+        buttonEditTV1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View popupView) {
             }
         });
 
