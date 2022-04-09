@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.fitrition.R;
@@ -31,10 +32,14 @@ import java.time.format.DateTimeFormatter;
 public class ProfileFragment extends Fragment {
     Button button1;
     Button button2;
+    Button changePassword;
+    Button changeDescription;
     TextView name,age,email,description,gender,statusCount,friendCount;
     EditText password;
     ProfileManager profileManager;
     ImageView profilePic;
+
+    int update=0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +50,9 @@ public class ProfileFragment extends Fragment {
 
         button1 = view.findViewById(R.id.status_count_btn);
         button2 = view.findViewById(R.id.friend_list_btn);
+
+        changeDescription = view.findViewById(R.id.profile_description_change);
+        changePassword = view.findViewById(R.id.profile_password_change);
 
         name = (TextView) view.findViewById(R.id.profile_user_name);
         age = (TextView) view.findViewById(R.id.profile_user_age);
@@ -58,12 +66,31 @@ public class ProfileFragment extends Fragment {
 
         profilePic = (ImageView) view.findViewById(R.id.profile_user_image);
 
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment passwordChangeFragment = new PasswordChangeFragment();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_fragment_container, passwordChangeFragment).commit();
+            }
+        });
+
+        changeDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment descriptionChangeFragment = new DescriptionChangeFragment();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_fragment_container, descriptionChangeFragment).commit();
+            }
+        });
+
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Fragment statusHistory = new StatusHistoryFragment();
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.profile_fragment, statusHistory).commit();
+                fragmentTransaction.replace(R.id.main_fragment_container, statusHistory).commit();
+
             }
         });
 
@@ -103,5 +130,4 @@ public class ProfileFragment extends Fragment {
                 .load(profileManager.getUser().getImageUrl())
                 .into(profilePic);
     }
-
 }
