@@ -20,11 +20,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No events here" />
-        <Button
-            android:id="@+id/buttonDeleteTV1"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delete" />
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/buttonEditTV1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Edit Event  " />
+            <Button
+                android:id="@+id/buttonDeleteTV1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Delete Event  " />
+        </LinearLayout>
 
 
 
@@ -33,11 +43,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No events here" />
-        <Button
-            android:id="@+id/buttonDeleteTV2"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delete" />
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/buttonEditTV2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Edit Event  " />
+            <Button
+                android:id="@+id/buttonDeleteTV2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Delete Event  " />
+        </LinearLayout>
 
 
         <TextView
@@ -45,11 +65,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No events here" />
-        <Button
-            android:id="@+id/buttonDeleteTV3"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delete" />
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/buttonEditTV3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Edit Event  " />
+            <Button
+                android:id="@+id/buttonDeleteTV3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Delete Event  " />
+        </LinearLayout>
 
 
         <TextView
@@ -57,11 +87,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No events here" />
-        <Button
-            android:id="@+id/buttonDeleteTV4"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delete" />
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/buttonEditTV4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Edit Event  " />
+            <Button
+                android:id="@+id/buttonDeleteTV4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Delete Event  " />
+        </LinearLayout>
 
 
 

@@ -103,6 +103,13 @@ public class FriendActivity extends AppCompatActivity {
         friendAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                friendManager.addFriend(friendManager.getFriend(), FriendActivity.this);
+            }
+        });
+
+        friendRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Dialog dialog = new Dialog(FriendActivity.this);
                 dialog.setTitle("Friend Invitation Request");
                 dialog.setContentView(R.layout.fragment_invitation);
@@ -114,7 +121,7 @@ public class FriendActivity extends AppCompatActivity {
                 btnAccept.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        friendManager.addFriend(friendManager.getFriend(), FriendActivity.this);
+                        friendManager.removeFriend(friendManager.getFriend(),FriendActivity.this);
                         dialog.dismiss();
                     }
                 });
@@ -127,13 +134,6 @@ public class FriendActivity extends AppCompatActivity {
                 });
 
 
-            }
-        });
-
-        friendRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                friendManager.removeFriend(friendManager.getFriend(),FriendActivity.this);
             }
         });
 
