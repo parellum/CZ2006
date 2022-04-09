@@ -10,7 +10,7 @@
 
     <item android:title="Search"
         android:id="@+id/search_icon"
-        android:icon="@drawable/ic_baseline_search_24"
+        android:icon="@drawable/ic_add_new_friend"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 <!--https://www.youtube.com/watch?v=cId3IrdAg7k-->

@@ -82,24 +82,6 @@ public class MainActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setQueryHint("Search eateries/fitness facilities here...");
 
-//        MenuItem.OnActionExpandListener onActionExpandListener =new MenuItem.OnActionExpandListener() {
-//            @Override
-//            public boolean onMenuItemActionExpand(MenuItem item) {
-//                Toast.makeText(MainActivity.this, "Search is Expanded", Toast.LENGTH_SHORT);
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onMenuItemActionCollapse(MenuItem item) {
-//                Toast.makeText(MainActivity.this, "Search is Colapsed", Toast.LENGTH_SHORT);
-//                return true;
-//            }
-//        };
-        // same thing here except for the first line
-//        menu.findItem(R.id.search_icon).setOnActionExpandListener(onActionExpandListener);
-//        SearchView searchView = (SearchView) menu.findItem(R.id.search_icon).getActionView();
-//        searchView.setQueryHint("Search eateries/fitness facilities here...");
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
