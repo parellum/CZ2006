@@ -1,7 +1,5 @@
 package com.example.fitrition.entities;
 
-import android.media.Image;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
