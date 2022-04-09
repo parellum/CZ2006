@@ -2,7 +2,20 @@ package com.example.fitrition.entities;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+
+
+
 public class FitnessCentreJSON {
+
+    @SerializedName("type")
+    private Type type = null;
+
+    public enum Type{
+        @SerializedName("0")
+        HAWKER,
+        @SerializedName("1")
+        FITNESS
+    }
 
     @SerializedName("id")
     @Expose
@@ -35,6 +48,10 @@ public class FitnessCentreJSON {
     @SerializedName("Rating")
     @Expose
     private double Rating;
+
+    @SerializedName("imageUrl")
+    @Expose
+    private String imageUrl;
 
     public FitnessCentreJSON(){}
 
@@ -102,5 +119,23 @@ public class FitnessCentreJSON {
         Rating = rating;
     }
 
+    public String getType() {
+        return type.toString();
+    }
+
+    public void setType(String type) {
+        if(type.equalsIgnoreCase("Hawker"))
+            this.type = Type.HAWKER;
+        else
+            this.type = Type.FITNESS;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
 

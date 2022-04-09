@@ -1,0 +1,218 @@
+[
+   {
+      "foodfoodID":"1",
+      "nameOfHawker":"Marsiling Mall Hawker Centre",
+      "nameOfStall":"The Bite Moguls",
+      "nameOfFood":"Hainanese chicken rice",
+      "description":"Hainanese chicken rice is a dish of poached chicken and seasoned rice, served with chilli sauce and usually with cucumber garnishes",
+      "calories":"617",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodfoodID":"2",
+      "nameOfHawker":"Marsiling Mall Hawker Centre",
+      "nameOfStall":"The Bite Moguls",
+      "nameOfFood":"Bak kut teh",
+      "description":"Bak kut teh is a pork rib dish cooked in broth popularly served in Malaysia and Singapore where there is a predominant Hoklo and Teochew",
+      "calories":"324",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodfoodID":"3",
+      "nameOfHawker":"Marsiling Mall Hawker Centre",
+      "nameOfStall":"Streets And Steaks",
+      "nameOfFood":"Nasi Lemak",
+      "description":"Nasi lemak is a Malay cuisine dish originating from Malaysia that consists of fragrant rice cooked in coconut milk and pandan leaf.",
+      "calories":"348",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodfoodID":"4",
+      "nameOfHawker":"Marsiling Mall Hawker Centre",
+      "nameOfStall":"Streets And Steaks",
+      "nameOfFood":"Laksa",
+      "description":"Laksa is a spicy noodle dish popular in Southeast Asia.",
+      "calories":"610",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodfoodID":"5",
+      "nameOfHawker":"Marsiling Lane Blk 20",
+      "nameOfStall":"Scramble Sunrise",
+      "nameOfFood":"Grated Daikon & Ponzu Sauce Gyudon",
+      "description":"Freshly grated daikon with ponzu sauce, made of shoyu, dashi, and yuzu citrus juice. A well-balanced combination of savory, sweet, and tangy flavor on top of gyudon.",
+      "calories":"574",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodfoodID":"6",
+      "nameOfHawker":"Marsiling Lane Blk 20",
+      "nameOfStall":"Scramble Sunrise",
+      "nameOfFood":"Grated Daikon & Ponzu Sauce Beef Yakiniku Bowl",
+      "description":"Freshly grated daikon with ponzu sauce, made of shoyu, dashi, and yuzu citrus juice. A well-balanced combination of savory, sweet, and tangy flavor on top of beef yakiniku bowl.",
+      "calories":"903",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodfoodID":"7",
+      "nameOfHawker":"Marsiling Lane Blk 20",
+      "nameOfStall":"The Foodie Spotlight",
+      "nameOfFood":"Spring Onion & Half Boiled Egg Gyudon",
+      "description":"Gyudon with fresh spring onion complimented with sweet and spicy Korean chilli pepper sauce and Half Boiled Egg. A very popular menu in Japan.",
+      "calories":"822",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodfoodID":"8",
+      "nameOfHawker":"Marsiling Lane Blk 20",
+      "nameOfStall":"The Foodie Spotlight",
+      "nameOfFood":"Triple Cheese Gyudon",
+      "description":"A perfect combination of mozzarella, cheddar, and Monterey Jack cheese on your gyudon. After 20 years, it’s still the most popular topping in Japan.",
+      "calories":"623",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodfoodID":"9",
+      "nameOfHawker":"Taman Jurong Market and Food Centre",
+      "nameOfStall":"Sukiya",
+      "nameOfFood":"Kimchi Gyudon",
+      "description":"The very first and long seller topping of Sukiya in Japan. Carefully selected kimchi on top of your favorite gyudon.",
+      "calories":"987",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodfoodID":"10",
+      "nameOfHawker":"Taman Jurong Market and Food Centre",
+      "nameOfStall":"Sukiya",
+      "nameOfFood":"Double Half Boiled Egg Gyudon",
+      "description":"2pc Half Boiled Eggs topping on gyudon, for you who love egg!",
+      "calories":"987",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodfoodID":"11",
+      "nameOfHawker":"Taman Jurong Market and Food Centre",
+      "nameOfStall":"Sukiya",
+      "nameOfFood":"Melted Cheese Gyudon",
+      "description":"Our Triple Cheese Gyudon with savory melted cheese on top. Japan Sukiya's current most popular topping.",
+      "calories":"813",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodfoodID":"12",
+      "nameOfHawker":"Taman Jurong Market and Food Centre",
+      "nameOfStall":"Sukiya",
+      "nameOfFood":"Half Boiled Egg Gyudon",
+      "description":"Half Boiled Egg that matches perfectly and compliments the taste of gyudon.",
+      "calories":"493",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodID":"13",
+      "nameOfHawker":"Jurong West Street 52 Blk 505",
+      "nameOfStall":"Fat Mario",
+      "nameOfFood":"Bacon & Mushroom Aglio Olio (Spicy)",
+      "description":"An Italian Icon with a twist! sautéed bacon, mushrooms, minced garlic and chilli padi with your choice of pasta. Topped with parmesan & fresh parsley.",
+      "calories":"983",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodID":"14",
+      "nameOfHawker":"Jurong West Street 52 Blk 505",
+      "nameOfStall":"Fat Mario",
+      "nameOfFood":"Veggie Alfredo",
+      "description":"Roasted mushrooms, red pepper, broccoli, spinach, garlic, alfredo sauce, parmesan, fresh parsley.",
+      "calories":"313",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodID":"15",
+      "nameOfHawker":"Jurong West Street 52 Blk 505",
+      "nameOfStall":"M.A.D. Kitchen",
+      "nameOfFood":"Spicy Chicken Pasta",
+      "description":"Spice up your meal! Pasta made with Napoli sauce, poached chicken strips, chili padi for extra kick, topped with parmesan and fresh parsley.",
+      "calories":"898",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodID":"16",
+      "nameOfHawker":"Jurong West Street 52 Blk 505",
+      "nameOfStall":"M.A.D. Kitchen",
+      "nameOfFood":"Creamy Bacon and Mushroom Pasta",
+      "description":"Basic yet perfect combination of pasta and parmesan cream sauce, cooked with mushrooms and bacon. Topped with parmesan and fresh parsley.",
+      "calories":"463",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodID":"17",
+      "nameOfHawker":"Boon Lay Place Market and Food Village",
+      "nameOfStall":"Bombay Grill",
+      "nameOfFood":"Veg Set",
+      "description":"Served with mix Veg, Dal Tadka, Saffron pulao & Butter Naan",
+      "calories":"103",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodID":"18",
+      "nameOfHawker":"Boon Lay Place Market and Food Village",
+      "nameOfStall":"Bombay Grill",
+      "nameOfFood":"Veg Biryani Set",
+      "description":"Served with Vegetable biryani, dal Tadka, and ratia",
+      "calories":"213",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodID":"19",
+      "nameOfHawker":"Boon Lay Place Market and Food Village",
+      "nameOfStall":"Bombay Grill",
+      "nameOfFood":"Aloo Gobi Set",
+      "description":"Served with Aloo Gobi, Dal Tadka, Saffron pulao & Butter Naan",
+      "calories":"987",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodID":"20",
+      "nameOfHawker":"Boon Lay Place Market and Food Village",
+      "nameOfStall":"Bombay Grill",
+      "nameOfFood":"Paneer Butter Masala Set",
+      "description":"Served with Paneer Butter Masala, Dal Tadka, Saffron pulao & Butter Naan",
+      "calories":"413",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodID":"21",
+      "nameOfHawker":"Jurong West Hawker Centre",
+      "nameOfStall":"Mackenzie Rex Restaurant",
+      "nameOfFood":"Curry Pan Mee (Soup)",
+      "description":"TauPau, Pork Chop, Long Bean, Fish-Cake.",
+      "calories":"223",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodID":"22",
+      "nameOfHawker":"Jurong West Hawker Centre",
+      "nameOfStall":"Mackenzie Rex Restaurant",
+      "nameOfFood":"Sweet and Sour Pork Rice",
+      "description":"Sweet and Sour Pork Rice",
+      "calories":"953",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodID":"23",
+      "nameOfHawker":"Jurong West Hawker Centre",
+      "nameOfStall":"Mackenzie Rex Restaurant",
+      "nameOfFood":"Deep Fried Fish Fillet Rice",
+      "description":"Deep Fried Fish Fillet Rice",
+      "calories":"813",
+      "foodImageUrl":"nil"
+   },
+   {
+      "foodID":"24",
+      "nameOfHawker":"Jurong West Hawker Centre",
+      "nameOfStall":"Mackenzie Rex Restaurant",
+      "nameOfFood":"Deep Fried Pork Meat",
+      "description":"Deep Fried Pork Meat",
+      "calories":"898",
+      "foodImageUrl":"nil"
+   }
+]

@@ -53,10 +53,14 @@ public class CalendarCustomView extends LinearLayout {
     private CalendarManager calendarManager;
 
     ArrayList<Events> arrayList;
-    TextView eventCellTV;
+    TextView eventCellTV1, eventCellTV2, eventCellTV3, eventCellTV4;
 
     DatabaseReference mDatabaseReference;
     FirebaseAuth mAuth;
+
+    int array_point = 0;
+    int previous_page_array_point = 0;
+    int next_page_array_point;
 
 
     public CalendarCustomView(Context context) {
@@ -124,34 +128,40 @@ public class CalendarCustomView extends LinearLayout {
                 // which view you pass in doesn't matter, it is only used for the window tolken
                 popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
-                Button saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
+
                 TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
                 TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
                 EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
                 EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
                 EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
                 EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
+                Button saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
                 saveEventButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View popupView) {
                         String err_msg = "";
-                        int year_int = Integer.parseInt(eventYear.getText().toString());
-                        if (year_int < 1950 || year_int >2100){
-                            err_msg = err_msg + "Year is not valid. Please enter number in range of 1950 to 2100\n";
+                        if (eventName.getText().toString() == "") {
+                            err_msg = err_msg + "Name is not valid. Please enter the event name.\n";
                         }
-                        int month_int = Integer.parseInt(eventMonth.getText().toString());
-                        if (month_int < 1 || month_int >12){
-                            err_msg = err_msg + "Month is not valid. Please enter number in range of 1 to 12\n";
-                        }
-                        int date_int = Integer.parseInt(eventDate.getText().toString());
-                        if (date_int < 1 || date_int >31){
-                            err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
+                        if (eventLocation.getText().toString() == "") {
+                            err_msg = err_msg + "Location is not valid. Please enter a valid location.\n";
                         }
                         int time_int = Integer.parseInt(eventTime.getText().toString());
                         if (time_int < 0 || time_int >2359){
                             err_msg = err_msg + "Time is not valid. Please enter number in range of 0000 to 2359\n";
                         }
-
+                        int date_int = Integer.parseInt(eventDate.getText().toString());
+                        if (date_int < 1 || date_int >31){
+                            err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
+                        }
+                        int month_int = Integer.parseInt(eventMonth.getText().toString());
+                        if (month_int < 1 || month_int >12){
+                            err_msg = err_msg + "Month is not valid. Please enter number in range of 1 to 12\n";
+                        }
+                        int year_int = Integer.parseInt(eventYear.getText().toString());
+                        if (year_int < 1900 || year_int >2100){
+                            err_msg = err_msg + "Year is not valid. Please enter number in range of 1900 to 2100\n";
+                        }
                         if (err_msg == "") {
                             SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
                                     , eventTime.getText().toString()
@@ -164,7 +174,6 @@ public class CalendarCustomView extends LinearLayout {
                         }
                     }
                 });
-
                 // dismiss the popup window when touched
                 popupView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -226,23 +235,28 @@ public class CalendarCustomView extends LinearLayout {
             @Override
             public void onClick(View popupView) {
                 String err_msg = "";
-                int year_int = Integer.parseInt(eventYear.getText().toString());
-                if (year_int < 1950 || year_int >2100){
-                    err_msg = err_msg + "Year is not valid. Please enter number in range of 1950 to 2100\n";
+                if (eventName.getText().toString() == "") {
+                    err_msg = err_msg + "Name is not valid. Please enter the event name.\n";
                 }
-                int month_int = Integer.parseInt(eventMonth.getText().toString());
-                if (month_int < 1 || month_int >12){
-                    err_msg = err_msg + "Month is not valid. Please enter number in range of 1 to 12\n";
-                }
-                int date_int = Integer.parseInt(eventDate.getText().toString());
-                if (date_int < 1 || date_int >31){
-                    err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
+                if (eventLocation.getText().toString() == "") {
+                    err_msg = err_msg + "Location is not valid. Please enter a valid location.\n";
                 }
                 int time_int = Integer.parseInt(eventTime.getText().toString());
                 if (time_int < 0 || time_int >2359){
                     err_msg = err_msg + "Time is not valid. Please enter number in range of 0000 to 2359\n";
                 }
-
+                int date_int = Integer.parseInt(eventDate.getText().toString());
+                if (date_int < 1 || date_int >31){
+                    err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
+                }
+                int month_int = Integer.parseInt(eventMonth.getText().toString());
+                if (month_int < 1 || month_int >12){
+                    err_msg = err_msg + "Month is not valid. Please enter number in range of 1 to 12\n";
+                }
+                int year_int = Integer.parseInt(eventYear.getText().toString());
+                if (year_int < 1900 || year_int >2100){
+                    err_msg = err_msg + "Year is not valid. Please enter number in range of 1900 to 2100\n";
+                }
                 if (err_msg == "") {
                     SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
                             , eventTime.getText().toString()
@@ -269,39 +283,157 @@ public class CalendarCustomView extends LinearLayout {
     private void setAllEventButtonClickEvent() {
         allEventButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                LayoutInflater inflater = (LayoutInflater)
-                        context.getSystemService(LAYOUT_INFLATER_SERVICE);
-                View popupView = inflater.inflate(R.layout.fragment_event_list, null);
-                // create the popup window
-                int width = LinearLayout.LayoutParams.MATCH_PARENT;
-                int height = LinearLayout.LayoutParams.MATCH_PARENT;
-                boolean focusable = true; // lets taps outside the popup also dismiss it
-                final PopupWindow popupWindow = new PopupWindow(popupView, width,  height, focusable);
-                // show the popup window
-                // which view you pass in doesn't matter, it is only used for the window tolken
-                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-                Events events;
-                String text = "";
-                eventCellTV = popupView.findViewById(R.id.eventListTV);
-                for (int i = 0; i < arrayList.size(); i +=1){
-                    events = arrayList.get(i);
-                    if ((cal.get(Calendar.MONTH) + 1) == Integer.parseInt(events.getMonth())){
-                        text = text + "\nEvent Name: " + events.getEvent() + "\nEvent Location: " + events.getLocation()
-                                + "\nEvent Time: " + events.getTime() + "\nEvent Date: " + events.getDate() + " " + events.getMonth()
-                                + " " + events.getYear() + "\n\n";
-                    }
-                }
-                eventCellTV.setText(text);
-                // dismiss the popup window when touched
-                popupView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        popupWindow.dismiss();
-                        return true;
-                    }
-                });
+                array_point = 0;
+                previous_page_array_point = 0;
+                next_page_array_point = 0;
+                inflateEventList(view);
             }
         });
+    }
+
+    private void inflateEventList(View view){
+        LayoutInflater inflater = (LayoutInflater)
+                context.getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.fragment_event_list, null);
+        // create the popup window
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width,  height, focusable);
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        eventCellTV1 = popupView.findViewById(R.id.eventListTV1);
+        eventCellTV2 = popupView.findViewById(R.id.eventListTV2);
+        eventCellTV3 = popupView.findViewById(R.id.eventListTV3);
+        eventCellTV4 = popupView.findViewById(R.id.eventListTV4);
+        next_page_array_point = eventListViewer(popupView, array_point);
+
+        Button buttonDeleteTV1 = (Button) popupView.findViewById(R.id.buttonDeleteTV1);
+        buttonDeleteTV1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View popupView) {
+
+            }
+        });
+
+        Button buttonDeleteTV2 = (Button) popupView.findViewById(R.id.buttonDeleteTV2);
+        buttonDeleteTV2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View popupView) {
+
+            }
+        });
+
+        Button buttonDeleteTV3 = (Button) popupView.findViewById(R.id.buttonDeleteTV3);
+        buttonDeleteTV3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View popupView) {
+
+            }
+        });
+
+        Button buttonDeleteTV4 = (Button) popupView.findViewById(R.id.buttonDeleteTV4);
+        buttonDeleteTV4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View popupView) {
+
+            }
+        });
+
+        Button buttonPreviousPage = (Button) popupView.findViewById(R.id.buttonPreviousPage);
+        buttonPreviousPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View popupView) {
+
+            }
+        });
+
+        Button buttonNextPage = (Button) popupView.findViewById(R.id.buttonNextPage);
+        buttonNextPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View popupView) {
+                //array_point = next_page_array_point;
+                //previous_page_array_point = array_point;
+                next_page_array_point = eventListViewer(popupView, next_page_array_point);
+            }
+        });
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+    }
+
+
+    private int eventListViewer(View popupView, int array_point){
+        Events events;
+        String text;
+
+        for (int i = array_point; i < arrayList.size(); i +=1){
+            events = arrayList.get(i);
+            //Toast.makeText(context, cal.get(Calendar.YEAR), Toast.LENGTH_LONG).show();
+            if ((cal.get(Calendar.MONTH) + 1) == Integer.parseInt(events.getMonth())){
+                text = "";
+                text = text + "\nEvent Name: " + events.getEvent() + "\nEvent Location: " + events.getLocation()
+                        + "\nEvent Time: " + events.getTime() + "\nEvent Date: " + events.getDate() + " " + events.getMonth()
+                        + " " + events.getYear();
+                eventCellTV1.setText(text);
+                array_point +=1;
+                break;
+            }
+            array_point +=1;
+        }
+
+        for (int i = array_point; i < arrayList.size(); i +=1){
+            events = arrayList.get(i);
+            //Toast.makeText(context, cal.get(Calendar.YEAR), Toast.LENGTH_LONG).show();
+            if ((cal.get(Calendar.MONTH) + 1) == Integer.parseInt(events.getMonth())){
+                text = "";
+                text = text + "\nEvent Name: " + events.getEvent() + "\nEvent Location: " + events.getLocation()
+                        + "\nEvent Time: " + events.getTime() + "\nEvent Date: " + events.getDate() + " " + events.getMonth()
+                        + " " + events.getYear();
+                eventCellTV2.setText(text);
+                array_point +=1;
+                break;
+            }
+            array_point +=1;
+        }
+
+        for (int i = array_point; i < arrayList.size(); i +=1){
+            events = arrayList.get(i);
+            //Toast.makeText(context, cal.get(Calendar.YEAR), Toast.LENGTH_LONG).show();
+            if ((cal.get(Calendar.MONTH) + 1) == Integer.parseInt(events.getMonth())){
+                text = "";
+                text = text + "\nEvent Name: " + events.getEvent() + "\nEvent Location: " + events.getLocation()
+                        + "\nEvent Time: " + events.getTime() + "\nEvent Date: " + events.getDate() + " " + events.getMonth()
+                        + " " + events.getYear();
+                eventCellTV3.setText(text);
+                array_point +=1;
+                break;
+            }
+            array_point +=1;
+        }
+
+        for (int i = array_point; i < arrayList.size(); i +=1){
+            events = arrayList.get(i);
+            //Toast.makeText(context, cal.get(Calendar.YEAR), Toast.LENGTH_LONG).show();
+            if ((cal.get(Calendar.MONTH) + 1) == Integer.parseInt(events.getMonth())){
+                text = "";
+                text = text + "\nEvent Name: " + events.getEvent() + "\nEvent Location: " + events.getLocation()
+                        + "\nEvent Time: " + events.getTime() + "\nEvent Date: " + events.getDate() + " " + events.getMonth()
+                        + " " + events.getYear();
+                eventCellTV4.setText(text);
+                array_point +=1;
+                break;
+            }
+            array_point +=1;
+        }
+        return array_point;
     }
 
 //    private DatePickerDialog.OnDateSetListener myDateListener = new

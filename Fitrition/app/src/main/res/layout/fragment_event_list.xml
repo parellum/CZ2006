@@ -16,9 +16,72 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/eventListTV"
+            android:id="@+id/eventListTV1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="No events here" />
+        <Button
+            android:id="@+id/buttonDeleteTV1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete" />
+
+
+
+        <TextView
+            android:id="@+id/eventListTV2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No events here" />
+        <Button
+            android:id="@+id/buttonDeleteTV2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete" />
+
+
+        <TextView
+            android:id="@+id/eventListTV3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No events here" />
+        <Button
+            android:id="@+id/buttonDeleteTV3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete" />
+
+
+        <TextView
+            android:id="@+id/eventListTV4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No events here" />
+        <Button
+            android:id="@+id/buttonDeleteTV4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/buttonPreviousPage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="   Previous Page   " />
+
+            <Button
+                android:id="@+id/buttonNextPage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="      Next Page      " />
+
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

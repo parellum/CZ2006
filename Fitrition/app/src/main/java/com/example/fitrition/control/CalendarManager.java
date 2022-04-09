@@ -1,5 +1,9 @@
 package com.example.fitrition.control;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.fitrition.entities.Events;
@@ -41,15 +45,16 @@ public class CalendarManager {
     }
 
     public void loadEvents(){
-        mDatabaseReference= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        mDatabaseReference= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds: snapshot.getChildren()){
+                    Log.d(TAG, "loadEvents: HELLO");
                     Events eventChild=ds.getValue(Events.class);
+                    Log.d(TAG, "loadEvents: HELLO");
                     eventsList.add(eventChild);
                 }
-                mDatabaseReference.removeEventListener(this);
             }
 
             @Override

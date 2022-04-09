@@ -39,6 +39,12 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
         this.friendList=friendList;
     }
 
+    public void setData(ArrayList<Status>statusList,ArrayList<String> friendIDList,ArrayList<Friend> friendList){
+        this.statusList = statusList;
+        this.friendIDList=friendIDList;
+        this.friendList=friendList;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,parent,false);

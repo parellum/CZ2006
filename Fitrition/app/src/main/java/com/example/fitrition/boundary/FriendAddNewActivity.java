@@ -34,6 +34,7 @@ public class FriendAddNewActivity extends AppCompatActivity {
     ImageView back_button;
     ProfileManager profileManager;
     DatabaseReference mDatabaseReference;
+    int allowUpdate=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class FriendAddNewActivity extends AppCompatActivity {
                     }
                 }
                 initRecylerView();
+                mDatabaseReference.removeEventListener(this);
             }
 
             @Override
@@ -85,6 +87,41 @@ public class FriendAddNewActivity extends AppCompatActivity {
         all_user_list_adapter=new AllUserRecyclerAdapter(searchUserList);
         recyclerView.setAdapter(all_user_list_adapter);
         all_user_list_adapter.notifyDataSetChanged();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        allowUpdate=1;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (allowUpdate == 1) {
+            searchUserList = new ArrayList<>();
+            mDatabaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot targetChild : snapshot.getChildren()) {
+                        if (profileManager.getUser().getFriendList().contains(targetChild.getKey()) | profileManager.getUser().getUserID().equals(targetChild.getKey())) {
+                            continue;
+                        } else {
+                            searchUserList.add(targetChild.getValue(Friend.class));
+                        }
+                    }
+                    initRecylerView();
+                    all_user_list_adapter.setData(searchUserList);
+                    all_user_list_adapter.notifyDataSetChanged();
+                    allowUpdate=0;
+                    mDatabaseReference.removeEventListener(this);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
     }
 }
