@@ -4,10 +4,12 @@ import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.fitrition.adapter.StatusAdapter;
 import com.example.fitrition.adapter.StatusFocusAdapter;
+import com.example.fitrition.boundary.InvitationFragment;
 import com.example.fitrition.control.FriendManager;
 import com.example.fitrition.databinding.ActivityMainBinding;
 import com.example.fitrition.entities.Friend;
@@ -48,6 +51,9 @@ public class FriendActivity extends AppCompatActivity {
     //check if the database is updated before
     private DatabaseReference databaseReference;
 
+    LoadinDialogBar loadinDialogBar;
+
+
     RecyclerView recyclerView;
     StatusFocusAdapter statusFocusAdapter;
 
@@ -70,6 +76,8 @@ public class FriendActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_status);
+
+        loadinDialogBar = new LoadinDialogBar(this);
 
         friendManager=FriendManager.getInstance();
 
@@ -95,14 +103,37 @@ public class FriendActivity extends AppCompatActivity {
         friendAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                friendManager.addFriend(friendManager.getFriend(),FriendActivity.this);
+                friendManager.addFriend(friendManager.getFriend(), FriendActivity.this);
             }
         });
 
         friendRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                friendManager.removeFriend(friendManager.getFriend(),FriendActivity.this);
+                Dialog dialog = new Dialog(FriendActivity.this);
+                dialog.setTitle("Friend Invitation Request");
+                dialog.setContentView(R.layout.fragment_invitation);
+                dialog.show();
+
+                Button btnAccept = dialog.findViewById(R.id.acceptBtn);
+                Button btnDecline = dialog.findViewById(R.id.declineBtn);
+
+                btnAccept.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        friendManager.removeFriend(friendManager.getFriend(),FriendActivity.this);
+                        dialog.dismiss();
+                    }
+                });
+
+                btnDecline.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+
             }
         });
 
@@ -139,6 +170,8 @@ public class FriendActivity extends AppCompatActivity {
 
         fToolbar = findViewById(R.id.friend_toolbar);
         setSupportActionBar(fToolbar);
+
+
 
     }
 

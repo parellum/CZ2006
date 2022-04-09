@@ -3,6 +3,7 @@ import static android.content.ContentValues.TAG;
 
 import android.net.Uri;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.example.fitrition.entities.Facility;
 import com.example.fitrition.entities.Fitness;
 import com.example.fitrition.entities.FitnessCentreJSON;
+import com.example.fitrition.entities.Food;
 import com.example.fitrition.entities.Review;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -36,6 +38,16 @@ import java.util.Vector;
 public class FacilityManager {
     private static FacilityManager instance=null;
     private ArrayList<FitnessCentreJSON> facilityList;
+
+    public ArrayList<Food> getFoodList() {
+        return foodList;
+    }
+
+    public void setFoodList(ArrayList<Food> foodList) {
+        this.foodList = foodList;
+    }
+
+    private ArrayList<Food> foodList;
     private final float distanceInKm = 2;
 
     private DatabaseReference mDatabaseReference;
@@ -160,9 +172,17 @@ public class FacilityManager {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot childsnap:snapshot.getChildren()){
                     FitnessCentreJSON facility = childsnap.getValue(FitnessCentreJSON.class);
-                    Log.d(TAG, "onDataChange: "+facility.getName());
                     facilityList.add(facility);
+                    /*mStorageReference.child(facility.getName().replace(' ', '-') + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            facility.setImageUrl(uri.toString());
+                            Log.d(TAG, "onDataChange: "+facility.getImageUrl());
+                            facilityList.add(facility);
+                        }
+                    });*/
                 }
+                mDatabaseReference.removeEventListener(this);
             }
 
             @Override
@@ -172,6 +192,44 @@ public class FacilityManager {
         });
     }
 
+    public void loadFood(){
+        foodList = new ArrayList<Food>();
+        mDatabaseReference = FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("foodItems");
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot childsnap:snapshot.getChildren()){
+                    Food f = childsnap.getValue(Food.class);
+                    foodList.add(f);
+
+                }
+                mDatabaseReference.removeEventListener(this);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public FitnessCentreJSON searchFacility(String name){
+
+        for(FitnessCentreJSON info : facilityList){
+            if( name.equalsIgnoreCase(info.getName())){
+                return info;
+            }
+
+        }
+
+        //BB
+        return null;
+    }
+
+    public void saveFacilitiesnow(){
+        mDatabaseReference = FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("facilities");
+        mDatabaseReference.setValue(facilityList);
+    }
 }
 
 

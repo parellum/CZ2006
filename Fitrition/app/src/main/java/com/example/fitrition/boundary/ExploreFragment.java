@@ -178,13 +178,15 @@ public class ExploreFragment extends Fragment implements OnMapReadyCallback, Eas
     public void createAllMapMarkers(){
         //Used to write to database - Remove Later
         /*try {
+            Gson gson;
+            gson = new GsonBuilder().create();
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(getActivity().getApplicationContext().getAssets().open("sampleJson.txt")));
 
             allFacilitiesArrayList = gson.fromJson(reader, new TypeToken<List<FitnessCentreJSON>>(){}.getType());
-//            FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("facilities").setValue(allFacilitiesArrayList);
+            //FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("facilities").setValue(allFacilitiesArrayList);
 
-             Log.d("Sucess123", "what Inner" + Integer.toString(fitnessCentreArrayList.size()));
+             Log.d("Sucess123", "what Inner" + Integer.toString(allFacilitiesArrayList.size()));
         }
         catch(Exception e) {
             Log.d("Failure", "Exception"  );

@@ -30,6 +30,7 @@ public class facilityDisplay extends Fragment {
     private TextView viewFacilitiesDescription;
     private TextView viewFacilitiesOpeningHr;
     private TextView viewFacilitiesClosingHr;
+    private ImageView viewFacilitiesImage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,8 @@ public class facilityDisplay extends Fragment {
 
                     viewFacilitiesOpeningHr.setText(paddedOpeningTime);
                     viewFacilitiesClosingHr.setText(paddedEndingTime);
+
+                    //
 
                 }
             }

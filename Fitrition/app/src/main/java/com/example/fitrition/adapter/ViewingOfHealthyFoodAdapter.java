@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.fitrition.R;
 import com.example.fitrition.entities.Events;
 import com.example.fitrition.entities.Food;
@@ -57,6 +58,10 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
         String nameOfStall = foodList.get(position).getNameOfStall();
 
         String location = foodList.get(position).getNameOfHawker();
+
+        Glide.with(holder.foodAdapterImageOfDish.getContext())
+                .load(foodList.get(position).getFoodImageUrl())
+                .into(holder.foodAdapterImageOfDish);
 
         holder.setData(URL, name, description, calories);
 
@@ -122,7 +127,7 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView foodAdapterImageOfDish;
+        protected ImageView foodAdapterImageOfDish;
         private TextView foodAdapterTextNameOfDish;
         private TextView foodAdapterTextDescription;
         private TextView foodAdapterTextCalories;

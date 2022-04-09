@@ -1,5 +1,7 @@
 package com.example.fitrition;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,10 +20,13 @@ import android.widget.Toast;
 import com.example.fitrition.adapter.FriendListRecyclerAdapter;
 import com.example.fitrition.adapter.StatusAdapter;
 import com.example.fitrition.adapter.ViewingOfHealthyFoodAdapter;
+import com.example.fitrition.control.FacilityManager;
 import com.example.fitrition.entities.Food;
 import com.example.fitrition.entities.Friend;
 import com.example.fitrition.entities.Status;
 import com.example.fitrition.utils.SpacingItemDecoration;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -48,20 +53,11 @@ public class viewingOfHealthyFood extends Fragment {
 
     private void initData() {
 
-        try {
-            Gson gson;
-            gson = new GsonBuilder().create();
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(getActivity().getApplicationContext().getAssets().open("food.txt")));
+        FacilityManager fm = FacilityManager.getInstance();
 
-            foodArrayList = gson.fromJson(reader, new TypeToken<List<Food>>(){}.getType());
-//            FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("facilities").setValue(foodList);
+        foodArrayList = fm.getFoodList();
 
-             Log.d("SucessFinalVIew", "what Inner" + Integer.toString(foodArrayList.size()));
-        }
-        catch(Exception e) {
-            Log.d("FailureFinalVIew", "Exception"  );
-        }
+
     }
 
     @Override
@@ -70,6 +66,7 @@ public class viewingOfHealthyFood extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_viewing_of_healthy_food, container, false);
 
+        Log.d("SucessFinalVIew", "No Exception"  );
         initData();
 
         //Here is where the list gets populate
