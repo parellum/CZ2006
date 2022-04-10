@@ -119,4 +119,27 @@ public class SocialManager {
             }
         }
     }
+
+    public ArrayList<Status> loadPersonalStatusList(ArrayList<Status> statusArrayList){
+        ArrayList returnArray = new ArrayList<Status>();
+        ArrayList<Status> unsortedArr=new ArrayList<Status>();
+        ArrayList<Long> sortArr=new ArrayList<Long>();
+        for (Status statusSub:statusArrayList) {
+            unsortedArr.add(statusSub);
+            sortArr.add(Long.parseLong(statusSub.getYear() + statusSub.getMonth() + statusSub.getDay() + statusSub.getTime()));
+        }
+        Collections.sort(sortArr);
+        Collections.reverse(sortArr);
+        for (Long subject:sortArr){
+            Log.d(TAG, "loadPersonalStatusList: "+subject.toString());
+            for (Status sub:unsortedArr){
+                if (subject.toString().equals(sub.getYear()+sub.getMonth()+sub.getDay()+sub.getTime())){
+                    returnArray.add(sub);
+                    unsortedArr.remove(sub);
+                    break;
+                }
+            }
+        }
+        return returnArray;
+    }
 }
