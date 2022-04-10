@@ -47,7 +47,7 @@
                     android:layout_height="60dp"
                     android:background="#FFFFFF"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_dining_icon" />
+                    app:srcCompat="@drawable/ic_food_icon" />
 
                 <ImageView
                     android:id="@+id/event_gym"
