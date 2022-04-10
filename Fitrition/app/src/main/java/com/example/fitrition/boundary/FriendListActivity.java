@@ -55,7 +55,7 @@ public class FriendListActivity extends AppCompatActivity {
         searchfriend_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(FriendListActivity.this, FriendAddNewActivity.class));
+//                startActivity(new Intent(FriendListActivity.this, FriendAddNewActivity.class));
             }
         });
     }

@@ -48,8 +48,6 @@ public class FriendListRecyclerAdapter extends RecyclerView.Adapter<FriendListRe
                 .load(userList.get(position).getImageUrl())
                 .into(holder.friendImage);
         holder.setData(name, description);
-
-
         holder.friendCv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,36 +63,6 @@ public class FriendListRecyclerAdapter extends RecyclerView.Adapter<FriendListRe
         return userList.size();
     }
 
-    private String monthValuetoMonth(String s){
-        switch(s) {
-            case "01":
-                return "Jan";
-            case "02":
-                return "Feb";
-            case "03":
-                return "Mar";
-            case "04":
-                return "Apr";
-            case "05":
-                return "May";
-            case "06":
-                return "Jun";
-            case "07":
-                return "Jul";
-            case "08":
-                return "Aug";
-            case "09":
-                return "Sep";
-            case "10":
-                return "Oct";
-            case "11":
-                return "Nov";
-            case "12":
-                return "Dec";
-        }
-        return "Error";
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private ImageView friendImage;
@@ -103,9 +71,6 @@ public class FriendListRecyclerAdapter extends RecyclerView.Adapter<FriendListRe
         private TextView friendDiv;
         private CardView friendCv;
 
-        CardView cvHead;
-        TextView textHead;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             friendImage=itemView.findViewById(R.id.friend_image);
@@ -113,13 +78,10 @@ public class FriendListRecyclerAdapter extends RecyclerView.Adapter<FriendListRe
             friendName=itemView.findViewById(R.id.name_textview);
             friendDescrp=itemView.findViewById(R.id.description_textview);
 //            friendDiv=itemView.findViewById(R.id.friendlist_divider);
-
         }
         public void setData( String name, String description){
             friendName.setText(name);
             friendDescrp.setText(description);
-
-
         }
     }
 }
