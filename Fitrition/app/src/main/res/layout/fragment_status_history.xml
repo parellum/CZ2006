@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".boundary.StatusHistoryFragment">
+    tools:context=".boundary.StatusHistoryFragment"
+    android:background="@color/background_tint">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,9 +36,7 @@
             android:id="@+id/divider2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/status_history_title"
-            android:background="?android:attr/listDivider"
-            android:backgroundTint="#C6A951" />
+            android:layout_below="@id/status_history_title" />
 
     </RelativeLayout>
 

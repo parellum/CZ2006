@@ -15,11 +15,11 @@
             android:id="@+id/status_history_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/green_prime"
             android:fontFamily="@font/nunito_bold"
-            android:text="Description Change"
+            android:text="Change Description"
             android:textAlignment="center"
-            android:textColor="@color/green_prime"
+            android:textColor="@color/white"
             android:textSize="24sp" />
 
         <LinearLayout

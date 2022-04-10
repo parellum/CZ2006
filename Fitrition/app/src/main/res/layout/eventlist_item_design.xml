@@ -99,6 +99,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="80dp"
                 android:layout_marginBottom="20dp"
+                android:buttonTint="@color/green_prime"
                 android:checked="true" />
 
             <androidx.cardview.widget.CardView
@@ -107,13 +108,13 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="35dp"
+                android:layout_marginBottom="30dp"
                 app:cardCornerRadius="10dp">
             <TextView
                 android:id="@+id/event_delete"
                 android:layout_width="50dp"
                 android:layout_height="30dp"
-                android:background="@color/red_700"
+                android:background="@color/redd"
                 android:checked="true"
                 android:text="Delete"
                 android:textSize="10dp"
