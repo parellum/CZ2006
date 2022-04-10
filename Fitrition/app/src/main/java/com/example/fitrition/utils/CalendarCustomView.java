@@ -573,7 +573,10 @@ public class CalendarCustomView extends LinearLayout {
                 return true;
             }
         });
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of dd10f47 (Revert "Merge branch 'Safe-Login' of https://github.com/parellum/CZ2006 into Safe-Login")
     private void initializeUILayout() {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.fragment_calender, this);
@@ -587,7 +590,10 @@ public class CalendarCustomView extends LinearLayout {
         mDatabaseReference= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(mAuth.getCurrentUser().getUid());
         calendarManager=CalendarManager.getInstance();
         arrayList = calendarManager.getEventsList();
+<<<<<<< HEAD
 >>>>>>> parent of 43eef55 (Merge branch 'Safe-Login' of https://github.com/parellum/CZ2006 into Stable-branch)
+=======
+>>>>>>> parent of dd10f47 (Revert "Merge branch 'Safe-Login' of https://github.com/parellum/CZ2006 into Safe-Login")
     }
 
     public void setUpCalendarAdapter() {
