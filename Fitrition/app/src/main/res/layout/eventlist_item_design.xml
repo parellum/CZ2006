@@ -42,12 +42,20 @@
                 app:cardCornerRadius="30dp">
 
                 <ImageView
-                    android:id="@+id/event_image"
+                    android:id="@+id/event_dine"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:background="#FFFFFF"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_avocado_profile" />
+                    app:srcCompat="@drawable/ic_dining_icon" />
+
+                <ImageView
+                    android:id="@+id/event_gym"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="#FFFFFF"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/ic_gym_icon" />
 
             </androidx.cardview.widget.CardView>
 
