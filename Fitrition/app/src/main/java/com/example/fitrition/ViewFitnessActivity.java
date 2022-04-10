@@ -176,8 +176,9 @@ public class ViewFitnessActivity extends AppCompatActivity implements ViewFacili
                     }
                 });
 
-                //eventName.setText(name);
-                //eventLocation.setText(location);
+                Fitness f = FacilityManager.getInstance().searchFitness(nameOfMarkerClicked);
+                eventName.setText("Exercise @" + f.getName());
+                eventLocation.setText(f.getName());
 
                 saveEventButton.setOnClickListener(new View.OnClickListener() {
                     @Override
