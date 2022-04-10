@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fitrition.R;
+import com.example.fitrition.control.CalendarManager;
 import com.example.fitrition.entities.Events;
 import com.example.fitrition.entities.Food;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -248,17 +249,18 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
     }
 
     private void SaveEvent(String event, String location,String time,String date, String month, String year){
-        Events events = new Events(event,location,time,date,month,year,false);
+        //Events events = new Events(event,location,time,date,month,year,false);
+        CalendarManager.getInstance().saveAnEvent(new Events(event,location,time,date,month,year,false));
 
 
-        mDataRef= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+       /* mDataRef= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         mDataRef.child(Long.toString(Calendar.getInstance().getTimeInMillis())).setValue(events).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 //Toast.makeText(context, "Successfully Saved", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
     }
 

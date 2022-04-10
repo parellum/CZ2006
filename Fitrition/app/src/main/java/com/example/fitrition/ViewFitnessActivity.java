@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
+import com.example.fitrition.control.CalendarManager;
 import com.example.fitrition.control.FacilityManager;
 import com.example.fitrition.entities.Events;
 import com.example.fitrition.entities.Fitness;
@@ -259,8 +260,11 @@ public class ViewFitnessActivity extends AppCompatActivity implements ViewFacili
 
 
     private void SaveEvent(String event, String location,String time,String date, String month, String year){
-        Events events = new Events(event,location,time,date,month,year,false);
+        CalendarManager.getInstance().saveAnEvent(new Events(event,location,time,date,month,year,true));
 
+        /*Events events = new Events(event,location,time,date,month,year,false);
+
+        // calendarManager.saveAnEvent(new Events(newName,newLocation,newTime,newDay,newMonth,newYear,isExercise));
 
         mDataRef= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
@@ -269,7 +273,7 @@ public class ViewFitnessActivity extends AppCompatActivity implements ViewFacili
             public void onComplete(@NonNull Task<Void> task) {
                 //Toast.makeText(context, "Successfully Saved", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
     }
 }
