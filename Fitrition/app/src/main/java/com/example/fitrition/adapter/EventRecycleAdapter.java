@@ -83,6 +83,14 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
 
             }
         });
+
+        holder.eventDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(event.getId()).removeValue();
+                holder.eventCard.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
@@ -129,6 +137,7 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
         private TextView eventLocation;
         private CardView eventCard;
         private CheckBox eventCheck;
+        private TextView eventDelete;
 
         private CardView eventCardHead;
         private TextView eventHead;
@@ -143,6 +152,7 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
             eventCheck=itemView.findViewById(R.id.event_check);
             eventCardHead=itemView.findViewById(R.id.event_list_date_div_cv);
             eventHead=itemView.findViewById(R.id.event_list_date_div);
+            eventDelete=itemView.findViewById(R.id.event_delete);
         }
         public void setData( String name,String location, String time){
             eventName.setText(name);
