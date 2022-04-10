@@ -46,9 +46,11 @@ public class AllUserRecyclerAdapter extends RecyclerView.Adapter<AllUserRecycler
         String description=allUserList.get(position).getDescription();
 //        String divider=allUserList.get(position).getFriendlist_divider();
 
-        Glide.with(holder.friendImage.getContext())
-                .load(allUserList.get(position).getImageUrl())
-                .into(holder.friendImage);
+        if (allUserList.get(position).getImageUrl()!=null) {
+            Glide.with(holder.friendImage.getContext())
+                    .load(allUserList.get(position).getImageUrl())
+                    .into(holder.friendImage);
+        }
 
         holder.setData(name, description);
 

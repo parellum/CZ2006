@@ -44,9 +44,12 @@ public class FriendListRecyclerAdapter extends RecyclerView.Adapter<FriendListRe
 //        String divider=userList.get(position).getFriendlist_divider();
 
         Friend targetFriend = userList.get(position);
-        Glide.with(holder.friendImage.getContext())
-                .load(userList.get(position).getImageUrl())
-                .into(holder.friendImage);
+
+        if (userList.get(position).getImageUrl()!=null) {
+            Glide.with(holder.friendImage.getContext())
+                    .load(userList.get(position).getImageUrl())
+                    .into(holder.friendImage);
+        }
         holder.setData(name, description);
 
 
@@ -118,8 +121,6 @@ public class FriendListRecyclerAdapter extends RecyclerView.Adapter<FriendListRe
         public void setData( String name, String description){
             friendName.setText(name);
             friendDescrp.setText(description);
-
-
         }
     }
 }

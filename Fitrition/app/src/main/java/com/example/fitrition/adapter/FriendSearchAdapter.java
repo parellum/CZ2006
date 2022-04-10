@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.fitrition.FriendActivity;
 import com.example.fitrition.R;
 import com.example.fitrition.control.FriendManager;
@@ -47,6 +49,12 @@ public class FriendSearchAdapter extends RecyclerView.Adapter<FriendSearchAdapte
         int friendpos = friendIDList.indexOf(status.getUserID());
         Friend friend = friendList.get(friendpos);
 
+        if (friend.getImageUrl()!=null) {
+            Glide.with(holder.statusImage.getContext())
+                    .load(friend.getImageUrl())
+                    .into(holder.statusImage);
+        }
+
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +75,7 @@ public class FriendSearchAdapter extends RecyclerView.Adapter<FriendSearchAdapte
         //ImageView imgTvShow;
         TextView textStatus;
         CardView cv;
+        ImageView statusImage;
 
         public ViewHolder(View itemView)
         {
@@ -74,6 +83,7 @@ public class FriendSearchAdapter extends RecyclerView.Adapter<FriendSearchAdapte
             //imgTvShow = (ImageView)itemView.findViewById(R.id.imgTvshow);
             textStatus = (TextView)itemView.findViewById(R.id.status_text);
             cv = (CardView)itemView.findViewById(R.id.cv);
+            statusImage = itemView.findViewById(R.id.status_image);
         }
 
     }
