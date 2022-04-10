@@ -2,7 +2,6 @@ package com.example.fitrition.adapter;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,17 +13,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fitrition.R;
 import com.example.fitrition.entities.Events;
 import com.example.fitrition.entities.Food;
-import com.example.fitrition.entities.Friend;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -155,7 +151,7 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
     }
 
     private void SaveEvent(String event, String location,String time,String date, String month, String year){
-        Events events = new Events(event,location,time,date,month,year);
+        Events events = new Events(event,location,time,date,month,year,false);
 
 
         mDataRef= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid());

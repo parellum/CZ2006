@@ -1,27 +1,20 @@
 package com.example.fitrition;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.fitrition.control.FacilityManager;
-import com.example.fitrition.entities.FitnessCentreJSON;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import androidx.fragment.app.Fragment;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import com.example.fitrition.control.FacilityManager;
+import com.example.fitrition.entities.Fitness;
+import com.example.fitrition.entities.HawkerCentre;
+
+import java.util.Objects;
 
 
 public class facilityDisplay extends Fragment {
@@ -30,7 +23,6 @@ public class facilityDisplay extends Fragment {
     private TextView viewFacilitiesDescription;
     private TextView viewFacilitiesOpeningHr;
     private TextView viewFacilitiesClosingHr;
-    private ImageView viewFacilitiesImage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,55 +42,54 @@ public class facilityDisplay extends Fragment {
         viewFacilitiesOpeningHr = (TextView) view.findViewById(R.id.viewFacilitiesOpeningHour);
         viewFacilitiesClosingHr = (TextView) view.findViewById(R.id.viewFacilitiesClosingHour);
 
-        //Version 2 using facilities manager
-        FacilityManager facilityManager= FacilityManager.getInstance();
-
-        //ArrayList<FitnessCentreJSON> fitnessCentre = facilityManager.getFacilityList();
-        //Remove once JAC IS DONE============================================================
-        ArrayList<FitnessCentreJSON> allFacilitiesArrayList = null;
-        try {
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(getActivity().getApplicationContext().getAssets().open("sampleJson.txt")));
-            Gson gson =  new GsonBuilder().create();
-            allFacilitiesArrayList = gson.fromJson(reader, new TypeToken<List<FitnessCentreJSON>>(){}.getType()
-            );
-
-            Log.d("Sucess123", "what Inner" + Integer.toString(allFacilitiesArrayList.size()));
-        }
-        catch(Exception e) {
-            Log.d("Failure", "Exception"  );
-        }
-        //==============================
-
         Bundle b = getActivity().getIntent().getExtras();
 
         String facilitiesName = null;
         if(b != null){
+            Log.d("Tag", String.valueOf(this.getActivity().getClass()));
+
             facilitiesName = b.getString("facilitiesName");
-            for(int i = 0; i<allFacilitiesArrayList.size(); i++){
-                if(allFacilitiesArrayList.get(i).getName().equalsIgnoreCase(facilitiesName)){
-                    //Set name
-                    viewFacilitiesName.setText(allFacilitiesArrayList.get(i).getName());
 
-                    //Set rating
-                    viewFacilitiesRatingBar.setRating((float) allFacilitiesArrayList.get(i).getRating());
 
-                    //Set Description
-                    viewFacilitiesDescription.setText(allFacilitiesArrayList.get(i).getDescription());
+            if(String.valueOf(this.getActivity().getClass()).equalsIgnoreCase("class com.example.fitrition.ViewFitnessActivity")){
+                Fitness temp = FacilityManager.getInstance().searchFitness(facilitiesName);
 
-                    //set time
-                    String paddedOpeningTime = String.format("%04d" , allFacilitiesArrayList.get(i).getOpeningTime());
-                    String paddedEndingTime = String.format("%04d" , allFacilitiesArrayList.get(i).getClosingTime());
+                //Set name
+                viewFacilitiesName.setText(temp.getName());
 
-                    viewFacilitiesOpeningHr.setText(paddedOpeningTime);
-                    viewFacilitiesClosingHr.setText(paddedEndingTime);
+                //Set rating
+                viewFacilitiesRatingBar.setRating((float) temp.getRating());
 
-                    //
+                //Set Description
+                viewFacilitiesDescription.setText(temp.getDescription());
 
-                }
+                //set time
+                String paddedOpeningTime = String.format("%04d" , temp.getOpeningTime());
+                String paddedEndingTime = String.format("%04d" , temp.getClosingTime());
+
+                viewFacilitiesOpeningHr.setText(paddedOpeningTime);
+                viewFacilitiesClosingHr.setText(paddedEndingTime);
+            }else{
+                HawkerCentre temp = FacilityManager.getInstance().searchHawker(facilitiesName);
+
+                //Set name
+                viewFacilitiesName.setText(temp.getName());
+
+                //Set rating
+                viewFacilitiesRatingBar.setRating((float) temp.getRating());
+
+                //Set Description
+                viewFacilitiesDescription.setText(temp.getDescription());
+
+                //set time
+                String paddedOpeningTime = String.format("%04d" , temp.getOpeningTime());
+                String paddedEndingTime = String.format("%04d" , temp.getClosingTime());
+
+                viewFacilitiesOpeningHr.setText(paddedOpeningTime);
+                viewFacilitiesClosingHr.setText(paddedEndingTime);
             }
-        }
 
+            }
         return view;
 
     }

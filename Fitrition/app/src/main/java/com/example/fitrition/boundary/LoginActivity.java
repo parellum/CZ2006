@@ -24,6 +24,7 @@ import com.example.fitrition.R;
 import com.example.fitrition.control.CalendarManager;
 import com.example.fitrition.control.FacilityManager;
 import com.example.fitrition.control.ProfileManager;
+import com.example.fitrition.entities.ViewFacilitiesActivityFactory;
 import com.example.fitrition.utils.HelpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -65,12 +66,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         facilityManager = FacilityManager.getInstance();
         calendarManager = CalendarManager.getInstance();
 
-        facilityManager.loadFacilities();
-        facilityManager.loadFood();
-
-
-
-
+        //facilityManager.loadFacilities();
+        //facilityManager.loadFood();
+        //Load the data for map
+        ViewFacilitiesActivityFactory.getFacility("Hawker");
+        ViewFacilitiesActivityFactory.getFacility("Fitness");
 
     }
 
