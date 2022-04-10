@@ -42,9 +42,12 @@ public class StatusFocusAdapter extends RecyclerView.Adapter<StatusFocusAdapter.
         Status status = statusList.get(position);
         holder.textStatus.setText(status.getDescription());
         holder.textTime.setText(status.getDay()+"/"+status.getMonth()+"/"+status.getYear()+" "+status.getTime());
-        Glide.with(holder.statusImage.getContext())
-                .load(friendManager.getFriend().getImageUrl())
-                .into(holder.statusImage);
+
+        if (friendManager.getFriend().getImageUrl()!=null) {
+            Glide.with(holder.statusImage.getContext())
+                    .load(friendManager.getFriend().getImageUrl())
+                    .into(holder.statusImage);
+        }
 
         if (position==0){
             holder.cvHead.setVisibility(View.VISIBLE);

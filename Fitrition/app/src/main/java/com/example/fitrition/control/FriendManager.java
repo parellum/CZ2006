@@ -174,6 +174,21 @@ public class FriendManager {
 
                 }
             });
+            mDatabaseReference.child(aFriend.getUserID()).child("description").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (!friendList.contains(aFriend)){
+                        mDatabaseReference.removeEventListener(this);
+                    }
+                    String aDescription=snapshot.getValue(String.class);
+                    aFriend.setDescription(aDescription);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
     }
 
     public void loadFriendList(){

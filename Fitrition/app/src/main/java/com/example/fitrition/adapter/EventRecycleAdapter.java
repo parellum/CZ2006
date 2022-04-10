@@ -53,6 +53,16 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
         Events event = eventsList.get(position);
         int eventIndex=eventsList.indexOf(event);
 
+        if (event.getExercise()==true){
+            Glide.with(holder.eventImage.getContext())
+                    .load("https://firebasestorage.googleapis.com/v0/b/fitrition-3a967.appspot.com/o/event_pic%2Fbiceps_002.jpg?alt=media&token=5bfa76b4-2900-4315-96dc-380f34b2e22b")
+                    .into(holder.eventImage);
+        }else{
+            Glide.with(holder.eventImage.getContext())
+                    .load("https://firebasestorage.googleapis.com/v0/b/fitrition-3a967.appspot.com/o/event_pic%2Fistockphoto-1158019625-612x612.jpg?alt=media&token=043d594d-c444-46cf-acc3-4cb9f0c4b731")
+                    .into(holder.eventImage);
+        }
+
         if (eventIndex==0){
             holder.eventCardHead.setVisibility(View.VISIBLE);
             holder.eventHead.setText(monthValuetoMonth(event.getMonth())+" "+event.getYear());
@@ -89,7 +99,8 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
             @Override
             public void onClick(View view) {
                 FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(event.getId()).removeValue();
-                holder.eventCard.setVisibility(View.GONE);
+                eventsList.remove(event);
+                notifyDataSetChanged();
             }
         });
     }
