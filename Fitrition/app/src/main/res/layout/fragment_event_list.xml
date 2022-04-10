@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/dark_green">
+    android:layout_height="match_parent"
+    android:background="@color/background_tint">
 
     <LinearLayout
         android:layout_width="409dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:orientation="vertical"
@@ -19,7 +19,9 @@
             android:id="@+id/eventListTV1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No events here" />
+            android:text="No events here"
+            android:fontFamily="@font/nunito_semibold"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,7 +44,9 @@
             android:id="@+id/eventListTV2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No events here" />
+            android:text="No events here"
+            android:fontFamily="@font/nunito_semibold"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,7 +55,8 @@
                 android:id="@+id/buttonEditTV2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="  Edit Event  " />
+                android:text="  Edit Event  "
+                />
             <Button
                 android:id="@+id/buttonDeleteTV2"
                 android:layout_width="wrap_content"
@@ -64,7 +69,9 @@
             android:id="@+id/eventListTV3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No events here" />
+            android:text="No events here"
+            android:fontFamily="@font/nunito_semibold"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -86,7 +93,9 @@
             android:id="@+id/eventListTV4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No events here" />
+            android:text="No events here"
+            android:fontFamily="@font/nunito_semibold"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +109,8 @@
                 android:id="@+id/buttonDeleteTV4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="  Delete Event  " />
+                android:text="  Delete Event  "
+                />
         </LinearLayout>
 
 

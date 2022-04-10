@@ -174,7 +174,9 @@ xmlns:tools="http://schemas.android.com/tools"
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="300dp"
-        android:layout_marginTop="350dp">
+        android:layout_marginTop="350dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -203,7 +205,7 @@ xmlns:tools="http://schemas.android.com/tools"
                         android:textSize="13sp" />
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="240dp"
+                        android:layout_width="220dp"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="5dp">
 
@@ -245,7 +247,7 @@ xmlns:tools="http://schemas.android.com/tools"
 
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="240dp"
+                            android:layout_width="220dp"
                             android:layout_height="wrap_content"
                             app:cardCornerRadius="5dp">
 
@@ -295,7 +297,7 @@ xmlns:tools="http://schemas.android.com/tools"
                         android:layout_height="wrap_content">
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="240dp"
+                            android:layout_width="220dp"
                             android:layout_height="100dp"
                             app:cardCornerRadius="5dp">
 
@@ -342,7 +344,7 @@ xmlns:tools="http://schemas.android.com/tools"
                         android:textSize="13sp" />
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="240dp"
+                        android:layout_width="220dp"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="5dp">
 
