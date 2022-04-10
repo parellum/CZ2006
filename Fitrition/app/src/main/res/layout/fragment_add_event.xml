@@ -31,11 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Exercise"
-<<<<<<< HEAD
             android:buttonTint="@color/green_prime"/>
-=======
-            android:textSize="20sp"/>
->>>>>>> 7fb47b9c1802dffe4fc5f2a103dbe21248557376
 
     </RadioGroup>
     </RelativeLayout>
@@ -154,16 +150,8 @@
         android:layout_margin="10dp"
         android:background="@android:color/white"
         android:text="Save Event"
-<<<<<<< HEAD
         android:textAllCaps="false"
-        android:textColor="@color/white"
-=======
-        android:textAllCaps="true"
-        android:textSize="20sp"
-        android:textColor="@color/colorPrimary"
->>>>>>> 7fb47b9c1802dffe4fc5f2a103dbe21248557376
-        android:fontFamily="@font/nunito_bold"
-        tools:ignore="HardcodedText" />
+        android:textColor="@color/white"/>
 
 
 
