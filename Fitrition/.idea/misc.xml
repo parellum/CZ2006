@@ -64,10 +64,10 @@
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/layout/fragment_friend_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_friend_searchbar.xml" value="0.29755503336588546" />
-        <entry key="app/src/main/res/layout/fragment_invitation.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_invitation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_list_layout.xml" value="0.26051177978515627" />
-        <entry key="app/src/main/res/layout/fragment_password_change.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.355059814453125" />
+        <entry key="app/src/main/res/layout/fragment_password_change.xml" value="0.24173329671223953" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.2296875" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/layout/fragment_single_cell.xml" value="0.17135416666666667" />

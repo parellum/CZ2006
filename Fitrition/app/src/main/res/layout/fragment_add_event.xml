@@ -15,8 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
-        >
+        android:layout_centerHorizontal="true">
 
         <RadioButton
             android:id="@+id/add_event_radio_dine"
@@ -24,12 +23,14 @@
             android:layout_height="wrap_content"
             android:text="Dine"
             android:checked="true"
-            android:layout_marginEnd="40dp"/>
+            android:layout_marginEnd="40dp"
+            android:buttonTint="@color/green_prime"/>
         <RadioButton
             android:id="@+id/add_event_radio_exercise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Exercise"/>
+            android:text="Exercise"
+            android:buttonTint="@color/green_prime"/>
 
     </RadioGroup>
     </RelativeLayout>
@@ -91,7 +92,7 @@
             android:layout_toEndOf="@+id/eventTimeTV"
             android:text="Select Time"
             android:fontFamily="@font/nunito_semibold"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
 
 
@@ -144,7 +145,7 @@
         android:background="@android:color/white"
         android:text="Save Event"
         android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/white"
         android:fontFamily="@font/nunito_bold"
         tools:ignore="HardcodedText" />
 
