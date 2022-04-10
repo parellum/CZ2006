@@ -22,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dine"
+            android:textSize="20sp"
             android:checked="true"
             android:layout_marginEnd="40dp"
             android:buttonTint="@color/green_prime"/>
@@ -30,7 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Exercise"
+<<<<<<< HEAD
             android:buttonTint="@color/green_prime"/>
+=======
+            android:textSize="20sp"/>
+>>>>>>> 7fb47b9c1802dffe4fc5f2a103dbe21248557376
 
     </RadioGroup>
     </RelativeLayout>
@@ -42,6 +47,7 @@
         android:background="@android:color/white"
         android:gravity="center"
         android:hint="Type Event"
+        android:textSize="20sp"
         android:fontFamily="@font/nunito_semibold"
         android:inputType="textShortMessage"
         tools:ignore="HardcodedText"
@@ -56,6 +62,7 @@
         android:background="@android:color/white"
         android:gravity="center"
         android:hint="Type Location"
+        android:textSize="20sp"
         android:fontFamily="@font/nunito_semibold"
         android:inputType="textShortMessage"
         tools:ignore="HardcodedText"
@@ -111,6 +118,7 @@
             android:layout_weight="2"
             android:ems="10"
             android:hint="DD"
+            android:textSize="20sp"
             android:fontFamily="@font/nunito_semibold"
             android:inputType="numberDecimal" />
 
@@ -121,6 +129,7 @@
             android:layout_weight="2"
             android:ems="10"
             android:hint="MM"
+            android:textSize="20sp"
             android:fontFamily="@font/nunito_semibold"
             android:inputType="numberDecimal" />
 
@@ -131,6 +140,7 @@
             android:layout_weight="2"
             android:ems="10"
             android:hint="YYYY"
+            android:textSize="20sp"
             android:fontFamily="@font/nunito_semibold"
             android:inputType="numberDecimal" />
     </LinearLayout>
@@ -144,8 +154,14 @@
         android:layout_margin="10dp"
         android:background="@android:color/white"
         android:text="Save Event"
+<<<<<<< HEAD
         android:textAllCaps="false"
         android:textColor="@color/white"
+=======
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+>>>>>>> 7fb47b9c1802dffe4fc5f2a103dbe21248557376
         android:fontFamily="@font/nunito_bold"
         tools:ignore="HardcodedText" />
 

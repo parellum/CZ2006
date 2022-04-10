@@ -25,7 +25,6 @@ import com.example.fitrition.adapter.StatusAdapter;
 import com.example.fitrition.adapter.StatusFocusAdapter;
 import com.example.fitrition.boundary.InvitationFragment;
 import com.example.fitrition.control.FriendManager;
-import com.example.fitrition.databinding.ActivityMainBinding;
 import com.example.fitrition.entities.Friend;
 import com.example.fitrition.utils.SpacingItemDecoration;
 import com.google.firebase.database.DatabaseReference;
@@ -157,9 +156,11 @@ public class FriendActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(statusFocusAdapter);
 
-        Glide.with(this)
-                .load(friendSubject.getImageUrl())
-                .into(friendImage);
+        if (friendSubject.getImageUrl()!=null) {
+            Glide.with(this)
+                    .load(friendSubject.getImageUrl())
+                    .into(friendImage);
+        }
 
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -77,6 +77,14 @@ public class FriendManager {
         this.friend = friend;
     }
 
+    public ArrayList<String> getFriendIDList(){
+        ArrayList<String> returnArr=new ArrayList<String>();
+            for (Friend aFriend:friendList){
+                returnArr.add(aFriend.getUserID());
+            }
+            return returnArr;
+    }
+
     /**
      * Adds Friend object to FriendList
      * @param aFriend
@@ -174,6 +182,36 @@ public class FriendManager {
 
                 }
             });
+            mDatabaseReference.child(aFriend.getUserID()).child("description").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (!friendList.contains(aFriend)){
+                        mDatabaseReference.removeEventListener(this);
+                    }
+                    String aDescription=snapshot.getValue(String.class);
+                    aFriend.setDescription(aDescription);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        mDatabaseReference.child(aFriend.getUserID()).child("imageUrl").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!friendList.contains(aFriend)){
+                    mDatabaseReference.removeEventListener(this);
+                }
+                String aImageUrl=snapshot.getValue(String.class);
+                aFriend.setImageUrl(aImageUrl);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void loadFriendList(){
@@ -184,14 +222,13 @@ public class FriendManager {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot friendChild:snapshot.getChildren()) {
                     Friend targetFriend = friendChild.getValue(Friend.class);
-                    if (profileManager.getUser().getFriendList().contains(targetFriend.getUserID()) & !friendList.contains(targetFriend.getUserID())) {
+                    if (profileManager.getUser().getFriendList().contains(targetFriend.getUserID()) & !getFriendIDList().contains(targetFriend.getUserID())) {
                         friendList.add(targetFriend);
                         friendListener(targetFriend);
                     }
                 }
                 mDatabaseReference.removeEventListener(this);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

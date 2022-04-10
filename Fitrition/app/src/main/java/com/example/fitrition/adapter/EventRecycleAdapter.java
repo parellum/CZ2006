@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,7 +63,7 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
             holder.eventCardHead.setVisibility(View.GONE);
         }
 
-        holder.setData(event.getEvent(),event.getLocation(),event.getDate()+"/"+event.getMonth()+"/"+event.getYear()+" "+event.getTime());
+        holder.setData(event.getEvent(),event.getLocation(),event.getDate()+"/"+event.getMonth()+"/"+event.getYear()+" "+event.getTime(), event.getExercise());
 
         if (event.getDone()==true){
             holder.eventCheck.setChecked(true);
@@ -88,7 +89,8 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
             @Override
             public void onClick(View view) {
                 FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(event.getId()).removeValue();
-                holder.eventCard.setVisibility(View.GONE);
+                eventsList.remove(event);
+                notifyDataSetChanged();
             }
         });
     }
@@ -131,7 +133,8 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        protected ImageView eventImage;
+        protected ImageView eventDine;
+        protected ImageView eventGym;
         private TextView eventName;
         private TextView eventTime;
         private TextView eventLocation;
@@ -144,7 +147,11 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            eventImage=itemView.findViewById(R.id.event_image);
+
+            eventDine=itemView.findViewById(R.id.event_dine);
+            eventGym=itemView.findViewById(R.id.event_gym);
+            eventDine.setVisibility(View.GONE);
+            eventGym.setVisibility(View.GONE);
             eventCard=itemView.findViewById(R.id.event_list_cv);
             eventName=itemView.findViewById(R.id.event_activity);
             eventTime=itemView.findViewById(R.id.event_time);
@@ -154,10 +161,14 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
             eventHead=itemView.findViewById(R.id.event_list_date_div);
             eventDelete=itemView.findViewById(R.id.event_delete);
         }
-        public void setData( String name,String location, String time){
+        public void setData( String name,String location, String time, Boolean isExercise){
             eventName.setText(name);
             eventTime.setText(time);
             eventLocation.setText(location);
+            if(isExercise==true)
+                eventGym.setVisibility(View.VISIBLE);
+            else
+                eventDine.setVisibility(View.VISIBLE);
         }
     }
 }

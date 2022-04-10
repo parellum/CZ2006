@@ -60,9 +60,11 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
         holder.timeStatus.setText(status.getDay()+"/"+status.getMonth()+"/"+status.getYear()+" "+status.getTime());
         int friendpos = friendIDList.indexOf(status.getUserID());
         Friend friend = friendList.get(friendpos);
-        Glide.with(holder.friendImage.getContext())
-                .load(friend.getImageUrl())
-                .into(holder.friendImage);
+        if (friend.getImageUrl()!=null) {
+            Glide.with(holder.friendImage.getContext())
+                    .load(friend.getImageUrl())
+                    .into(holder.friendImage);
+        }
 
         if (position==0){
             holder.cvHead.setVisibility(View.VISIBLE);

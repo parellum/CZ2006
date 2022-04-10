@@ -22,9 +22,9 @@
             android:id="@+id/viewFacilitiesButton"
             android:layout_width="404dp"
             android:layout_height="56dp"
-            android:visibility="invisible"
-            android:text="Click to view Healthy Food"
-            android:fontFamily="@font/nunito_semibold" />
+            android:fontFamily="@font/nunito_semibold"
+            android:text="Click to Add Fitness Activity"
+            android:visibility="visible" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/viewFacilitiesFragmentContainer"
