@@ -88,7 +88,7 @@ public class ViewHawkerActivity extends AppCompatActivity implements ViewFacilit
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_facilities);
         viewFacilitiesButton = (Button) findViewById(R.id.viewFacilitiesButton);

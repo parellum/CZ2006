@@ -1,6 +1,8 @@
 package com.example.fitrition.entities;
 
-public interface ViewFacilitiesActivity {
+import android.os.Bundle;
 
+public interface ViewFacilitiesActivity {
+    public void onCreate(Bundle savedInstanceState);
 
 }
