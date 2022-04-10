@@ -74,8 +74,8 @@ public class TrackerFragment extends Fragment {
 
     Button addEventButton;
 
-    private int hour, minute;
-    private LocalTime time;
+    int hour, minute;
+    LocalTime time;
 
 
     @Override
@@ -387,6 +387,31 @@ public class TrackerFragment extends Fragment {
                         TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
                         TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
                         Button eventTime = (Button) popupView.findViewById(R.id.timeButton);
+
+                        eventTime.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
+                                {
+                                    @Override
+                                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
+                                    {
+                                        hour = selectedHour;
+                                        minute = selectedMinute;
+                                        time = LocalTime.of(hour, minute);
+                                        Button eventTime = (Button) view.findViewById(R.id.timeButton);
+                                        eventTime.setText(time.toString());
+                                    }
+                                };
+
+                                int style = AlertDialog.THEME_HOLO_LIGHT;
+
+                                TimePickerDialog timePickerDialog = new TimePickerDialog(view.getContext(), style, onTimeSetListener, hour, minute, true);
+
+                                timePickerDialog.setTitle("Select Time");
+                                timePickerDialog.show();
+                            }
+                        });
 
                         RadioButton eventDine = popupView.findViewById(R.id.add_event_radio_dine);
 

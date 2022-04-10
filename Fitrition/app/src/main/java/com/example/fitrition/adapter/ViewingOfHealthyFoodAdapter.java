@@ -2,6 +2,8 @@ package com.example.fitrition.adapter;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
+import android.app.AlertDialog;
+import android.app.TimePickerDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -13,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +31,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.List;
 
@@ -35,6 +39,8 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
 
     private List<Food> foodList;
     private DatabaseReference mDataRef;
+    int hour, minute;
+    LocalTime time;
 
     public ViewingOfHealthyFoodAdapter(List<Food> foodList){
         this.foodList = foodList;
@@ -89,6 +95,31 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
                 EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
                 EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
 
+                eventTime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
+                        {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
+                            {
+                                hour = selectedHour;
+                                minute = selectedMinute;
+                                time = LocalTime.of(hour, minute);
+                                Button eventTime = (Button) view.findViewById(R.id.timeButton);
+                                eventTime.setText(time.toString());
+                            }
+                        };
+
+                        int style = AlertDialog.THEME_HOLO_LIGHT;
+
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(view.getContext(), style, onTimeSetListener, hour, minute, true);
+
+                        timePickerDialog.setTitle("Select Time");
+                        timePickerDialog.show();
+                    }
+                });
+
                 eventName.setText(name);
                 eventLocation.setText(location);
 
@@ -97,7 +128,7 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
                     public void onClick(View popupView) {
                         //String eventNameStr = eventName.getText().toString();
                         SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
-                                , eventTime.getText().toString()
+                                , eventTime.getText().toString().replaceAll(":","")
                                 , eventDate.getText().toString(), eventMonth.getText().toString()
                                 , eventYear.getText().toString());
                         //eventRecyclerAdapter.notifyDataSetChanged();
