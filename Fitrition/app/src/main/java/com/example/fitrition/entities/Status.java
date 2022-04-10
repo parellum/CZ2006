@@ -8,25 +8,25 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.time.LocalDateTime;
 
-/**
- * Status message which holds display message as well as time as marker
- * @author Jacques
- * @version 1.0
- * @since 20-03-2022
- */
 public class Status {
     private String userID;
     private String description;
     private String time;
+    private String day;
+    private String month;
+    private String year;
 
     public Status(){
+        this.userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
-    public Status(String description, LocalDateTime localDateTime) {
+    public Status(String description, String year, String month, String day, String time) {
         this.userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         this.description = description;
-        this.time=localDateTime.plusHours(8).toString();
-        Log.d(TAG, "Status: "+time);
+        this.year=year;
+        this.month=month;
+        this.day=day;
+        this.time=time;
     }
 
     public String getUserID() {
@@ -51,5 +51,29 @@ public class Status {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 }
