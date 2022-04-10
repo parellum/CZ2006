@@ -68,8 +68,14 @@ public class SocialManager {
         }else{
             newStatus.setDescription(profileManager.getUser().getName()+" ate "+event.getEvent()+" at "+event.getLocation());
         }
-        personalStatusList.add(newStatus);
-        FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("socialStatus").setValue(personalStatusList);
+        try{
+            Integer.parseInt(event.getTime());
+            personalStatusList.add(newStatus);
+            FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("socialStatus").setValue(personalStatusList);
+        }catch (Exception e){
+            return;
+        }
+
     }
 
     public void loadFriendStatusList(){
