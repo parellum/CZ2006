@@ -12,14 +12,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
+import com.example.fitrition.control.CalendarManager;
 import com.example.fitrition.control.FacilityManager;
 import com.example.fitrition.entities.Events;
 import com.example.fitrition.entities.Fitness;
@@ -33,9 +36,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 public class ViewFitnessActivity extends AppCompatActivity implements ViewFacilitiesActivity {
 
@@ -46,6 +51,7 @@ public class ViewFitnessActivity extends AppCompatActivity implements ViewFacili
     int hour, minute;
     LocalTime time;
     private DatabaseReference mDataRef;
+    Calendar cal;
 
 
     public ViewFitnessActivity(){
@@ -116,13 +122,35 @@ public class ViewFitnessActivity extends AppCompatActivity implements ViewFacili
                 // which view you pass in doesn't matter, it is only used for the window tolken
                 popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
-                Button saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
                 TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
                 TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
                 Button eventTime = (Button) popupView.findViewById(R.id.timeButton);
                 EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
                 EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
                 EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
+                Button saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
+
+                RadioButton eventDine = popupView.findViewById(R.id.add_event_radio_dine);
+
+                TimeZone.setDefault(TimeZone.getTimeZone("Asia/Singapore"));
+                cal=Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore"));
+
+                SimpleDateFormat dateFormat= new SimpleDateFormat("dd MMMM yyyy");
+                String dateOnly = dateFormat.format(cal.getTime());
+
+                String calDay=Integer.toString(cal.get(Calendar.DATE));
+                String calMonth=Integer.toString(cal.get(Calendar.MONTH)+1);
+
+                if (calDay.length()==1){
+                    calDay="0"+calDay;
+                }
+                if (calMonth.length()==1){
+                    calMonth="0"+calMonth;
+                }
+
+                eventDate.setText(calDay);
+                eventMonth.setText(calMonth);
+                eventYear.setText(Integer.toString(cal.get(Calendar.YEAR)));
 
                 eventTime.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -156,13 +184,52 @@ public class ViewFitnessActivity extends AppCompatActivity implements ViewFacili
                 saveEventButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View popupView) {
-                        //String eventNameStr = eventName.getText().toString();
-                        SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
-                                , eventTime.getText().toString().replaceAll(":","")
-                                , eventDate.getText().toString(), eventMonth.getText().toString()
-                                , eventYear.getText().toString());
-                        //eventRecyclerAdapter.notifyDataSetChanged();
-                        popupWindow.dismiss();
+                        String err_msg = "";
+                        String newTime = eventTime.getText().toString().replaceAll(":","").trim();
+
+                        if (eventName.getText().toString().trim().isEmpty()) {
+                            err_msg = err_msg + "Name is not valid. Please enter the event name.\n";
+                            eventName.setError(err_msg);
+                            eventName.requestFocus();
+                            return;
+                        }
+                        if (eventLocation.getText().toString().trim().isEmpty()) {
+                            err_msg = err_msg + "Location is not valid. Please enter a valid location.\n";
+                            eventLocation.setError(err_msg);
+                            eventLocation.requestFocus();
+                            return;
+                        }
+
+                        if (newTime.equals("Select Time")){
+                            err_msg = err_msg + "Please select a time.\n";
+                            eventTime.setError(err_msg);
+                            eventTime.requestFocus();
+                            return;
+                        }
+
+                        int date_int = Integer.parseInt(eventDate.getText().toString());
+                        if (date_int < 1 || date_int >31){
+                            err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
+                        }
+                        int month_int = Integer.parseInt(eventMonth.getText().toString());
+                        if (month_int < 1 || month_int >12){
+                            err_msg = err_msg + "Month is not valid. Please enter number in range of 1 to 12\n";
+                        }
+                        int year_int = Integer.parseInt(eventYear.getText().toString());
+                        if (year_int < 1900 || year_int >2100){
+                            err_msg = err_msg + "Year is not valid. Please enter number in range of 1900 to 2100\n";
+                        }
+
+                        if (err_msg == "") {
+                            SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
+                                    , eventTime.getText().toString().replaceAll(":","")
+                                    , eventDate.getText().toString(), eventMonth.getText().toString()
+                                    , eventYear.getText().toString());
+                            popupWindow.dismiss();
+                        }
+                        else {
+                            Toast.makeText(view.getContext(), err_msg, Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
 
@@ -193,8 +260,11 @@ public class ViewFitnessActivity extends AppCompatActivity implements ViewFacili
 
 
     private void SaveEvent(String event, String location,String time,String date, String month, String year){
-        Events events = new Events(event,location,time,date,month,year,false);
+        CalendarManager.getInstance().saveAnEvent(new Events(event,location,time,date,month,year,true));
 
+        /*Events events = new Events(event,location,time,date,month,year,false);
+
+        // calendarManager.saveAnEvent(new Events(newName,newLocation,newTime,newDay,newMonth,newYear,isExercise));
 
         mDataRef= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
@@ -203,7 +273,7 @@ public class ViewFitnessActivity extends AppCompatActivity implements ViewFacili
             public void onComplete(@NonNull Task<Void> task) {
                 //Toast.makeText(context, "Successfully Saved", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
     }
 }
