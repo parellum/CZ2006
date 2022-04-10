@@ -83,7 +83,7 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
                 Button saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
                 TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
                 TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
-                Button eventTime = (Button) popupView.findViewById(R.id.timeButton);
+                EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
                 EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
                 EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
                 EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);

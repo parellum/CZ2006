@@ -2,8 +2,6 @@ package com.example.fitrition.boundary;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
-import android.app.AlertDialog;
-import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -28,7 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.fitrition.R;
@@ -43,7 +40,6 @@ import com.example.fitrition.utils.CalendarCustomView;
 import java.sql.Array;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -73,9 +69,6 @@ public class TrackerFragment extends Fragment {
     Calendar cal;
 
     Button addEventButton;
-
-    private int hour, minute;
-    private LocalTime time;
 
 
     @Override
@@ -209,7 +202,7 @@ public class TrackerFragment extends Fragment {
 
                 TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
                 TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
-                Button eventTime = (Button) popupView.findViewById(R.id.timeButton);
+                EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
                 EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
                 EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
                 EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
@@ -237,31 +230,6 @@ public class TrackerFragment extends Fragment {
                 eventMonth.setText(calMonth);
                 eventYear.setText(Integer.toString(cal.get(Calendar.YEAR)));
 
-                eventTime.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
-                        {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
-                            {
-                                hour = selectedHour;
-                                minute = selectedMinute;
-                                time = LocalTime.of(hour, minute);
-                                Button eventTime = (Button) view.findViewById(R.id.timeButton);
-                                eventTime.setText(time.toString());
-                            }
-                        };
-
-                        int style = AlertDialog.THEME_HOLO_LIGHT;
-
-                        TimePickerDialog timePickerDialog = new TimePickerDialog(view.getContext(), style, onTimeSetListener, hour, minute, true);
-
-                        timePickerDialog.setTitle("Select Time");
-                        timePickerDialog.show();
-                    }
-                });
-
 
                 saveEventButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -270,7 +238,7 @@ public class TrackerFragment extends Fragment {
 
                         String newName = eventName.getText().toString().trim();
                         String newLocation = eventLocation.getText().toString().trim();
-                        String newTime = eventTime.getText().toString().replaceAll(":","").trim();
+                        String newTime = eventTime.getText().toString().trim();
                         String newDay=eventDate.getText().toString().trim();
                         String newMonth = eventMonth.getText().toString().trim();
                         String newYear = eventYear.getText().toString().trim();
@@ -295,7 +263,24 @@ public class TrackerFragment extends Fragment {
                             eventLocation.requestFocus();
                             return;
                         }
+                        if (eventTime.getText().toString().trim().isEmpty()) {
+                            err_msg = err_msg + "Time is not valid. Please enter a valid time.\n";
+                            eventTime.setError(err_msg);
+                            eventTime.requestFocus();
+                            return;
+                        }
 
+                        if (eventTime.getText().toString().trim().length()!=4) {
+                            err_msg = err_msg + "Time is not valid. Please enter a valid time.\n";
+                            eventTime.setError(err_msg);
+                            eventTime.requestFocus();
+                            return;
+                        }
+
+                        int time_int = Integer.parseInt(eventTime.getText().toString());
+                        if (time_int < 0 || time_int >2359){
+                            err_msg = err_msg + "Time is not valid. Please enter number in range of 0000 to 2359\n";
+                        }
                         int date_int = Integer.parseInt(eventDate.getText().toString());
                         if (date_int < 1 || date_int >31){
                             err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
@@ -386,7 +371,7 @@ public class TrackerFragment extends Fragment {
                         Button saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
                         TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
                         TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
-                        Button eventTime = (Button) popupView.findViewById(R.id.timeButton);
+                        EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
 
                         RadioButton eventDine = popupView.findViewById(R.id.add_event_radio_dine);
 
@@ -395,7 +380,7 @@ public class TrackerFragment extends Fragment {
                             public void onClick(View popupView) {
                                 String newName = eventName.getText().toString().trim();
                                 String newLocation = eventLocation.getText().toString().trim();
-                                String newTime = eventTime.getText().toString().replaceAll(":","").trim();
+                                String newTime = eventTime.getText().toString().trim();
                                 String newDay=eventDate.getText().toString().trim();
                                 String newMonth = eventMonth.getText().toString().trim();
                                 String newYear = eventYear.getText().toString().trim();
@@ -420,7 +405,25 @@ public class TrackerFragment extends Fragment {
                                     eventLocation.requestFocus();
                                     return;
                                 }
+                                if (eventTime.getText().toString().trim().isEmpty()) {
+                                    err_msg = err_msg + "Time is not valid. Please enter a valid time.\n";
+                                    eventTime.setError(err_msg);
+                                    eventTime.requestFocus();
+                                    return;
+                                }
 
+                                if (eventTime.getText().toString().trim().length()!=4) {
+                                    err_msg = err_msg + "Time is not valid. Please enter a valid time.\n";
+                                    eventTime.setError(err_msg);
+                                    eventTime.requestFocus();
+                                    return;
+                                }
+
+
+                                int time_int = Integer.parseInt(eventTime.getText().toString());
+                                if (time_int < 0 || time_int >2359){
+                                    err_msg = err_msg + "Time is not valid. Please enter number in range of 0000 to 2359\n";
+                                }
                                 int date_int = Integer.parseInt(eventDate.getText().toString());
                                 if (date_int < 1 || date_int >31){
                                     err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
@@ -460,4 +463,6 @@ public class TrackerFragment extends Fragment {
         });
 
     }
+
+
 }
