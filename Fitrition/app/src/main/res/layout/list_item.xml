@@ -48,7 +48,8 @@
                         android:id="@+id/status_image"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:scaleType="centerCrop" />
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_avocado_profile"/>
                 </androidx.cardview.widget.CardView>
 
                 <TextView
