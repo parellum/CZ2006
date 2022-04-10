@@ -64,18 +64,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
 
-        <EditText
-            android:id="@+id/eventtime"
+        <TextView
+            android:id="@+id/eventTimeTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:ems="10"
-            android:hint="Event Time"
+            android:layout_gravity="center"
+            android:text="Time"
+            android:layout_alignBaseline="@id/timeButton"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:fontFamily="@font/nunito_semibold"
-            android:inputType="time"
-            android:textAlignment="center" />
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/timeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/eventTimeTV"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/eventTimeTV"
+            android:text="Select Time"
+            android:fontFamily="@font/nunito_semibold"
+            android:textSize="20sp" />
 
 
 
