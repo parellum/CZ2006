@@ -79,6 +79,7 @@ public class CalendarCustomView extends LinearLayout {
         setAllEventButtonClickEvent();
     }
 
+<<<<<<< HEAD
 
     private void initializeUILayout() {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
@@ -96,6 +97,25 @@ public class CalendarCustomView extends LinearLayout {
         arrayList = calendarManager.getEventsList();
     }
 
+=======
+
+    private void initializeUILayout() {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.fragment_calender, this);
+        previousButton = (ImageView) view.findViewById(R.id.previous_month);
+        nextButton = (ImageView) view.findViewById(R.id.next_month);
+        currentDate = (TextView) view.findViewById(R.id.display_current_date);
+        addEventButton = (Button) findViewById(R.id.buttonAddEvent);
+        allEventButton = (Button) findViewById(R.id.buttonAllEvent);
+        calendarGridView = (ExpandableHeightGridView) view.findViewById(R.id.calendar_grid);
+        calendarGridView.setExpanded(true);
+        mAuth=FirebaseAuth.getInstance();
+        mDatabaseReference= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(mAuth.getCurrentUser().getUid());
+        calendarManager=CalendarManager.getInstance();
+        arrayList = calendarManager.getEventsList();
+    }
+
+>>>>>>> parent of 04e1496 (Merge branch 'Safe-Login' of https://github.com/parellum/CZ2006 into Safe-Login)
     private void setPreviousButtonClickEvent() {
         previousButton.setOnClickListener(new OnClickListener() {
             @Override
