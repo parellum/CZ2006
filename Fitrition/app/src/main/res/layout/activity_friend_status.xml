@@ -119,7 +119,7 @@
         <Button
             android:id="@+id/friend_status_remove"
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:text="-"
             android:textSize="30sp"
             android:visibility="invisible" />
