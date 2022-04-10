@@ -50,10 +50,7 @@
         <entry key="app/src/main/res/layout/content_main.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/layout/fragment_add_event.xml" value="0.17915649414062496" />
         <entry key="app/src/main/res/layout/fragment_calender.xml" value="0.18541666666666667" />
-<<<<<<< HEAD
         <entry key="app/src/main/res/layout/fragment_description_change.xml" value="0.2734375" />
-=======
->>>>>>> parent of 04e1496 (Merge branch 'Safe-Login' of https://github.com/parellum/CZ2006 into Safe-Login)
         <entry key="app/src/main/res/layout/fragment_event_list.xml" value="0.21829710144927536" />
         <entry key="app/src/main/res/layout/fragment_event_view.xml" value="0.14628623188405798" />
         <entry key="app/src/main/res/layout/fragment_explore.xml" value="0.18541666666666667" />
@@ -61,13 +58,9 @@
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/layout/fragment_friend_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_friend_searchbar.xml" value="0.29755503336588546" />
-<<<<<<< HEAD
         <entry key="app/src/main/res/layout/fragment_invitation.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_list_layout.xml" value="0.26051177978515627" />
         <entry key="app/src/main/res/layout/fragment_password_change.xml" value="0.3098958333333333" />
-=======
-        <entry key="app/src/main/res/layout/fragment_list_layout.xml" value="0.26051177978515627" />
->>>>>>> parent of 04e1496 (Merge branch 'Safe-Login' of https://github.com/parellum/CZ2006 into Safe-Login)
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.355059814453125" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.2296875" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.18541666666666667" />
