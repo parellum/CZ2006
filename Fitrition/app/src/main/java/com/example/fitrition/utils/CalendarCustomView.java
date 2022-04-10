@@ -65,7 +65,6 @@ public class CalendarCustomView extends LinearLayout {
         this.context = context;
         initializeUILayout();
         setUpCalendarAdapter();
-<<<<<<< HEAD
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
         setAddEventButtonClickEvent();
@@ -89,9 +88,6 @@ public class CalendarCustomView extends LinearLayout {
     }
 
     private void setPreviousButtonClickEvent() {
-=======
-
->>>>>>> parent of dd10f47 (Revert "Merge branch 'Safe-Login' of https://github.com/parellum/CZ2006 into Safe-Login")
         previousButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
