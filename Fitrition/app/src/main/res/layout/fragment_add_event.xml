@@ -96,7 +96,7 @@
             android:layout_toEndOf="@+id/eventTimeTV"
             android:text="Select Time"
             android:fontFamily="@font/nunito_semibold"
-            android:textSize="15sp" />
+            android:textSize="20sp" />
 
 
 
@@ -151,7 +151,8 @@
         android:layout_margin="10dp"
         android:background="@android:color/white"
         android:text="Save Event"
-        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textAllCaps="true"
         android:textColor="@color/white"/>
 
 

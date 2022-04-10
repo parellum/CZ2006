@@ -190,6 +190,7 @@ public class TrackerFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        time = null;
         addEventButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 LayoutInflater inflater = (LayoutInflater)
@@ -282,7 +283,6 @@ public class TrackerFragment extends Fragment {
                             isExercise=true;
                         }
 
-
                         if (eventName.getText().toString().trim().isEmpty()) {
                             err_msg = err_msg + "Name is not valid. Please enter the event name.\n";
                             eventName.setError(err_msg);
@@ -314,6 +314,14 @@ public class TrackerFragment extends Fragment {
                         if (year_int < 1900 || year_int >2100){
                             err_msg = err_msg + "Year is not valid. Please enter number in range of 1900 to 2100\n";
                         }
+
+                        if(time == null){
+                            err_msg = err_msg + "Time is not valid. Please select a time.\n";
+                            eventTime.setError(err_msg);
+                            eventTime.requestFocus();
+                            return;
+                        }
+
                         if (err_msg == "") {
                             calendarManager.saveAnEvent(new Events(newName,newLocation,newTime,newDay,newMonth,newYear,isExercise));
                             updateRecycler(view,dateOnly);
@@ -332,6 +340,7 @@ public class TrackerFragment extends Fragment {
 
         ViewGroup parent = (ViewGroup) custom_view.getParent();
         parent.removeView(custom_view);
+        time = null;
 
         final CalendarCustomView calendarCustomView = new CalendarCustomView(view.getContext());
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -439,6 +448,7 @@ public class TrackerFragment extends Fragment {
                                 }
 
                                 String err_msg = "";
+
                                 if (eventName.getText().toString().trim().isEmpty()) {
                                     err_msg = err_msg + "Name is not valid. Please enter the event name.\n";
                                     eventName.setError(err_msg);
@@ -470,6 +480,14 @@ public class TrackerFragment extends Fragment {
                                 if (year_int < 1900 || year_int >2100){
                                     err_msg = err_msg + "Year is not valid. Please enter number in range of 1900 to 2100\n";
                                 }
+
+                                if(time == null){
+                                    err_msg = err_msg + "Time is not valid. Please select a time.\n";
+                                    eventTime.setError(err_msg);
+                                    eventTime.requestFocus();
+                                    return;
+                                }
+
                                 if (err_msg == "") {
                                     calendarManager.saveAnEvent(new Events(newName,newLocation,newTime,newDay,newMonth,newYear,isExercise));
                                     updateRecycler(view,dateOnly);
