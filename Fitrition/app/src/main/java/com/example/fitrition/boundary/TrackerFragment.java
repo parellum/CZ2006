@@ -296,6 +296,12 @@ public class TrackerFragment extends Fragment {
                             return;
                         }
 
+                        if (newTime.equals("Select Time")){
+                            eventTime.setError("Please select a time");
+                            eventTime.requestFocus();
+                            return;
+                        }
+
                         int date_int = Integer.parseInt(eventDate.getText().toString());
                         if (date_int < 1 || date_int >31){
                             err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
@@ -443,6 +449,12 @@ public class TrackerFragment extends Fragment {
                                     err_msg = err_msg + "Location is not valid. Please enter a valid location.\n";
                                     eventLocation.setError(err_msg);
                                     eventLocation.requestFocus();
+                                    return;
+                                }
+
+                                if (newTime.equals("Select Time")){
+                                    eventTime.setError("Please select a time");
+                                    eventTime.requestFocus();
                                     return;
                                 }
 
