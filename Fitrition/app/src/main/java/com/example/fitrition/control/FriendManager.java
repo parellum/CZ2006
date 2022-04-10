@@ -189,6 +189,21 @@ public class FriendManager {
 
                 }
             });
+        mDatabaseReference.child(aFriend.getUserID()).child("imageUrl").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!friendList.contains(aFriend)){
+                    mDatabaseReference.removeEventListener(this);
+                }
+                String aImageUrl=snapshot.getValue(String.class);
+                aFriend.setImageUrl(aImageUrl);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void loadFriendList(){
