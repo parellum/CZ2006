@@ -56,26 +56,25 @@ public class SocialManager {
     }
 
     public void createStatusFromEvent(Events event){
-        loadPersonalStatusList();
-        Status newStatus=new Status();
-        newStatus.setDay(event.getDate());
-        newStatus.setYear(event.getYear());
-        newStatus.setMonth(event.getMonth());
-        newStatus.setTime(event.getTime());
-        ProfileManager profileManager=ProfileManager.getInstance();
-        if (event.getExercise()==true){
-            newStatus.setDescription(profileManager.getUser().getName()+" exercised "+event.getEvent()+" at "+event.getLocation());
-        }else{
-            newStatus.setDescription(profileManager.getUser().getName()+" ate "+event.getEvent()+" at "+event.getLocation());
-        }
         try{
+            loadPersonalStatusList();
+            Status newStatus=new Status();
+            newStatus.setDay(event.getDate());
+            newStatus.setYear(event.getYear());
+            newStatus.setMonth(event.getMonth());
+            newStatus.setTime(event.getTime());
+            ProfileManager profileManager=ProfileManager.getInstance();
+            if (event.getExercise()==true){
+                newStatus.setDescription(profileManager.getUser().getName()+" exercised "+event.getEvent()+" at "+event.getLocation());
+            }else{
+                newStatus.setDescription(profileManager.getUser().getName()+" ate "+event.getEvent()+" at "+event.getLocation());
+            }
             Integer.parseInt(event.getTime());
             personalStatusList.add(newStatus);
             FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("socialStatus").setValue(personalStatusList);
         }catch (Exception e){
             return;
         }
-
     }
 
     public void loadFriendStatusList(){
