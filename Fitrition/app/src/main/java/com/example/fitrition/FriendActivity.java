@@ -157,9 +157,11 @@ public class FriendActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(statusFocusAdapter);
 
-        Glide.with(this)
-                .load(friendSubject.getImageUrl())
-                .into(friendImage);
+        if (friendSubject.getImageUrl()!=null) {
+            Glide.with(this)
+                    .load(friendSubject.getImageUrl())
+                    .into(friendImage);
+        }
 
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
