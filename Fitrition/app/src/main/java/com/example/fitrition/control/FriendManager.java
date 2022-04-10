@@ -69,7 +69,6 @@ public class FriendManager {
         this.friendList = friendList;
     }
 
-
     public Friend getFriend() {
         return friend;
     }
@@ -154,9 +153,31 @@ public class FriendManager {
         }
     }
 
+    public void friendListener(Friend aFriend){
+            mDatabaseReference= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
+            mDatabaseReference.child(aFriend.getUserID()).child("socialStatus").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (!friendList.contains(aFriend)){
+                        mDatabaseReference.removeEventListener(this);
+                    }
+                    ArrayList<Status> newStatusList=new ArrayList<Status>();
+                    for (DataSnapshot snap:snapshot.getChildren()){
+                        Status aStatus=snap.getValue(Status.class);
+                        newStatusList.add(aStatus);
+                    }
+                    aFriend.setSocialStatus(newStatusList);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+    }
+
     public void loadFriendList(){
         profileManager=ProfileManager.getInstance();
-        friendList=new ArrayList<Friend>();
         mDatabaseReference= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -165,6 +186,7 @@ public class FriendManager {
                     Friend targetFriend = friendChild.getValue(Friend.class);
                     if (profileManager.getUser().getFriendList().contains(targetFriend.getUserID()) & !friendList.contains(targetFriend.getUserID())) {
                         friendList.add(targetFriend);
+                        friendListener(targetFriend);
                     }
                 }
                 mDatabaseReference.removeEventListener(this);

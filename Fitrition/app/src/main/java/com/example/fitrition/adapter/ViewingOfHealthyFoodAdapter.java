@@ -2,6 +2,8 @@ package com.example.fitrition.adapter;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
+import android.app.AlertDialog;
+import android.app.TimePickerDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -13,13 +15,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fitrition.R;
-import com.example.fitrition.control.CalendarManager;
 import com.example.fitrition.entities.Events;
 import com.example.fitrition.entities.Food;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.List;
 
@@ -35,6 +38,8 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
 
     private List<Food> foodList;
     private DatabaseReference mDataRef;
+    int hour, minute;
+    LocalTime time;
 
     public ViewingOfHealthyFoodAdapter(List<Food> foodList){
         this.foodList = foodList;
@@ -84,10 +89,35 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
                 Button saveEventButton = (Button) popupView.findViewById(R.id.buttonSaveEvent);
                 TextView eventName = (TextView) popupView.findViewById(R.id.eventname);
                 TextView eventLocation = (TextView) popupView.findViewById(R.id.eventlocation);
-                EditText eventTime = (EditText) popupView.findViewById(R.id.eventtime);
+                Button eventTime = (Button) popupView.findViewById(R.id.timeButton);
                 EditText eventDate = (EditText) popupView.findViewById(R.id.eventdatebox);
                 EditText eventMonth = (EditText) popupView.findViewById(R.id.eventmonthbox);
                 EditText eventYear = (EditText) popupView.findViewById(R.id.eventyearbox);
+
+                eventTime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
+                        {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
+                            {
+                                hour = selectedHour;
+                                minute = selectedMinute;
+                                time = LocalTime.of(hour, minute);
+                                Button eventTime = (Button) view.findViewById(R.id.timeButton);
+                                eventTime.setText(time.toString());
+                            }
+                        };
+
+                        int style = AlertDialog.THEME_HOLO_LIGHT;
+
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(view.getContext(), style, onTimeSetListener, hour, minute, true);
+
+                        timePickerDialog.setTitle("Select Time");
+                        timePickerDialog.show();
+                    }
+                });
 
                 eventName.setText(name);
                 eventLocation.setText(location);
@@ -97,7 +127,7 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
                     public void onClick(View popupView) {
                         //String eventNameStr = eventName.getText().toString();
                         SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
-                                , eventTime.getText().toString()
+                                , eventTime.getText().toString().replaceAll(":","")
                                 , eventDate.getText().toString(), eventMonth.getText().toString()
                                 , eventYear.getText().toString());
                         //eventRecyclerAdapter.notifyDataSetChanged();
@@ -153,17 +183,16 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
 
     private void SaveEvent(String event, String location,String time,String date, String month, String year){
         Events events = new Events(event,location,time,date,month,year,false);
-        CalendarManager manager = CalendarManager.getInstance();
-        manager.saveAnEvent(events);
 
-        /*mDataRef= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        mDataRef= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         mDataRef.child(Long.toString(Calendar.getInstance().getTimeInMillis())).setValue(events).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 //Toast.makeText(context, "Successfully Saved", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
 
     }
 
