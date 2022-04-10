@@ -1,0 +1,66 @@
+[   {
+      "id":"128",
+      "Name":"Anytime Fitness Jurong Point",
+      "latitude":"1.3407058617338312",
+      "type":"1",
+      "imageUrl":"https://firebasestorage.googleapis.com/v0/b/fitrition-3a967.appspot.com/o/facility_images%2FAnytime-Fitness-Jurong-Point.jpg?alt=media&token=e72454a7-4920-4034-a1df-72102df0d9fd",
+      "longitude":"103.70594791385996",
+      "Address":"1 Jurong West Central 2 JP1#03-24/25, Singapore 648886",
+      "Opening Time":"0000",
+      "Closing Time":"2359",
+      "Rating":"3.1",
+      "Description":"Welcome to your neighborhood 24 hour gym in Jurong Point! Whether you're a beginner or a fitness regular, we'll help you get to a healthier place."
+   },
+   {
+      "id":"129",
+      "Name":"Anytime Fitness Boon Lay",
+      "latitude":"1.3464871142646275",
+      "type":"1",
+      "imageUrl":"https://firebasestorage.googleapis.com/v0/b/fitrition-3a967.appspot.com/o/facility_images%2FAnytime-Fitness-Boon-Lay.jpg?alt=media&token=ae4bd908-3448-4900-b44e-1cc51c8c6975",
+      "longitude":"103.71222428338493",
+      "Address":"221 Boon Lay Pl, #03-106, Singapore 640221",
+      "Opening Time":"0700",
+      "Closing Time":"0000",
+      "Rating":"4.5",
+      "Description":"Welcome to your neighborhood 24 hour gym in Boon Lay! Whether you're a beginner or a fitness regular, we'll help you get to a healthier place."
+   },
+   {
+      "id":"130",
+      "Name":"Anytime Fitness Nanyang CC",
+      "latitude":"1.3433873349422558",
+      "type":"1",
+      "imageUrl":"https://firebasestorage.googleapis.com/v0/b/fitrition-3a967.appspot.com/o/facility_images%2FAnytime-Fitness-Nanyang-CC.jpg?alt=media&token=01f9fd20-83b5-44c4-aa88-d4689fddd164",
+      "longitude":"103.69242957972368",
+      "Address":" 60 Jurong West Street 91, #01-08, Nanyang Community Club, Singapore 649040",
+      "Opening Time":"0000",
+      "Closing Time":"2359",
+      "Rating":"4.3",
+      "Description":"Welcome to your neighborhood 24 hour gym in Pioneer! Whether you're a beginner or a fitness regular, we'll help you get to a healthier place."
+   },
+   {
+      "id":"131",
+      "Name":"Anytime Fitness Pioneer Mall",
+      "latitude":"1.3421645835238742",
+      "type":"1",
+      "imageUrl":"https://console.firebase.google.com/project/fitrition-3a967/storage/fitrition-3a967.appspot.com/files/~2Ffacility_images",
+      "longitude":"103.69715026783477",
+      "Address":"638 Jurong West Street 61, #03-01 Pioneer Mall, Singapore 640638",
+      "Opening Time":"0000",
+      "Closing Time":"2359",
+      "Rating":"4.6",
+      "Description":"Welcome to your neighborhood 24 hour gym in Pioneer Mall! Whether you're a beginner or a fitness regular, we'll help you get to a healthier place."
+   },
+   {
+      "id":"132",
+      "Name":"Woodlands ActiveSG Sports Centre",
+      "latitude":"1.4342691077747212",
+      "type":"1",
+      "imageUrl":"https://firebasestorage.googleapis.com/v0/b/fitrition-3a967.appspot.com/o/facility_images%2FWoodlands-ActiveSG-Sports-Centre.jpg?alt=media&token=4e8052b6-0f96-4ef2-b125-406dd7760ff8",
+      "longitude":"103.7798263463984",
+      "Address":"2 Woodlands Street 12, Singapore 738599",
+      "Opening Time":"0700",
+      "Closing Time":"2200",
+      "Rating":"4.1",
+      "Description":"Woodlands ActiveSG Gym is a neighbourhood gym operated by Sport Singapore. It operates in a mature estate, serving its community with its well managed and upgraded facilities."
+   }
+]

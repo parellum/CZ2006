@@ -1,11 +1,131 @@
 package com.example.fitrition.entities;
 
-import java.time.LocalDateTime;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
-public class Fitness extends Facility{
-    public Fitness(String facilityID, String name, String description, int postalCode, LocalDateTime openingHour, String contactNumber, String priceRange, String emailAddress, String password, String eateryAddress, int numberOfClicks, ArrayList<Integer> ratingScoreList, int numTotalRating, ArrayList<Review> reviewList) {
-        super(facilityID, name, description, postalCode, openingHour, contactNumber, priceRange, emailAddress, password, eateryAddress, numberOfClicks, ratingScoreList, numTotalRating, reviewList);
+public class Fitness   {
+
+
+//    @SerializedName("type")
+//    private HawkerCentre.Type type = null;
+//
+//    public enum Type{
+//        @SerializedName("0")
+//        HAWKER,
+//        @SerializedName("1")
+//        FITNESS
+//    }
+
+    @SerializedName("id")
+    @Expose
+    private String id;
+
+    @SerializedName("Name")
+    @Expose
+    private String name;
+
+    @SerializedName("latitude")
+    @Expose
+    private String latitude;
+
+    @SerializedName("longitude")
+    @Expose
+    private String longitude;
+
+    @SerializedName("OpeningTime")
+    @Expose
+    private int OpeningTime;
+
+    @SerializedName("ClosingTime")
+    @Expose
+    private int ClosingTime;
+
+    @SerializedName("Description")
+    @Expose
+    private String Description;
+
+    @SerializedName("Rating")
+    @Expose
+    private double Rating;
+
+    @SerializedName("imageUrl")
+    @Expose
+    private String imageUrl;
+
+    public Fitness(){}
+
+    public String getId() {
+        return id;
     }
-    /**Additional attributes **/
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public int getOpeningTime() {
+        return OpeningTime;
+    }
+
+    public void setOpeningTime(int openingTime) {
+        OpeningTime = openingTime;
+    }
+
+    public int getClosingTime() {
+        return ClosingTime;
+    }
+
+    public void setClosingTime(int closingTime) {
+        ClosingTime = closingTime;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public double getRating() {
+        return Rating;
+    }
+
+    public void setRating(double rating) {
+        Rating = rating;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
