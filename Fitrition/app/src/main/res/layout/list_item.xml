@@ -6,21 +6,6 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/list_date_div_cv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/green_alt"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/list_date_div"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="April 2022"/>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/cv"

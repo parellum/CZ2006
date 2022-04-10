@@ -14,13 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fitrition">
         <activity
-            android:name=".ViewFitnessActivity"
-            android:exported="false" />
-        <activity
             android:name=".boundary.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".ViewHawkerActivity"
+            android:name=".ViewFacilities"
             android:exported="false" />
         <activity
             android:name=".boundary.FriendListActivity"

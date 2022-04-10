@@ -35,7 +35,6 @@ import java.util.ArrayList;
         import java.util.Date;
         import java.util.List;
         import java.util.Locale;
-import java.util.TimeZone;
 
 public class CalendarCustomView extends LinearLayout {
     private static final String TAG = CalendarCustomView.class.getSimpleName();
@@ -43,35 +42,71 @@ public class CalendarCustomView extends LinearLayout {
     private TextView currentDate;
     public ExpandableHeightGridView calendarGridView;
     private Button addEventButton;
+    private Button allEventButton;
 
     private static final int MAX_CALENDAR_COLUMN = 42;
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM, yyyy", Locale.ENGLISH);
-    private Calendar cal;
+    private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
     private com.example.fitrition.utils.GridAdapter mAdapter;
+    private DatePicker datePicker;
     private CalendarManager calendarManager;
 
     ArrayList<Events> arrayList;
+    TextView eventCellTV1, eventCellTV2, eventCellTV3, eventCellTV4;
 
     DatabaseReference mDatabaseReference;
     FirebaseAuth mAuth;
 
+    int array_point = 0;
+    int previous_page_array_point = 0;
+    int next_page_array_point;
+
+    int array_point1 = 0;
+    int array_point2 = 0;
+    int array_point3 = 0;
+    int array_point4 = 0;
+
 
     public CalendarCustomView(Context context) {
         super(context);
-        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Singapore"));
-        cal=Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore"));
-
         this.context = context;
         initializeUILayout();
         setUpCalendarAdapter();
+        setPreviousButtonClickEvent();
+        setNextButtonClickEvent();
+        setAddEventButtonClickEvent();
+        setAllEventButtonClickEvent();
+    }
 
+
+    private void initializeUILayout() {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.fragment_calender, this);
+        previousButton = (ImageView) view.findViewById(R.id.previous_month);
+        nextButton = (ImageView) view.findViewById(R.id.next_month);
+        currentDate = (TextView) view.findViewById(R.id.display_current_date);
+        addEventButton = (Button) findViewById(R.id.buttonAddEvent);
+        allEventButton = (Button) findViewById(R.id.buttonAllEvent);
+        calendarGridView = (ExpandableHeightGridView) view.findViewById(R.id.calendar_grid);
+        calendarGridView.setExpanded(true);
+        mAuth=FirebaseAuth.getInstance();
+        mDatabaseReference= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(mAuth.getCurrentUser().getUid());
+        calendarManager=CalendarManager.getInstance();
+        arrayList = calendarManager.getEventsList();
+    }
+
+    private void setPreviousButtonClickEvent() {
         previousButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 CalendarCustomView.this.previousMonths();
             }
         });
+    }
+
+    private void setNextButtonClickEvent() {
+
         nextButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -574,6 +609,7 @@ public class CalendarCustomView extends LinearLayout {
             }
         });
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of dd10f47 (Revert "Merge branch 'Safe-Login' of https://github.com/parellum/CZ2006 into Safe-Login")
@@ -594,7 +630,28 @@ public class CalendarCustomView extends LinearLayout {
 >>>>>>> parent of 43eef55 (Merge branch 'Safe-Login' of https://github.com/parellum/CZ2006 into Stable-branch)
 =======
 >>>>>>> parent of dd10f47 (Revert "Merge branch 'Safe-Login' of https://github.com/parellum/CZ2006 into Safe-Login")
+=======
+>>>>>>> parent of 04e1496 (Merge branch 'Safe-Login' of https://github.com/parellum/CZ2006 into Safe-Login)
     }
+
+//    private DatePickerDialog.OnDateSetListener myDateListener = new
+//            DatePickerDialog.OnDateSetListener() {
+//                @Override
+//                public void onDateSet(DatePicker arg0,
+//                                      int arg1, int arg2, int arg3) {
+//                    // TODO Auto-generated method stub
+//                    // arg1 = year
+//                    // arg2 = month
+//                    // arg3 = day
+//                    showDate(arg1, arg2+1, arg3);
+//                }
+//            };
+//
+//    private void showDate(int year, int month, int day) {
+//        eventCellTV.setText(new StringBuilder().append(day).append("/")
+//                .append(month).append("/").append(year));
+//    }
+
 
     public void setUpCalendarAdapter() {
         List<Date> dayValueInCells = new ArrayList<Date>();
@@ -608,11 +665,12 @@ public class CalendarCustomView extends LinearLayout {
         }
         Log.d(TAG, "Number of date " + dayValueInCells.size());
         String sDate = formatter.format(cal.getTime());
-
         currentDate.setText(sDate);
         mAdapter = new com.example.fitrition.utils.GridAdapter(context, dayValueInCells, cal);
         calendarGridView.setAdapter(mAdapter);
     }
+
+
 
     public void nextMonth() {
         cal.add(Calendar.MONTH, 1);
