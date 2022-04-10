@@ -88,7 +88,8 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
             @Override
             public void onClick(View view) {
                 FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(event.getId()).removeValue();
-                holder.eventCard.setVisibility(View.GONE);
+                eventsList.remove(event);
+                notifyDataSetChanged();
             }
         });
     }
