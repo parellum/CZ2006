@@ -193,8 +193,9 @@ public class CalendarCustomView extends LinearLayout {
 
     private void SaveEvent(String event, String location,String time,String date, String month, String year){
         Events events = new Events(event,location,time,date,month,year);
-        mDatabaseReference.child(Long.toString(Calendar.getInstance().getTimeInMillis())).setValue(events).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
+        //mDatabaseReference.child(Long.toString(Calendar.getInstance().getTimeInMillis())).setValue(events).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mDatabaseReference.child((year + month + date + time + event.length() + location.length())).setValue(events).addOnCompleteListener(new OnCompleteListener<Void>() {
+        @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(context, "Successfully Saved", Toast.LENGTH_SHORT).show();
             }
@@ -204,13 +205,20 @@ public class CalendarCustomView extends LinearLayout {
 
     private void EditEvent(String event, String location,String time,String date, String month, String year, int pos){
         Events events = new Events(event,location,time,date,month,year);
-        mDatabaseReference.child(Long.toString(Calendar.getInstance().getTimeInMillis())).setValue(events).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mDatabaseReference.child((year + month + date + time + event.length() + location.length())).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                //Toast.makeText(context, "Successfully Saved", Toast.LENGTH_SHORT).show();
+            }
+        });
+        mDatabaseReference.child((year + month + date + time + event.length() + location.length())).setValue(events).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(context, "Successfully Saved", Toast.LENGTH_SHORT).show();
             }
         });
-        arrayList.set(pos, events);
+        arrayList.remove(pos);
+        arrayList.add(events);
     }
 
     public void dateClickEvent(View view, Date date) {
@@ -342,6 +350,12 @@ public class CalendarCustomView extends LinearLayout {
         buttonDeleteTV1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View popupView) {
+                Events events = arrayList.get(array_point1);
+                mDatabaseReference.child((events.getYear() + events.getMonth() + events.getDate() + events.getDate() + events.getEvent().length() + events.getLocation().length())).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {@Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(context, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+                }
+                });
                 arrayList.remove(array_point1);
                 String text = "Event removed successfully";
                 eventCellTV1.setText(text);
@@ -362,6 +376,12 @@ public class CalendarCustomView extends LinearLayout {
         buttonDeleteTV2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View popupView) {
+                Events events = arrayList.get(array_point1);
+                mDatabaseReference.child((events.getYear() + events.getMonth() + events.getDate() + events.getDate() + events.getEvent().length() + events.getLocation().length())).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {@Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(context, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+                }
+                });
                 arrayList.remove(array_point2);
                 String text = "Event removed successfully";
                 eventCellTV2.setText(text);
@@ -381,6 +401,12 @@ public class CalendarCustomView extends LinearLayout {
         buttonDeleteTV3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View popupView) {
+                Events events = arrayList.get(array_point1);
+                mDatabaseReference.child((events.getYear() + events.getMonth() + events.getDate() + events.getDate() + events.getEvent().length() + events.getLocation().length())).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {@Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(context, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+                }
+                });
                 arrayList.remove(array_point3);
                 String text = "Event removed successfully";
                 eventCellTV3.setText(text);
@@ -400,6 +426,12 @@ public class CalendarCustomView extends LinearLayout {
         buttonDeleteTV4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View popupView) {
+                Events events = arrayList.get(array_point1);
+                mDatabaseReference.child((events.getYear() + events.getMonth() + events.getDate() + events.getDate() + events.getEvent().length() + events.getLocation().length())).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {@Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(context, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+                }
+                });
                 arrayList.remove(array_point4);
                 String text = "Event removed successfully";
                 eventCellTV4.setText(text);
