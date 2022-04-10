@@ -40,19 +40,19 @@ public class IndividualUser{
 		if (minute.length()==1){
 			minute="0"+minute;
 		}
-		String hour =Integer.toString(LocalDateTime.now().plusHours(8).getHour());
+		String hour =Integer.toString(LocalDateTime.now().getHour());
 		if (hour.length()==1){
 			hour="0"+hour;
 		}
-		String day=Integer.toString(LocalDateTime.now().plusHours(8).getDayOfMonth());
+		String day=Integer.toString(LocalDateTime.now().getDayOfMonth());
 		if (day.length()==1){
 			day="0"+day;
 		}
-		String month = Integer.toString(LocalDateTime.now().plusHours(8).getMonthValue());
+		String month = Integer.toString(LocalDateTime.now().getMonthValue());
 		if (month.length()==1){
 			month="0"+month;
 		}
-		socialStatus.add(new Status(userName+" just joined Fitrition!",Integer.toString(LocalDateTime.now().plusHours(8).getYear()),month,day,hour+minute));
+		socialStatus.add(new Status(userName+" just joined Fitrition!",Integer.toString(LocalDateTime.now().getYear()),month,day,hour+minute));
 		this.verified = false;
 		this.gender=gender;
 	}

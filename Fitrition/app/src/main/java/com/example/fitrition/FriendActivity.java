@@ -25,6 +25,7 @@ import com.example.fitrition.adapter.StatusAdapter;
 import com.example.fitrition.adapter.StatusFocusAdapter;
 import com.example.fitrition.boundary.InvitationFragment;
 import com.example.fitrition.control.FriendManager;
+import com.example.fitrition.control.SocialManager;
 import com.example.fitrition.entities.Friend;
 import com.example.fitrition.utils.SpacingItemDecoration;
 import com.google.firebase.database.DatabaseReference;
@@ -147,8 +148,8 @@ public class FriendActivity extends AppCompatActivity {
         gender.setText(friendSubject.getGender());
         description.setText(friendSubject.getDescription());
 
-        statusFocusAdapter = new StatusFocusAdapter(friendSubject.getSocialStatus());
-
+        SocialManager socialManager=SocialManager.getInstance();
+        statusFocusAdapter = new StatusFocusAdapter(socialManager.getStatusOrdered(friendSubject.getSocialStatus()));
         recyclerView = (RecyclerView)findViewById(R.id.friend_social_feed);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         SpacingItemDecoration itemDecoration = new SpacingItemDecoration(10);
@@ -171,8 +172,6 @@ public class FriendActivity extends AppCompatActivity {
 
         fToolbar = findViewById(R.id.friend_toolbar);
         setSupportActionBar(fToolbar);
-
-
 
     }
 
