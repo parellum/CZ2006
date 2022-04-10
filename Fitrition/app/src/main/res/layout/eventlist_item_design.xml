@@ -108,7 +108,18 @@
                 android:layout_marginEnd="80dp"
                 android:layout_marginBottom="20dp"
                 android:buttonTint="@color/green_prime"
-                android:checked="true" />
+                android:checked="true"/>
+            <CheckBox
+                android:id="@+id/event_warner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="80dp"
+                android:layout_marginBottom="20dp"
+                android:buttonTint="@color/green_prime"
+                android:checked="true"
+                android:alpha="0"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"

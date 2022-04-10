@@ -27,6 +27,7 @@ import com.example.fitrition.entities.Friend;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -71,9 +72,45 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
             holder.eventCheck.setChecked(false);
         }
 
+        Long timeLong = Long.parseLong(event.getYear()+event.getMonth()+event.getDate()+event.getTime());
+        String minute = Integer.toString(LocalDateTime.now().getMinute());
+        if (minute.length()==1){
+            minute="0"+minute;
+        }
+        String hour =Integer.toString(LocalDateTime.now().getHour());
+        if (hour.length()==1){
+            hour="0"+hour;
+        }
+        String day=Integer.toString(LocalDateTime.now().getDayOfMonth());
+        if (day.length()==1){
+            day="0"+day;
+        }
+        String month = Integer.toString(LocalDateTime.now().getMonthValue());
+        if (month.length()==1){
+            month="0"+month;
+        }
+        String year = Integer.toString(LocalDateTime.now().getYear());
+        long timeLim=Long.parseLong(year+month+day+hour+minute);
+
+        if ((timeLong-timeLim)>=100){
+            holder.eventCheck.setClickable(false);
+            holder.eventWarn.setClickable(true);
+        }else{
+            holder.eventCheck.setClickable(true);
+            holder.eventWarn.setClickable(false);
+        }
+
+        holder.eventWarn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Toast.makeText(compoundButton.getContext(), "Event is too far in the future.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         holder.eventCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                Toast.makeText(compoundButton.getContext(), Long.toString(timeLong-timeLim), Toast.LENGTH_SHORT).show();
                 if (b==true & event.getPosted()==false){
                     socialManager=SocialManager.getInstance();
                     socialManager.createStatusFromEvent(event);
@@ -140,6 +177,7 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
         private TextView eventLocation;
         private CardView eventCard;
         private CheckBox eventCheck;
+        private CheckBox eventWarn;
         private TextView eventDelete;
 
         private CardView eventCardHead;
@@ -157,6 +195,7 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
             eventTime=itemView.findViewById(R.id.event_time);
             eventLocation=itemView.findViewById(R.id.event_location);
             eventCheck=itemView.findViewById(R.id.event_check);
+            eventWarn=itemView.findViewById(R.id.event_warner);
             eventCardHead=itemView.findViewById(R.id.event_list_date_div_cv);
             eventHead=itemView.findViewById(R.id.event_list_date_div);
             eventDelete=itemView.findViewById(R.id.event_delete);
