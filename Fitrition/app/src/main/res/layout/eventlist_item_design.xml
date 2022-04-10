@@ -99,6 +99,7 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="20dp"
                 android:checked="true" />
+<<<<<<< HEAD
             <Button
                 android:id="@+id/event_check"
                 android:layout_width="20dp"
@@ -107,6 +108,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="20dp" />
+=======
+>>>>>>> parent of dd10f47 (Revert "Merge branch 'Safe-Login' of https://github.com/parellum/CZ2006 into Safe-Login")
 
 
 

@@ -7,7 +7,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.fitrition.entities.Events;
-import com.example.fitrition.entities.FitnessCentreJSON;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,16 +43,23 @@ public class CalendarManager {
         this.eventsList = eventsList;
     }
 
+    public void saveAnEvent(Events event){
+        eventsList.add(event);
+        mDatabaseReference= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        mDatabaseReference.child(event.getId()).setValue(event);
+    }
+
     public void loadEvents(){
         mDatabaseReference= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                eventsList=new ArrayList<Events>();
                 for (DataSnapshot ds: snapshot.getChildren()){
-                    Log.d(TAG, "loadEvents: HELLO");
                     Events eventChild=ds.getValue(Events.class);
-                    Log.d(TAG, "loadEvents: HELLO");
-                    eventsList.add(eventChild);
+                    if (!eventsList.contains(eventChild)){
+                        eventsList.add(eventChild);
+                    }
                 }
             }
 
