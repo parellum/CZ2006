@@ -62,12 +62,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
 
         <TextView
             android:id="@+id/sun"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/sun"
@@ -77,6 +80,7 @@
             android:id="@+id/mon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/mon"
@@ -86,6 +90,7 @@
             android:id="@+id/tue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/tue"
@@ -95,6 +100,7 @@
             android:id="@+id/wed"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/wed"
@@ -104,6 +110,7 @@
             android:id="@+id/thu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/thu"
@@ -113,6 +120,7 @@
             android:id="@+id/fri"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/fri"
@@ -122,6 +130,7 @@
             android:id="@+id/sat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/sat"
@@ -133,49 +142,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:horizontalSpacing="0sp"
+        android:horizontalSpacing="4sp"
         android:numColumns="7"
-        android:verticalSpacing="0sp" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true">
+        android:verticalSpacing="4sp" />
 
     <Button
         android:id="@+id/buttonAddEvent"
-        android:layout_width="180dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Event" />
 
     <Button
         android:id="@+id/buttonAllEvent"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:text="Events History"
-        android:layout_marginStart="20dp"/>
-
-    </LinearLayout>
-    </RelativeLayout>
-    <TextView
-        android:id="@+id/display_current_day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
-        android:layout_marginTop="4dp"
-        android:gravity="center"
-        android:text="current date"
-        android:textAllCaps="true"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tracker_day_recycle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"/>
+        android:text="All Events this month" />
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/my_feed"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:scrollbars="vertical"/>-->
 </LinearLayout>
