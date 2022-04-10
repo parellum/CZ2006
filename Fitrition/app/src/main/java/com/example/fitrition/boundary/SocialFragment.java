@@ -38,6 +38,7 @@ public class SocialFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
 
     private FriendManager friendManager;
+    private SocialManager socialManager;
     private ArrayList<Status> statusList;
     private ArrayList<String> friendIDList;
 
@@ -46,6 +47,8 @@ public class SocialFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view=inflater.inflate(R.layout.fragment_social, container, false);
+
+        socialManager = SocialManager.getInstance();
 
         friendManager=FriendManager.getInstance();
         friendIDList=new ArrayList<String>();
@@ -76,14 +79,11 @@ public class SocialFragment extends Fragment {
             @Override
             public void onRefresh() {
                 friendIDList=new ArrayList<String>();
-                statusList=new ArrayList<Status>();
                 for (Friend friendSub:friendManager.getFriendList()){
                     friendIDList.add(friendSub.getUserID());
-                    for (Status statusSub:friendSub.getSocialStatus()){
-                        statusList.add(statusSub);
-                    }
                 }
-                statusAdapter.setData(statusList,friendIDList, friendManager.getFriendList());
+                socialManager.loadFriendStatusList();
+                statusAdapter.setData(socialManager.getFriendStatusList(),friendIDList, friendManager.getFriendList());
                 statusAdapter.notifyDataSetChanged();
                 swipeRefreshLayout.bringToFront();
                 swipeRefreshLayout.setRefreshing(false);
@@ -108,7 +108,6 @@ public class SocialFragment extends Fragment {
         for (Friend friendSub:friendManager.getFriendList()){
             friendIDList.add(friendSub.getUserID());
         }
-        SocialManager socialManager = SocialManager.getInstance();
         socialManager.loadFriendStatusList();
         statusAdapter.setData(socialManager.getFriendStatusList(),friendIDList, friendManager.getFriendList());
         statusAdapter.notifyDataSetChanged();

@@ -87,7 +87,6 @@ public class SocialManager {
         Collections.sort(sortArr);
         Collections.reverse(sortArr);
         for (Long subject:sortArr){
-            Log.d(TAG, "loadFriendStatusList: "+subject.toString());
             for (Status sub:unsortedArr){
                 if (subject.toString().equals(sub.getYear()+sub.getMonth()+sub.getDay()+sub.getTime())){
                     friendStatusList.add(sub);
@@ -110,6 +109,7 @@ public class SocialManager {
         Collections.sort(sortArr);
         Collections.reverse(sortArr);
         for (Long subject:sortArr){
+            Log.d(TAG, "loadPersonalStatusList: "+subject.toString());
             for (Status sub:unsortedArr){
                 if (subject.toString().equals(sub.getYear()+sub.getMonth()+sub.getDay()+sub.getTime())){
                     personalStatusList.add(sub);
