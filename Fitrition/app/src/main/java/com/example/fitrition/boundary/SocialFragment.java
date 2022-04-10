@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.fitrition.R;
 import com.example.fitrition.adapter.StatusAdapter;
 import com.example.fitrition.control.FriendManager;
+import com.example.fitrition.control.SocialManager;
 import com.example.fitrition.entities.Friend;
 import com.example.fitrition.entities.Status;
 import com.example.fitrition.utils.SpacingItemDecoration;
@@ -39,12 +40,6 @@ public class SocialFragment extends Fragment {
     private FriendManager friendManager;
     private ArrayList<Status> statusList;
     private ArrayList<String> friendIDList;
-
-    public static final String[] statusTest2 = {"Adam ate Chicken Rice at NTU Hall 15",
-            "Zac has achieved a hotstreak of 1000 days!",
-            "Lilian has completed her 9th Swimming session!",
-            "Janet gave PastaExpress 5/5 stars!" ,
-            "Eve ate Chicken Rice at NTU Hall 15 again"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -109,13 +104,13 @@ public class SocialFragment extends Fragment {
         super.onResume();
         friendIDList=new ArrayList<String>();
         statusList=new ArrayList<Status>();
+        friendManager = FriendManager.getInstance();
         for (Friend friendSub:friendManager.getFriendList()){
             friendIDList.add(friendSub.getUserID());
-            for (Status statusSub:friendSub.getSocialStatus()){
-                statusList.add(statusSub);
-            }
         }
-        statusAdapter.setData(statusList,friendIDList, friendManager.getFriendList());
+        SocialManager socialManager = SocialManager.getInstance();
+        socialManager.loadFriendStatusList();
+        statusAdapter.setData(socialManager.getFriendStatusList(),friendIDList, friendManager.getFriendList());
         statusAdapter.notifyDataSetChanged();
     }
 

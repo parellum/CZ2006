@@ -39,6 +39,22 @@ public class SocialManager {
         return instance;
     }
 
+    public ArrayList<Status> getFriendStatusList() {
+        return friendStatusList;
+    }
+
+    public void setFriendStatusList(ArrayList<Status> friendStatusList) {
+        this.friendStatusList = friendStatusList;
+    }
+
+    public ArrayList<Status> getPersonalStatusList() {
+        return personalStatusList;
+    }
+
+    public void setPersonalStatusList(ArrayList<Status> personalStatusList) {
+        this.personalStatusList = personalStatusList;
+    }
+
     public void createStatusFromEvent(Events event){
         loadPersonalStatusList();
         Status newStatus=new Status();
@@ -56,6 +72,7 @@ public class SocialManager {
     }
 
     public void loadFriendStatusList(){
+        friendManager=FriendManager.getInstance();
         friendStatusList = new ArrayList<Status>();
         ArrayList<String> friendIDList=new ArrayList<String>();
         ArrayList<Status> unsortedArr=new ArrayList<Status>();
@@ -70,6 +87,7 @@ public class SocialManager {
         Collections.sort(sortArr);
         Collections.reverse(sortArr);
         for (Long subject:sortArr){
+            Log.d(TAG, "loadFriendStatusList: "+subject.toString());
             for (Status sub:unsortedArr){
                 if (subject.toString().equals(sub.getYear()+sub.getMonth()+sub.getDay()+sub.getTime())){
                     friendStatusList.add(sub);
