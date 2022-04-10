@@ -171,7 +171,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     return;
                 }else{
                     if (name.isEmpty()){
-                        editName.setError("First Name is required!");
+                        editName.setError("Name is required!");
                         editName.requestFocus();
                         return;
                     }
