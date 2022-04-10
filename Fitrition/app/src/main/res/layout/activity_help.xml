@@ -54,7 +54,7 @@
             android:text="FAQ"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
             <ScrollView
                 android:id="@+id/FAQScroll"
@@ -301,7 +301,7 @@
             android:text="More Information"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
             <ScrollView

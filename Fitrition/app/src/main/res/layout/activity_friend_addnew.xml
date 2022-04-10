@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/browser_actions_context_menu_min_padding"
             android:fontFamily="@font/nunito_bold"
-            android:text=" Back to Status"
+            android:text=" Back to Friend List"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
