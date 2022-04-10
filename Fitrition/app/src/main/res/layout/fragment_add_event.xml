@@ -4,35 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
-    android:clickable="true">
+    android:background="@color/colorPrimary">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
-        >
-
-        <RadioButton
-            android:id="@+id/add_event_radio_dine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dine"
-            android:checked="true"
-            android:layout_marginEnd="40dp"/>
-        <RadioButton
-            android:id="@+id/add_event_radio_exercise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Exercise"/>
-
-    </RadioGroup>
-    </RelativeLayout>
     <EditText
         android:id="@+id/eventname"
         android:layout_width="match_parent"
@@ -131,7 +104,5 @@
         android:textColor="@color/colorPrimary"
         android:fontFamily="@font/nunito_bold"
         tools:ignore="HardcodedText" />
-
-
 
 </LinearLayout>

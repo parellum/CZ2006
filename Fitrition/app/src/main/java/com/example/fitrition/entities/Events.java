@@ -1,34 +1,17 @@
 package com.example.fitrition.entities;
 
-import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
-
 public class Events {
-    String id,event,location,time,date,month,year;
-    Boolean done,isExercise,isPosted;
+    String event,location,time,date,month,year;
 
     public Events(){}
 
-    public Events(String event, String location, String time, String date, String month, String year, Boolean isExercise) {
-        this.id = Long.toString(Calendar.getInstance().getTimeInMillis());
+    public Events(String event, String location, String time, String date, String month, String year) {
         this.event = event;
         this.location = location;
         this.time = time;
         this.date = date;
         this.month = month;
         this.year = year;
-        this.done = false;
-        this.isPosted=false;
-        this.isExercise=isExercise;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getEvent() {
@@ -77,29 +60,5 @@ public class Events {
 
     public void setYear(String year) {
         this.year = year;
-    }
-
-    public Boolean getDone() {
-        return done;
-    }
-
-    public void setDone(Boolean done) {
-        this.done = done;
-    }
-
-    public Boolean getExercise() {
-        return isExercise;
-    }
-
-    public void setExercise(Boolean exercise) {
-        isExercise = exercise;
-    }
-
-    public Boolean getPosted() {
-        return isPosted;
-    }
-
-    public void setPosted(Boolean posted) {
-        isPosted = posted;
     }
 }

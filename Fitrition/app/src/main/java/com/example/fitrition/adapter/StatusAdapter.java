@@ -57,22 +57,12 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         Status status = statusList.get(position);
         holder.textStatus.setText(status.getDescription());
-        holder.timeStatus.setText(status.getDay()+"/"+status.getMonth()+"/"+status.getYear()+" "+status.getTime());
+        holder.timeStatus.setText(status.getTime());
         int friendpos = friendIDList.indexOf(status.getUserID());
         Friend friend = friendList.get(friendpos);
         Glide.with(holder.friendImage.getContext())
                 .load(friend.getImageUrl())
                 .into(holder.friendImage);
-
-        if (position==0){
-            holder.cvHead.setVisibility(View.VISIBLE);
-            holder.textHead.setText(monthValuetoMonth(status.getMonth())+" "+status.getYear());
-        }else if (!statusList.get(position-1).getMonth().equals(status.getMonth()) | !statusList.get(position-1).getYear().equals(status.getYear())){
-            holder.cvHead.setVisibility(View.VISIBLE);
-            holder.textHead.setText(monthValuetoMonth(status.getMonth())+" "+status.getYear());
-        }else{
-            holder.cvHead.setVisibility(View.GONE);
-        }
 
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,45 +81,12 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
         return statusList.size();
     }
 
-    private String monthValuetoMonth(String s){
-        switch(s) {
-            case "01":
-                return "Jan";
-            case "02":
-                return "Feb";
-            case "03":
-                return "Mar";
-            case "04":
-                return "Apr";
-            case "05":
-                return "May";
-            case "06":
-                return "Jun";
-            case "07":
-                return "Jul";
-            case "08":
-                return "Aug";
-            case "09":
-                return "Sep";
-            case "10":
-                return "Oct";
-            case "11":
-                return "Nov";
-            case "12":
-                return "Dec";
-        }
-        return "Error";
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder
     {
         //ImageView imgTvShow;
         TextView textStatus,timeStatus;
         CardView cv;
         ImageView friendImage;
-
-        CardView cvHead;
-        TextView textHead;
 
         public ViewHolder(View itemView)
         {
@@ -139,9 +96,6 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
             cv = (CardView)itemView.findViewById(R.id.cv);
             friendImage=itemView.findViewById(R.id.status_image);
             timeStatus=itemView.findViewById(R.id.status_time);
-
-            cvHead=itemView.findViewById(R.id.list_date_div_cv);
-            textHead=itemView.findViewById(R.id.list_date_div);
         }
 
     }
