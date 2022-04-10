@@ -36,7 +36,23 @@ public class IndividualUser{
 		this.userName = userName;
 		this.friendList = new ArrayList<String>();
 		this.socialStatus = new ArrayList<Status>();
-		socialStatus.add(new Status(userName+" just joined Fitrition!",LocalDateTime.now()));
+		String minute = Integer.toString(LocalDateTime.now().getMinute());
+		if (minute.length()==1){
+			minute="0"+minute;
+		}
+		String hour =Integer.toString(LocalDateTime.now().plusHours(8).getHour());
+		if (hour.length()==1){
+			hour="0"+hour;
+		}
+		String day=Integer.toString(LocalDateTime.now().plusHours(8).getDayOfMonth());
+		if (day.length()==1){
+			day="0"+day;
+		}
+		String month = Integer.toString(LocalDateTime.now().plusHours(8).getMonthValue());
+		if (month.length()==1){
+			month="0"+month;
+		}
+		socialStatus.add(new Status(userName+" just joined Fitrition!",Integer.toString(LocalDateTime.now().plusHours(8).getYear()),month,day,hour+minute));
 		this.verified = false;
 		this.gender=gender;
 	}
