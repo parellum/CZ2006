@@ -156,6 +156,14 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
                         String err_msg = "";
                         String newTime = eventTime.getText().toString().replaceAll(":","").trim();
 
+                        Boolean isExercise;
+
+                        if (eventDine.isChecked()){
+                            isExercise=false;
+                        }else{
+                            isExercise=true;
+                        }
+
                         if (eventName.getText().toString().trim().isEmpty()) {
                             err_msg = err_msg + "Name is not valid. Please enter the event name.\n";
                             eventName.setError(err_msg);
@@ -193,7 +201,7 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
                             SaveEvent(eventName.getText().toString(), eventLocation.getText().toString()
                                     , eventTime.getText().toString().replaceAll(":","")
                                     , eventDate.getText().toString(), eventMonth.getText().toString()
-                                    , eventYear.getText().toString());
+                                    , eventYear.getText().toString(), isExercise);
                             popupWindow.dismiss();
                         }
                         else {
@@ -248,9 +256,9 @@ public class ViewingOfHealthyFoodAdapter extends RecyclerView.Adapter<ViewingOfH
 
     }
 
-    private void SaveEvent(String event, String location,String time,String date, String month, String year){
+    private void SaveEvent(String event, String location,String time,String date, String month, String year, boolean isExercise){
         //Events events = new Events(event,location,time,date,month,year,false);
-        CalendarManager.getInstance().saveAnEvent(new Events(event,location,time,date,month,year,false));
+        CalendarManager.getInstance().saveAnEvent(new Events(event,location,time,date,month,year, isExercise));
 
 
        /* mDataRef= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("events").child(FirebaseAuth.getInstance().getCurrentUser().getUid());

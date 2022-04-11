@@ -204,10 +204,14 @@ public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapte
             eventName.setText(name);
             eventTime.setText(time);
             eventLocation.setText(location);
-            if(isExercise==true)
+            if(isExercise==true) {
+                eventDine.setVisibility(View.GONE);
                 eventGym.setVisibility(View.VISIBLE);
-            else
+            }
+            else {
+                eventGym.setVisibility(View.GONE);
                 eventDine.setVisibility(View.VISIBLE);
+            }
         }
     }
 }
