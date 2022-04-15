@@ -300,18 +300,47 @@ public class TrackerFragment extends Fragment {
                             eventTime.requestFocus();
                             return;
                         }
-
-                        int date_int = Integer.parseInt(eventDate.getText().toString());
-                        if (date_int < 1 || date_int >31){
+                        if (eventDate.getText().toString() == "") {
                             err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
                         }
-                        int month_int = Integer.parseInt(eventMonth.getText().toString());
-                        if (month_int < 1 || month_int >12){
+                        else {
+                            try {
+                                int date_int = Integer.parseInt(eventDate.getText().toString());
+                                if (date_int < 1 || date_int > 31) {
+                                    err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
+                                }
+                            }
+                            catch (java.lang.NumberFormatException e) {
+                                err_msg = err_msg + "Date is not valid. Please enter number in range of 1 to 31\n";
+                            }
+                        }
+                        if (eventMonth.getText().toString() == "") {
                             err_msg = err_msg + "Month is not valid. Please enter number in range of 1 to 12\n";
                         }
-                        int year_int = Integer.parseInt(eventYear.getText().toString());
-                        if (year_int < 1900 || year_int >2100){
+                        else {
+                            try {
+                                int month_int = Integer.parseInt(eventMonth.getText().toString());
+                                if (month_int < 1 || month_int > 12) {
+                                    err_msg = err_msg + "Month is not valid. Please enter number in range of 1 to 12\n";
+                                }
+                            }
+                            catch (java.lang.NumberFormatException e) {
+                                err_msg = err_msg + "Month is not valid. Please enter number in range of 1 to 12\n";
+                            }
+                        }
+                        if (eventYear.getText().toString() == "") {
                             err_msg = err_msg + "Year is not valid. Please enter number in range of 1900 to 2100\n";
+                        }
+                        else {
+                            try {
+                                int year_int = Integer.parseInt(eventYear.getText().toString());
+                                if (year_int < 1900 || year_int > 2100) {
+                                    err_msg = err_msg + "Year is not valid. Please enter number in range of 1900 to 2100\n";
+                                }
+                            }
+                            catch (java.lang.NumberFormatException e) {
+                                err_msg = err_msg + "Year is not valid. Please enter number in range of 1900 to 2100\n";
+                            }
                         }
 
                         if (err_msg == "") {
