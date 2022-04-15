@@ -1,4 +1,4 @@
-package com.example.fitrition;
+package com.example.fitrition.boundary;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.fitrition.R;
 import com.example.fitrition.control.FacilityManager;
 import com.example.fitrition.entities.Fitness;
 import com.example.fitrition.entities.HawkerCentre;
@@ -17,7 +18,7 @@ import com.example.fitrition.entities.HawkerCentre;
 import java.util.Objects;
 
 
-public class facilityDisplay extends Fragment {
+public class FacilityDisplayFragment extends Fragment {
     private TextView viewFacilitiesName;
     private RatingBar viewFacilitiesRatingBar;
     private TextView viewFacilitiesDescription;
@@ -51,7 +52,7 @@ public class facilityDisplay extends Fragment {
             facilitiesName = b.getString("facilitiesName");
 
 
-            if(String.valueOf(this.getActivity().getClass()).equalsIgnoreCase("class com.example.fitrition.ViewFitnessActivity")){
+            if(String.valueOf(this.getActivity().getClass()).equalsIgnoreCase("class com.example.fitrition.boundary.ViewFitnessActivity")){
                 Fitness temp = FacilityManager.getInstance().searchFitness(facilitiesName);
 
                 //Set name

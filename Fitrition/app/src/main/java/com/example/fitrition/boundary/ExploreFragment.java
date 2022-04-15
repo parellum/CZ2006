@@ -17,8 +17,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.fitrition.R;
-import com.example.fitrition.ViewFitnessActivity;
-import com.example.fitrition.ViewHawkerActivity;
 import com.example.fitrition.control.FacilityManager;
 //import com.example.fitrition.databinding.ActivityMainBinding;
 import com.example.fitrition.entities.Fitness;
@@ -38,13 +36,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;

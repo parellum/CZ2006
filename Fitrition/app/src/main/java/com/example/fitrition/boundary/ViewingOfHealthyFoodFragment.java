@@ -1,4 +1,4 @@
-package com.example.fitrition;
+package com.example.fitrition.boundary;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,13 +9,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fitrition.R;
 import com.example.fitrition.adapter.ViewingOfHealthyFoodAdapter;
 import com.example.fitrition.control.FacilityManager;
 import com.example.fitrition.entities.Food;
 
 import java.util.ArrayList;
 
-public class viewingOfHealthyFood extends Fragment {
+public class ViewingOfHealthyFoodFragment extends Fragment {
 
     RecyclerView recyclerView;
     ViewingOfHealthyFoodAdapter healthyFoodAdapter;

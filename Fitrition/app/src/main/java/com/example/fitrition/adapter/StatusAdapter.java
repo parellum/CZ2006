@@ -16,14 +16,13 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.fitrition.FriendActivity;
+import com.example.fitrition.boundary.FriendActivity;
 import com.example.fitrition.R;
 import com.example.fitrition.control.FriendManager;
 import com.example.fitrition.entities.Friend;
 import com.example.fitrition.entities.Status;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder> {
     ArrayList<Status> statusList;

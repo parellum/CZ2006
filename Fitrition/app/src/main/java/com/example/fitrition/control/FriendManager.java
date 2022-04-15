@@ -1,29 +1,19 @@
 package com.example.fitrition.control;
 
-import static android.content.ContentValues.TAG;
-
-import android.content.Context;
-import android.util.Log;
-import android.widget.Button;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.example.fitrition.FriendActivity;
+import com.example.fitrition.boundary.FriendActivity;
 import com.example.fitrition.entities.Friend;
-import com.example.fitrition.entities.IndividualUser;
 import com.example.fitrition.entities.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**

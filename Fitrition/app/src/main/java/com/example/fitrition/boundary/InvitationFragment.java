@@ -36,12 +36,6 @@ public class InvitationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_invitation,container, false);
 
-//        mAccept = view.findViewById(R.id.acceptBtn);
-//        mDecline = view.findViewById(R.id.declineBtn);
-//
-//
-
-
 
         return view;
 

@@ -1,10 +1,12 @@
-package com.example.fitrition;
+package com.example.fitrition.utils;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.widget.TextView;
+
+import com.example.fitrition.R;
 
 public class LoadinDialogBar {
     Context context;

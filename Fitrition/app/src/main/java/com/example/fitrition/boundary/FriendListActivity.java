@@ -7,20 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.example.fitrition.R;
 import com.example.fitrition.adapter.FriendListRecyclerAdapter;
 import com.example.fitrition.control.FriendManager;
-import com.example.fitrition.control.ProfileManager;
-import com.example.fitrition.entities.Achievement;
 import com.example.fitrition.entities.Friend;
-import com.example.fitrition.entities.Status;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

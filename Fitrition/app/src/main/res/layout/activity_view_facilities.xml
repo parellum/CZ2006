@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_tint"
-    tools:context=".ViewHawkerActivity">
+    tools:context=".boundary.ViewHawkerActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/viewFacilitiesFragmentContainer"
-            android:name="com.example.fitrition.facilityDisplay"
+            android:name="com.example.fitrition.boundary.FacilityDisplayFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

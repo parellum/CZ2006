@@ -1,14 +1,11 @@
 package com.example.fitrition.adapter;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,19 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.fitrition.FriendActivity;
 import com.example.fitrition.R;
 import com.example.fitrition.control.CalendarManager;
-import com.example.fitrition.control.FriendManager;
 import com.example.fitrition.control.SocialManager;
 import com.example.fitrition.entities.Events;
-import com.example.fitrition.entities.Friend;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapter.ViewHolder> {

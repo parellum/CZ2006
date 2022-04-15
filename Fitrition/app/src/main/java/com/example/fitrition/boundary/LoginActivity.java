@@ -12,26 +12,19 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.example.fitrition.LoadinDialogBar;
-import com.example.fitrition.MainActivity;
 import com.example.fitrition.R;
 import com.example.fitrition.control.CalendarManager;
 import com.example.fitrition.control.FacilityManager;
 import com.example.fitrition.control.ProfileManager;
 import com.example.fitrition.entities.ViewFacilitiesActivityFactory;
-import com.example.fitrition.utils.HelpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 //

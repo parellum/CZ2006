@@ -1,4 +1,4 @@
-package com.example.fitrition;
+package com.example.fitrition.boundary;
 
 import android.content.Intent;
 import android.location.Address;
@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.fitrition.R;
 import com.example.fitrition.boundary.LoginActivity;
 import com.example.fitrition.boundary.TrackerFragment;
 import com.example.fitrition.boundary.ExploreFragment;

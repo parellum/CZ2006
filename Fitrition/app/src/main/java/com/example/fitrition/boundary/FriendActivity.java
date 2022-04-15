@@ -1,32 +1,25 @@
-package com.example.fitrition;
-
-import static android.content.ContentValues.TAG;
+package com.example.fitrition.boundary;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.fitrition.adapter.StatusAdapter;
+import com.example.fitrition.R;
 import com.example.fitrition.adapter.StatusFocusAdapter;
-import com.example.fitrition.boundary.InvitationFragment;
 import com.example.fitrition.control.FriendManager;
 import com.example.fitrition.control.SocialManager;
 import com.example.fitrition.entities.Friend;
+import com.example.fitrition.utils.LoadinDialogBar;
 import com.example.fitrition.utils.SpacingItemDecoration;
 import com.google.firebase.database.DatabaseReference;
 

@@ -2,8 +2,8 @@ package com.example.fitrition.control;
 
 import android.util.Log;
 
-import com.example.fitrition.ViewFitnessActivity;
-import com.example.fitrition.ViewHawkerActivity;
+import com.example.fitrition.boundary.ViewFitnessActivity;
+import com.example.fitrition.boundary.ViewHawkerActivity;
 import com.example.fitrition.entities.Fitness;
 import com.example.fitrition.entities.Food;
 import com.example.fitrition.entities.HawkerCentre;

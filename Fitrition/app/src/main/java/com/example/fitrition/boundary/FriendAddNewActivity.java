@@ -11,12 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitrition.R;
 import com.example.fitrition.adapter.AllUserRecyclerAdapter;
-import com.example.fitrition.adapter.FriendListRecyclerAdapter;
-import com.example.fitrition.control.FriendManager;
 import com.example.fitrition.control.ProfileManager;
-import com.example.fitrition.entities.Achievement;
 import com.example.fitrition.entities.Friend;
-import com.example.fitrition.entities.Status;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

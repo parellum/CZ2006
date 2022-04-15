@@ -1,18 +1,7 @@
 package com.example.fitrition.entities;
 
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.example.fitrition.ViewFitnessActivity;
-import com.example.fitrition.ViewHawkerActivity;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
+import com.example.fitrition.boundary.ViewFitnessActivity;
+import com.example.fitrition.boundary.ViewHawkerActivity;
 
 public class ViewFacilitiesActivityFactory {
 

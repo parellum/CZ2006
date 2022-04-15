@@ -1,7 +1,6 @@
-package com.example.fitrition;
+package com.example.fitrition.boundary;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
+import com.example.fitrition.R;
 import com.example.fitrition.control.FacilityManager;
 import com.example.fitrition.entities.Food;
 import com.example.fitrition.entities.HawkerCentre;
@@ -111,7 +111,7 @@ public class ViewHawkerActivity extends AppCompatActivity implements ViewFacilit
             public void onClick(View view) {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.viewFacilitiesFragmentContainer, viewingOfHealthyFood.class, null)
+                        .replace(R.id.viewFacilitiesFragmentContainer, ViewingOfHealthyFoodFragment.class, null)
                         .setReorderingAllowed(true)
                         .addToBackStack("name") // name can be null
                         .commit();

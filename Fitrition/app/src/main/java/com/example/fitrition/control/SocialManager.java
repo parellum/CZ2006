@@ -4,17 +4,13 @@ import static android.content.ContentValues.TAG;
 
 import android.util.Log;
 
-import com.example.fitrition.entities.Achievement;
 import com.example.fitrition.entities.Events;
 import com.example.fitrition.entities.Friend;
-import com.example.fitrition.entities.IndividualUser;
 import com.example.fitrition.entities.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.sql.Array;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 

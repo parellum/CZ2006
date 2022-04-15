@@ -6,7 +6,6 @@ import static android.content.ContentValues.TAG;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -27,7 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.fitrition.FriendActivity;
 import com.example.fitrition.R;
 import com.example.fitrition.control.ProfileManager;
 import com.google.android.gms.tasks.OnFailureListener;
