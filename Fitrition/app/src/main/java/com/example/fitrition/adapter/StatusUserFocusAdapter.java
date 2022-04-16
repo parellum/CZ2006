@@ -16,8 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fitrition.R;
-import com.example.fitrition.control.FriendManager;
-import com.example.fitrition.control.ProfileManager;
+import com.example.fitrition.control.IndividualUserManager;
 import com.example.fitrition.entities.Status;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ import java.util.ArrayList;
 public class StatusUserFocusAdapter extends RecyclerView.Adapter<StatusUserFocusAdapter.ViewHolder> {
     Context context;
     ArrayList<Status> statusList;
-    private ProfileManager profileManager;
+    private IndividualUserManager individualUserManager;
 
     public StatusUserFocusAdapter(ArrayList<Status> statusList)
     {
@@ -36,7 +35,7 @@ public class StatusUserFocusAdapter extends RecyclerView.Adapter<StatusUserFocus
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.d(TAG, "onCreateView: yo");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,parent,false);
-        profileManager = ProfileManager.getInstance();
+        individualUserManager = IndividualUserManager.getInstance();
         ViewHolder viewHolder = new ViewHolder(view);
         context = parent.getContext();
         return viewHolder;
@@ -47,9 +46,9 @@ public class StatusUserFocusAdapter extends RecyclerView.Adapter<StatusUserFocus
         Status status = statusList.get(position);
         holder.textStatus.setText(status.getDescription());
         holder.textTime.setText(status.getDay()+"/"+status.getMonth()+"/"+status.getYear()+" "+status.getTime());
-        if (profileManager.getUser().getImageUrl()!=null) {
+        if (individualUserManager.getUser().getImageUrl()!=null) {
             Glide.with(holder.statusImage.getContext())
-                    .load(profileManager.getUser().getImageUrl())
+                    .load(individualUserManager.getUser().getImageUrl())
                     .into(holder.statusImage);
         }
 

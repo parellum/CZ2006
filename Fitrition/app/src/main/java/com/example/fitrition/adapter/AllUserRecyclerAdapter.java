@@ -77,7 +77,6 @@ public class AllUserRecyclerAdapter extends RecyclerView.Adapter<AllUserRecycler
         private ImageView friendImage;
         private TextView friendName;
         private TextView friendDescrp;
-        private TextView friendDiv;
         private CardView friendCv;
 
         public ViewHolder(@NonNull View itemView) {

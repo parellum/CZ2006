@@ -25,7 +25,6 @@ import java.util.List;
 
 public class EventRecycleAdapter extends RecyclerView.Adapter<EventRecycleAdapter.ViewHolder> {
     private List<Events> eventsList;
-    private CalendarManager calendarManager;
     private SocialManager socialManager;
 
     public EventRecycleAdapter(List<Events>eventsList){

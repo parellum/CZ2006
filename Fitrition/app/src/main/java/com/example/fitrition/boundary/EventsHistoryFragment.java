@@ -63,8 +63,6 @@ public class EventsHistoryFragment extends Fragment {
 
     private void initRecylerView(View view) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH);
-
         ArrayList<Events> eventsList = new ArrayList<Events>();
         ArrayList<Long> intList=new ArrayList<Long>();
 

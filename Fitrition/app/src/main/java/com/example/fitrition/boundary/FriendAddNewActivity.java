@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitrition.R;
 import com.example.fitrition.adapter.AllUserRecyclerAdapter;
-import com.example.fitrition.control.ProfileManager;
+import com.example.fitrition.control.IndividualUserManager;
 import com.example.fitrition.entities.Friend;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +28,7 @@ public class FriendAddNewActivity extends AppCompatActivity {
     List<Friend> searchUserList;
     AllUserRecyclerAdapter all_user_list_adapter;
     ImageView back_button;
-    ProfileManager profileManager;
+    IndividualUserManager individualUserManager;
     DatabaseReference mDatabaseReference;
     int allowUpdate=0;
 
@@ -36,7 +36,7 @@ public class FriendAddNewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_addnew);
-        profileManager = ProfileManager.getInstance();
+        individualUserManager = IndividualUserManager.getInstance();
 
         initData();
         back_button=findViewById(R.id.all_user_back_icon);
@@ -56,7 +56,7 @@ public class FriendAddNewActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot targetChild:snapshot.getChildren()){
-                    if (profileManager.getUser().getFriendList().contains(targetChild.getKey()) | profileManager.getUser().getUserID().equals(targetChild.getKey())){
+                    if (individualUserManager.getUser().getFriendList().contains(targetChild.getKey()) | individualUserManager.getUser().getUserID().equals(targetChild.getKey())){
                         continue;
                     }else{
                         searchUserList.add(targetChild.getValue(Friend.class));
@@ -100,7 +100,7 @@ public class FriendAddNewActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot targetChild : snapshot.getChildren()) {
-                        if (profileManager.getUser().getFriendList().contains(targetChild.getKey()) | profileManager.getUser().getUserID().equals(targetChild.getKey())) {
+                        if (individualUserManager.getUser().getFriendList().contains(targetChild.getKey()) | individualUserManager.getUser().getUserID().equals(targetChild.getKey())) {
                             continue;
                         } else {
                             searchUserList.add(targetChild.getValue(Friend.class));

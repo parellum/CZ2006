@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.fitrition.R;
-import com.example.fitrition.control.ProfileManager;
+import com.example.fitrition.control.IndividualUserManager;
 import com.example.fitrition.entities.IndividualUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,7 +34,7 @@ public class PasswordChangeFragment extends Fragment {
 
     DatabaseReference mDataRef;
 
-    ProfileManager profileManager;
+    IndividualUserManager individualUserManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class PasswordChangeFragment extends Fragment {
         pwSave=view.findViewById(R.id.pw_save);
         pwBack=view.findViewById(R.id.pw_back);
 
-        profileManager=ProfileManager.getInstance();
+        individualUserManager = IndividualUserManager.getInstance();
 
         return view;
     }
@@ -66,7 +66,7 @@ public class PasswordChangeFragment extends Fragment {
         pwSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IndividualUser subject=profileManager.getUser();
+                IndividualUser subject= individualUserManager.getUser();
                 if (!pwOld.getText().toString().trim().equals(subject.getPassword())){
                     pwOld.setError("Password does not match with current password");
                     pwOld.requestFocus();

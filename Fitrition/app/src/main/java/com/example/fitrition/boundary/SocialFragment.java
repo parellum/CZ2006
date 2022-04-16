@@ -31,21 +31,11 @@ import java.util.ArrayList;
 public class SocialFragment extends Fragment {
     RecyclerView recyclerView;
     StatusAdapter statusAdapter;
-
     View view;
-
-
     SwipeRefreshLayout swipeRefreshLayout;
-
     private FriendManager friendManager;
     private ArrayList<Status> statusList;
     private ArrayList<String> friendIDList;
-
-    public static final String[] statusTest2 = {"Adam ate Chicken Rice at NTU Hall 15",
-            "Zac has achieved a hotstreak of 1000 days!",
-            "Lilian has completed her 9th Swimming session!",
-            "Janet gave PastaExpress 5/5 stars!" ,
-            "Eve ate Chicken Rice at NTU Hall 15 again"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,12 +61,6 @@ public class SocialFragment extends Fragment {
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(statusAdapter);
-
-////        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(SocialFragment.this, DividerItemDecoration.VERTICAL);
-////        recyclerView.addItemDecoration(dividerItemDecoration);
-//
-//
-//
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

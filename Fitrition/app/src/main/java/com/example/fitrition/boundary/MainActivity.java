@@ -1,37 +1,20 @@
 package com.example.fitrition.boundary;
 
 import android.content.Intent;
-import android.location.Address;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.fitrition.R;
-import com.example.fitrition.boundary.LoginActivity;
-import com.example.fitrition.boundary.TrackerFragment;
-import com.example.fitrition.boundary.ExploreFragment;
-import com.example.fitrition.boundary.ProfileFragment;
-import com.example.fitrition.boundary.SocialFragment;
-import com.example.fitrition.utils.HelpActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 

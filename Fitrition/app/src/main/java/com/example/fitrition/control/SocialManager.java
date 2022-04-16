@@ -39,16 +39,8 @@ public class SocialManager {
         return friendStatusList;
     }
 
-    public void setFriendStatusList(ArrayList<Status> friendStatusList) {
-        this.friendStatusList = friendStatusList;
-    }
-
     public ArrayList<Status> getPersonalStatusList() {
         return personalStatusList;
-    }
-
-    public void setPersonalStatusList(ArrayList<Status> personalStatusList) {
-        this.personalStatusList = personalStatusList;
     }
 
     public void createStatusFromEvent(Events event){
@@ -59,11 +51,11 @@ public class SocialManager {
             newStatus.setYear(event.getYear());
             newStatus.setMonth(event.getMonth());
             newStatus.setTime(event.getTime());
-            ProfileManager profileManager=ProfileManager.getInstance();
+            IndividualUserManager individualUserManager = IndividualUserManager.getInstance();
             if (event.getExercise()==true){
-                newStatus.setDescription(profileManager.getUser().getName()+" exercised "+event.getEvent()+" at "+event.getLocation());
+                newStatus.setDescription(individualUserManager.getUser().getName()+" exercised "+event.getEvent()+" at "+event.getLocation());
             }else{
-                newStatus.setDescription(profileManager.getUser().getName()+" ate "+event.getEvent()+" at "+event.getLocation());
+                newStatus.setDescription(individualUserManager.getUser().getName()+" ate "+event.getEvent()+" at "+event.getLocation());
             }
             Integer.parseInt(event.getTime());
             personalStatusList.add(newStatus);
@@ -101,11 +93,11 @@ public class SocialManager {
     }
 
     public void loadPersonalStatusList(){
-        ProfileManager profileManager = ProfileManager.getInstance();
+        IndividualUserManager individualUserManager = IndividualUserManager.getInstance();
         personalStatusList = new ArrayList<Status>();
         ArrayList<Status> unsortedArr=new ArrayList<Status>();
         ArrayList<Long> sortArr=new ArrayList<Long>();
-        for (Status statusSub:profileManager.getUser().getSocialStatus()) {
+        for (Status statusSub: individualUserManager.getUser().getSocialStatus()) {
             unsortedArr.add(statusSub);
             sortArr.add(Long.parseLong(statusSub.getYear() + statusSub.getMonth() + statusSub.getDay() + statusSub.getTime()));
         }

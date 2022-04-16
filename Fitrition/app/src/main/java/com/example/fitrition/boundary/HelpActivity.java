@@ -1,4 +1,4 @@
-package com.example.fitrition.utils;
+package com.example.fitrition.boundary;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

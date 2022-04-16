@@ -22,7 +22,6 @@ public class CalendarManager {
     private ArrayList<Events> eventsList;
 
     private DatabaseReference mDatabaseReference;
-    private StorageReference mStorageReference;
 
     public  CalendarManager(){
         eventsList = new ArrayList<Events>();

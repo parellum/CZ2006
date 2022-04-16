@@ -28,7 +28,6 @@ public class FriendManager {
      */
     private static FriendManager instance=null;
     private DatabaseReference mDatabaseReference;
-    private ProfileManager profileManager;
     /**
      * Holds ArrayList of Friend object that can be referenced throughout runtime.
      */
@@ -55,10 +54,6 @@ public class FriendManager {
         return friendList;
     }
 
-    public void setFriendList(ArrayList<Friend> friendList) {
-        this.friendList = friendList;
-    }
-
     public Friend getFriend() {
         return friend;
     }
@@ -82,12 +77,13 @@ public class FriendManager {
      */
     public void addFriend(Friend aFriend,FriendActivity friendActivity){
         if (!friendList.contains(aFriend)){
+            IndividualUserManager individualUserManager;
             friendList.add(aFriend);
-            profileManager=ProfileManager.getInstance();
+            individualUserManager = IndividualUserManager.getInstance();
             mDatabaseReference=FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
             //replace arraylist in uid
-            profileManager.getUser().getFriendList().add(aFriend.getUserID());
-            mDatabaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("friendList").setValue(profileManager.getUser().getFriendList()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            individualUserManager.getUser().getFriendList().add(aFriend.getUserID());
+            mDatabaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("friendList").setValue(individualUserManager.getUser().getFriendList()).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     friendActivity.friendAddToggle();
@@ -104,13 +100,14 @@ public class FriendManager {
     }
 
     public void removeFriend(Friend aFriend,FriendActivity friendActivity){
+        IndividualUserManager individualUserManager;
         if (friendList.contains(aFriend)){
             friendList.remove(aFriend);
-            profileManager=ProfileManager.getInstance();
+            individualUserManager = IndividualUserManager.getInstance();
             mDatabaseReference=FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
             //replace arraylist in uid
-            profileManager.getUser().getFriendList().remove(aFriend.getUserID());
-            mDatabaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("friendList").setValue(profileManager.getUser().getFriendList()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            individualUserManager.getUser().getFriendList().remove(aFriend.getUserID());
+            mDatabaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("friendList").setValue(individualUserManager.getUser().getFriendList()).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     friendActivity.friendAddToggle();
@@ -124,31 +121,6 @@ public class FriendManager {
             return;
         }
 
-    }
-
-    /**
-     * Removes friend object in FriendList
-     * @param aFriend
-     * @return 1 if successful otherwise 0
-     */
-    public int delFriend(Friend aFriend){
-        if (friendList.contains(aFriend)){
-            friendList.remove(aFriend);
-            return 1;
-        }
-        else{
-            return 0;
-        }
-    }
-
-    /**
-     * Returns consolidated social status of all friends and own user sorted by time
-     */
-    public void getConsolidatedSocialStatus(){
-        for (Friend aFreind:friendList){
-            ArrayList<Status> consolStatus = new ArrayList<Status>();
-
-        }
     }
 
     public void friendListener(Friend aFriend){
@@ -205,14 +177,15 @@ public class FriendManager {
     }
 
     public void loadFriendList(){
-        profileManager=ProfileManager.getInstance();
+        IndividualUserManager individualUserManager;
+        individualUserManager = IndividualUserManager.getInstance();
         mDatabaseReference= FirebaseDatabase.getInstance("https://fitrition-3a967-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot friendChild:snapshot.getChildren()) {
                     Friend targetFriend = friendChild.getValue(Friend.class);
-                    if (profileManager.getUser().getFriendList().contains(targetFriend.getUserID()) & !getFriendIDList().contains(targetFriend.getUserID())) {
+                    if (individualUserManager.getUser().getFriendList().contains(targetFriend.getUserID()) & !getFriendIDList().contains(targetFriend.getUserID())) {
                         friendList.add(targetFriend);
                         friendListener(targetFriend);
                     }

@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.fitrition.R;
-import com.example.fitrition.control.ProfileManager;
+import com.example.fitrition.control.IndividualUserManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
     Button changeDescription;
     TextView name,age,email,description,gender,statusCount,friendCount;
     EditText password;
-    ProfileManager profileManager;
+    IndividualUserManager individualUserManager;
     ImageView profilePic;
     private Uri mImageUri;
 
@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        profileManager=ProfileManager.getInstance();
+        individualUserManager = IndividualUserManager.getInstance();
 
         button1 = view.findViewById(R.id.status_count_btn);
         button2 = view.findViewById(R.id.friend_list_btn);
@@ -173,7 +173,7 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Glide.with(view.getContext())
-                            .load(profileManager.getUser().getImageUrl())
+                            .load(individualUserManager.getUser().getImageUrl())
                             .into(profilePic);
                     dialog.dismiss();
                 }
@@ -188,26 +188,26 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        name.setText(profileManager.getUser().getName());
+        name.setText(individualUserManager.getUser().getName());
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
-        LocalDate date = LocalDate.parse(profileManager.getUser().getDob(), formatter);
+        LocalDate date = LocalDate.parse(individualUserManager.getUser().getDob(), formatter);
         Period intervalPeriod = Period.between(date,LocalDate.now());
         int ageInYears=intervalPeriod.getYears();
 
         age.setText(Integer.toString(ageInYears));
-        email.setText(profileManager.getUser().getEmail());
-        description.setText(profileManager.getUser().getDescription());
-        gender.setText(profileManager.getUser().getGender());
+        email.setText(individualUserManager.getUser().getEmail());
+        description.setText(individualUserManager.getUser().getDescription());
+        gender.setText(individualUserManager.getUser().getGender());
 
-        friendCount.setText(Integer.toString(profileManager.getUser().getFriendList().size()));
-        statusCount.setText(Integer.toString(profileManager.getUser().getSocialStatus().size()));
+        friendCount.setText(Integer.toString(individualUserManager.getUser().getFriendList().size()));
+        statusCount.setText(Integer.toString(individualUserManager.getUser().getSocialStatus().size()));
 
-        password.setText(profileManager.getUser().getPassword());
-        Log.d(TAG, "onViewCreated: "+profileManager.getUser().getImageUrl());
+        password.setText(individualUserManager.getUser().getPassword());
+        Log.d(TAG, "onViewCreated: "+ individualUserManager.getUser().getImageUrl());
 
         Glide.with(view.getContext())
-                .load(profileManager.getUser().getImageUrl())
+                .load(individualUserManager.getUser().getImageUrl())
                 .into(profilePic);
     }
 

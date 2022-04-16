@@ -21,46 +21,26 @@ import com.google.firebase.database.ValueEventListener;
  * @since 24-03-2022
  */
 
-public class ProfileManager {
+public class IndividualUserManager {
 
-    private static ProfileManager instance=null;
+    private static IndividualUserManager instance=null;
     IndividualUser user;
     DatabaseReference mDatabaseReference;
     FriendManager friendManager;
 
-    public ProfileManager() {
+    public IndividualUserManager() {
         user=new IndividualUser();
     }
 
-    public static ProfileManager getInstance() {
+    public static IndividualUserManager getInstance() {
         if (instance == null) {
-            instance = new ProfileManager();
+            instance = new IndividualUserManager();
         }
         return instance;
     }
 
-    public void setIndividualUserList(IndividualUser user) {
-        this.user = user;
-    }
-
-    public void addNewUser(String userID,String userName, String name, String eMail, String password, String DOB, String description, String gender){
-        user =new IndividualUser(userID,userName, name, eMail,  password,  DOB,  description,  gender);
-    }
-
     public IndividualUser getUser(){
         return user;
-    }
-
-    public boolean validatePassword(String str){
-        return str.matches("\\S");
-    }
-
-    public boolean validateUserName(String str){
-        return str.matches("[a-zA-Z0-9]*");
-    }
-
-    public void updateIsVerified(String email, boolean isVerified){
-
     }
 
     public void loadUser(String uid, Context context){

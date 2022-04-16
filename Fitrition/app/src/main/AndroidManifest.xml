@@ -56,7 +56,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".utils.HelpActivity"
+            android:name=".boundary.HelpActivity"
             android:parentActivityName=".boundary.MainActivity" />
         <activity android:name=".boundary.FriendAddNewActivity" />
     </application>

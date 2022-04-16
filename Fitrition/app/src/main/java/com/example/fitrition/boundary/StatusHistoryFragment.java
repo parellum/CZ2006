@@ -1,25 +1,18 @@
 package com.example.fitrition.boundary;
 
-import static android.content.ContentValues.TAG;
-
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fitrition.R;
-import com.example.fitrition.adapter.StatusAdapter;
 import com.example.fitrition.adapter.StatusUserFocusAdapter;
-import com.example.fitrition.control.ProfileManager;
 import com.example.fitrition.control.SocialManager;
 import com.example.fitrition.entities.Status;
 import com.example.fitrition.utils.SpacingItemDecoration;

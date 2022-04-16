@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.example.fitrition.R;
 import com.example.fitrition.control.CalendarManager;
 import com.example.fitrition.control.FacilityManager;
-import com.example.fitrition.control.ProfileManager;
+import com.example.fitrition.control.IndividualUserManager;
 import com.example.fitrition.entities.ViewFacilitiesActivityFactory;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView register,resetPassword;
     private EditText editTextEmail, editTextPassword;
     private Button login;
-    private ProfileManager profileManager;
+    private IndividualUserManager individualUserManager;
     private FacilityManager facilityManager;
     private CalendarManager calendarManager;
     private FirebaseAuth mAuth;
@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressBar=(ProgressBar) findViewById(R.id.RegisterPB);
 
         mAuth=FirebaseAuth.getInstance();
-        profileManager = ProfileManager.getInstance();
+        individualUserManager = IndividualUserManager.getInstance();
         facilityManager = FacilityManager.getInstance();
         calendarManager = CalendarManager.getInstance();
 
@@ -89,11 +89,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
-//        if (!email.isEmpty()){
-//            startActivity(new Intent(LoginActivity.this,MainActivity.class));
-//            return;
-//        }
-
         if (email.isEmpty()){
             editTextEmail.setError("Email is required!");
             editTextEmail.requestFocus();
@@ -122,9 +117,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    profileManager.loadUser(mAuth.getCurrentUser().getUid(), LoginActivity.this);
+                    individualUserManager.loadUser(mAuth.getCurrentUser().getUid(), LoginActivity.this);
                     calendarManager.loadEvents();
-                    Log.d(TAG, "onComplete: "+profileManager.getUser().getImageUrl());
+                    Log.d(TAG, "onComplete: "+ individualUserManager.getUser().getImageUrl());
                     startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 }
                 else{

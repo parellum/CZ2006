@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fitrition.R;
-import com.example.fitrition.control.ProfileManager;
 import com.example.fitrition.entities.IndividualUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -222,6 +221,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         editDOB.setError("Please Enter Valid Date in DDMMYYYY format");
                         editDOB.requestFocus();
                         return;
+                        //
                     }
 
                     progressBar.setVisibility(View.VISIBLE);

@@ -33,6 +33,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             public void onClick(View view) {
                 finish();
             }
+            //
         });
 
         resetCall.setOnClickListener(new View.OnClickListener() {
